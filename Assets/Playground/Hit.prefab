@@ -226,7 +226,13 @@ VisualEffect:
         m_Name: Color
         m_Overridden: 1
     m_NamedObject:
-      m_Array: []
+      m_Array:
+      - m_Value: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
+        m_Name: Texture
+        m_Overridden: 0
+      - m_Value: {fileID: 10307, guid: 0000000000000000f000000000000000, type: 0}
+        m_Name: Texture 1
+        m_Overridden: 0
     m_Bool:
       m_Array: []
 --- !u!73398921 &4723002809397014906
