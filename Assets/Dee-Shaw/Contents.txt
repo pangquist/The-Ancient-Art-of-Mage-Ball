@@ -1,0 +1,12 @@
+Thank you for the purchase!!
+If any questions/feedback feel free to mail us @deep.deepshah10@gmail.com
+
+-Contents
+-The package has 7 folders.
+-1)Attacks: it contains the prefabs of all the projectiles(attacks)with their sounds and "Hit" effects, original graphs of the effects.
+-2)Background Sound: Has the sound(mp3) used in the background of the demo.
+-3)Documents: it has all the manuals and instructions related writeups.
+-4)Extras: this folder has the shoot prefab to demonstrate the attack effects on the shields and its related game objects.
+-5)Scene:Contains the demo scens for Both HDRP and LWRP(URP)(Open the specific scens into their given render pipelines).
+-6)Shields: Contains all the shields prefab with its original graphs, sounds and hit effects.
+-7)Target Material: contain the materails used for the cube(target)for attacks.
