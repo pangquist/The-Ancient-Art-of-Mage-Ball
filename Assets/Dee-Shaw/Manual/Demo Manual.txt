@@ -1,0 +1,9 @@
+To operate in the demo scene follow the instructions stated below;
+
+-Attacks spawn and shield spanws are the prefabs from where you spawn them by pressing the key "Left Alt"
+
+-To spawn a specific projectile/Shield make sure you have the Shoot script to active.
+
+- Spawning 2 projecticles at a time may result in mutliple collission effects.
+
+-Once you spawn a shield make sure to turn it off before spawning another or they will collide with each other.

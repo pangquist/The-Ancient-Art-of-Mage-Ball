@@ -1,0 +1,14 @@
+Each VFX graph has  a node periodic burst attached to the stop spawn, that deifnes the range and time of the particle(for how long it could travel) Change the numbers according to your need.
+
+-All the other settings to change the visuals of the graphs have been enabled in the inspector window, you can change the spawn rate, Color, velocity, noice, lifetime per particle, texture, spawn size, etc...
+
+-Each attack has a few scripts attached to the parent i.e destro(determines when the whole prefab would get destroyed)
++Floating Projecticle(determines the speed of projecticle and the noise to it via an animation graph)
++VFX(Dtermines spawnning of the "hit" effect when it collides along with hit sound effect)
+
+-When change the speed of the projecticle make sure to change the spawn rate of the particle accordingly.
+
+-TO shoot the projecticle in your scene drag and drop the prefab to your shoot/Spawn point
+same goes with the shield.
+
+-three things to change when you set the distance and range of the projecticle according to your needs i.e its destroy value, the life range of the particle via graph periodic burst node, the destruction of the light used in that effect.
