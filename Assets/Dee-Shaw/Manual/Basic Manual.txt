@@ -1,0 +1,17 @@
+Instructions for a smooth workflow:
++To avoid confusion please open LWRP scene only in LWRP(URP) and HDRP scene with HDRP.
+
+-First and the main thing is to update your render pipeline via windows>package manager>HDRP/LWRP.
+-For the effects to work you will need to install the visual effect graph from package manager, install the latest version.
+
+-For the effects to show up instantly without having to rebuilt the effect graphs manually, go edit>visual effect graph>rebuilt all graphs.
+
+-to get the exact feel of the enviorment in the demo scene, add the sky and volume fog settings to the sky and fog volume and post process to the post process volume. (for more glow and volume to the effects change the bloom settings accordingly)
+
+-Please change the emission settings of the effects using URP  to get the required results.
+ 
+-While importing individual effects to your own project in LWRP make sure to remove the "HDRP script" component in all the lights and change the intensity from 400 to 1-2.
+
+-For better workflow use this asset for unity version 2019.4 and above.
+
+
