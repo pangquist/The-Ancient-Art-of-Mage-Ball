@@ -345,7 +345,6 @@ MonoBehaviour:
   displayName: Missing Name
   playerColour: {r: 1, g: 1, b: 1, a: 1}
   displayNameText: {fileID: 2782714423443914302}
-  displayColourRederer: {fileID: 0}
 --- !u!136 &1398020548929700590
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -552,7 +551,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  mouseSensitivity: 100
+  mouseSensitivity: 500
   playerCamera: {fileID: 1398020549020263658}
 --- !u!54 &2886720547080984662
 Rigidbody:
