@@ -34,7 +34,7 @@ public class PlayerMovement : NetworkBehaviour
     [Command]
     void CmdMove()
     {
-        
+        RpcMove();
     }
     #endregion
 
@@ -48,26 +48,31 @@ public class PlayerMovement : NetworkBehaviour
 
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
-        if (isGrounded && velocity.y < 0)
-        {
-            velocity.y = -2;
-        }
 
         if (isGrounded && Input.GetKeyDown(jumpButton))
         {
             velocity.y = jumpPower;
         }
+        velocity.y += gravity * Time.deltaTime;
 
         x = Input.GetAxis("Horizontal");
         z = Input.GetAxis("Vertical");
 
+        if (isGrounded && velocity.y < 0)
+        {
+            velocity.y = -4;
+        }
+
         move = transform.right * x + transform.forward * z;
-        velocity.y += gravity * Time.deltaTime;
+        
+        CmdMove();
+    }
 
-
-        //CmdMove();
-        controller.Move(move * speed * Time.deltaTime);
-        controller.Move(velocity * Time.deltaTime);
+    [ClientRpc]
+    void RpcMove()
+    {
+        controller.Move(move * speed * Time.deltaTime); //X and Z
+        controller.Move(velocity * Time.deltaTime); //Y
     }
     #endregion
 }
