@@ -39,11 +39,6 @@ public class PlayerMovement : NetworkBehaviour
     #endregion
 
     #region Client
-    
-    public override void OnStartAuthority()
-    {
-        enabled = true;
-    }
 
     [ClientCallback]
     void Update()
