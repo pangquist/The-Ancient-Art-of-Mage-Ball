@@ -14,6 +14,13 @@ public class MyNetworkPlayer : NetworkBehaviour
 
     [SerializeField] TMP_Text displayNameText = null;
 
+    private int teamNumber;
+    public int TeamNumber   // property
+    {
+        get { return teamNumber; }   // get method
+        set { teamNumber = value; }  // set method
+    }
+
     #region Server
 
     [Server]

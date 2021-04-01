@@ -301,6 +301,7 @@ GameObject:
   - component: {fileID: 8890351901005270611}
   - component: {fileID: 4492199172709615581}
   - component: {fileID: 2886720547080984662}
+  - component: {fileID: 7180692712059419732}
   m_Layer: 0
   m_Name: Player Character
   m_TagString: Untagged
@@ -569,6 +570,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 122
   m_CollisionDetection: 0
+--- !u!114 &7180692712059419732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1398020548929700587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b0fecffa3f624585964b0d0eb21b18e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Port: 7777
+  NoDelay: 1
+  Interval: 10
+  FastResend: 2
+  CongestionWindow: 0
+  SendWindowSize: 128
+  ReceiveWindowSize: 128
+  debugLog: 0
+  debugGUI: 0
 --- !u!1 &1398020549020263655
 GameObject:
   m_ObjectHideFlags: 0
@@ -608,7 +630,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1398020549020263655}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}

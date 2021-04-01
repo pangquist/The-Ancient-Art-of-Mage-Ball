@@ -20,5 +20,15 @@ public class MyNetworkManager : NetworkManager
         player.SetPlayerColor(displayColour);
         //playerGameObject.GetComponent<MeshRenderer>().material.color = displayColour;
         Debug.Log("Player number: " + numPlayers + " has joined the server!");
+
+        if (numPlayers < 2)
+        {
+            player.TeamNumber = 1;
+        }
+        else
+        {
+            player.TeamNumber = 2;
+        }
+        Debug.Log(player.TeamNumber);
     }
 }

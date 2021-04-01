@@ -8,7 +8,7 @@ public class PlayerMovement : NetworkBehaviour
     
     public CharacterController controller;
     [SerializeField]
-    float speed = 12;
+    float speed = 8;
     [SerializeField]
     Transform groundCheck;
     float groundDistance = 0.4f;
@@ -28,7 +28,7 @@ public class PlayerMovement : NetworkBehaviour
     float gravity = -9.81f;
 
     Vector3 move;
-    public Vector3 velocity;
+    public Vector3 velocity;  
 
     #region Server
     [Command]
