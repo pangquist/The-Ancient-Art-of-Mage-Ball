@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class MyNetworkManager : NetworkManager
 {
+    [SerializeField] TeamManager teamManager;
+
     public override void OnServerAddPlayer(NetworkConnection conn)
     {
         base.OnServerAddPlayer(conn);
@@ -23,11 +25,11 @@ public class MyNetworkManager : NetworkManager
 
         if (numPlayers < 2)
         {
-            player.TeamNumber = 1;
+            teamManager.team1.Add(player);
         }
         else
         {
-            player.TeamNumber = 2;
+            teamManager.team2.Add(player);
         }
         Debug.Log(player.TeamNumber);
     }

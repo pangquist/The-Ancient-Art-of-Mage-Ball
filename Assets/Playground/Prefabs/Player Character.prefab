@@ -400,8 +400,8 @@ MonoBehaviour:
     m_Bits: 64
   isGrounded: 0
   jumpButton: 32
-  jumpPower: 12
-  gravity: -19.62
+  jumpPower: 6
+  gravity: -9.81
   velocity: {x: 0, y: 0, z: 0}
 --- !u!114 &7130249670396189663
 MonoBehaviour:
@@ -517,7 +517,7 @@ MonoBehaviour:
     type: 3}
   pushAmount: 500
   pushRadius: 5
-  forceJumpHeight: 25
+  forceJumpHeight: 16
   hitEffect: {fileID: 8027473195609965283, guid: e06bdea1510a3e547a2ed554aac7f5f9,
     type: 3}
 --- !u!114 &8890351901005270611
