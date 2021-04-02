@@ -21,8 +21,15 @@ public class CountdownTimer : MonoBehaviour
 
     private void Update()
     {
-        if(currentTime <= 0) { return; }
+        ShowTimer();       
+    }
+
+    private void ShowTimer()
+    {
+        float minutes = Mathf.FloorToInt(currentTime / 60);
+        float seconds = Mathf.FloorToInt(currentTime % 60);
+        if (currentTime <= 0) { return; }
         currentTime -= 1 * Time.deltaTime;
-        countdownText.text = currentTime.ToString("0");
+        countdownText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 }
