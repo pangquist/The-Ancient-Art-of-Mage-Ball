@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Mirror;
 
-public class CountdownTimer : MonoBehaviour
+public class CountdownTimer : NetworkBehaviour
 {
+    [SyncVar(hook = nameof(OnChangeTime))]
     float currentTime = 0f;
     float startingTime = 300f;
 
@@ -21,6 +23,9 @@ public class CountdownTimer : MonoBehaviour
 
     private void Update()
     {
+        //Problem beror på att alla clienter har tillgång till varje klient timer. Kan sätta timern på klienten så att bara de har authentication?
+
+        if (currentTime <= 0) { return; }
         ShowTimer();       
     }
 
@@ -29,7 +34,12 @@ public class CountdownTimer : MonoBehaviour
         float minutes = Mathf.FloorToInt(currentTime / 60);
         float seconds = Mathf.FloorToInt(currentTime % 60);
         if (currentTime <= 0) { return; }
-        currentTime -= 1 * Time.deltaTime;
+        OnChangeTime(currentTime, currentTime -= 1 * Time.deltaTime);
         countdownText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+
+    private void OnChangeTime(float oldTime, float newTime)
+    {
+        currentTime = newTime;
     }
 }
