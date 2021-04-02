@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class MyNetworkManager : NetworkManager
 {
     [SerializeField] TeamManager teamManager;
+    [SerializeField] CountdownTimer countdownTimer;
 
     bool ballIsSpawned = false;
     [SerializeField] GameObject ball;
@@ -46,6 +47,11 @@ public class MyNetworkManager : NetworkManager
         }
 
         NetworkServer.Spawn(ball.gameObject);
+
+        if (numPlayers == 2)
+        {
+            countdownTimer.StartingTime = 300;
+        }
     }
     //public override void OnClientSceneChanged(NetworkConnection conn)
     //{
