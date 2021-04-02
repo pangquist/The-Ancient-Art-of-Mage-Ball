@@ -2,10 +2,13 @@ using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MyNetworkManager : NetworkManager
 {
     [SerializeField] TeamManager teamManager;
+    [SerializeField] GameObject ball;
+    [SerializeField] Transform ballStartPos;
 
     public override void OnServerAddPlayer(NetworkConnection conn)
     {
@@ -20,7 +23,6 @@ public class MyNetworkManager : NetworkManager
             Random.Range(0f, 1f));
 
         player.SetPlayerColor(displayColour);
-        //playerGameObject.GetComponent<MeshRenderer>().material.color = displayColour;
         Debug.Log("Player number: " + numPlayers + " has joined the server!");
 
         if (numPlayers < 2)
@@ -32,5 +34,24 @@ public class MyNetworkManager : NetworkManager
             teamManager.team2.Add(player);
         }
         Debug.Log(player.TeamNumber);
+
+        ball = Instantiate(ball, ballStartPos.position, ballStartPos.rotation);
+
+        NetworkServer.Spawn(ball.gameObject);
+    }
+    public override void OnClientSceneChanged(NetworkConnection conn)
+    {
+        if (SceneManager.GetActiveScene().name.StartsWith("Arena"))
+        {
+            //ball = Instantiate(ball, ballStartPos.position, ballStartPos.rotation);
+
+            //NetworkServer.Spawn(ball.gameObject);
+
+            //foreach (RTSPlayer player in players)
+            //{
+            //    GameObject baseInstance = Instantiate(unitBasePrefab, GetStartPosition().position, Quaternion.identity);
+            //    NetworkServer.Spawn(baseInstance, player.connectionToClient);
+            //}
+        }
     }
 }
