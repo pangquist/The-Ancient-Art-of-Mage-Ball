@@ -9,7 +9,6 @@ public class MyNetworkPlayer : NetworkBehaviour
     [SyncVar(hook = nameof(HandlePlayerNameUpdated))]
     [SerializeField] string displayName = "Missing Name";
     [SerializeField] TMP_Text timerText;
-    //[SyncVar(hook = nameof(HandleDisplayColourUpdated))]
     [SerializeField] Color playerColour = Color.white;
 
     [SerializeField] TMP_Text displayNameText = null;
@@ -20,6 +19,8 @@ public class MyNetworkPlayer : NetworkBehaviour
         get { return teamNumber; }   // get method
         set { teamNumber = value; }  // set method
     }
+
+    public static float time;
 
     #region Server
 
@@ -65,6 +66,7 @@ public class MyNetworkPlayer : NetworkBehaviour
         displayNameText.text = displayName;
     }
 
+    [ClientRpc]
     public void RpcChangeTimer(float time)
     {
         float minutes = Mathf.FloorToInt(time / 60);

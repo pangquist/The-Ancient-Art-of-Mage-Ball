@@ -16,22 +16,35 @@ public class CountdownTimer : NetworkBehaviour
     private void Start()
     {
         currentTime = startingTime;
+        Debug.Log(currentTime);
     }
     
     private void Update()
     {
         if (currentTime <= 0) { return; }
-        Debug.Log(currentTime);
-        RpcShowTimer();
-    }
-    
-    private void RpcShowTimer()
-    {
-        if (currentTime <= 0) { return; }
         currentTime -= 1 * Time.deltaTime;
-        foreach (MyNetworkPlayer player in MyNetworkManager.players)
-        {
-            player.CmdChangeTimer(currentTime);
-        }
+        //Debug.Log(currentTime);
+        SendTime(CurrentTime);
+    }
+
+    [ClientCallback]
+    void SendTime(float time)
+    {
+        //Debug.Log(currentTime);
+        CmdSendTime(time);
+    }
+
+    [Command]
+    void CmdSendTime(float time)
+    {
+        //Debug.Log("Command recieved!");
+        RpcSendTime(time);
+    }
+
+    [ClientRpc]
+    private void RpcSendTime(float time)
+    {
+        //Debug.Log("Sending Time to all clients!");
+        GetComponent<MyNetworkPlayer>().RpcChangeTimer(time);
     }
 }
