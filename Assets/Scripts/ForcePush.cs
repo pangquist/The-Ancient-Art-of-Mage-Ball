@@ -37,34 +37,24 @@ public class ForcePush : NetworkBehaviour
         Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, hitableLayer);
     }
     
+    [Client]
     void DoPush()
     {
-        Collider[] colliders = Physics.OverlapSphere(hit.point, pushRadius);
         CmdSpawnHitEffect(hit.point);
 
+        Collider[] colliders = Physics.OverlapSphere(hit.point, pushRadius);
         foreach (Collider pushedObject in colliders)
         {
             if (pushedObject.CompareTag("Enemy"))
             {
-                pushedBody = pushedObject.GetComponent<Rigidbody>();
+                Debug.Log("Client is pushing!");
                 CmdDoPush(pushedObject.gameObject);
             }
         }
     }
     
-    void DoChargePush()
-    {
-        Collider[] colliders = Physics.OverlapSphere(transform.position + transform.forward * 7, pushRadius);
-        CmdSpawnHitEffect(transform.position + transform.forward * 7);
-        foreach (Collider pushedObject in colliders)
-        {
-            if (pushedObject.CompareTag("Enemy"))
-            {
-                pushedBody = pushedObject.GetComponent<Rigidbody>();
-                CmdDoChargePush();
-            }
-        }
-    }
+    
+
     [Client]
     void DoForceJump()
     {
@@ -85,17 +75,32 @@ public class ForcePush : NetworkBehaviour
         pushedBody.AddExplosionForce(pushAmount * 1.5f, transform.position + transform.forward * 7, pushRadius * 1.5f);
     }
 
-    [Command]
-    void CmdDoPush(GameObject _pushedBody)
+    [ClientCallback]
+    void DoChargePush()
     {
-        Debug.Log("Client is pushing!");
-        RpcMoveBall(_pushedBody);
+        Collider[] colliders = Physics.OverlapSphere(transform.position + transform.forward * 7, pushRadius);
+        CmdSpawnHitEffect(transform.position + transform.forward * 7);
+        foreach (Collider pushedObject in colliders)
+        {
+            if (pushedObject.CompareTag("Enemy"))
+            {
+                pushedBody = pushedObject.GetComponent<Rigidbody>();
+                CmdDoChargePush();
+            }
+        }
+    }
+
+    [Command]
+    void CmdDoPush(GameObject ball)
+    {
+        RpcMoveBall(ball);
     }
 
     [ClientRpc]
     void RpcMoveBall(GameObject ball)
     {
         Debug.Log("Server is moving the ball for the clients!");
+        ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
         ball.GetComponent<Rigidbody>().AddExplosionForce(pushAmount, hit.point, pushRadius);
     }
     #endregion

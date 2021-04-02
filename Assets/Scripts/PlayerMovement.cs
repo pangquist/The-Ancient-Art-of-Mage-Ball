@@ -11,7 +11,7 @@ public class PlayerMovement : NetworkBehaviour
     float speed = 8;
     [SerializeField]
     Transform groundCheck;
-    float groundDistance = 0.4f;
+    float groundDistance = 0.2f;
     [SerializeField]
     LayerMask groundMask;
 
@@ -32,9 +32,9 @@ public class PlayerMovement : NetworkBehaviour
 
     #region Server
     [Command]
-    void CmdMove()
+    void CmdMove(Vector3 _move, Vector3 _velocity)
     {
-        RpcMove();
+        RpcMove(_move, _velocity);
     }
     #endregion
 
@@ -60,19 +60,19 @@ public class PlayerMovement : NetworkBehaviour
 
         if (isGrounded && velocity.y < 0)
         {
-            velocity.y = -4;
+            velocity.y = -2;
         }
 
         move = transform.right * x + transform.forward * z;
         
-        CmdMove();
+        CmdMove(move, velocity);
     }
 
     [ClientRpc]
-    void RpcMove()
+    void RpcMove(Vector3 _move, Vector3 _velocity)
     {
-        controller.Move(move * speed * Time.deltaTime); //X and Z
-        controller.Move(velocity * Time.deltaTime); //Y
+        controller.Move(_move * speed * Time.deltaTime); //X and Z
+        controller.Move(_velocity * Time.deltaTime); //Y
     }
     #endregion
 }
