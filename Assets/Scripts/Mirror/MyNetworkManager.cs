@@ -7,8 +7,13 @@ using UnityEngine.SceneManagement;
 public class MyNetworkManager : NetworkManager
 {
     [SerializeField] TeamManager teamManager;
+    [SerializeField] CountdownTimer countdownTimer;
+
+    bool ballIsSpawned = false;
     [SerializeField] GameObject ball;
     [SerializeField] Transform ballStartPos;
+
+    bool timeIsStarted = false;
 
     public override void OnServerAddPlayer(NetworkConnection conn)
     {
@@ -35,23 +40,32 @@ public class MyNetworkManager : NetworkManager
         }
         Debug.Log(player.TeamNumber);
 
-        ball = Instantiate(ball, ballStartPos.position, ballStartPos.rotation);
+        if(ballIsSpawned == false)
+        {
+            ball = Instantiate(ball, ballStartPos.position, ballStartPos.rotation);
+            ballIsSpawned = true;
+        }
 
         NetworkServer.Spawn(ball.gameObject);
-    }
-    public override void OnClientSceneChanged(NetworkConnection conn)
-    {
-        if (SceneManager.GetActiveScene().name.StartsWith("Arena"))
+
+        if (numPlayers == 2)
         {
-            //ball = Instantiate(ball, ballStartPos.position, ballStartPos.rotation);
-
-            //NetworkServer.Spawn(ball.gameObject);
-
-            //foreach (RTSPlayer player in players)
-            //{
-            //    GameObject baseInstance = Instantiate(unitBasePrefab, GetStartPosition().position, Quaternion.identity);
-            //    NetworkServer.Spawn(baseInstance, player.connectionToClient);
-            //}
+            countdownTimer.StartingTime = 300;
         }
     }
+    //public override void OnClientSceneChanged(NetworkConnection conn)
+    //{
+    //    if (SceneManager.GetActiveScene().name.StartsWith("Arena"))
+    //    {
+    //        ball = Instantiate(ball, ballStartPos.position, ballStartPos.rotation);
+
+    //        NetworkServer.Spawn(ball.gameObject);
+
+    //        foreach (RTSPlayer player in players)
+    //        {
+    //            GameObject baseInstance = Instantiate(unitBasePrefab, GetStartPosition().position, Quaternion.identity);
+    //            NetworkServer.Spawn(baseInstance, player.connectionToClient);
+    //        }
+    //    }
+    //}
 }
