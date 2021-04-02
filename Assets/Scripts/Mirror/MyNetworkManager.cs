@@ -7,13 +7,14 @@ using UnityEngine.SceneManagement;
 public class MyNetworkManager : NetworkManager
 {
     [SerializeField] TeamManager teamManager;
-    [SerializeField] CountdownTimer countdownTimer;
 
     bool ballIsSpawned = false;
     [SerializeField] GameObject ball;
     [SerializeField] Transform ballStartPos;
 
-    bool timeIsStarted = false;
+    public static bool timeIsStarted = false; //ÄNDRA
+
+    public static List<MyNetworkPlayer> players = new List<MyNetworkPlayer>();
 
     public override void OnServerAddPlayer(NetworkConnection conn)
     {
@@ -37,6 +38,7 @@ public class MyNetworkManager : NetworkManager
         else
         {
             teamManager.team2.Add(player);
+            timeIsStarted = true;
         }
         Debug.Log(player.TeamNumber);
 
@@ -45,27 +47,9 @@ public class MyNetworkManager : NetworkManager
             ball = Instantiate(ball, ballStartPos.position, ballStartPos.rotation);
             ballIsSpawned = true;
         }
+        players.Add(player);
 
+        Debug.Log("players have " + numPlayers + " in its list");
         NetworkServer.Spawn(ball.gameObject);
-
-        if (numPlayers == 2)
-        {
-            countdownTimer.StartingTime = 300;
-        }
     }
-    //public override void OnClientSceneChanged(NetworkConnection conn)
-    //{
-    //    if (SceneManager.GetActiveScene().name.StartsWith("Arena"))
-    //    {
-    //        ball = Instantiate(ball, ballStartPos.position, ballStartPos.rotation);
-
-    //        NetworkServer.Spawn(ball.gameObject);
-
-    //        foreach (RTSPlayer player in players)
-    //        {
-    //            GameObject baseInstance = Instantiate(unitBasePrefab, GetStartPosition().position, Quaternion.identity);
-    //            NetworkServer.Spawn(baseInstance, player.connectionToClient);
-    //        }
-    //    }
-    //}
 }

@@ -8,7 +8,7 @@ public class MyNetworkPlayer : NetworkBehaviour
 {
     [SyncVar(hook = nameof(HandlePlayerNameUpdated))]
     [SerializeField] string displayName = "Missing Name";
-
+    [SerializeField] TMP_Text timerText;
     //[SyncVar(hook = nameof(HandleDisplayColourUpdated))]
     [SerializeField] Color playerColour = Color.white;
 
@@ -46,6 +46,12 @@ public class MyNetworkPlayer : NetworkBehaviour
 
         SetDisplayName(newDisplayName);
     }
+
+    [Command]
+    public void CmdChangeTimer(float time)
+    {
+        RpcChangeTimer(time);
+    }
     #endregion
     #region Client
 
@@ -57,6 +63,13 @@ public class MyNetworkPlayer : NetworkBehaviour
     private void HandlePlayerNameUpdated(string oldName, string newName)
     {
         displayNameText.text = displayName;
+    }
+
+    public void RpcChangeTimer(float time)
+    {
+        float minutes = Mathf.FloorToInt(time / 60);
+        float seconds = Mathf.FloorToInt(time % 60);
+        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
     [ContextMenu("SetMyName")]

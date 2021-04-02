@@ -7,39 +7,31 @@ using Mirror;
 
 public class CountdownTimer : NetworkBehaviour
 {
-    [SyncVar(hook = nameof(OnChangeTime))]
     float currentTime = 0f;
     float startingTime = 300f;
+    TMP_Text timerText = null;
 
-    public float StartingTime { get { return startingTime; } set { startingTime = value; } }
-
-
-    [SerializeField] TMP_Text countdownText;
+    public float CurrentTime { get { return currentTime; } set { currentTime = value; } }
 
     private void Start()
     {
         currentTime = startingTime;
     }
-
+    
     private void Update()
     {
-        //Problem beror på att alla clienter har tillgång till varje klient timer. Kan sätta timern på klienten så att bara de har authentication?
-
         if (currentTime <= 0) { return; }
-        ShowTimer();       
+        Debug.Log(currentTime);
+        RpcShowTimer();
     }
-
-    private void ShowTimer()
+    
+    private void RpcShowTimer()
     {
-        float minutes = Mathf.FloorToInt(currentTime / 60);
-        float seconds = Mathf.FloorToInt(currentTime % 60);
         if (currentTime <= 0) { return; }
-        OnChangeTime(currentTime, currentTime -= 1 * Time.deltaTime);
-        countdownText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-    }
-
-    private void OnChangeTime(float oldTime, float newTime)
-    {
-        currentTime = newTime;
+        currentTime -= 1 * Time.deltaTime;
+        foreach (MyNetworkPlayer player in MyNetworkManager.players)
+        {
+            player.CmdChangeTimer(currentTime);
+        }
     }
 }
