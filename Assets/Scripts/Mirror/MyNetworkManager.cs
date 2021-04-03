@@ -11,7 +11,7 @@ public class MyNetworkManager : NetworkManager
 
     bool ballIsSpawned = false;
     [SerializeField] GameObject ball;
-    [SerializeField] Transform ballStartPos;
+    [SerializeField] GameObject ballStartPos;
     [SerializeField] GameObject[] characters;
 
     public static event Action ClientOnConnected;
@@ -118,7 +118,8 @@ public class MyNetworkManager : NetworkManager
 
             if (ballIsSpawned == false)
             {
-                ball = Instantiate(ball, new Vector3(-14, 2, 0), Quaternion.identity); //HARD CODED CHANGE LATER
+                ballStartPos = GameObject.Find("BallSpawnPosition");
+                ball = Instantiate(ball, ballStartPos.transform.position, ballStartPos.transform.rotation); //HARD CODED CHANGE LATER
                 NetworkServer.Spawn(ball.gameObject);
                 ballIsSpawned = true;
             }
