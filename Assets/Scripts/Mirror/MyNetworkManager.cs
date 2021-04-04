@@ -13,6 +13,7 @@ public class MyNetworkManager : NetworkManager
     [SerializeField] GameObject ball;
     [SerializeField] GameObject ballStartPos;
     [SerializeField] GameObject[] characters;
+    [SerializeField] public int playersRequiredToStart = 1;
 
     public static event Action ClientOnConnected;
     public static event Action ClientOnDisconnected;
@@ -50,7 +51,7 @@ public class MyNetworkManager : NetworkManager
     [Server]
     public void StartGame()
     {
-        if (Players.Count < 2)
+        if (Players.Count < playersRequiredToStart)
             return;
 
         isGameInProgress = true;
