@@ -35,7 +35,7 @@ public class CountdownTimer : NetworkBehaviour
     [Command]
     void CmdUpdateTime()
     {
-        Debug.Log("Sending time: " + currentTime + " to server");
+        //Debug.Log("Sending time: " + currentTime + " to server");
         SetTime();
     }
 
@@ -49,6 +49,6 @@ public class CountdownTimer : NetworkBehaviour
     {
         float minutes = Mathf.FloorToInt(currentTime / 60);
         float seconds = Mathf.FloorToInt(currentTime % 60);
-        //timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 }
