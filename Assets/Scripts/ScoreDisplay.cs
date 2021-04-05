@@ -7,16 +7,21 @@ using TMPro;
 public class ScoreDisplay : MonoBehaviour
 {
     [SerializeField]
-    public int score;
+    public int redScore = 0;
+    public int blueScore = 0;
+    public ScoreArea scoreArea;
     public TMP_Text scoreText;
     public bool isRed;
+    public MatchInfo matchInfo;
 
     private void Update()
     {
+        redScore = matchInfo.redScore;
+        blueScore = matchInfo.blueScore;
         if(isRed)
-        scoreText.text = "Red: " + score.ToString();
+        scoreText.text = "Red: " + redScore.ToString();
         else
-            scoreText.text = "Blue: " + score.ToString();
+            scoreText.text = "Blue: " + blueScore.ToString();
     }
 
 }

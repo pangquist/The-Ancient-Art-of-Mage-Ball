@@ -13,7 +13,7 @@ public class CountdownTimer : NetworkBehaviour
 
     public float CurrentTime { get { return currentTime; } set { currentTime = value; } }
 
-    private void Start()
+    public override void OnStartServer()
     {
         currentTime = startingTime;
         Debug.Log(currentTime);

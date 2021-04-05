@@ -303,7 +303,7 @@ GameObject:
   - component: {fileID: 4492199172709615581}
   m_Layer: 0
   m_Name: Player Character
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1702,9 +1702,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66927a00ec53722478be54efbd01022a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
+  redScore: 0
+  blueScore: 0
+  scoreArea: {fileID: 6231605736282244174, guid: 0edf11e3780fb1b44b4488b68f23b1a9,
+    type: 3}
   scoreText: {fileID: 2304103363279501702}
   isRed: 1
+  matchInfo: {fileID: 3249680014488525399, guid: 5ec7c610e51ec434c9f7dc1ba4e65f85,
+    type: 3}
 --- !u!1 &3821483350630335701
 GameObject:
   m_ObjectHideFlags: 0
@@ -2500,9 +2505,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66927a00ec53722478be54efbd01022a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
+  redScore: 0
+  blueScore: 0
+  scoreArea: {fileID: 6231605736282244174, guid: 0edf11e3780fb1b44b4488b68f23b1a9,
+    type: 3}
   scoreText: {fileID: 6308363265070594642}
   isRed: 0
+  matchInfo: {fileID: 3249680014488525399, guid: 5ec7c610e51ec434c9f7dc1ba4e65f85,
+    type: 3}
 --- !u!1 &5774797683928480432
 GameObject:
   m_ObjectHideFlags: 0
