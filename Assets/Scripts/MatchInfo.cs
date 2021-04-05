@@ -7,12 +7,19 @@ public class MatchInfo : NetworkBehaviour
 {
     public int blueScore = 0;
     public int redScore = 0;
-    public int time = 300;
 
-    public void OnServerStart()
+    public int BlueScore { get { return blueScore; } set { blueScore = value; } }
+
+    public int RedScore { get { return redScore; } set { redScore = value; } }
+
+    public override void OnStartServer()
     {
-    blueScore = 0;
-    redScore = 0;
-    time = 300;
+        ResetScore();
+    }
+
+    public void ResetScore()
+    {
+        blueScore = 0;
+        redScore = 0;
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ScoreArea : MonoBehaviour
@@ -7,7 +8,8 @@ public class ScoreArea : MonoBehaviour
 
     public GameObject effectObject;
     public GameObject parentName;
-    public MatchInfo matchInfo;
+    [SerializeField] GamestateManager gmManager;
+
 
     private void Start()
     {
@@ -19,8 +21,6 @@ public class ScoreArea : MonoBehaviour
         if(other.gameObject.tag == "Enemy")
         {            
             effectObject.SetActive(true);
-            //string name = GetComponent<GameObject>().name.ToString();
-            //Debug.Log("hello");
             AddScore();            
         }     
     }
@@ -28,14 +28,12 @@ public class ScoreArea : MonoBehaviour
     {
         if (parentName.name == "Goal Blue")
         {
-            matchInfo.blueScore += 1;
+            gmManager.BlueScore += 1;
         }
         else
         {
-            matchInfo.redScore += 1;
+            gmManager.RedScore += 1;
         }
-                  
-
     }
 
 }

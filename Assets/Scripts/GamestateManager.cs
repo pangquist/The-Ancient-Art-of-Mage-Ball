@@ -4,117 +4,50 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class GamestateManager : NetworkManager
+public class GamestateManager : NetworkBehaviour
 {
-    [SerializeField] TMP_Text scoreUi;
     //[SyncVar]
     //[SerializeField]
     //public static bool gameIsOver = false;
 
-    List<MyNetworkPlayer> team1 = new List<MyNetworkPlayer>();
-    List<MyNetworkPlayer> team2 = new List<MyNetworkPlayer>();
-    
-    //[SyncVar]
-    //[SerializeField] double time;
-    double startTime = 300;
+    List<MyNetworkPlayer> blueTeam = new List<MyNetworkPlayer>();
+    List<MyNetworkPlayer> redTeam = new List<MyNetworkPlayer>();
+
+    [SyncVar]
+    [SerializeField] double time;
+    double startTime = 300f;
 
     int startScore = 0;
-    //[SyncVar]
-    //[SerializeField] int team1Score; 
-    //[SyncVar]
-    //[SerializeField] int team2Score;
+    [SyncVar (hook = nameof(HandleRedScore))]
+    [SerializeField] int redScore;
+    [SyncVar(hook = nameof(HandleBlueScore))]
+    [SerializeField] int blueScore;
 
-    List<MyNetworkPlayer> players = new List<MyNetworkPlayer>();
+    public int BlueScore { get { return blueScore; } set { blueScore = value; } }
+    public int RedScore { get { return redScore; } set { redScore = value; } }
 
-    public GameObject gameOverUI;
-    public GameObject gameWinUI;
 
-    bool isGameInProgress = false;
-
-    public override void OnServerSceneChanged(string sceneName)
+    public override void OnStartServer()
     {
-        //gameIsOver = false;
-        //team1Score = startScore;
-        //team2Score = startScore;
-        //time = startTime;
+        ResetScore();
     }
 
-    public void StartGame()
+    public void ResetScore()
     {
-        if (players.Count < 2)
-            return;
-
-        isGameInProgress = true;
-
-        foreach(MyNetworkPlayer player in players)
-        {
-            if(player.TeamNumber == 1)
-            {
-                team1.Add(player);
-            }
-            else
-            {
-                team2.Add(player);
-            }
-        }
-
-        ServerChangeScene("Scene_Map_01");
+        blueScore = startScore;
+        redScore = startScore;
     }
 
-    public override void OnServerConnect(NetworkConnection conn)
+    public void HandleRedScore()
     {
-        if (!isGameInProgress)
-            return;
-
-        conn.Disconnect();
+        redScoreUi.text = "Red: " + redScore.ToString();
+ 
     }
 
-    public override void OnServerDisconnect(NetworkConnection conn)
+    public void HandleBlueScore()
     {
-        MyNetworkPlayer player = conn.identity.GetComponent<MyNetworkPlayer>();
-
-        players.Remove(player);
-
-        base.OnServerDisconnect(conn);
+        blueScoreUi.text = "Blue: " + blueScore.ToString();
     }
-
-    void Update()
-    {
-
-
-        //if (time <= 0)
-        //    EndGame();
-    }
-    //void EndGame()
-    //{
-    //    if(team1Score > team2Score)
-    //    {
-    //        //team 1 vinner
-    //        foreach(MyNetworkPlayer player in team1)
-    //        {
-                
-    //        }
-    //    }
-    //    else if(team1Score < team2Score)
-    //    {
-    //        //team 2 vinner
-    //        foreach (MyNetworkPlayer player in team2)
-    //        {
-                
-    //        }
-    //    }
-    //    else
-    //    {
-    //        //overtime
-    //        time += 60;
-    //    }
-
-    //    gameIsOver = true;
-
-    //    gameOverUI.SetActive(true);
-    //}
-    //void WinGame()
-    //{
-
-    //}
 }
+
+ 
