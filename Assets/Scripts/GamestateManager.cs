@@ -32,6 +32,7 @@ public class GamestateManager : NetworkBehaviour
     public override void OnStartServer()
     {
         ResetScore();
+        myNetworkManager = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<MyNetworkManager>();
     }
 
     public void ResetScore()
@@ -43,22 +44,16 @@ public class GamestateManager : NetworkBehaviour
     
     public void HandleBlueScore(int oldScore, int newScore)
     {
-        CmdSendBlueScore();
+        SendBlueScore();
     }
 
     public void HandleRedScore(int oldScore, int newScore)
     {
-        CmdSendRedScore();
+        SendRedScore();
     }
 
-    [Command]
-    void CmdSendRedScore()
-    {
-        RpcSendRedScore();
-    }
-
-    [ClientRpc]
-    void RpcSendRedScore()
+  
+    void SendRedScore()
     {
         foreach (MyNetworkPlayer player in myNetworkManager.Players)
         {
@@ -66,14 +61,7 @@ public class GamestateManager : NetworkBehaviour
         }
     }
 
-    [Command]
-    void CmdSendBlueScore()
-    {
-        RpcSendBlueScore();
-    }
-
-    [ClientRpc]
-    void RpcSendBlueScore()
+    void SendBlueScore()
     {
         foreach (MyNetworkPlayer player in myNetworkManager.Players)
         {

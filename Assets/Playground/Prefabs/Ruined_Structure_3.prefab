@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8875672228214067465}
   - component: {fileID: 6685681144633959875}
   - component: {fileID: 6526075509496077059}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ruined_Structure_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
