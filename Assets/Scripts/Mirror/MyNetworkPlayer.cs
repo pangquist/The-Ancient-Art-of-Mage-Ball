@@ -13,6 +13,9 @@ public class MyNetworkPlayer : NetworkBehaviour
 
     [SerializeField] TMP_Text displayNameText = null;
 
+    [SerializeField] TMP_Text redScoreText;
+    [SerializeField] TMP_Text blueScoreText;
+
     private int teamNumber;
     public int TeamNumber   // property
     {

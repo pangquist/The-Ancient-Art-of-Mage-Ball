@@ -303,7 +303,7 @@ GameObject:
   - component: {fileID: 4492199172709615581}
   m_Layer: 0
   m_Name: Player Character
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -346,6 +346,8 @@ MonoBehaviour:
   timerText: {fileID: 1028667098871470237}
   playerColour: {r: 1, g: 1, b: 1, a: 1}
   displayNameText: {fileID: 2782714423443914302}
+  redScoreText: {fileID: 2304103363279501702}
+  blueScoreText: {fileID: 6308363265070594642}
 --- !u!114 &9123136897218366115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1566,7 +1568,6 @@ GameObject:
   - component: {fileID: 6301066454781117881}
   - component: {fileID: 107227701596929577}
   - component: {fileID: 2304103363279501702}
-  - component: {fileID: 194499340521627098}
   m_Layer: 0
   m_Name: ScoreRed
   m_TagString: Untagged
@@ -1690,21 +1691,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &194499340521627098
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3809276247224564515}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66927a00ec53722478be54efbd01022a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  score: 0
-  scoreText: {fileID: 2304103363279501702}
-  isRed: 1
 --- !u!1 &3821483350630335701
 GameObject:
   m_ObjectHideFlags: 0
@@ -2364,7 +2350,6 @@ GameObject:
   - component: {fileID: 4251880675193189865}
   - component: {fileID: 3130663899906130434}
   - component: {fileID: 6308363265070594642}
-  - component: {fileID: 5179072738549807726}
   m_Layer: 0
   m_Name: ScoreBlue
   m_TagString: Untagged
@@ -2488,21 +2473,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &5179072738549807726
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5528152384557313784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66927a00ec53722478be54efbd01022a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  score: 0
-  scoreText: {fileID: 6308363265070594642}
-  isRed: 0
 --- !u!1 &5774797683928480432
 GameObject:
   m_ObjectHideFlags: 0
