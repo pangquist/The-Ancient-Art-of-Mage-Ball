@@ -24,6 +24,9 @@ public class MyNetworkPlayer : NetworkBehaviour
     public static event Action<bool> AuthorityOnPartyOwnerStateUpdated;
     public static event Action ClientOnInfoUpdated;
 
+    public TMP_Text BlueScore { get { return blueScoreText; } set { blueScoreText = value; } }
+    public TMP_Text RedScore { get { return redScoreText; } set { redScoreText = value; } }
+
 
     private int teamNumber;
 

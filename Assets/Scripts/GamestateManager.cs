@@ -13,6 +13,8 @@ public class GamestateManager : NetworkBehaviour
     List<MyNetworkPlayer> blueTeam = new List<MyNetworkPlayer>();
     List<MyNetworkPlayer> redTeam = new List<MyNetworkPlayer>();
 
+    [SerializeField] MyNetworkManager myNetworkManager;
+
     [SyncVar]
     [SerializeField] double time;
     double startTime = 300f;
@@ -38,15 +40,45 @@ public class GamestateManager : NetworkBehaviour
         redScore = startScore;
     }
 
-    public void HandleRedScore(int oldScore, int newScore)
-    {
-        //redScoreUi.text = "Red: " + redScore.ToString();
- 
-    }
-
+    
     public void HandleBlueScore(int oldScore, int newScore)
     {
-        //blueScoreUi.text = "Blue: " + blueScore.ToString();
+        CmdSendBlueScore();
+    }
+
+    public void HandleRedScore(int oldScore, int newScore)
+    {
+        CmdSendRedScore();
+    }
+
+    [Command]
+    void CmdSendRedScore()
+    {
+        RpcSendRedScore();
+    }
+
+    [ClientRpc]
+    void RpcSendRedScore()
+    {
+        foreach (MyNetworkPlayer player in myNetworkManager.Players)
+        {
+            player.RedScore.text = "Red: " + redScore.ToString();
+        }
+    }
+
+    [Command]
+    void CmdSendBlueScore()
+    {
+        RpcSendBlueScore();
+    }
+
+    [ClientRpc]
+    void RpcSendBlueScore()
+    {
+        foreach (MyNetworkPlayer player in myNetworkManager.Players)
+        {
+            player.BlueScore.text = "Blue: " + blueScore.ToString();
+        }
     }
 }
 
