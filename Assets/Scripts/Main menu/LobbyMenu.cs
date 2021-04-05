@@ -37,7 +37,7 @@ public class LobbyMenu : MonoBehaviour
         Debug.Log("Name list: " + players.Count);
         for (int i = 0; i < players.Count; i++)
         {
-            playerNameTexts[i].text = players[i].GetDisplayName();
+            playerNameTexts[i].text = players[i].GetComponent<MyNetworkPlayer>().GetDisplayName();
         }
 
         for (int i = players.Count; i < playerNameTexts.Length; i++)

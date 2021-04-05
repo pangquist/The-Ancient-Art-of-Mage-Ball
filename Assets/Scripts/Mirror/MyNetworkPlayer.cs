@@ -1,9 +1,11 @@
 using Mirror;
+using Steamworks;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MyNetworkPlayer : NetworkBehaviour
 {
@@ -20,6 +22,10 @@ public class MyNetworkPlayer : NetworkBehaviour
     public static event Action ClientOnInfoUpdated;
 
     private int teamNumber;
+
+    [SyncVar(hook = nameof(HandleSteamIdUpdated))]
+    ulong steamId;
+    
     public int TeamNumber   // property
     {
         get { return teamNumber; }   // get method
@@ -29,12 +35,21 @@ public class MyNetworkPlayer : NetworkBehaviour
     {
         return isPartyOwner;
     }
-    public string GetDisplayName()
-    {
-        return displayName;
-    }
 
     #region Server
+
+    [Server]
+    public void SetSteamId(ulong _steamId)
+    {
+        Debug.Log("Sent in steam ID: " + _steamId);
+        steamId = _steamId;
+    }
+
+    public string GetDisplayName()
+    {
+        Debug.Log("Getting name: " + displayName);
+        return displayName;
+    }
 
     [Server]
     public void SetPartyOwner(bool state)
@@ -66,10 +81,10 @@ public class MyNetworkPlayer : NetworkBehaviour
     [Command]
     void CmdSetDisplayName(string newDisplayName)
     {
+        //if (newDisplayName.Length < 2 || newDisplayName.Length > 15)
+        //    return;
 
-        if (newDisplayName.Length < 2 || newDisplayName.Length > 15)
-            return;
-
+        Debug.Log("Setting display name on server: " + newDisplayName);
         RpcLogNewName(newDisplayName);
 
         SetDisplayName(newDisplayName);
@@ -98,6 +113,13 @@ public class MyNetworkPlayer : NetworkBehaviour
         ((MyNetworkManager)NetworkManager.singleton).Players.Remove(this);
     }
 
+    void HandleSteamIdUpdated(ulong oldSteamId, ulong newSteamId)
+    {
+        var CSteamID = new CSteamID(newSteamId);
+        CmdSetDisplayName(SteamFriends.GetFriendPersonaName(CSteamID));
+        Debug.Log("Display Name has been set to: " + displayName);
+    }
+
     //private void ClientHandleDisplayNameUpdated(string oldDisplayName, string newDisplayName)
     //{
     //    ClientOnInfoUpdated?.Invoke();
@@ -116,13 +138,7 @@ public class MyNetworkPlayer : NetworkBehaviour
         ClientOnInfoUpdated?.Invoke();
         displayNameText.text = displayName;
     }
-
-    [ContextMenu("SetMyName")]
-    void SetMyName()
-    {
-        CmdSetDisplayName("M");
-    }
-
+    
     [ClientRpc]
     void RpcLogNewName(string newDisplayName)
     {

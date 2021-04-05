@@ -1,4 +1,5 @@
 using Mirror;
+using Steamworks;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -76,13 +77,20 @@ public class MyNetworkManager : NetworkManager
     public override void OnServerAddPlayer(NetworkConnection conn)
     {
         base.OnServerAddPlayer(conn);
-        GameObject playerGameObject = conn.identity.gameObject;
+
         MyNetworkPlayer player = conn.identity.GetComponent<MyNetworkPlayer>();
+        Debug.Log("Lobby id: " + MainMenu.LobbyId);
+        CSteamID steamId = SteamMatchmaking.GetLobbyMemberByIndex(MainMenu.LobbyId, numPlayers - 1);
+        Debug.Log("Steam id: " + steamId);
         Players.Add(player);
+        Debug.Log("Trying to set Steam Id: " + steamId.m_SteamID);
+        Debug.Log("Maybe we should try steam Id: " + steamId);
+        player.SetSteamId(steamId.m_SteamID);
+
+
+        GameObject playerGameObject = conn.identity.gameObject;
         player.SetPartyOwner(Players.Count == 1);
-        Debug.Log("We set the Party Owner");
-        player.SetDisplayName("Player " + numPlayers);
-        Debug.Log("We set the Player name");
+
 
 
         //if (SceneManager.GetActiveScene().name.StartsWith("Main"))

@@ -13,6 +13,8 @@ public class MainMenu : MonoBehaviour
     protected Callback<LobbyCreated_t> lobbyCreated;
     protected Callback<GameLobbyJoinRequested_t> gameLobbyJoinRequested;
     protected Callback<LobbyEnter_t> lobbyEntered;
+    
+    public static CSteamID LobbyId { get; private set; }
 
     private void Start()
     {
@@ -45,10 +47,12 @@ public class MainMenu : MonoBehaviour
             return;
         }
 
+        LobbyId = new CSteamID(callback.m_ulSteamIDLobby);
+
         NetworkManager.singleton.StartHost();
 
         SteamMatchmaking.SetLobbyData(
-            new CSteamID(callback.m_ulSteamIDLobby),
+            LobbyId,
             "HostAdDress",
             SteamUser.GetSteamID().ToString());
     }
