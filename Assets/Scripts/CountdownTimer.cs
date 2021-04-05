@@ -7,44 +7,48 @@ using Mirror;
 
 public class CountdownTimer : NetworkBehaviour
 {
-    float currentTime = 0f;
+    [SyncVar (hook = nameof(OnChangeTime))]
+    float currentTime;
     float startingTime = 300f;
-    TMP_Text timerText = null;
+    [SerializeField] TMP_Text timerText = null;
 
     public float CurrentTime { get { return currentTime; } set { currentTime = value; } }
 
     public override void OnStartServer()
     {
         currentTime = startingTime;
-        Debug.Log(currentTime);
     }
-    
+
+    private void OnEnable()
+    {
+        if (!hasAuthority)
+            return;
+        timerText.enabled = true;
+    }
+
     private void Update()
     {
         if (currentTime <= 0) { return; }
-        currentTime -= 1 * Time.deltaTime;
-        //Debug.Log(currentTime);
-        SendTime(CurrentTime);
+        CmdUpdateTime();
     }
-
-    [ClientCallback]
-    void SendTime(float time)
-    {
-        //Debug.Log(currentTime);
-        CmdSendTime(time);
-    }
-
+    
     [Command]
-    void CmdSendTime(float time)
+    void CmdUpdateTime()
     {
-        //Debug.Log("Command recieved!");
-        RpcSendTime(time);
+        Debug.Log("Sending time: " + currentTime + " to server");
+        SetTime();
     }
 
-    [ClientRpc]
-    private void RpcSendTime(float time)
+    [Server]
+    public void SetTime()
     {
-        //Debug.Log("Sending Time to all clients!");
-        GetComponent<MyNetworkPlayer>().RpcChangeTimer(time);
+        currentTime -= 1 * Time.deltaTime;
+    }
+
+    void OnChangeTime(float oldTime, float newTime)
+    {
+        float minutes = Mathf.FloorToInt(currentTime / 60);
+        float seconds = Mathf.FloorToInt(currentTime % 60);
+        //timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 }

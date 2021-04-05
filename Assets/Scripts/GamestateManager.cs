@@ -38,15 +38,15 @@ public class GamestateManager : NetworkBehaviour
         redScore = startScore;
     }
 
-    public void HandleRedScore()
+    public void HandleRedScore(int oldScore, int newScore)
     {
-        redScoreUi.text = "Red: " + redScore.ToString();
+        //redScoreUi.text = "Red: " + redScore.ToString();
  
     }
 
-    public void HandleBlueScore()
+    public void HandleBlueScore(int oldScore, int newScore)
     {
-        blueScoreUi.text = "Blue: " + blueScore.ToString();
+        //blueScoreUi.text = "Blue: " + blueScore.ToString();
     }
 }
 
