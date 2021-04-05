@@ -14,6 +14,7 @@ public class MyNetworkPlayer : NetworkBehaviour
     [SerializeField] Color playerColour = Color.white;
 
     [SerializeField] TMP_Text displayNameText = null;
+    [SerializeField] TMP_Text countdownTimer = null;
 
     [SyncVar(hook = nameof(AuthorityHandlePartyOwnerStateUpdated))]
     bool isPartyOwner = false;
@@ -94,12 +95,12 @@ public class MyNetworkPlayer : NetworkBehaviour
 
     public override void OnStartClient()
     {
+        gameObject.GetComponent<CountdownTimer>().enabled = true;
+
         if (NetworkServer.active)
             return;
 
         ((MyNetworkManager)NetworkManager.singleton).Players.Add(this);
-
-        gameObject.GetComponent<CountdownTimer>().enabled = true;
         gameObject.GetComponent<Animator>().enabled = true;
     }
 

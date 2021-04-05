@@ -14,9 +14,8 @@ public class CountdownTimer : NetworkBehaviour
 
     public float CurrentTime { get { return currentTime; } set { currentTime = value; } }
 
-    public override void OnStartServer()
+    void Start()
     {
-        base.OnStartServer();
         currentTime = startingTime;
     }
 

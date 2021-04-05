@@ -345,6 +345,7 @@ MonoBehaviour:
   displayName: Missing Name
   playerColour: {r: 1, g: 1, b: 1, a: 1}
   displayNameText: {fileID: 2782714423443914302}
+  countdownTimer: {fileID: 0}
 --- !u!114 &9123136897218366115
 MonoBehaviour:
   m_ObjectHideFlags: 0
