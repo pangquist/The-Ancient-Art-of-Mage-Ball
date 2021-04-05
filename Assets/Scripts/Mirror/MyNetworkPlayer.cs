@@ -98,7 +98,8 @@ public class MyNetworkPlayer : NetworkBehaviour
 
     public override void OnStartClient()
     {
-        gameObject.GetComponent<CountdownTimer>().enabled = true;
+        if(gameObject.GetComponent<CountdownTimer>() != null)
+            gameObject.GetComponent<CountdownTimer>().enabled = true;
 
         if (NetworkServer.active)
             return;
