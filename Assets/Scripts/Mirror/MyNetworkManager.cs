@@ -24,7 +24,9 @@ public class MyNetworkManager : NetworkManager
 
 
     public List<MyNetworkPlayer> Players { get; } = new List<MyNetworkPlayer>();
-    //[SerializeField] int chosenCharacter = 0;
+    int chosenCharacter = 0;
+
+    public int ChosenCharacter { get { return chosenCharacter; } set { chosenCharacter = value; } }
 
     public override void OnServerConnect(NetworkConnection conn)
     {
@@ -103,7 +105,7 @@ public class MyNetworkManager : NetworkManager
     public override void OnServerSceneChanged(string sceneName)
     {
         Debug.Log("Scene is being changed!");
-        playerPrefab = characters[0]; //Here is where it is decided what character the player will spawn in as. Make it work with character select in lobby!
+        playerPrefab = characters[chosenCharacter]; //Here is where it is decided what character the player will spawn in as. Make it work with character select in lobby!
 
         Debug.Log("Current prefab: " + playerPrefab);
 
