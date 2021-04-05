@@ -14,7 +14,6 @@ public class MyNetworkPlayer : NetworkBehaviour
     [SerializeField] Color playerColour = Color.white;
 
     [SerializeField] TMP_Text displayNameText = null;
-    [SerializeField] TMP_Text countdownTimer = null;
 
     [SyncVar(hook = nameof(AuthorityHandlePartyOwnerStateUpdated))]
     bool isPartyOwner = false;

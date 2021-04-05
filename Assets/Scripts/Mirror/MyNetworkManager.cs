@@ -79,12 +79,8 @@ public class MyNetworkManager : NetworkManager
         base.OnServerAddPlayer(conn);
 
         MyNetworkPlayer player = conn.identity.GetComponent<MyNetworkPlayer>();
-        Debug.Log("Lobby id: " + MainMenu.LobbyId);
         CSteamID steamId = SteamMatchmaking.GetLobbyMemberByIndex(MainMenu.LobbyId, numPlayers - 1);
-        Debug.Log("Steam id: " + steamId);
         Players.Add(player);
-        Debug.Log("Trying to set Steam Id: " + steamId.m_SteamID);
-        Debug.Log("Maybe we should try steam Id: " + steamId);
         player.SetSteamId(steamId.m_SteamID);
 
 
