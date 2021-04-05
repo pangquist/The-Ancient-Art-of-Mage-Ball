@@ -9,11 +9,13 @@ public class ScoreArea : MonoBehaviour
     public GameObject effectObject;
     public GameObject parentName;
     [SerializeField] GamestateManager gmManager;
+    GameObject ballStartPos;
 
 
     private void Start()
     {
         effectObject.SetActive(false);
+        ballStartPos = GameObject.Find("BallSpawnPosition");
 
     }
     private void OnTriggerEnter(Collider other)
@@ -21,7 +23,10 @@ public class ScoreArea : MonoBehaviour
         if(other.gameObject.tag == "Enemy")
         {            
             effectObject.SetActive(true);
-            AddScore();            
+            AddScore();
+            other.transform.position = ballStartPos.transform.position;
+            other.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            other.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
         }     
     }
     private void AddScore()
@@ -34,6 +39,7 @@ public class ScoreArea : MonoBehaviour
         {
             gmManager.RedScore += 1;
         }
+        
     }
 
 }
