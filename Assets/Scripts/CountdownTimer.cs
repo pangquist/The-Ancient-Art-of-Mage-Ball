@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Mirror;
+using System;
 
 public class CountdownTimer : NetworkBehaviour
 {
@@ -13,7 +14,7 @@ public class CountdownTimer : NetworkBehaviour
     [SerializeField] TMP_Text timerText = null;
 
     public float CurrentTime { get { return currentTime; } set { currentTime = value; } }
-
+    
     public override void OnStartServer()
     {
         currentTime = startingTime;
@@ -26,11 +27,11 @@ public class CountdownTimer : NetworkBehaviour
         timerText.enabled = true;
     }
 
-    private void Update()
-    {
-        if (currentTime <= 0) { return; }
-        CmdUpdateTime();
-    }
+    //private void Update()
+    //{
+    //    if (currentTime <= 0) { return; }
+    //    CmdUpdateTime();
+    //}
     
     [Command]
     void CmdUpdateTime()

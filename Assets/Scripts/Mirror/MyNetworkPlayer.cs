@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MyNetworkPlayer : NetworkBehaviour
@@ -17,6 +18,8 @@ public class MyNetworkPlayer : NetworkBehaviour
 
     [SerializeField] TMP_Text redScoreText;
     [SerializeField] TMP_Text blueScoreText;
+    [SerializeField] TMP_Text timeText;
+    [SerializeField] GamestateManager gamestateManager;
 
     [SyncVar(hook = nameof(AuthorityHandlePartyOwnerStateUpdated))]
     bool isPartyOwner = false;
@@ -26,6 +29,7 @@ public class MyNetworkPlayer : NetworkBehaviour
 
     public TMP_Text BlueScore { get { return blueScoreText; } set { blueScoreText = value; } }
     public TMP_Text RedScore { get { return redScoreText; } set { redScoreText = value; } }
+    public TMP_Text TimeText { get { return timeText; } set { timeText = value; } }
 
 
     private int teamNumber;
@@ -41,6 +45,30 @@ public class MyNetworkPlayer : NetworkBehaviour
     public bool GetIsPartyOwner()
     {
         return isPartyOwner;
+    }
+
+    private void OnPlayerConnected()
+    {
+        //GamestateManager.HandleTimeChanged += SetTimerText;
+    }
+
+    private void OnPlayerDisconnected()
+    {
+        //GamestateManager.HandleTimeChanged -= SetTimerText;
+    }
+
+    void SetTimerText()
+    {
+        
+        float minutes = Mathf.FloorToInt(gamestateManager.Timer / 60);
+        float seconds = Mathf.FloorToInt(gamestateManager.Timer % 60);
+        timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+
+    void SetScoreText()
+    {
+        redScoreText.text = "Red: " + gamestateManager.RedScore.ToString();
+        blueScoreText.text = "Blue: " + gamestateManager.BlueScore.ToString();
     }
 
     #region Server
@@ -100,6 +128,15 @@ public class MyNetworkPlayer : NetworkBehaviour
     #endregion
     #region Client
 
+    private void Start()
+    {
+        if (SceneManager.GetActiveScene().name == "MainMenu")
+            return;
+        gamestateManager = GameObject.Find("GamestateManager").GetComponent<GamestateManager>();
+        GamestateManager.HandleTimeChanged += SetTimerText;
+        GamestateManager.HandleScoreChanged += SetScoreText;
+    }
+
     public override void OnStartClient()
     {
         if(gameObject.GetComponent<CountdownTimer>() != null)
@@ -119,6 +156,8 @@ public class MyNetworkPlayer : NetworkBehaviour
         if (!hasAuthority)
             return;
 
+        GamestateManager.HandleTimeChanged -= SetTimerText;
+        GamestateManager.HandleScoreChanged -= SetScoreText;
         ((MyNetworkManager)NetworkManager.singleton).Players.Remove(this);
     }
 

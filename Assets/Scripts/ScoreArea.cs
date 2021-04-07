@@ -26,11 +26,11 @@ public class ScoreArea : NetworkBehaviour
             GameObject effect = Instantiate(effectObject, gameObject.transform.position, gameObject.transform.rotation);
             NetworkServer.Spawn(effect);
             AddScore();
-            other.transform.position = ballStartPos.transform.position;
-            other.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            other.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+            ResetBallPosition(other.gameObject);
         }     
     }
+
+    [Server]
     private void AddScore()
     {
         if (parentName.name == "Goal Blue")
@@ -42,6 +42,13 @@ public class ScoreArea : NetworkBehaviour
             gmManager.RedScore += 1;
         }
         
+    }
+    
+    private void ResetBallPosition(GameObject ball)
+    {
+        ball.transform.position = ballStartPos.transform.position;
+        ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        ball.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
     }
 
 }

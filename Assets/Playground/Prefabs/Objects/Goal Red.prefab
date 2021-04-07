@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 4181507993175177973}
   - component: {fileID: 4181507993175177972}
   - component: {fileID: 4181507993175177971}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Goal Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -221,6 +221,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4181507993175177974}
     m_Modifications:
+    - target: {fileID: -7407692643131331785, guid: 0edf11e3780fb1b44b4488b68f23b1a9,
+        type: 3}
+      propertyPath: m_AssetId
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6231605736282244172, guid: 0edf11e3780fb1b44b4488b68f23b1a9,
         type: 3}
       propertyPath: m_Name
