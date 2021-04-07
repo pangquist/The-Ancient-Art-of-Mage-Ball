@@ -7,9 +7,7 @@ using System;
 
 public class GamestateManager : NetworkBehaviour
 {
-    //[SyncVar]
-    //[SerializeField]
-    //public static bool gameIsOver = false;
+    public static bool gameIsOver = false;
 
     List<MyNetworkPlayer> blueTeam = new List<MyNetworkPlayer>();
     List<MyNetworkPlayer> redTeam = new List<MyNetworkPlayer>();
@@ -18,7 +16,7 @@ public class GamestateManager : NetworkBehaviour
 
     [SyncVar (hook = nameof(HandleTimeChange))]
     [SerializeField] float time;
-    float startTime = 300f;
+    float startTime = 20f;
 
     int startScore = 0;
     [SyncVar (hook = nameof(HandleRedScore))]
@@ -42,10 +40,30 @@ public class GamestateManager : NetworkBehaviour
 
     private void Update()
     {
-        if (time <= 0) { return; }
+        //if (gameIsOver) return;
+
+        if (time <= 0)
+        {
+            gameIsOver = true;
+            EndGame();
+        }
+            
         time -= Time.deltaTime;
     }
 
+    void EndGame()
+    {
+        if(blueScore == redScore)
+        {
+            time = 60f;
+        }
+        else
+        {
+            myNetworkManager.EndGame();
+        }
+    }
+
+    
 
     public void ResetScore()
     {
@@ -63,32 +81,13 @@ public class GamestateManager : NetworkBehaviour
     {
         Debug.Log("Blue score has been changed!");
         HandleScoreChanged?.Invoke();
-        //SendBlueScore();
     }
 
     public void HandleRedScore(int oldScore, int newScore)
     {
         Debug.Log("Red score has been changed!");
         HandleScoreChanged?.Invoke();
-        //SendRedScore();
     }
-
-    
-    //void SendRedScore()
-    //{
-    //    foreach (MyNetworkPlayer player in myNetworkManager.Players)
-    //    {
-    //        player.RedScore.text = "Red: " + redScore.ToString();
-    //    }
-    //}
-
-    //void SendBlueScore()
-    //{
-    //    foreach (MyNetworkPlayer player in myNetworkManager.Players)
-    //    {
-    //        player.BlueScore.text = "Blue: " + blueScore.ToString();
-    //    }
-    //}
 }
 
  

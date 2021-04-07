@@ -11,6 +11,7 @@ public class MyNetworkManager : NetworkManager
     [SerializeField] TeamManager teamManager;
 
     bool ballIsSpawned = false;
+    [SerializeField] GameObject mainMenuPlayer;
     [SerializeField] GameObject ball;
     [SerializeField] GameObject ballStartPos;
     [SerializeField] GameObject[] characters;
@@ -66,6 +67,12 @@ public class MyNetworkManager : NetworkManager
         ServerChangeScene("Playground");
     }
 
+    [Server]
+    public void EndGame()
+    {
+        ServerChangeScene("PostMatch");
+    }
+
     public override void OnClientConnect(NetworkConnection conn)
     {
         base.OnClientConnect(conn);
@@ -97,16 +104,23 @@ public class MyNetworkManager : NetworkManager
     //Called whenever a scene is changed. The players spawns a player prefabs that is decided in the character select. If the scene is an arena map, the ball is spawned and the game begins.
     public override void OnServerSceneChanged(string sceneName)
     {
-        playerPrefab = characters[chosenCharacter]; //Here is where it is decided what character the player will spawn in as. Make it work with character select in lobby!
-        if (SceneManager.GetActiveScene().name.StartsWith("Play"))
+        if (sceneName == "Playground")
         {
-            if (ballIsSpawned == false)
+            playerPrefab = characters[chosenCharacter]; //Here is where it is decided what character the player will spawn in as. Make it work with character select in lobby!
+            if (SceneManager.GetActiveScene().name.StartsWith("Play"))
             {
-                ballStartPos = GameObject.Find("BallSpawnPosition");
-                ball = Instantiate(ball, ballStartPos.transform.position, ballStartPos.transform.rotation); //HARD CODED CHANGE LATER
-                NetworkServer.Spawn(ball.gameObject);
-                ballIsSpawned = true;
+                if (ballIsSpawned == false)
+                {
+                    ballStartPos = GameObject.Find("BallSpawnPosition");
+                    ball = Instantiate(ball, ballStartPos.transform.position, ballStartPos.transform.rotation); //HARD CODED CHANGE LATER
+                    NetworkServer.Spawn(ball.gameObject);
+                    ballIsSpawned = true;
+                }
             }
+        }
+        else if (sceneName == "PostMatch")
+        {
+            playerPrefab = mainMenuPlayer;
         }
     }
 
