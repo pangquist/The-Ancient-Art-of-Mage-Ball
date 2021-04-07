@@ -40,7 +40,6 @@ public class GamestateManager : NetworkBehaviour
         blueScore = startScore;
         redScore = startScore;
     }
-
     
     public void HandleBlueScore(int oldScore, int newScore)
     {
@@ -51,8 +50,7 @@ public class GamestateManager : NetworkBehaviour
     {
         SendRedScore();
     }
-
-  
+    
     void SendRedScore()
     {
         foreach (MyNetworkPlayer player in myNetworkManager.Players)

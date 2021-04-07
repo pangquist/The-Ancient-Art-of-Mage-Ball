@@ -22,8 +22,7 @@ public class AnimController : NetworkBehaviour
     KeyCode dashButton;
     [SerializeField]
     string dashAnimationName;
-
-    // Start is called before the first frame update
+    
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -34,11 +33,13 @@ public class AnimController : NetworkBehaviour
         enabled = true;
     }
 
+    //Reads the input and activates the corresponding animation on the character prefab.
     [ClientCallback]
     void Update()
     {
         if (!hasAuthority)
             return;
+
         if (Input.GetKeyDown(castButton) && !anim.GetCurrentAnimatorStateInfo(0).IsName(castAnimationName))
         {
             anim.Play(castAnimationName);

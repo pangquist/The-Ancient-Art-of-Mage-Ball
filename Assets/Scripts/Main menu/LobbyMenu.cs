@@ -26,20 +26,19 @@ public class LobbyMenu : MonoBehaviour
         MyNetworkPlayer.ClientOnInfoUpdated -= ClientHandleInfoUpdated;
     }
 
-    void HandleClientConnected()
+    void HandleClientConnected() //When a client connects to the server, they set the Lobby UI to be active
     {
         lobbyUI.SetActive(true);
     }
-
-    void ClientHandleInfoUpdated()
+    
+    //Method that is connected to the action event from MyNetworkPlayer. This method activates whenever the player name is changed on the client and gets the displayname and writes it out on the corresponding slot in the lobby.
+    void ClientHandleInfoUpdated() 
     {
         List<MyNetworkPlayer> players = ((MyNetworkManager)NetworkManager.singleton).Players;
-        Debug.Log("Name list: " + players.Count);
         for (int i = 0; i < players.Count; i++)
         {
             playerNameTexts[i].text = players[i].GetComponent<MyNetworkPlayer>().GetDisplayName();
         }
-
         for (int i = players.Count; i < playerNameTexts.Length; i++)
         {
             playerNameTexts[i].text = "Waiting For Player...";
@@ -53,11 +52,13 @@ public class LobbyMenu : MonoBehaviour
         startGameButton.gameObject.SetActive(state);
     }
 
-    public void StartGame()
+    //Method that starts the command in the player script, telling the server to start the game if the neccesary requirements are fullfilled.
+    public void StartGame() 
     {
         NetworkClient.connection.identity.GetComponent<MyNetworkPlayer>().CmdStartGame();
     }
 
+    //Method that checks whether the player is the server or a client. If they are the server, the lobby is shut down. If they are the client they are reloaded to the main menu scene.
     public void LeaveLobby()
     {
         if (NetworkServer.active && NetworkClient.isConnected)

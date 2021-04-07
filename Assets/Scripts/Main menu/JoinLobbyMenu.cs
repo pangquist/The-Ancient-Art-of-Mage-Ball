@@ -32,7 +32,7 @@ public class JoinLobbyMenu : MonoBehaviour
         joinButton.interactable = false;
     }
 
-    void HandleClientConnected()
+    void HandleClientConnected() 
     {
         joinButton.interactable = true;
 

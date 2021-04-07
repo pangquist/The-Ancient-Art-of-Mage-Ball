@@ -85,6 +85,7 @@ public class MyNetworkPlayer : NetworkBehaviour
         ((MyNetworkManager)NetworkManager.singleton).StartGame();
     }
 
+    //Sends a command to the server telling it to update the display name of the client.
     [Command]
     void CmdSetDisplayName(string newDisplayName)
     {
@@ -121,17 +122,13 @@ public class MyNetworkPlayer : NetworkBehaviour
         ((MyNetworkManager)NetworkManager.singleton).Players.Remove(this);
     }
 
+    //Hook method that is called whenever the steam ID of the client is updated. Starts a method that finds the steam name that is connected to that steam id.
     void HandleSteamIdUpdated(ulong oldSteamId, ulong newSteamId)
     {
         var CSteamID = new CSteamID(newSteamId);
         CmdSetDisplayName(SteamFriends.GetFriendPersonaName(CSteamID));
         Debug.Log("Display Name has been set to: " + displayName);
     }
-
-    //private void ClientHandleDisplayNameUpdated(string oldDisplayName, string newDisplayName)
-    //{
-    //    ClientOnInfoUpdated?.Invoke();
-    //}
 
     private void AuthorityHandlePartyOwnerStateUpdated(bool oldState, bool newState)
     {

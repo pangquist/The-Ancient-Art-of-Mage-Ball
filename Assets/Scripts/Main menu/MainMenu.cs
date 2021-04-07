@@ -26,6 +26,7 @@ public class MainMenu : MonoBehaviour
         lobbyEntered = Callback<LobbyEnter_t>.Create(OnLobbyEntered);
     }
 
+    //Creates a lobby for the host if the ability to use steam is enabled on the Network Manager
     public void HostLobby()
     {
         landingPagePanel.SetActive(false);
@@ -39,6 +40,7 @@ public class MainMenu : MonoBehaviour
         NetworkManager.singleton.StartHost();
     }
 
+    //When a lobby is successfully created, the UI elements that the lobby consists of are enabled.
     void OnLobbyCreated(LobbyCreated_t callback)
     {
         if (callback.m_eResult != EResult.k_EResultOK)

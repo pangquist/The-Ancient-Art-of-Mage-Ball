@@ -6,9 +6,9 @@ public class CharacterSelect : MonoBehaviour
 {
     [SerializeField] MyNetworkManager myNetworkManager;
 
+    //Method that is called through a button click that changes the selected character integer in the manager script
     public void PickCharacter(int characterIndex)
     {
         myNetworkManager.ChosenCharacter = characterIndex;
-        Debug.Log("Chosen a new character: " + characterIndex);
     }
 }

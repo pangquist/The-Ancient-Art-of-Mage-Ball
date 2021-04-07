@@ -242,6 +242,12 @@ PrefabInstance:
       propertyPath: parentName
       value: 
       objectReference: {fileID: 4181507993175177970}
+    - target: {fileID: 6231605736282244174, guid: 0edf11e3780fb1b44b4488b68f23b1a9,
+        type: 3}
+      propertyPath: effectObject
+      value: 
+      objectReference: {fileID: 8890923103834530407, guid: 784ad36bc36c0544bbaf184f629af1ac,
+        type: 3}
     - target: {fileID: 6231605736282244175, guid: 0edf11e3780fb1b44b4488b68f23b1a9,
         type: 3}
       propertyPath: m_RootOrder

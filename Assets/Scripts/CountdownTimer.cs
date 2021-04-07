@@ -35,7 +35,6 @@ public class CountdownTimer : NetworkBehaviour
     [Command]
     void CmdUpdateTime()
     {
-        //Debug.Log("Sending time: " + currentTime + " to server");
         SetTime();
     }
 
@@ -45,6 +44,7 @@ public class CountdownTimer : NetworkBehaviour
         currentTime -= 1 * Time.deltaTime;
     }
 
+    //hook method that is called everytime the time-variable is changed and updates the UI-element that shows the current time.
     void OnChangeTime(float oldTime, float newTime)
     {
         float minutes = Mathf.FloorToInt(currentTime / 60);
