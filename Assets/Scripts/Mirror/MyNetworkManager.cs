@@ -25,6 +25,14 @@ public class MyNetworkManager : NetworkManager
     public static bool timeIsStarted = false; //ÄNDRA
     public static MyNetworkPlayer connectedPlayer;
 
+    private List<string[]> menuPlayers = new List<string[]>();
+
+    public List<string[]> MenuPlayers { get { return menuPlayers; } set { menuPlayers = value; } }
+
+    public void ClearMenuPlayers()
+    {
+        menuPlayers.Clear();
+    }
 
     public List<MyNetworkPlayer> Players { get; } = new List<MyNetworkPlayer>();
     int chosenCharacter = 0;
@@ -114,8 +122,6 @@ public class MyNetworkManager : NetworkManager
         Debug.Log("Current scene is: " + SceneManager.GetActiveScene().name);
         if (sceneName == "Playground")
         {
-
-
             playerPrefab = characters[chosenCharacter]; //Here is where it is decided what character the player will spawn in as. Make it work with character select in lobby!
 
             ballStartPos = GameObject.Find("BallSpawnPosition");
@@ -140,6 +146,18 @@ public class MyNetworkManager : NetworkManager
 
     void AssignNames()
     {
+        foreach(string[] menuPlayer in menuPlayers)
+        {
+            foreach (MyNetworkPlayer player in Players)
+            {
+                if (player.GetDisplayName() == menuPlayer[0])
+                {
+                    player.CmdSetTeamName(menuPlayer[1]);
+                }
+            }
+               
+        }
+
         //for (int i = 0; i < teamManager.redTeam.Length; i++)
         //{
         //    Debug.Log("Searching for name: " + teamManager.redTeam[i]);

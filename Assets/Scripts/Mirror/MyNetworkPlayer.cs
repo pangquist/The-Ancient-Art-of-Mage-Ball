@@ -32,7 +32,7 @@ public class MyNetworkPlayer : NetworkBehaviour
     public TMP_Text BlueScore { get { return blueScoreText; } set { blueScoreText = value; } }
     public TMP_Text RedScore { get { return redScoreText; } set { redScoreText = value; } }
     public TMP_Text TimeText { get { return timeText; } set { timeText = value; } }
-    public string TeamName { get { return teamName; } set { teamName = value; } }
+    public string TeamName { get { return teamName; } }
 
     [SyncVar(hook = nameof(HandleSteamIdUpdated))]
     ulong steamId;
@@ -85,6 +85,13 @@ public class MyNetworkPlayer : NetworkBehaviour
     }
 
     [Server]
+    public void SetTeamName(string newTeamName)
+    {
+        teamName = newTeamName;
+
+    }
+
+    [Server]
     public void SetPlayerColor(Color newColour)
     {
         playerColour = newColour;
@@ -111,6 +118,12 @@ public class MyNetworkPlayer : NetworkBehaviour
 
         SetDisplayName(newDisplayName);
     }
+    
+    [Command]
+    public void CmdSetTeamName(string newTeamName)
+    {
+        SetTeamName(newTeamName);
+    }
     #endregion
     #region Client
 
@@ -125,11 +138,15 @@ public class MyNetworkPlayer : NetworkBehaviour
 
     public override void OnStartClient()
     {
-        if(gameObject.GetComponent<CountdownTimer>() != null)
-            gameObject.GetComponent<CountdownTimer>().enabled = true;
+        //if(gameObject.GetComponent<CountdownTimer>() != null)
+        //    gameObject.GetComponent<CountdownTimer>().enabled = true;
 
         if (NetworkServer.active)
             return;
+
+        //GameObject.Find("LobbyParent");
+
+        //.GetComponent<NetworkIdentity>().AssignClientAuthority(this.GetComponent<NetworkIdentity>().connectionToClient);
 
         ((MyNetworkManager)NetworkManager.singleton).Players.Add(this);
         gameObject.GetComponent<Animator>().enabled = true;
@@ -151,7 +168,9 @@ public class MyNetworkPlayer : NetworkBehaviour
     void HandleSteamIdUpdated(ulong oldSteamId, ulong newSteamId)
     {
         var CSteamID = new CSteamID(newSteamId);
+
         CmdSetDisplayName(SteamFriends.GetFriendPersonaName(CSteamID));
+
         Debug.Log("Display Name has been set to: " + displayName);
     }
 

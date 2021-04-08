@@ -6,16 +6,19 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LobbyMenu : MonoBehaviour
+public class LobbyMenu : NetworkBehaviour
 {
     [SerializeField] GameObject lobbyUI;
     [SerializeField] Button startGameButton;
     //[SerializeField] TMP_Text[] lobbyNames = new TMP_Text[6];
 
     [SerializeField] TeamManager teamManager;
+
     [SerializeField] TMP_Text[] redTeamNames = new TMP_Text[3];
     [SerializeField] TMP_Text[] blueTeamNames = new TMP_Text[3];
 
+
+    private List<string[]> menuPlayers = new List<string[]>();
 
     private void Start()
     {
@@ -63,11 +66,11 @@ public class LobbyMenu : MonoBehaviour
 
         if(redPlayers >= 3 && bluePlayers < 3)
         {
-            newPlayer.TeamName = "Blue Team";
+            newPlayer.CmdSetTeamName("Blue Team");
         }
         else
         {
-            newPlayer.TeamName = "Red Team";
+            newPlayer.CmdSetTeamName("Red Team");
         }
 
         UpdateNameLists();
@@ -145,9 +148,9 @@ public class LobbyMenu : MonoBehaviour
 
         if (team == "Red Team")
         {
-            if (redPlayers >= 3) return;
+            if (redPlayers >= 3 || localPlayer.TeamName == "Red Team") return;
 
-            localPlayer.TeamName = "Red Team";
+            localPlayer.CmdSetTeamName("Red Team");
 
             for (int j = 0; j < blueTeamNames.Length; j++)
             {
@@ -161,9 +164,9 @@ public class LobbyMenu : MonoBehaviour
 
         if (team == "Blue Team")
         {
-            if (bluePlayers >= 3) return;
+            if (bluePlayers >= 3 || localPlayer.TeamName == "Blue Team") return;
 
-            localPlayer.TeamName = "Blue Team";
+            localPlayer.CmdSetTeamName("Blue Team");
 
             for (int j = 0; j < redTeamNames.Length; j++)
             {
@@ -174,7 +177,6 @@ public class LobbyMenu : MonoBehaviour
                 }
             }
         }
-
         UpdateNameLists();
 
         //if (team == "Red Team")
@@ -222,12 +224,27 @@ public class LobbyMenu : MonoBehaviour
         //}
         Debug.Log("Changing player to " + team);
     }
-    
+
+    [ClientRpc]
     public void UpdateNameLists()
     {
         List<MyNetworkPlayer> players = ((MyNetworkManager)NetworkManager.singleton).Players;
 
-        for(int i = 0; i < players.Count; i++)
+        ((MyNetworkManager)NetworkManager.singleton).ClearMenuPlayers();
+
+        foreach (MyNetworkPlayer player in players)
+        {
+            menuPlayers.Add(new string[] { player.GetDisplayName(), player.TeamName });
+        }
+
+        foreach (string[] listItem in menuPlayers)
+        {
+            Debug.Log($"{listItem[0]} {listItem[1]}");
+        }
+
+        ((MyNetworkManager)NetworkManager.singleton).MenuPlayers = menuPlayers;
+
+        for (int i = 0; i < players.Count; i++)
         {
             if (players[i].TeamName == "Red Team")
             {
@@ -254,7 +271,6 @@ public class LobbyMenu : MonoBehaviour
                 }
             }
         }
-
 
         //Debug.Log("Red Team Count: " + teamManager.redTeam.Length);
 
