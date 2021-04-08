@@ -46,12 +46,12 @@ public class LobbyMenu : MonoBehaviour
         {
             if (players.Count <= 3)
             {
-                teamManager.redTeam.Add(players[i]);
+                teamManager.redTeam.Add(players[i].GetDisplayName());
                 redTeamNames[i].text = players[i].GetComponent<MyNetworkPlayer>().GetDisplayName();
             }
             else
             {
-                teamManager.blueTeam.Add(players[i]);
+                teamManager.blueTeam.Add(players[i].GetDisplayName());
                 blueTeamNames[i].text = players[i].GetComponent<MyNetworkPlayer>().GetDisplayName();
             }
 
@@ -73,8 +73,7 @@ public class LobbyMenu : MonoBehaviour
     public void StartGame() 
     {
         MyNetworkPlayer localPlayer = NetworkClient.localPlayer.gameObject.GetComponent<MyNetworkPlayer>();
-
-        teamManager.AssignTeam();
+        
         NetworkClient.connection.identity.GetComponent<MyNetworkPlayer>().CmdStartGame();
     }
 
@@ -101,13 +100,13 @@ public class LobbyMenu : MonoBehaviour
         {
             for (int i = 0; i < teamManager.blueTeam.Count; i++)
             {
-                if (teamManager.blueTeam[i] == localPlayer)
+                if (teamManager.blueTeam[i] == localPlayer.GetDisplayName())
                 {
                     if (teamManager.redTeam.Count == 3)
                         return;
                     blueTeamNames[i].text = "Waiting For Player...";
-                    teamManager.blueTeam.Remove(localPlayer);
-                    teamManager.redTeam.Add(localPlayer);
+                    teamManager.blueTeam.Remove(localPlayer.GetDisplayName());
+                    teamManager.redTeam.Add(localPlayer.GetDisplayName());
                     UpdateNameLists();
                     return;
                 }
@@ -117,13 +116,13 @@ public class LobbyMenu : MonoBehaviour
         {
             for (int i = 0; i < teamManager.redTeam.Count; i++)
             {
-                if (teamManager.redTeam[i] == localPlayer)
+                if (teamManager.redTeam[i] == localPlayer.GetDisplayName())
                 {
                     if (teamManager.blueTeam.Count == 3)
                         return;
                     redTeamNames[i].text = "Waiting For Player...";
-                    teamManager.redTeam.Remove(localPlayer);
-                    teamManager.blueTeam.Add(localPlayer);
+                    teamManager.redTeam.Remove(localPlayer.GetDisplayName());
+                    teamManager.blueTeam.Add(localPlayer.GetDisplayName());
                     UpdateNameLists();
                     return;
                 }
@@ -139,7 +138,7 @@ public class LobbyMenu : MonoBehaviour
         for (int i = 0; i < teamManager.redTeam.Count; i++)
         {
             if (teamManager.redTeam[i] != null)
-                redTeamNames[i].text = teamManager.redTeam[i].GetComponent<MyNetworkPlayer>().GetDisplayName();
+                redTeamNames[i].text = teamManager.redTeam[i];
         }
 
         Debug.Log("Blue Team Count: " + teamManager.blueTeam.Count);
@@ -147,7 +146,7 @@ public class LobbyMenu : MonoBehaviour
         for (int i = 0; i < teamManager.blueTeam.Count; i++)
         {
             if (teamManager.blueTeam[i] != null)
-                blueTeamNames[i].text = teamManager.blueTeam[i].GetComponent<MyNetworkPlayer>().GetDisplayName();
+                blueTeamNames[i].text = teamManager.blueTeam[i];
         }
     }
 }

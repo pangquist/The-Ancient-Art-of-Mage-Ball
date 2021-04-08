@@ -19,6 +19,7 @@ public class MyNetworkPlayer : NetworkBehaviour
     [SerializeField] TMP_Text redScoreText;
     [SerializeField] TMP_Text blueScoreText;
     [SerializeField] TMP_Text timeText;
+    [SyncVar (hook = nameof(HandlePlayerTeamAssigned))]
     [SerializeField] string teamName;
     [SerializeField] GamestateManager gamestateManager;
 
@@ -80,6 +81,7 @@ public class MyNetworkPlayer : NetworkBehaviour
     public void SetDisplayName(string newDisplayName)
     {
         displayName = newDisplayName;
+
     }
 
     [Server]
@@ -165,6 +167,16 @@ public class MyNetworkPlayer : NetworkBehaviour
     {
         ClientOnInfoUpdated?.Invoke();
         displayNameText.text = displayName;
+        Debug.Log("Team color: " + teamName);
+       
+    }
+
+    private void HandlePlayerTeamAssigned(string oldTeam, string newTeam)
+    {
+        if (teamName == "Red Team")
+            displayNameText.color = Color.red;
+        else
+            displayNameText.color = Color.blue;
     }
     
     [ClientRpc]

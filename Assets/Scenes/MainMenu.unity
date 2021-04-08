@@ -5198,8 +5198,7 @@ MonoBehaviour:
   - {fileID: 1104336519}
   - {fileID: 233761489}
   - {fileID: 801817982}
-  blueTeam: []
-  redTeam: []
+  teamManager: {fileID: 1326186315}
   redTeamNames:
   - {fileID: 881825510}
   - {fileID: 1404969086}
@@ -6586,6 +6585,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7027079361099392648, guid: f9f2dd1600203254eabef20669d45d98,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7027079361099392649, guid: f9f2dd1600203254eabef20669d45d98,
         type: 3}
       propertyPath: transport

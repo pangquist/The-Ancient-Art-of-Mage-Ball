@@ -101,7 +101,8 @@ public class MyNetworkManager : NetworkManager
         CSteamID steamId = SteamMatchmaking.GetLobbyMemberByIndex(MainMenu.LobbyId, numPlayers - 1);
         Players.Add(player);
         player.SetSteamId(steamId.m_SteamID);
-        
+
+        AssignNames();
         GameObject playerGameObject = conn.identity.gameObject;
         player.SetPartyOwner(Players.Count == 1);
     }
@@ -109,15 +110,18 @@ public class MyNetworkManager : NetworkManager
     //Called whenever a scene is changed. The players spawns a player prefabs that is decided in the character select. If the scene is an arena map, the ball is spawned and the game begins.
     public override void OnServerSceneChanged(string sceneName)
     {
+        Debug.Log("Current scene is: " + SceneManager.GetActiveScene().name);
         if (sceneName == "Playground")
         {
-            teamManager.AssignTeam();
+
+
             playerPrefab = characters[chosenCharacter]; //Here is where it is decided what character the player will spawn in as. Make it work with character select in lobby!
 
             ballStartPos = GameObject.Find("BallSpawnPosition");
             ball = Instantiate(ball, ballStartPos.transform.position, ballStartPos.transform.rotation);
             NetworkServer.Spawn(ball.gameObject);
             ballIsSpawned = true;
+            //AssignNames();
         }
         else if (sceneName == "PostMatch")
         {
@@ -128,5 +132,35 @@ public class MyNetworkManager : NetworkManager
     public override void OnStopClient()
     {
         Players.Clear();
+    }
+
+    void AssignNames()
+    {
+        for (int i = 0; i < teamManager.redTeam.Count; i++)
+        {
+            Debug.Log("Searching for name: " + teamManager.redTeam[i]);
+            for (int j = 0; j < Players.Count; j++)
+            {
+                if (teamManager.redTeam[i] == Players[j].GetDisplayName())
+                {
+                    Players[j].TeamName = "Red Team";
+                    continue;
+                }
+
+            }
+        }
+
+        for (int i = 0; i < teamManager.blueTeam.Count; i++)
+        {
+            for (int j = 0; j < Players.Count; j++)
+            {
+                if (teamManager.blueTeam[i] == Players[j].GetDisplayName())
+                {
+                    Players[j].TeamName = "Blue Team";
+                    continue;
+                }
+
+            }
+        }
     }
 }
