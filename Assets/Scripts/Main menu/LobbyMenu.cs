@@ -10,7 +10,7 @@ public class LobbyMenu : MonoBehaviour
 {
     [SerializeField] GameObject lobbyUI;
     [SerializeField] Button startGameButton;
-    [SerializeField] TMP_Text[] lobbyNames = new TMP_Text[6];
+    //[SerializeField] TMP_Text[] lobbyNames = new TMP_Text[6];
 
     [SerializeField] TeamManager teamManager;
     [SerializeField] TMP_Text[] redTeamNames = new TMP_Text[3];
@@ -39,28 +39,57 @@ public class LobbyMenu : MonoBehaviour
     //Method that is connected to the action event from MyNetworkPlayer. This method activates whenever the player name is changed on the client and gets the displayname and writes it out on the corresponding slot in the lobby.
     void ClientHandleInfoUpdated() 
     {
+        Debug.Log("Handling info!!");
         List<MyNetworkPlayer> players = ((MyNetworkManager)NetworkManager.singleton).Players;
-        
 
-        for (int i = 0; i < players.Count; i++)
+        MyNetworkPlayer newPlayer = players[players.Count - 1];
+
+        int redPlayers = 0;
+        int bluePlayers = 0;
+
+
+        foreach(MyNetworkPlayer player in players)
         {
-            if (players.Count <= 3)
+            if(player.TeamName == "Red Team")
             {
-                teamManager.redTeam.Add(players[i].GetDisplayName());
-                redTeamNames[i].text = players[i].GetComponent<MyNetworkPlayer>().GetDisplayName();
+                redPlayers++;
+                
             }
-            else
+            else if(player.TeamName == "Blue Team")
             {
-                teamManager.blueTeam.Add(players[i].GetDisplayName());
-                blueTeamNames[i].text = players[i].GetComponent<MyNetworkPlayer>().GetDisplayName();
+                bluePlayers++;
             }
-
         }
-        for (int i = players.Count; i < redTeamNames.Length + blueTeamNames.Length; i++)
+
+        if(redPlayers >= 3 && bluePlayers < 3)
         {
-            lobbyNames[i].text = "Waiting For Player...";
+            newPlayer.TeamName = "Blue Team";
+        }
+        else
+        {
+            newPlayer.TeamName = "Red Team";
         }
 
+        UpdateNameLists();
+
+        //for (int i = 0; i < teamManager.redTeam.Length; i++)
+        //{
+        //    if (teamManager.redTeam[i] == "")
+        //    {
+        //        teamManager.redTeam[i] = newPlayer.GetDisplayName();
+        //        UpdateNameLists();
+        //        return;
+        //    }
+        //}
+        //for (int i = 0; i < teamManager.blueTeam.Length; i++)
+        //{
+        //    if (teamManager.blueTeam[i] == "")
+        //    {
+        //        teamManager.blueTeam[i] = newPlayer.GetDisplayName();
+        //        UpdateNameLists();
+        //        return;
+        //    }
+        //}
         //startGameButton.interactable = players.Count >= MyNetworkManager.playersRequiredToStart; //Add this when testing is complete
     }
 
@@ -96,57 +125,156 @@ public class LobbyMenu : MonoBehaviour
     {
         MyNetworkPlayer localPlayer = NetworkClient.localPlayer.gameObject.GetComponent<MyNetworkPlayer>();
 
+        List<MyNetworkPlayer> players = ((MyNetworkManager)NetworkManager.singleton).Players;
+
+        int redPlayers = 0;
+        int bluePlayers = 0;
+
+        foreach (MyNetworkPlayer player in players)
+        {
+            if (player.TeamName == "Red Team")
+            {
+                redPlayers++;
+
+            }
+            else if (player.TeamName == "Blue Team")
+            {
+                bluePlayers++;
+            }
+        }
+
         if (team == "Red Team")
         {
-            for (int i = 0; i < teamManager.blueTeam.Count; i++)
+            if (redPlayers >= 3) return;
+
+            localPlayer.TeamName = "Red Team";
+
+            for (int j = 0; j < blueTeamNames.Length; j++)
             {
-                if (teamManager.blueTeam[i] == localPlayer.GetDisplayName())
+                if (blueTeamNames[j].text == localPlayer.GetDisplayName())
                 {
-                    if (teamManager.redTeam.Count == 3)
-                        return;
-                    blueTeamNames[i].text = "Waiting For Player...";
-                    teamManager.blueTeam.Remove(localPlayer.GetDisplayName());
-                    teamManager.redTeam.Add(localPlayer.GetDisplayName());
-                    UpdateNameLists();
-                    return;
+                    blueTeamNames[j].text = "Waiting For Player...";
+                    break;
                 }
             }
         }
-        else if (team == "Blue Team")
+
+        if (team == "Blue Team")
         {
-            for (int i = 0; i < teamManager.redTeam.Count; i++)
+            if (bluePlayers >= 3) return;
+
+            localPlayer.TeamName = "Blue Team";
+
+            for (int j = 0; j < redTeamNames.Length; j++)
             {
-                if (teamManager.redTeam[i] == localPlayer.GetDisplayName())
+                if (redTeamNames[j].text == localPlayer.GetDisplayName())
                 {
-                    if (teamManager.blueTeam.Count == 3)
-                        return;
-                    redTeamNames[i].text = "Waiting For Player...";
-                    teamManager.redTeam.Remove(localPlayer.GetDisplayName());
-                    teamManager.blueTeam.Add(localPlayer.GetDisplayName());
-                    UpdateNameLists();
-                    return;
+                    redTeamNames[j].text = "Waiting For Player...";
+                    break;
                 }
             }
         }
+
+        UpdateNameLists();
+
+        //if (team == "Red Team")
+        //{
+        //    for (int i = 0; i < teamManager.blueTeam.Length; i++)
+        //    {
+        //        if (teamManager.blueTeam[i] == localPlayer.GetDisplayName())
+        //        {
+        //            for (int j = 0; j < teamManager.redTeam.Length; j++)
+        //            {
+        //                if (teamManager.redTeam[j] == "")
+        //                {
+        //                    teamManager.blueTeam[i] = "";
+        //                    teamManager.redTeam[j] = localPlayer.GetDisplayName();
+        //                    UpdateNameLists();
+        //                    return;
+        //                }
+                            
+        //            }
+        //            return;
+        //        }
+        //    }
+        //}
+        //else if (team == "Blue Team")
+        //{
+        //    for (int i = 0; i < teamManager.redTeam.Length; i++)
+        //    {
+        //        if (teamManager.redTeam[i] == localPlayer.GetDisplayName())
+        //        {
+        //            for (int j = 0; j < teamManager.blueTeam.Length; j++)
+        //            {
+        //                if (teamManager.blueTeam[j] == "")
+        //                {
+        //                    teamManager.redTeam[i] = "";
+        //                    teamManager.blueTeam[j] = localPlayer.GetDisplayName();
+        //                    UpdateNameLists();
+        //                    return;
+        //                }
+
+        //            }
+                    
+        //            return;
+        //        }
+        //    }
+        //}
         Debug.Log("Changing player to " + team);
     }
-
+    
     public void UpdateNameLists()
     {
-        Debug.Log("Red Team Count: " + teamManager.redTeam.Count);
+        List<MyNetworkPlayer> players = ((MyNetworkManager)NetworkManager.singleton).Players;
 
-        for (int i = 0; i < teamManager.redTeam.Count; i++)
+        for(int i = 0; i < players.Count; i++)
         {
-            if (teamManager.redTeam[i] != null)
-                redTeamNames[i].text = teamManager.redTeam[i];
+            if (players[i].TeamName == "Red Team")
+            {
+
+                for (int j = 0; j < redTeamNames.Length; j++)
+                {
+                    if (redTeamNames[j].text == "Waiting For Player...")
+                    {
+                        redTeamNames[j].text = players[i].GetDisplayName();
+                        break;
+                    }
+                }
+
+            }
+            else if (players[i].TeamName == "Blue Team")
+            {
+                for (int j = 0; j < blueTeamNames.Length; j++)
+                {
+                    if (blueTeamNames[j].text == "Waiting For Player...")
+                    {
+                        blueTeamNames[j].text = players[i].GetDisplayName();
+                        break;
+                    }
+                }
+            }
         }
 
-        Debug.Log("Blue Team Count: " + teamManager.blueTeam.Count);
 
-        for (int i = 0; i < teamManager.blueTeam.Count; i++)
-        {
-            if (teamManager.blueTeam[i] != null)
-                blueTeamNames[i].text = teamManager.blueTeam[i];
-        }
+        //Debug.Log("Red Team Count: " + teamManager.redTeam.Length);
+
+        //for (int i = 0; i < teamManager.redTeam.Length; i++)
+        //{
+        //    if (teamManager.redTeam[i] != "")
+        //        redTeamNames[i].text = teamManager.redTeam[i];
+        //    else
+        //        redTeamNames[i].text = "Waiting For Player...";
+        //}
+
+        //Debug.Log("Blue Team Count: " + teamManager.blueTeam.Length);
+
+        //for (int i = 0; i < teamManager.blueTeam.Length; i++)
+        //{
+        //    if (teamManager.blueTeam[i] != "")
+        //        blueTeamNames[i].text = teamManager.blueTeam[i];
+        //    else
+        //        blueTeamNames[i].text = "Waiting For Player...";
+        //}
+
     }
 }

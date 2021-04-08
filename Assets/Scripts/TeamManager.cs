@@ -3,13 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TeamManager : MonoBehaviour
+public class TeamManager : NetworkBehaviour
 {
-    public List<string> redTeam = new List<string>();
-    public List<string> blueTeam = new List<string>();
-    
-    private void Awake()
-    {
-        DontDestroyOnLoad(this.gameObject);
-    }
+    //[SerializeField] public string[] redTeam = new string[3];
+    //[SerializeField] public string[] blueTeam = new string[3];
+
+    //private void Awake()
+    //{
+    //    DontDestroyOnLoad(this.gameObject);
+    //}
 }

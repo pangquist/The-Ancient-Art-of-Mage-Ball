@@ -140,31 +140,31 @@ public class MyNetworkManager : NetworkManager
 
     void AssignNames()
     {
-        for (int i = 0; i < teamManager.redTeam.Count; i++)
-        {
-            Debug.Log("Searching for name: " + teamManager.redTeam[i]);
-            for (int j = 0; j < Players.Count; j++)
-            {
-                if (teamManager.redTeam[i] == Players[j].GetDisplayName())
-                {
-                    Players[j].TeamName = "Red Team";
-                    continue;
-                }
+        //for (int i = 0; i < teamManager.redTeam.Length; i++)
+        //{
+        //    Debug.Log("Searching for name: " + teamManager.redTeam[i]);
+        //    for (int j = 0; j < Players.Count; j++)
+        //    {
+        //        if (teamManager.redTeam[i] == Players[j].GetDisplayName())
+        //        {
+        //            Players[j].TeamName = "Red Team";
+        //            continue;
+        //        }
 
-            }
-        }
+        //    }
+        //}
 
-        for (int i = 0; i < teamManager.blueTeam.Count; i++)
-        {
-            for (int j = 0; j < Players.Count; j++)
-            {
-                if (teamManager.blueTeam[i] == Players[j].GetDisplayName())
-                {
-                    Players[j].TeamName = "Blue Team";
-                    continue;
-                }
+        //for (int i = 0; i < teamManager.blueTeam.Length; i++)
+        //{
+        //    for (int j = 0; j < Players.Count; j++)
+        //    {
+        //        if (teamManager.blueTeam[i] == Players[j].GetDisplayName())
+        //        {
+        //            Players[j].TeamName = "Blue Team";
+        //            continue;
+        //        }
 
-            }
-        }
+        //    }
+        //}
     }
 }

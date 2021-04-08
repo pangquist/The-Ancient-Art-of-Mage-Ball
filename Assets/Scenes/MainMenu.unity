@@ -3273,6 +3273,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 969383541}
   m_CullTransparentMesh: 1
+--- !u!114 &1095036548 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1095036548, guid: 3240b3151397728489b06a805db157cc,
+    type: 3}
+  m_PrefabInstance: {fileID: 3334934252025299144}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c96882b5b21a0f47a02eb41a7c701b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1104336517
 GameObject:
   m_ObjectHideFlags: 0
@@ -4299,18 +4311,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1305980976}
   m_CullTransparentMesh: 1
---- !u!114 &1326186315 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3334934251170414467, guid: 3240b3151397728489b06a805db157cc,
-    type: 3}
-  m_PrefabInstance: {fileID: 3334934252025299144}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c96882b5b21a0f47a02eb41a7c701b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1326340073
 GameObject:
   m_ObjectHideFlags: 0
@@ -5061,9 +5061,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '
-
-'
+  m_text: Waiting For Player...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5191,14 +5189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lobbyUI: {fileID: 2064029740}
   startGameButton: {fileID: 206773571}
-  lobbyNames:
-  - {fileID: 881825510}
-  - {fileID: 1404969086}
-  - {fileID: 1619350909}
-  - {fileID: 1104336519}
-  - {fileID: 233761489}
-  - {fileID: 801817982}
-  teamManager: {fileID: 1326186315}
+  teamManager: {fileID: 1095036548}
   redTeamNames:
   - {fileID: 881825510}
   - {fileID: 1404969086}
@@ -6577,7 +6568,7 @@ PrefabInstance:
         type: 3}
       propertyPath: teamManager
       value: 
-      objectReference: {fileID: 1326186315}
+      objectReference: {fileID: 1095036548}
     - target: {fileID: 7027079361099392651, guid: f9f2dd1600203254eabef20669d45d98,
         type: 3}
       propertyPath: m_Name
@@ -6647,6 +6638,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1095036548, guid: 3240b3151397728489b06a805db157cc, type: 3}
+      propertyPath: redTeam.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1095036548, guid: 3240b3151397728489b06a805db157cc, type: 3}
+      propertyPath: redTeam.Array.data[0]
+      value: Billy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1095036548, guid: 3240b3151397728489b06a805db157cc, type: 3}
+      propertyPath: redTeam.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1095036548, guid: 3240b3151397728489b06a805db157cc, type: 3}
+      propertyPath: redTeam.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1095036548, guid: 3240b3151397728489b06a805db157cc, type: 3}
+      propertyPath: redTeam.Array.data[3]
+      value: John
+      objectReference: {fileID: 0}
+    - target: {fileID: 1095036548, guid: 3240b3151397728489b06a805db157cc, type: 3}
+      propertyPath: blueTeam.Array.data[0]
+      value: Sven
+      objectReference: {fileID: 0}
     - target: {fileID: 3334934251170414466, guid: 3240b3151397728489b06a805db157cc,
         type: 3}
       propertyPath: m_Name
@@ -6706,6 +6721,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8684045667935968434, guid: 3240b3151397728489b06a805db157cc,
+        type: 3}
+      propertyPath: sceneId
+      value: 3540311539
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3240b3151397728489b06a805db157cc, type: 3}

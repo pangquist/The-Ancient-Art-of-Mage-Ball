@@ -168,7 +168,6 @@ public class MyNetworkPlayer : NetworkBehaviour
         ClientOnInfoUpdated?.Invoke();
         displayNameText.text = displayName;
         Debug.Log("Team color: " + teamName);
-       
     }
 
     private void HandlePlayerTeamAssigned(string oldTeam, string newTeam)
