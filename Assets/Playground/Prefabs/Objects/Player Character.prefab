@@ -348,6 +348,7 @@ MonoBehaviour:
   redScoreText: {fileID: 2304103363279501702}
   blueScoreText: {fileID: 6308363265070594642}
   timeText: {fileID: 1028667098871470237}
+  teamName: 
   gamestateManager: {fileID: 0}
 --- !u!114 &9123136897218366115
 MonoBehaviour:

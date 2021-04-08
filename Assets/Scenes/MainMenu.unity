@@ -280,7 +280,7 @@ GameObject:
   - component: {fileID: 68319205}
   - component: {fileID: 68319204}
   m_Layer: 0
-  m_Name: 'Team 2 Button '
+  m_Name: 'BlueTeamButton '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -349,7 +349,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 68319205}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1651184682}
+        m_TargetAssemblyTypeName: LobbyMenu, Assembly-CSharp
+        m_MethodName: ChangeTeam
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Blue Team
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &68319205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1088,7 +1100,7 @@ GameObject:
   - component: {fileID: 233761490}
   - component: {fileID: 233761489}
   m_Layer: 0
-  m_Name: PlayerNameText
+  m_Name: BluePlayer2NameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1621,7 +1633,7 @@ GameObject:
   - component: {fileID: 479189644}
   - component: {fileID: 479189643}
   m_Layer: 0
-  m_Name: PlayerBackground (3)
+  m_Name: BluePlayer2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1641,7 +1653,7 @@ RectTransform:
   - {fileID: 233761488}
   - {fileID: 299123383}
   m_Father: {fileID: 2064029741}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -1987,7 +1999,7 @@ GameObject:
   - component: {fileID: 541912886}
   - component: {fileID: 541912885}
   m_Layer: 0
-  m_Name: PlayerBackground
+  m_Name: RedPlayer1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2447,7 +2459,7 @@ GameObject:
   - component: {fileID: 713050596}
   - component: {fileID: 713050595}
   m_Layer: 0
-  m_Name: PlayerBackground (2)
+  m_Name: RedPlayer2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2467,7 +2479,7 @@ RectTransform:
   - {fileID: 1404969085}
   - {fileID: 1110186566}
   m_Father: {fileID: 2064029741}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -2512,54 +2524,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 713050593}
   m_CullTransparentMesh: 1
---- !u!1 &763365369 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7027079361099392651, guid: f9f2dd1600203254eabef20669d45d98,
-    type: 3}
-  m_PrefabInstance: {fileID: 2726291146046865531}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &763365371 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7027079361099392649, guid: f9f2dd1600203254eabef20669d45d98,
     type: 3}
   m_PrefabInstance: {fileID: 2726291146046865531}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 763365369}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7740bde5db69e224a8c8d1e687e6df80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &763365373
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 763365369}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef4bffeda13d7a748973ff9204401c07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &763365374
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 763365369}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea368fb6f27ec2f40a40e20977992b9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Channels: 0200000001000000
-  Timeout: 25
-  SteamAppID: 480
-  AllowSteamRelay: 1
-  UseNextGenSteamNetworking: 1
-  SteamUserID: 0
 --- !u!1 &778637302
 GameObject:
   m_ObjectHideFlags: 0
@@ -2651,7 +2627,7 @@ GameObject:
   - component: {fileID: 801817983}
   - component: {fileID: 801817982}
   m_Layer: 0
-  m_Name: PlayerNameText
+  m_Name: BluePlayer3NameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2851,7 +2827,7 @@ GameObject:
   - component: {fileID: 881825511}
   - component: {fileID: 881825510}
   m_Layer: 0
-  m_Name: PlayerNameText
+  m_Name: RedPlayer1NameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3309,7 +3285,7 @@ GameObject:
   - component: {fileID: 1104336520}
   - component: {fileID: 1104336519}
   m_Layer: 0
-  m_Name: PlayerNameText
+  m_Name: BluePlayer1NameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4323,6 +4299,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1305980976}
   m_CullTransparentMesh: 1
+--- !u!114 &1326186315 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3334934251170414467, guid: 3240b3151397728489b06a805db157cc,
+    type: 3}
+  m_PrefabInstance: {fileID: 3334934252025299144}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c96882b5b21a0f47a02eb41a7c701b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1326340073
 GameObject:
   m_ObjectHideFlags: 0
@@ -4468,7 +4456,7 @@ GameObject:
   - component: {fileID: 1404969087}
   - component: {fileID: 1404969086}
   m_Layer: 0
-  m_Name: PlayerNameText
+  m_Name: RedPlayer2NameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4874,7 +4862,7 @@ GameObject:
   - component: {fileID: 1589124374}
   - component: {fileID: 1589124373}
   m_Layer: 0
-  m_Name: PlayerBackground (5)
+  m_Name: BluePlayer3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4951,7 +4939,7 @@ GameObject:
   - component: {fileID: 1602536631}
   - component: {fileID: 1602536630}
   m_Layer: 0
-  m_Name: PlayerBackground (4)
+  m_Name: RedPlayer3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4971,7 +4959,7 @@ RectTransform:
   - {fileID: 1619350908}
   - {fileID: 1305980977}
   m_Father: {fileID: 2064029741}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -5028,7 +5016,7 @@ GameObject:
   - component: {fileID: 1619350910}
   - component: {fileID: 1619350909}
   m_Layer: 0
-  m_Name: PlayerNameText
+  m_Name: RedPlayer3NameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5073,7 +5061,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Waiting For Player...
+  m_text: '
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5201,11 +5191,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lobbyUI: {fileID: 2064029740}
   startGameButton: {fileID: 206773571}
-  playerNameTexts:
+  lobbyNames:
   - {fileID: 881825510}
-  - {fileID: 1104336519}
   - {fileID: 1404969086}
+  - {fileID: 1619350909}
+  - {fileID: 1104336519}
   - {fileID: 233761489}
+  - {fileID: 801817982}
+  blueTeam: []
+  redTeam: []
+  redTeamNames:
+  - {fileID: 881825510}
+  - {fileID: 1404969086}
+  - {fileID: 1619350909}
+  blueTeamNames:
+  - {fileID: 1104336519}
+  - {fileID: 233761489}
+  - {fileID: 801817982}
 --- !u!1 &1709910709
 GameObject:
   m_ObjectHideFlags: 0
@@ -5509,6 +5511,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1817434597}
   m_CullTransparentMesh: 1
+--- !u!114 &1819157823 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7027079361099392648, guid: f9f2dd1600203254eabef20669d45d98,
+    type: 3}
+  m_PrefabInstance: {fileID: 2726291146046865531}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b0fecffa3f624585964b0d0eb21b18e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1836671780
 GameObject:
   m_ObjectHideFlags: 0
@@ -5522,7 +5536,7 @@ GameObject:
   - component: {fileID: 1836671783}
   - component: {fileID: 1836671782}
   m_Layer: 0
-  m_Name: Team 1 Button
+  m_Name: RedTeamButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5591,7 +5605,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1836671783}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1651184682}
+        m_TargetAssemblyTypeName: LobbyMenu, Assembly-CSharp
+        m_MethodName: ChangeTeam
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Red Team
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1836671783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5642,7 +5668,7 @@ GameObject:
   - component: {fileID: 1841815482}
   - component: {fileID: 1841815481}
   m_Layer: 0
-  m_Name: PlayerBackground (1)
+  m_Name: BluePlayer1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5662,7 +5688,7 @@ RectTransform:
   - {fileID: 1104336518}
   - {fileID: 183790751}
   m_Father: {fileID: 2064029741}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -6224,10 +6250,10 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 541912884}
-  - {fileID: 1841815480}
   - {fileID: 713050594}
-  - {fileID: 479189642}
   - {fileID: 1602536629}
+  - {fileID: 1841815480}
+  - {fileID: 479189642}
   - {fileID: 1589124372}
   - {fileID: 206773570}
   - {fileID: 495990709}
@@ -6560,69 +6586,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7027079361099392648, guid: f9f2dd1600203254eabef20669d45d98,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7027079361099392649, guid: f9f2dd1600203254eabef20669d45d98,
         type: 3}
       propertyPath: transport
       value: 
-      objectReference: {fileID: 763365374}
+      objectReference: {fileID: 1819157823}
     - target: {fileID: 7027079361099392649, guid: f9f2dd1600203254eabef20669d45d98,
         type: 3}
-      propertyPath: playerPrefab
+      propertyPath: teamManager
       value: 
-      objectReference: {fileID: 1504607087717462475, guid: f5cf5b5d05b7cb34399cf42d0b093170,
-        type: 3}
-    - target: {fileID: 7027079361099392649, guid: f9f2dd1600203254eabef20669d45d98,
-        type: 3}
-      propertyPath: maxConnections
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7027079361099392649, guid: f9f2dd1600203254eabef20669d45d98,
-        type: 3}
-      propertyPath: dontDestroyOnLoad
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7027079361099392649, guid: f9f2dd1600203254eabef20669d45d98,
-        type: 3}
-      propertyPath: characters.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7027079361099392649, guid: f9f2dd1600203254eabef20669d45d98,
-        type: 3}
-      propertyPath: spawnPrefabs.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7027079361099392649, guid: f9f2dd1600203254eabef20669d45d98,
-        type: 3}
-      propertyPath: characters.Array.data[0]
-      value: 
-      objectReference: {fileID: 1398020548929700587, guid: 8d7dd92b185d0384fa5d85921e37d5da,
-        type: 3}
-    - target: {fileID: 7027079361099392649, guid: f9f2dd1600203254eabef20669d45d98,
-        type: 3}
-      propertyPath: characters.Array.data[1]
-      value: 
-      objectReference: {fileID: 8648654545112388095, guid: 75531380ff2fce8478e2280a6a278e4a,
-        type: 3}
-    - target: {fileID: 7027079361099392649, guid: f9f2dd1600203254eabef20669d45d98,
-        type: 3}
-      propertyPath: spawnPrefabs.Array.data[3]
-      value: 
-      objectReference: {fileID: 1398020548929700587, guid: 8d7dd92b185d0384fa5d85921e37d5da,
-        type: 3}
+      objectReference: {fileID: 1326186315}
     - target: {fileID: 7027079361099392651, guid: f9f2dd1600203254eabef20669d45d98,
         type: 3}
       propertyPath: m_Name
       value: MenuNetworkManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 7027079361099392651, guid: f9f2dd1600203254eabef20669d45d98,
-        type: 3}
-      propertyPath: m_TagString
-      value: NetworkManager
       objectReference: {fileID: 0}
     - target: {fileID: 7027079361099392655, guid: f9f2dd1600203254eabef20669d45d98,
         type: 3}
@@ -6681,3 +6658,72 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9f2dd1600203254eabef20669d45d98, type: 3}
+--- !u!1001 &3334934252025299144
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3334934251170414466, guid: 3240b3151397728489b06a805db157cc,
+        type: 3}
+      propertyPath: m_Name
+      value: TeamManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3334934251170414468, guid: 3240b3151397728489b06a805db157cc,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3334934251170414468, guid: 3240b3151397728489b06a805db157cc,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 133.33331
+      objectReference: {fileID: 0}
+    - target: {fileID: 3334934251170414468, guid: 3240b3151397728489b06a805db157cc,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 227.40741
+      objectReference: {fileID: 0}
+    - target: {fileID: 3334934251170414468, guid: 3240b3151397728489b06a805db157cc,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3334934251170414468, guid: 3240b3151397728489b06a805db157cc,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3334934251170414468, guid: 3240b3151397728489b06a805db157cc,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3334934251170414468, guid: 3240b3151397728489b06a805db157cc,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3334934251170414468, guid: 3240b3151397728489b06a805db157cc,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3334934251170414468, guid: 3240b3151397728489b06a805db157cc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3334934251170414468, guid: 3240b3151397728489b06a805db157cc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3334934251170414468, guid: 3240b3151397728489b06a805db157cc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3240b3151397728489b06a805db157cc, type: 3}

@@ -64,6 +64,11 @@ public class MyNetworkManager : NetworkManager
 
         isGameInProgress = true;
 
+        foreach (MyNetworkPlayer player in Players)
+        {
+
+        }
+
         ServerChangeScene("Playground");
     }
 
@@ -106,17 +111,13 @@ public class MyNetworkManager : NetworkManager
     {
         if (sceneName == "Playground")
         {
+            teamManager.AssignTeam();
             playerPrefab = characters[chosenCharacter]; //Here is where it is decided what character the player will spawn in as. Make it work with character select in lobby!
-            if (SceneManager.GetActiveScene().name.StartsWith("Play"))
-            {
-                if (ballIsSpawned == false)
-                {
-                    ballStartPos = GameObject.Find("BallSpawnPosition");
-                    ball = Instantiate(ball, ballStartPos.transform.position, ballStartPos.transform.rotation); //HARD CODED CHANGE LATER
-                    NetworkServer.Spawn(ball.gameObject);
-                    ballIsSpawned = true;
-                }
-            }
+
+            ballStartPos = GameObject.Find("BallSpawnPosition");
+            ball = Instantiate(ball, ballStartPos.transform.position, ballStartPos.transform.rotation);
+            NetworkServer.Spawn(ball.gameObject);
+            ballIsSpawned = true;
         }
         else if (sceneName == "PostMatch")
         {

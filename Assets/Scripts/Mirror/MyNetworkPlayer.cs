@@ -19,6 +19,7 @@ public class MyNetworkPlayer : NetworkBehaviour
     [SerializeField] TMP_Text redScoreText;
     [SerializeField] TMP_Text blueScoreText;
     [SerializeField] TMP_Text timeText;
+    [SerializeField] string teamName;
     [SerializeField] GamestateManager gamestateManager;
 
     [SyncVar(hook = nameof(AuthorityHandlePartyOwnerStateUpdated))]
@@ -30,31 +31,14 @@ public class MyNetworkPlayer : NetworkBehaviour
     public TMP_Text BlueScore { get { return blueScoreText; } set { blueScoreText = value; } }
     public TMP_Text RedScore { get { return redScoreText; } set { redScoreText = value; } }
     public TMP_Text TimeText { get { return timeText; } set { timeText = value; } }
-
-
-    private int teamNumber;
+    public string TeamName { get { return teamName; } set { teamName = value; } }
 
     [SyncVar(hook = nameof(HandleSteamIdUpdated))]
     ulong steamId;
     
-    public int TeamNumber   // property
-    {
-        get { return teamNumber; }   // get method
-        set { teamNumber = value; }  // set method
-    }
     public bool GetIsPartyOwner()
     {
         return isPartyOwner;
-    }
-
-    private void OnPlayerConnected()
-    {
-        //GamestateManager.HandleTimeChanged += SetTimerText;
-    }
-
-    private void OnPlayerDisconnected()
-    {
-        //GamestateManager.HandleTimeChanged -= SetTimerText;
     }
 
     void SetTimerText()
