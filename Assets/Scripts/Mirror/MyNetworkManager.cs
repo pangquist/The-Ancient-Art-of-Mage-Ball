@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 public class MyNetworkManager : NetworkManager
 {
     [SerializeField] TeamManager teamManager;
+    [SerializeField] GamestateManager gamestateManager;
 
     bool ballIsSpawned = false;
     [SerializeField] GameObject mainMenuPlayer;
@@ -121,11 +122,14 @@ public class MyNetworkManager : NetworkManager
             ball = Instantiate(ball, ballStartPos.transform.position, ballStartPos.transform.rotation);
             NetworkServer.Spawn(ball.gameObject);
             ballIsSpawned = true;
-            //AssignNames();
         }
         else if (sceneName == "PostMatch")
         {
             playerPrefab = mainMenuPlayer;
+            gamestateManager = GameObject.Find("GamestateManager").GetComponent<GamestateManager>();
+            gamestateManager.AssignScoreAtPostScreen();
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
     }
 

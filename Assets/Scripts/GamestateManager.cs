@@ -28,6 +28,9 @@ public class GamestateManager : NetworkBehaviour
     public int RedScore { get { return redScore; } set { redScore = value; } }
     public float Timer { get { return time; } set { time = value; } }
 
+    [SerializeField] TMP_Text postGameRedScoreDisplay;
+    [SerializeField] TMP_Text postGameBlueScoreDisplay;
+    [SerializeField] TMP_Text winningTeamText;
 
     public static event Action HandleTimeChanged, HandleScoreChanged;
 
@@ -36,15 +39,15 @@ public class GamestateManager : NetworkBehaviour
         myNetworkManager = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<MyNetworkManager>();
         time = startTime;
         ResetScore();
+        DontDestroyOnLoad(this.gameObject);
     }
 
     private void Update()
     {
-        //if (gameIsOver) return;
+        if (gameIsOver) return;
 
         if (time <= 0)
         {
-            gameIsOver = true;
             EndGame();
         }
             
@@ -59,11 +62,37 @@ public class GamestateManager : NetworkBehaviour
         }
         else
         {
+            gameIsOver = true;
             myNetworkManager.EndGame();
         }
     }
 
-    
+    public void AssignScoreAtPostScreen()
+    {
+        Debug.Log("Trying to find texts!");
+
+        postGameRedScoreDisplay = 
+            GameObject.Find("Canvas").
+            gameObject.transform.Find("BackgroundRedTeam").
+            gameObject.transform.Find("RedTeamScoreText").gameObject.GetComponent<TMP_Text>();
+
+        postGameBlueScoreDisplay =
+            GameObject.Find("Canvas").
+            gameObject.transform.Find("BackgroundBlueTeam").
+            gameObject.transform.Find("BlueTeamScoreText").gameObject.GetComponent<TMP_Text>();
+
+        winningTeamText = GameObject.Find("Canvas").gameObject.transform.Find("WinningTeamText").gameObject.GetComponent<TMP_Text>();
+
+        Debug.Log("Red: " + redScore + " and Blue: " + blueScore);
+
+        postGameRedScoreDisplay.text = "Red Team score: " + redScore;
+        postGameBlueScoreDisplay.text = "Blue Team score: " + blueScore;
+
+        if (redScore > blueScore)
+            winningTeamText.text = "Red Team Wins!";
+        else
+            winningTeamText.text = "Blue Team Wins!";
+    }
 
     public void ResetScore()
     {
