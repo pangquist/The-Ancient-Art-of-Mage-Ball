@@ -111,6 +111,7 @@ public class MyNetworkManager : NetworkManager
         Players.Add(player);
         player.SetSteamId(steamId.m_SteamID);
 
+
         AssignNames();
         GameObject playerGameObject = conn.identity.gameObject;
         player.SetPartyOwner(Players.Count == 1);
