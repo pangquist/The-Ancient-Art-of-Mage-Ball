@@ -11,6 +11,8 @@ public class Grapple : NetworkBehaviour
     [SerializeField] Transform castPoint, camera, player;
     private float maxRange = 25f;
 
+    private RaycastHit raycastHit;
+
     PlayerMovement playerMovement;
     [SerializeField]
     float grappleSpeed;
@@ -46,9 +48,24 @@ public class Grapple : NetworkBehaviour
 
         if (lr.positionCount == 0) return;
 
-        Vector3 grappleVector = grapplePoint - player.position;
+        if(raycastHit.transform.gameObject.tag == "Enemy")
+        {
+            grapplePoint = raycastHit.transform.position;
 
-        playerMovement.controller.Move(grappleVector * grappleSpeed * 2 * Time.deltaTime);
+            Vector3 grappleVector = player.position - grapplePoint;
+
+            Rigidbody ball = raycastHit.transform.gameObject.GetComponent<Rigidbody>();
+
+
+            ball.AddForce(grappleVector * grappleSpeed * 10 * Time.deltaTime);
+        }
+        else
+        {
+            Vector3 grappleVector = grapplePoint - player.position;
+
+            playerMovement.controller.Move(grappleVector * grappleSpeed * 2 * Time.deltaTime);
+        }
+        
     }
 
     private void LateUpdate()
@@ -64,6 +81,8 @@ public class Grapple : NetworkBehaviour
             grapplePoint = hit.point;
 
             lr.positionCount = 2;
+
+            raycastHit = hit;
         }
     }
 
