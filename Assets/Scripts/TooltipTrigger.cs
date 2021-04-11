@@ -7,11 +7,18 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 {
     
     
-    [SerializeField] List<string> contents;
     [SerializeField] List<string> headers;
+    [SerializeField] List<string> contents;
     [SerializeField] List<Tooltip> tooltips;
     [SerializeField] List<GameObject> tooltipsGO;
 
+    public void Awake()
+    {
+        for (int i = 0; i < tooltips.Count; i++)
+        {
+            tooltips[i].HideToolTip(tooltipsGO[i]);
+        }
+    }
 
     public void OnPointerEnter(PointerEventData eventData)
     {

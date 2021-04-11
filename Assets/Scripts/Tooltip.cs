@@ -18,6 +18,7 @@ public class Tooltip : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        
     }
 
     public void ShowToolTip(GameObject tooltipGO,Tooltip tooltip, string content, string header = "")
@@ -48,6 +49,7 @@ public class Tooltip : MonoBehaviour
 
     private void Update()
     {
+
         if (Application.isEditor)
         {
             int headerLength = headerField.text.Length;
