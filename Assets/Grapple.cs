@@ -6,6 +6,9 @@ using UnityEngine;
 public class Grapple : NetworkBehaviour
 {
     private LineRenderer lr;
+    private Material material;
+    private Vector2 offsetSpeed = new Vector2(15, 0);
+
     private Vector3 grapplePoint;
     [SerializeField] LayerMask grappleable;
     [SerializeField] Transform castPoint, camera, player;
@@ -33,10 +36,14 @@ public class Grapple : NetworkBehaviour
         lr = GetComponent<LineRenderer>();
 
         lr.positionCount = 0;
+
+        material = lr.material;
     }
 
     private void Update()
     {
+        material.mainTextureOffset += offsetSpeed * Time.deltaTime;
+
         if (Input.GetMouseButtonDown(0))
         {
             StartGrapple();
