@@ -16,7 +16,7 @@ public class GamestateManager : NetworkBehaviour
 
     [SyncVar (hook = nameof(HandleTimeChange))]
     [SerializeField] float time;
-    float startTime = 20f;
+    [SerializeField] float startTime = 180f;
 
     int startScore = 0;
     [SyncVar (hook = nameof(HandleRedScore))]

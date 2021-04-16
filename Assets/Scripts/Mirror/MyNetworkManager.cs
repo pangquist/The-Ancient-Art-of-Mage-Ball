@@ -140,16 +140,6 @@ public class MyNetworkManager : NetworkManager
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
         }
-        //else if (sceneName == "MainMenu")
-        //{
-        //    foreach (MyNetworkPlayer player in Players)
-        //    {
-        //        if (player.isLocalPlayer)
-        //        {
-        //            player.
-        //        }
-        //    }
-        //}
     }
 
     public override void OnStopClient()
@@ -161,7 +151,6 @@ public class MyNetworkManager : NetworkManager
     {
         base.OnStopHost();
         Destroy(gamestateManager.gameObject);
-        Destroy(ball.gameObject);
     }
 
     void AssignNames()

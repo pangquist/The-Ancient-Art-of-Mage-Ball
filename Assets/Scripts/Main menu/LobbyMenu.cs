@@ -16,9 +16,9 @@ public class LobbyMenu : NetworkBehaviour
 
     [SerializeField] TMP_Text[] redTeamNames = new TMP_Text[3];
     [SerializeField] TMP_Text[] blueTeamNames = new TMP_Text[3];
-
-
+    
     private List<string[]> menuPlayers = new List<string[]>();
+
 
     private void Start()
     {
