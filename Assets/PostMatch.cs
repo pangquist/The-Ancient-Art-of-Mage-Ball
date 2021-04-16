@@ -5,13 +5,6 @@ using TMPro;
 
  public class PostMatch : MonoBehaviour
 {
-
-   [SerializeField] GamestateManager gameStateManager;
-    void Awake()
-    {
-        gameStateManager = GameObject.Find("GamestateManager").GetComponent<GamestateManager>();
-    }
-    
     private string winnerTeam;
     private string losingTeam;
     private int winGoal;
@@ -37,25 +30,8 @@ using TMPro;
     public int WinGoal { get { return winGoal; } set { winGoal = value; } }
     public int LoseGoal { get { return loseGoal; } set { loseGoal = value; } }
 
-   
-
     public void Update()
     {
-        if (gameStateManager.BlueScore > gameStateManager.RedScore)
-        {
-            WinnerTeam = "Blue Team Wins";
-            LosingTeam = "Red Team Wins";
-            WinGoal = gameStateManager.BlueScore;
-            LoseGoal = gameStateManager.RedScore;
-        }
-        else
-        {
-            WinnerTeam = "Red Team Wins";
-            LosingTeam = "Blue Team Wins";
-            WinGoal = gameStateManager.RedScore;
-            LoseGoal = gameStateManager.BlueScore;
-        }
-        
         winnerTeamText.text = winnerTeam;
         losingTeamText.text = losingTeam;
         winGoalText.text = winGoal.ToString();
