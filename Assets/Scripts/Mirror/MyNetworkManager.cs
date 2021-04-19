@@ -13,7 +13,7 @@ public class MyNetworkManager : NetworkManager
     [SerializeField] TeamManager teamManager;
     [SerializeField] GamestateManager gamestateManager;
 
-    bool ballIsSpawned = false;
+    //bool ballIsSpawned = false;
     [SerializeField] GameObject mainMenuPlayer;
     [SerializeField] GameObject ball;
     [SerializeField] GameObject ballStartPos;
@@ -107,9 +107,7 @@ public class MyNetworkManager : NetworkManager
     //Removes the player from the list of active players so they wont be included in future code-interactions
     public override void OnServerDisconnect(NetworkConnection conn)
     {
-        MyNetworkPlayer player = conn.identity.GetComponent<MyNetworkPlayer>();
-
-        Players.Remove(player);
+        Players.Remove(conn.identity.GetComponent<MyNetworkPlayer>());
 
         base.OnServerDisconnect(conn);
     }
@@ -143,7 +141,7 @@ public class MyNetworkManager : NetworkManager
             GameObject instantiatedBall;
             instantiatedBall = Instantiate(ball, ballStartPos.transform.position, ballStartPos.transform.rotation);
             NetworkServer.Spawn(instantiatedBall.gameObject);
-            ballIsSpawned = true;
+            //ballIsSpawned = true;
         }
         else if (sceneName == "PostMatch")
         {
