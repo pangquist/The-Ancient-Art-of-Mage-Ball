@@ -69,6 +69,7 @@ public class ForcePush : NetworkBehaviour
         GameObject magicExplosion = Instantiate(hitEffect, hitLocation, Quaternion.identity) as GameObject;
         NetworkServer.Spawn(magicExplosion);
     }
+
     [Command]
     void CmdDoChargePush()
     {

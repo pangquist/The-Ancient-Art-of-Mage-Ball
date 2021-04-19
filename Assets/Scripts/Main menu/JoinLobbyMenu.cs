@@ -1,3 +1,4 @@
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -21,9 +22,10 @@ public class JoinLobbyMenu : MonoBehaviour
         MyNetworkManager.ClientOnConnected -= HandleClientConnected;
         MyNetworkManager.ClientOnDisconnected -= HandleClientDisconnected;
     }
-
+    
     public void Join()
     {
+        Debug.Log("Trying to join Lobby!");
         string address = addressInput.text;
 
         MyNetworkManager.singleton.networkAddress = address;

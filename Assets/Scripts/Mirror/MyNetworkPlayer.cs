@@ -10,36 +10,46 @@ using UnityEngine.UI;
 
 public class MyNetworkPlayer : NetworkBehaviour
 {
-    [SyncVar(hook = nameof(HandlePlayerNameUpdated))]
-    [SerializeField] string displayName = "Missing Name";
-    [SerializeField] Color playerColour = Color.white;
+    public static event Action<bool> AuthorityOnPartyOwnerStateUpdated;
+    public static event Action OnClientTeamUpdated;
+    public static event Action ClientOnInfoUpdated;
 
-    [SerializeField] TMP_Text displayNameText = null;
-
-    [SerializeField] TMP_Text redScoreText;
-    [SerializeField] TMP_Text blueScoreText;
-    [SerializeField] TMP_Text timeText;
     [SyncVar (hook = nameof(HandlePlayerTeamAssigned))]
     [SerializeField] string teamName;
-    [SerializeField] GamestateManager gamestateManager;
+
+    [SyncVar(hook = nameof(HandlePlayerNameUpdated))]
+    [SerializeField] string displayName = "Missing Name";
 
     [SyncVar(hook = nameof(AuthorityHandlePartyOwnerStateUpdated))]
     bool isPartyOwner = false;
 
-    public static event Action<bool> AuthorityOnPartyOwnerStateUpdated;
-    public static event Action ClientOnInfoUpdated;
+    [SyncVar(hook = nameof(HandleSteamIdUpdated))]
+    ulong steamId;
+    
+    //[SyncVar(hook = nameof(HandlePlayerColorUpdated))]
+    [SerializeField] Color playerColour = Color.white;
 
+    [SerializeField] TMP_Text displayNameText = null;
+    [SerializeField] TMP_Text redScoreText;
+    [SerializeField] TMP_Text blueScoreText;
+    [SerializeField] TMP_Text timeText;
+
+    [SerializeField] GamestateManager gamestateManager;
+    
     public TMP_Text BlueScore { get { return blueScoreText; } set { blueScoreText = value; } }
     public TMP_Text RedScore { get { return redScoreText; } set { redScoreText = value; } }
     public TMP_Text TimeText { get { return timeText; } set { timeText = value; } }
     public string TeamName { get { return teamName; } }
 
-    [SyncVar(hook = nameof(HandleSteamIdUpdated))]
-    ulong steamId;
-    
+
     public bool GetIsPartyOwner()
     {
         return isPartyOwner;
+    }
+
+    public string GetDisplayName()
+    {
+        return displayName;
     }
 
     void SetTimerText()
@@ -61,14 +71,13 @@ public class MyNetworkPlayer : NetworkBehaviour
     [Server]
     public void SetSteamId(ulong _steamId)
     {
-        Debug.Log("Sent in steam ID: " + _steamId);
+        Debug.Log("3. Sent in steam ID: " + _steamId);
         steamId = _steamId;
-    }
 
-    public string GetDisplayName()
-    {
-        Debug.Log("Getting name: " + displayName);
-        return displayName;
+        if (steamId == 0) //THIS SHOULD BE REMOVED WHEN TESTING FOR REAL
+        {
+            steamId = 1;
+        }
     }
 
     [Server]
@@ -81,20 +90,22 @@ public class MyNetworkPlayer : NetworkBehaviour
     public void SetDisplayName(string newDisplayName)
     {
         displayName = newDisplayName;
-
+        Debug.Log($"10. The name on the server has been changed to: {displayName}");
     }
 
     [Server]
     public void SetTeamName(string newTeamName)
     {
+        Debug.Log($"9. The player is being assigned to the: {newTeamName} on the server");
         teamName = newTeamName;
-
+        RpcSetTeamName(newTeamName);
     }
-
-    [Server]
-    public void SetPlayerColor(Color newColour)
+    
+    [ClientRpc]
+    public void RpcSetTeamName(string newTeamName)
     {
-        playerColour = newColour;
+        Debug.Log($"Changing {displayName}'s team to {newTeamName} for all clients");
+        teamName = newTeamName;
     }
 
     [Command]
@@ -112,8 +123,9 @@ public class MyNetworkPlayer : NetworkBehaviour
     {
         //if (newDisplayName.Length < 2 || newDisplayName.Length > 15)
         //    return;
+        
 
-        Debug.Log("Setting display name on server: " + newDisplayName);
+        Debug.Log($"5. Sending a command to the server to set the new name on the server: " + newDisplayName);
         RpcLogNewName(newDisplayName);
 
         SetDisplayName(newDisplayName);
@@ -122,6 +134,7 @@ public class MyNetworkPlayer : NetworkBehaviour
     [Command]
     public void CmdSetTeamName(string newTeamName)
     {
+        Debug.Log($"8. Sending a command to the server that the player is being assigned to the: {newTeamName}");
         SetTeamName(newTeamName);
     }
     #endregion
@@ -138,18 +151,11 @@ public class MyNetworkPlayer : NetworkBehaviour
 
     public override void OnStartClient()
     {
-        //if(gameObject.GetComponent<CountdownTimer>() != null)
-        //    gameObject.GetComponent<CountdownTimer>().enabled = true;
-
         if (NetworkServer.active)
             return;
-
-        //GameObject.Find("LobbyParent");
-
-        //.GetComponent<NetworkIdentity>().AssignClientAuthority(this.GetComponent<NetworkIdentity>().connectionToClient);
-
+        
         ((MyNetworkManager)NetworkManager.singleton).Players.Add(this);
-        gameObject.GetComponent<Animator>().enabled = true;
+        //gameObject.GetComponent<Animator>().enabled = true;
     }
 
     public override void OnStopClient()
@@ -165,13 +171,24 @@ public class MyNetworkPlayer : NetworkBehaviour
     }
 
     //Hook method that is called whenever the steam ID of the client is updated. Starts a method that finds the steam name that is connected to that steam id.
+    [Client]
     void HandleSteamIdUpdated(ulong oldSteamId, ulong newSteamId)
     {
-        var CSteamID = new CSteamID(newSteamId);
+        if (!isLocalPlayer)
+        {
+            return;
+        }
 
-        CmdSetDisplayName(SteamFriends.GetFriendPersonaName(CSteamID));
-
-        Debug.Log("Display Name has been set to: " + displayName);
+        if (steamId != 1)
+        {
+            var CSteamID = new CSteamID(newSteamId);
+            Debug.Log($"4. The steam ID has been updated, starting to set Display name to: { SteamFriends.GetFriendPersonaName(CSteamID) }");
+            CmdSetDisplayName(SteamFriends.GetFriendPersonaName(CSteamID));
+        }
+        else
+        {
+            CmdSetDisplayName($"Player 1");
+        }
     }
 
     private void AuthorityHandlePartyOwnerStateUpdated(bool oldState, bool newState)
@@ -184,23 +201,72 @@ public class MyNetworkPlayer : NetworkBehaviour
 
     private void HandlePlayerNameUpdated(string oldName, string newName)
     {
+        Debug.Log($"6. Handling that the name has been changed on the server!");
         ClientOnInfoUpdated?.Invoke();
         displayNameText.text = displayName;
-        Debug.Log("Team color: " + teamName);
     }
-
+    
     private void HandlePlayerTeamAssigned(string oldTeam, string newTeam)
     {
         if (teamName == "Red Team")
+        {
+            //playerColour = Color.red;
             displayNameText.color = Color.red;
+            //CmdSetColor(Color.red);
+        }
         else
+        {
+            //playerColour = Color.blue;
             displayNameText.color = Color.blue;
+            //CmdSetColor(Color.blue);
+        }
+
+        OnClientTeamUpdated?.Invoke();
+        Debug.Log($"Setting {displayName} text color to: {teamName}");
+        //CmdChangeTeamColor(displayNameText.color);
     }
-    
+
+    //[Command]
+    //void CmdSetColor(Color color)
+    //{
+    //    displayNameText.color = color;
+    //    RpcSetColor(color);
+    //}
+
+    //[ClientRpc]
+    //void RpcSetColor(Color color)
+    //{
+    //    displayNameText.color = color;
+    //}
+    //private void HandlePlayerColorUpdated(Color oldColor, Color newColor)
+    //{
+    //    CmdChangeTeamColor(playerColour);
+    //}
+
+    //[Command]
+    //private void CmdChangeTeamColor(Color _color)
+    //{
+    //    Debug.Log("Sending a command to change the color on the server");
+    //    displayNameText.color = _color;
+    //}
+
+    //[Server]
+    //private void SetTeamColor (Color _color)
+    //{
+    //    Debug.Log("The server is trying to set the color");
+    //    RpcSetTeamColor(_color);
+    //}
+
+    //[ClientRpc]
+    //private void RpcSetTeamColor (Color _color)
+    //{
+    //    displayNameText.color = _color;
+    //}
+
     [ClientRpc]
     void RpcLogNewName(string newDisplayName)
     {
-        Debug.Log(newDisplayName);
+        Debug.Log($" This is the RPC sending out the new name: {newDisplayName}");
     }
     #endregion
 
