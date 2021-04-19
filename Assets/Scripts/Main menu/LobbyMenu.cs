@@ -80,14 +80,16 @@ public class LobbyMenu : MonoBehaviour
         Debug.Log($"Number of players in list: {players.Count}");
 
 
-        if (players.Count != 0)
-        {
-            newPlayer = players[players.Count - 1];
-        }
-        else
-        {
-            newPlayer = NetworkClient.localPlayer.gameObject.GetComponent<MyNetworkPlayer>();
-        }
+        //if (players.Count != 0)
+        //{
+        //    newPlayer = players[players.Count - 1];
+        //}
+        //else
+        //{
+        //    newPlayer = NetworkClient.localPlayer.gameObject.GetComponent<MyNetworkPlayer>();
+        //}
+
+        newPlayer = NetworkClient.localPlayer.gameObject.GetComponent<MyNetworkPlayer>();
 
         Debug.Log($"Player: {newPlayer}");
 
