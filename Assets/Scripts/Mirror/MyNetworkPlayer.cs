@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MyNetworkPlayer : NetworkBehaviour
@@ -17,6 +18,10 @@ public class MyNetworkPlayer : NetworkBehaviour
 
     [SerializeField] TMP_Text redScoreText;
     [SerializeField] TMP_Text blueScoreText;
+    [SerializeField] TMP_Text timeText;
+    [SyncVar (hook = nameof(HandlePlayerTeamAssigned))]
+    [SerializeField] string teamName;
+    [SerializeField] GamestateManager gamestateManager;
 
     [SyncVar(hook = nameof(AuthorityHandlePartyOwnerStateUpdated))]
     bool isPartyOwner = false;
@@ -26,21 +31,29 @@ public class MyNetworkPlayer : NetworkBehaviour
 
     public TMP_Text BlueScore { get { return blueScoreText; } set { blueScoreText = value; } }
     public TMP_Text RedScore { get { return redScoreText; } set { redScoreText = value; } }
-
-
-    private int teamNumber;
+    public TMP_Text TimeText { get { return timeText; } set { timeText = value; } }
+    public string TeamName { get { return teamName; } set { teamName = value; } }
 
     [SyncVar(hook = nameof(HandleSteamIdUpdated))]
     ulong steamId;
     
-    public int TeamNumber   // property
-    {
-        get { return teamNumber; }   // get method
-        set { teamNumber = value; }  // set method
-    }
     public bool GetIsPartyOwner()
     {
         return isPartyOwner;
+    }
+
+    void SetTimerText()
+    {
+        
+        float minutes = Mathf.FloorToInt(gamestateManager.Timer / 60);
+        float seconds = Mathf.FloorToInt(gamestateManager.Timer % 60);
+        timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+
+    void SetScoreText()
+    {
+        redScoreText.text = "Red: " + gamestateManager.RedScore.ToString();
+        blueScoreText.text = "Blue: " + gamestateManager.BlueScore.ToString();
     }
 
     #region Server
@@ -68,6 +81,7 @@ public class MyNetworkPlayer : NetworkBehaviour
     public void SetDisplayName(string newDisplayName)
     {
         displayName = newDisplayName;
+
     }
 
     [Server]
@@ -85,6 +99,7 @@ public class MyNetworkPlayer : NetworkBehaviour
         ((MyNetworkManager)NetworkManager.singleton).StartGame();
     }
 
+    //Sends a command to the server telling it to update the display name of the client.
     [Command]
     void CmdSetDisplayName(string newDisplayName)
     {
@@ -98,6 +113,15 @@ public class MyNetworkPlayer : NetworkBehaviour
     }
     #endregion
     #region Client
+
+    private void Start()
+    {
+        if (SceneManager.GetActiveScene().name == "MainMenu")
+            return;
+        gamestateManager = GameObject.Find("GamestateManager").GetComponent<GamestateManager>();
+        GamestateManager.HandleTimeChanged += SetTimerText;
+        GamestateManager.HandleScoreChanged += SetScoreText;
+    }
 
     public override void OnStartClient()
     {
@@ -118,20 +142,18 @@ public class MyNetworkPlayer : NetworkBehaviour
         if (!hasAuthority)
             return;
 
+        GamestateManager.HandleTimeChanged -= SetTimerText;
+        GamestateManager.HandleScoreChanged -= SetScoreText;
         ((MyNetworkManager)NetworkManager.singleton).Players.Remove(this);
     }
 
+    //Hook method that is called whenever the steam ID of the client is updated. Starts a method that finds the steam name that is connected to that steam id.
     void HandleSteamIdUpdated(ulong oldSteamId, ulong newSteamId)
     {
         var CSteamID = new CSteamID(newSteamId);
         CmdSetDisplayName(SteamFriends.GetFriendPersonaName(CSteamID));
         Debug.Log("Display Name has been set to: " + displayName);
     }
-
-    //private void ClientHandleDisplayNameUpdated(string oldDisplayName, string newDisplayName)
-    //{
-    //    ClientOnInfoUpdated?.Invoke();
-    //}
 
     private void AuthorityHandlePartyOwnerStateUpdated(bool oldState, bool newState)
     {
@@ -145,6 +167,16 @@ public class MyNetworkPlayer : NetworkBehaviour
     {
         ClientOnInfoUpdated?.Invoke();
         displayNameText.text = displayName;
+        Debug.Log("Team color: " + teamName);
+       
+    }
+
+    private void HandlePlayerTeamAssigned(string oldTeam, string newTeam)
+    {
+        if (teamName == "Red Team")
+            displayNameText.color = Color.red;
+        else
+            displayNameText.color = Color.blue;
     }
     
     [ClientRpc]

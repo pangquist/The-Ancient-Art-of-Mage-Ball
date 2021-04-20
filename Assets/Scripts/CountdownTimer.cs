@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Mirror;
+using System;
 
 public class CountdownTimer : NetworkBehaviour
 {
@@ -13,7 +14,7 @@ public class CountdownTimer : NetworkBehaviour
     [SerializeField] TMP_Text timerText = null;
 
     public float CurrentTime { get { return currentTime; } set { currentTime = value; } }
-
+    
     public override void OnStartServer()
     {
         currentTime = startingTime;
@@ -26,16 +27,15 @@ public class CountdownTimer : NetworkBehaviour
         timerText.enabled = true;
     }
 
-    private void Update()
-    {
-        if (currentTime <= 0) { return; }
-        CmdUpdateTime();
-    }
+    //private void Update()
+    //{
+    //    if (currentTime <= 0) { return; }
+    //    CmdUpdateTime();
+    //}
     
     [Command]
     void CmdUpdateTime()
     {
-        //Debug.Log("Sending time: " + currentTime + " to server");
         SetTime();
     }
 
@@ -45,6 +45,7 @@ public class CountdownTimer : NetworkBehaviour
         currentTime -= 1 * Time.deltaTime;
     }
 
+    //hook method that is called everytime the time-variable is changed and updates the UI-element that shows the current time.
     void OnChangeTime(float oldTime, float newTime)
     {
         float minutes = Mathf.FloorToInt(currentTime / 60);

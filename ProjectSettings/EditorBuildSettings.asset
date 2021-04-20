@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Playground.unity
     guid: 63d3cb5bd82234e4184c99180ea1ff3e
+  - enabled: 1
+    path: Assets/Scenes/PostMatch.unity
+    guid: b5165149b3862fd48a4615bdf3212c6e
   m_configObjects: {}

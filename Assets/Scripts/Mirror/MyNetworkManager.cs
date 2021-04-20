@@ -11,6 +11,7 @@ public class MyNetworkManager : NetworkManager
     [SerializeField] TeamManager teamManager;
 
     bool ballIsSpawned = false;
+    [SerializeField] GameObject mainMenuPlayer;
     [SerializeField] GameObject ball;
     [SerializeField] GameObject ballStartPos;
     [SerializeField] GameObject[] characters;
@@ -21,11 +22,15 @@ public class MyNetworkManager : NetworkManager
 
     bool isGameInProgress;
     public static bool timeIsStarted = false; //ÄNDRA
+    public static MyNetworkPlayer connectedPlayer;
 
 
     public List<MyNetworkPlayer> Players { get; } = new List<MyNetworkPlayer>();
-    //[SerializeField] int chosenCharacter = 0;
+    int chosenCharacter = 0;
 
+    public int ChosenCharacter { get { return chosenCharacter; } set { chosenCharacter = value; } }
+
+    //If the player attemts to connect while the game is in progress, they are disconnected.
     public override void OnServerConnect(NetworkConnection conn)
     {
         if (!isGameInProgress)
@@ -33,6 +38,7 @@ public class MyNetworkManager : NetworkManager
         conn.Disconnect();
     }
 
+    //Removes the player from the list of active players so they wont be included in future code-interactions
     public override void OnServerDisconnect(NetworkConnection conn)
     {
         MyNetworkPlayer player = conn.identity.GetComponent<MyNetworkPlayer>();
@@ -49,6 +55,7 @@ public class MyNetworkManager : NetworkManager
         isGameInProgress = false;
     }
     
+    //Checks if the requirements to start the game are fullfilled.
     [Server]
     public void StartGame()
     {
@@ -57,7 +64,18 @@ public class MyNetworkManager : NetworkManager
 
         isGameInProgress = true;
 
+        foreach (MyNetworkPlayer player in Players)
+        {
+
+        }
+
         ServerChangeScene("Playground");
+    }
+
+    [Server]
+    public void EndGame()
+    {
+        ServerChangeScene("PostMatch");
     }
 
     public override void OnClientConnect(NetworkConnection conn)
@@ -74,6 +92,7 @@ public class MyNetworkManager : NetworkManager
         ClientOnDisconnected?.Invoke();
     }
 
+    //When the player enters the server, this method sets the steam ID of that player and subsequentially gets all the information from that ID.
     public override void OnServerAddPlayer(NetworkConnection conn)
     {
         base.OnServerAddPlayer(conn);
@@ -84,55 +103,65 @@ public class MyNetworkManager : NetworkManager
         player.SetSteamId(steamId.m_SteamID);
 
 
+        AssignNames();
         GameObject playerGameObject = conn.identity.gameObject;
         player.SetPartyOwner(Players.Count == 1);
-
-
-
-        //if (SceneManager.GetActiveScene().name.StartsWith("Main"))
-        //    return;
-
-        //Color displayColour = new Color(
-        //    UnityEngine.Random.Range(0f, 1f),
-        //    UnityEngine.Random.Range(0f, 1f),
-        //    UnityEngine.Random.Range(0f, 1f));
-
-        //player.SetPlayerColor(displayColour);
     }
 
+    //Called whenever a scene is changed. The players spawns a player prefabs that is decided in the character select. If the scene is an arena map, the ball is spawned and the game begins.
     public override void OnServerSceneChanged(string sceneName)
     {
-        Debug.Log("Scene is being changed!");
-        playerPrefab = characters[0]; //Here is where it is decided what character the player will spawn in as. Make it work with character select in lobby!
-
-        Debug.Log("Current prefab: " + playerPrefab);
-
-        if (SceneManager.GetActiveScene().name.StartsWith("Play"))
+        Debug.Log("Current scene is: " + SceneManager.GetActiveScene().name);
+        if (sceneName == "Playground")
         {
-            Debug.Log("Playground is the changed scene!");
-            //if (numPlayers < 2)
-            //{
-            //    teamManager.team1.Add(player);
-            //}
-            //else
-            //{
-            //    teamManager.team2.Add(player);
-            //    timeIsStarted = true;
-            //}
-            //Debug.Log(player.TeamNumber);
 
-            if (ballIsSpawned == false)
-            {
-                ballStartPos = GameObject.Find("BallSpawnPosition");
-                ball = Instantiate(ball, ballStartPos.transform.position, ballStartPos.transform.rotation); //HARD CODED CHANGE LATER
-                NetworkServer.Spawn(ball.gameObject);
-                ballIsSpawned = true;
-            }
+
+            playerPrefab = characters[chosenCharacter]; //Here is where it is decided what character the player will spawn in as. Make it work with character select in lobby!
+
+            ballStartPos = GameObject.Find("BallSpawnPosition");
+            ball = Instantiate(ball, ballStartPos.transform.position, ballStartPos.transform.rotation);
+            NetworkServer.Spawn(ball.gameObject);
+            ballIsSpawned = true;
+            //AssignNames();
+        }
+        else if (sceneName == "PostMatch")
+        {
+            playerPrefab = mainMenuPlayer;
         }
     }
 
     public override void OnStopClient()
     {
         Players.Clear();
+    }
+
+    void AssignNames()
+    {
+        for (int i = 0; i < teamManager.redTeam.Count; i++)
+        {
+            Debug.Log("Searching for name: " + teamManager.redTeam[i]);
+            for (int j = 0; j < Players.Count; j++)
+            {
+                if (teamManager.redTeam[i] == Players[j].GetDisplayName())
+                {
+                    Players[j].TeamName = "Red Team";
+                    continue;
+                }
+
+            }
+        }
+
+        for (int i = 0; i < teamManager.blueTeam.Count; i++)
+        {
+            for (int j = 0; j < Players.Count; j++)
+            {
+                if (teamManager.blueTeam[i] == Players[j].GetDisplayName())
+                {
+                    Players[j].TeamName = "Blue Team";
+                    continue;
+                }
+
+            }
+        }
     }
 }

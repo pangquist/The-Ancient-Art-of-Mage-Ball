@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class TeamManager : MonoBehaviour
 {
-    public List<MyNetworkPlayer> team1 = new List<MyNetworkPlayer>();
-    public List<MyNetworkPlayer> team2 = new List<MyNetworkPlayer>();
+    public List<string> redTeam = new List<string>();
+    public List<string> blueTeam = new List<string>();
+    
+    private void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
 }
