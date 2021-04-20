@@ -72,7 +72,7 @@ public class LobbyMenu : MonoBehaviour
     // Method that is connected to the action event from MyNetworkPlayer. This method activates whenever the player name is changed on the client and gets the displayname and writes it out on the corresponding slot in the lobby.
     void ClientHandleInfoUpdated() 
     {
-        Debug.Log("7. Handling that the clients info has been updated!");
+        //Debug.Log("7. Handling that the clients info has been updated!");
         List<MyNetworkPlayer> players = ((MyNetworkManager)NetworkManager.singleton).Players;
         MyNetworkPlayer newPlayer = NetworkClient.connection.identity.GetComponent<MyNetworkPlayer>();
         Debug.Log($"Number of players in list: {players.Count}");
@@ -81,6 +81,10 @@ public class LobbyMenu : MonoBehaviour
         if (players.Count != 0)
         {
             newPlayer = players[players.Count - 1];
+        }
+        else
+        {
+            return;
         }
 
         Debug.Log($"Player: {newPlayer}");
@@ -154,6 +158,7 @@ public class LobbyMenu : MonoBehaviour
             {
                 redPlayers++;
             }
+
             else if (player.TeamName == "Blue Team")
             {
                 bluePlayers++;
