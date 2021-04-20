@@ -74,8 +74,8 @@ public class LobbyMenu : MonoBehaviour
     {
         //Debug.Log("7. Handling that the clients info has been updated!");
         List<MyNetworkPlayer> players = ((MyNetworkManager)NetworkManager.singleton).Players;
-        MyNetworkPlayer newPlayer = NetworkClient.connection.identity.GetComponent<MyNetworkPlayer>();
         Debug.Log($"Number of players in list: {players.Count}");
+        MyNetworkPlayer newPlayer;
 
 
         if (players.Count != 0)
@@ -86,9 +86,8 @@ public class LobbyMenu : MonoBehaviour
         {
             return;
         }
-
-        Debug.Log($"Player: {newPlayer}");
-
+        Debug.Log($"The new player is named: {newPlayer.GetDisplayName()}");
+        
         int redPlayers = 0;
         int bluePlayers = 0;
 
@@ -104,16 +103,18 @@ public class LobbyMenu : MonoBehaviour
             }
         }
 
+        Debug.Log($"There are currently {redPlayers} players on the red team, and {bluePlayers} players on the blue team");
+
         if(redPlayers >= 3 && bluePlayers < 3)
         {
-            newPlayer.CmdSetTeamName("Blue Team");
+            newPlayer.SetTeamName("Blue Team");
         }
         else
         {
-            newPlayer.CmdSetTeamName("Red Team");
+            newPlayer.SetTeamName("Red Team");
         }
 
-        RpcUpdateNameLists();
+        UpdateNameLists();
 
         startGameButton.interactable = players.Count >= MyNetworkManager.playersRequiredToStart; 
     }
@@ -173,10 +174,10 @@ public class LobbyMenu : MonoBehaviour
     
     void ClientHandleTeamUpdated()
     {
-        RpcUpdateNameLists();
+        UpdateNameLists();
     }
     
-    public void RpcUpdateNameLists()
+    public void UpdateNameLists()
     {
         List<MyNetworkPlayer> players = ((MyNetworkManager)NetworkManager.singleton).Players;
 
@@ -184,6 +185,7 @@ public class LobbyMenu : MonoBehaviour
 
         foreach (MyNetworkPlayer player in players)
         {
+            Debug.Log($"There are {players.Count} players in the list, currently on: {player.GetDisplayName()} who is on the {player.TeamName}");
             menuPlayers.Add(new string[] { player.GetDisplayName(), player.TeamName });
         }
 

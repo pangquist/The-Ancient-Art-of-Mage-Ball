@@ -92,19 +92,10 @@ public class MyNetworkPlayer : NetworkBehaviour
         displayName = newDisplayName;
         //Debug.Log($"10. The name on the server has been changed to: {displayName}");
     }
-
-    [Server]
-    public void SetTeamName(string newTeamName)
-    {
-        //Debug.Log($"9. The player is being assigned to the: {newTeamName} on the server");
-        teamName = newTeamName;
-        RpcSetTeamName(newTeamName);
-    }
     
     [ClientRpc]
     public void RpcSetTeamName(string newTeamName)
     {
-        //Debug.Log($"Changing {displayName}'s team to {newTeamName} for all clients");
         teamName = newTeamName;
     }
 
@@ -135,7 +126,8 @@ public class MyNetworkPlayer : NetworkBehaviour
     public void CmdSetTeamName(string newTeamName)
     {
         //Debug.Log($"8. Sending a command to the server that the player is being assigned to the: {newTeamName}");
-        SetTeamName(newTeamName);
+      
+        RpcSetTeamName(newTeamName);
     }
     #endregion
     #region Client
@@ -206,6 +198,12 @@ public class MyNetworkPlayer : NetworkBehaviour
         displayNameText.text = displayName;
     }
     
+    public void SetTeamName(string name)
+    {
+        teamName = name;
+        CmdSetTeamName(name);
+    }
+
     private void HandlePlayerTeamAssigned(string oldTeam, string newTeam)
     {
         if (teamName == "Red Team")
