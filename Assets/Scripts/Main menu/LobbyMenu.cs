@@ -38,15 +38,13 @@ public class LobbyMenu : MonoBehaviour
     // When a client connects to the server, they set the Lobby UI to be active.
     void HandleClientConnected()
     {
-        Debug.Log("Setting the lobby UI to active for the client!");
+        //Debug.Log("Setting the lobby UI to active for the client!");
 
         lobbyUI.SetActive(true);
     }
     // Method that starts the command in the player script, telling the server to start the game if the neccesary requirements are fullfilled.
     public void StartGame() 
     {
-        MyNetworkPlayer localPlayer = NetworkClient.localPlayer.gameObject.GetComponent<MyNetworkPlayer>();
-        
         NetworkClient.connection.identity.GetComponent<MyNetworkPlayer>().CmdStartGame();
     }
 
@@ -76,20 +74,14 @@ public class LobbyMenu : MonoBehaviour
     {
         Debug.Log("7. Handling that the clients info has been updated!");
         List<MyNetworkPlayer> players = ((MyNetworkManager)NetworkManager.singleton).Players;
-        MyNetworkPlayer newPlayer;
+        MyNetworkPlayer newPlayer = NetworkClient.connection.identity.GetComponent<MyNetworkPlayer>();
         Debug.Log($"Number of players in list: {players.Count}");
 
 
-        //if (players.Count != 0)
-        //{
-        //    newPlayer = players[players.Count - 1];
-        //}
-        //else
-        //{
-        //    newPlayer = NetworkClient.localPlayer.gameObject.GetComponent<MyNetworkPlayer>();
-        //}
-
-        newPlayer = NetworkClient.localPlayer.gameObject.GetComponent<MyNetworkPlayer>();
+        if (players.Count != 0)
+        {
+            newPlayer = players[players.Count - 1];
+        }
 
         Debug.Log($"Player: {newPlayer}");
 
@@ -128,6 +120,11 @@ public class LobbyMenu : MonoBehaviour
 
         List<MyNetworkPlayer> players = ((MyNetworkManager)NetworkManager.singleton).Players;
 
+        if (players.Count == 0)
+        {
+            return;
+        }
+
         int redPlayers = 0;
         int bluePlayers = 0;
         
@@ -165,8 +162,8 @@ public class LobbyMenu : MonoBehaviour
 
         //RpcUpdateNameLists();
 
-        Debug.Log($"Changing player to: {team}");
-        Debug.Log($"Red players: {redPlayers} Blue players: {bluePlayers}");
+        //Debug.Log($"Changing player to: {team}");
+        //Debug.Log($"Red players: {redPlayers} Blue players: {bluePlayers}");
     }
     
     void ClientHandleTeamUpdated()

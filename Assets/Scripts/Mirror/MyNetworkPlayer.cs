@@ -71,7 +71,7 @@ public class MyNetworkPlayer : NetworkBehaviour
     [Server]
     public void SetSteamId(ulong _steamId)
     {
-        Debug.Log("3. Sent in steam ID: " + _steamId);
+        //Debug.Log("3. Sent in steam ID: " + _steamId);
         steamId = _steamId;
 
         if (steamId == 0) //THIS SHOULD BE REMOVED WHEN TESTING FOR REAL
@@ -90,13 +90,13 @@ public class MyNetworkPlayer : NetworkBehaviour
     public void SetDisplayName(string newDisplayName)
     {
         displayName = newDisplayName;
-        Debug.Log($"10. The name on the server has been changed to: {displayName}");
+        //Debug.Log($"10. The name on the server has been changed to: {displayName}");
     }
 
     [Server]
     public void SetTeamName(string newTeamName)
     {
-        Debug.Log($"9. The player is being assigned to the: {newTeamName} on the server");
+        //Debug.Log($"9. The player is being assigned to the: {newTeamName} on the server");
         teamName = newTeamName;
         RpcSetTeamName(newTeamName);
     }
@@ -104,7 +104,7 @@ public class MyNetworkPlayer : NetworkBehaviour
     [ClientRpc]
     public void RpcSetTeamName(string newTeamName)
     {
-        Debug.Log($"Changing {displayName}'s team to {newTeamName} for all clients");
+        //Debug.Log($"Changing {displayName}'s team to {newTeamName} for all clients");
         teamName = newTeamName;
     }
 
@@ -125,7 +125,7 @@ public class MyNetworkPlayer : NetworkBehaviour
         //    return;
         
 
-        Debug.Log($"5. Sending a command to the server to set the new name on the server: " + newDisplayName);
+        //Debug.Log($"5. Sending a command to the server to set the new name on the server: " + newDisplayName);
         RpcLogNewName(newDisplayName);
 
         SetDisplayName(newDisplayName);
@@ -134,7 +134,7 @@ public class MyNetworkPlayer : NetworkBehaviour
     [Command]
     public void CmdSetTeamName(string newTeamName)
     {
-        Debug.Log($"8. Sending a command to the server that the player is being assigned to the: {newTeamName}");
+        //Debug.Log($"8. Sending a command to the server that the player is being assigned to the: {newTeamName}");
         SetTeamName(newTeamName);
     }
     #endregion
@@ -182,7 +182,7 @@ public class MyNetworkPlayer : NetworkBehaviour
         if (steamId != 1)
         {
             var CSteamID = new CSteamID(newSteamId);
-            Debug.Log($"4. The steam ID has been updated, starting to set Display name to: { SteamFriends.GetFriendPersonaName(CSteamID) }");
+            //Debug.Log($"4. The steam ID has been updated, starting to set Display name to: { SteamFriends.GetFriendPersonaName(CSteamID) }");
             CmdSetDisplayName(SteamFriends.GetFriendPersonaName(CSteamID));
         }
         else
@@ -210,63 +210,21 @@ public class MyNetworkPlayer : NetworkBehaviour
     {
         if (teamName == "Red Team")
         {
-            //playerColour = Color.red;
             displayNameText.color = Color.red;
-            //CmdSetColor(Color.red);
         }
         else
         {
-            //playerColour = Color.blue;
             displayNameText.color = Color.blue;
-            //CmdSetColor(Color.blue);
         }
 
         OnClientTeamUpdated?.Invoke();
         Debug.Log($"Setting {displayName} text color to: {teamName}");
-        //CmdChangeTeamColor(displayNameText.color);
     }
-
-    //[Command]
-    //void CmdSetColor(Color color)
-    //{
-    //    displayNameText.color = color;
-    //    RpcSetColor(color);
-    //}
-
-    //[ClientRpc]
-    //void RpcSetColor(Color color)
-    //{
-    //    displayNameText.color = color;
-    //}
-    //private void HandlePlayerColorUpdated(Color oldColor, Color newColor)
-    //{
-    //    CmdChangeTeamColor(playerColour);
-    //}
-
-    //[Command]
-    //private void CmdChangeTeamColor(Color _color)
-    //{
-    //    Debug.Log("Sending a command to change the color on the server");
-    //    displayNameText.color = _color;
-    //}
-
-    //[Server]
-    //private void SetTeamColor (Color _color)
-    //{
-    //    Debug.Log("The server is trying to set the color");
-    //    RpcSetTeamColor(_color);
-    //}
-
-    //[ClientRpc]
-    //private void RpcSetTeamColor (Color _color)
-    //{
-    //    displayNameText.color = _color;
-    //}
 
     [ClientRpc]
     void RpcLogNewName(string newDisplayName)
     {
-        Debug.Log($" This is the RPC sending out the new name: {newDisplayName}");
+        //Debug.Log($" This is the RPC sending out the new name: {newDisplayName}");
     }
     #endregion
 

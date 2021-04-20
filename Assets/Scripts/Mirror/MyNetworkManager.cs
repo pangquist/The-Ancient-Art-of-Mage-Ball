@@ -44,10 +44,7 @@ public class MyNetworkManager : NetworkManager
     public override void OnStartServer()
     {
         base.OnStartServer();
-
-        //GameObject instantiatedLobby;
-        //instantiatedLobby = Instantiate(lobby);
-        //NetworkServer.Spawn(instantiatedLobby);
+        
     }
 
     public override void OnStopServer()
@@ -65,12 +62,7 @@ public class MyNetworkManager : NetworkManager
             return;
 
         isGameInProgress = true;
-
-        foreach (MyNetworkPlayer player in Players)
-        {
-
-        }
-
+        
         ServerChangeScene("Playground");
     }
 
@@ -82,7 +74,7 @@ public class MyNetworkManager : NetworkManager
 
     public override void OnClientConnect(NetworkConnection conn)
     {
-        Debug.Log("A client has connected to the server!");
+        //Debug.Log("A client has connected to the server!");
         base.OnClientConnect(conn);
 
         ClientOnConnected?.Invoke();
@@ -98,7 +90,7 @@ public class MyNetworkManager : NetworkManager
     //If the player attemts to connect while the game is in progress, they are disconnected.
     public override void OnServerConnect(NetworkConnection conn)
     {
-        Debug.Log("1. Trying to connect to the server");
+        //Debug.Log("1. Trying to connect to the server");
         if (!isGameInProgress)
             return;
         conn.Disconnect();
@@ -116,7 +108,7 @@ public class MyNetworkManager : NetworkManager
     public override void OnServerAddPlayer(NetworkConnection conn)
     {
         base.OnServerAddPlayer(conn);
-        Debug.Log("2. Player has been added to the server!");
+        //Debug.Log("2. Player has been added to the server!");
         MyNetworkPlayer player = conn.identity.GetComponent<MyNetworkPlayer>();
         Players.Add(player);
         
@@ -124,14 +116,13 @@ public class MyNetworkManager : NetworkManager
         player.SetSteamId(steamId.m_SteamID);
 
         AssignNames();
-        //GameObject playerGameObject = conn.identity.gameObject;
         player.SetPartyOwner(Players.Count == 1);
     }
 
     //Called whenever a scene is changed. The players spawns a player prefabs that is decided in the character select. If the scene is an arena map, the ball is spawned and the game begins.
     public override void OnServerSceneChanged(string sceneName)
     {
-        Debug.Log($"Scene has been changed to: {sceneName}");
+        //Debug.Log($"Scene has been changed to: {sceneName}");
         if (sceneName == "Playground")
         {
             playerPrefab = characters[chosenCharacter]; //Here is where it is decided what character the player will spawn in as. Make it work with character select in lobby!
@@ -166,15 +157,11 @@ public class MyNetworkManager : NetworkManager
 
     void AssignNames()
     {
-        Debug.Log($"11. Time to assign the players to their teams!");
+        //Debug.Log($"11. Time to assign the players to their teams!");
         foreach(string[] menuPlayer in menuPlayers)
         {
             foreach (MyNetworkPlayer player in Players)
             {
-                //if (player.GetDisplayName() == menuPlayer[0])
-                //{
-                //    player.CmdSetTeamName(menuPlayer[1]);
-                //}
                 for (int i = 0; i < menuPlayers.Count; i += 2)
                 {
                     if (player.GetDisplayName() == menuPlayer[i])
