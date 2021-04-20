@@ -21,6 +21,8 @@ public class Grapple : NetworkBehaviour
     float grappleSpeed;
 
     [SerializeField]
+    float duration;
+    float currentDuration;
     float cooldown;
     float timeSinceLastCast;
     [SerializeField]
@@ -38,6 +40,8 @@ public class Grapple : NetworkBehaviour
         lr.positionCount = 0;
 
         material = lr.material;
+
+        currentDuration = duration;
     }
 
     private void Update()
@@ -57,12 +61,18 @@ public class Grapple : NetworkBehaviour
 
         if(raycastHit.transform.gameObject.tag == "Enemy")
         {
+            currentDuration -= Time.deltaTime;
+
+            if(currentDuration <= 0)
+            {
+                StopGrapple();
+            }
+
             grapplePoint = raycastHit.transform.position;
 
             Vector3 grappleVector = player.position - grapplePoint;
 
             Rigidbody ball = raycastHit.transform.gameObject.GetComponent<Rigidbody>();
-
 
             ball.AddForce(grappleVector * grappleSpeed * 10 * Time.deltaTime);
         }
@@ -70,7 +80,7 @@ public class Grapple : NetworkBehaviour
         {
             Vector3 grappleVector = grapplePoint - player.position;
 
-            playerMovement.controller.Move(grappleVector * grappleSpeed * 2 * Time.deltaTime);
+            playerMovement.controller.Move(grappleVector * grappleSpeed * Time.deltaTime);
         }
         
     }
@@ -103,6 +113,7 @@ public class Grapple : NetworkBehaviour
 
     void StopGrapple()
     {
+        currentDuration = duration;
         lr.positionCount = 0;
     }
 }

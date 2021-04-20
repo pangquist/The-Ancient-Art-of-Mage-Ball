@@ -289,7 +289,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1398020548929700589}
   - component: {fileID: -3599253830600747055}
-  - component: {fileID: 9123136897218366115}
   - component: {fileID: 1398020548929700590}
   - component: {fileID: 1398020548929700585}
   - component: {fileID: 1398020548929700584}
@@ -298,13 +297,12 @@ GameObject:
   - component: {fileID: -418170281396793602}
   - component: {fileID: 282141968}
   - component: {fileID: 920328545}
-  - component: {fileID: 3887848313203973047}
   - component: {fileID: 8890351901005270611}
   - component: {fileID: 4492199172709615581}
   - component: {fileID: 6569366051808079934}
   - component: {fileID: 4032744186232787454}
   m_Layer: 0
-  m_Name: Player Character
+  m_Name: Chaincaster
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -352,21 +350,6 @@ MonoBehaviour:
   timeText: {fileID: 1028667098871470237}
   teamName: 
   gamestateManager: {fileID: 0}
---- !u!114 &9123136897218366115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1398020548929700587}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8700a807f508c6641a1dbddf1dc29180, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  timerText: {fileID: 1028667098871470237}
 --- !u!136 &1398020548929700590
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -421,7 +404,7 @@ MonoBehaviour:
     m_Bits: 64
   isGrounded: 0
   jumpButton: 32
-  jumpPower: 6
+  jumpPower: 9
   gravity: -9.81
   velocity: {x: 0, y: 0, z: 0}
 --- !u!114 &7130249670396189663
@@ -519,32 +502,6 @@ MonoBehaviour:
   jumpAnimationName: Cast jump spell
   dashButton: 49
   dashAnimationName: Cast dash
---- !u!114 &3887848313203973047
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1398020548929700587}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad21e2b4093f75e48a204a7dda25e0ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  mainCamera: {fileID: 1398020549020263658}
-  playerMovement: {fileID: 1398020548929700584}
-  hitableLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  hitableObject: {fileID: 8064140242585256329, guid: 62da8ef2cdaa94745b1556ae9ac28593,
-    type: 3}
-  pushAmount: 500
-  pushRadius: 5
-  forceJumpHeight: 16
-  hitEffect: {fileID: 8027473195609965283, guid: e06bdea1510a3e547a2ed554aac7f5f9,
-    type: 3}
 --- !u!114 &8890351901005270611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -599,8 +556,8 @@ MonoBehaviour:
   castPoint: {fileID: 738319874836368678}
   camera: {fileID: 1398020549020263659}
   player: {fileID: 1398020548929700589}
-  grappleSpeed: 5
-  cooldown: 0
+  grappleSpeed: 10
+  duration: 0.5
   isOnCooldown: 0
 --- !u!120 &4032744186232787454
 LineRenderer:
