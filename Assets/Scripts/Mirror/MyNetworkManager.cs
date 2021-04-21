@@ -27,7 +27,7 @@ public class MyNetworkManager : NetworkManager
     public static bool timeIsStarted = false; //ÄNDRA
     public static MyNetworkPlayer connectedPlayer;
 
-    private List<string[]> menuPlayers = new List<string[]>();
+    public List<string[]> menuPlayers = new List<string[]>();
 
     public List<string[]> MenuPlayers { get { return menuPlayers; } set { menuPlayers = value; } }
 

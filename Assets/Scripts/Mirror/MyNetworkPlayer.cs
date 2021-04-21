@@ -25,9 +25,9 @@ public class MyNetworkPlayer : NetworkBehaviour
 
     [SyncVar(hook = nameof(HandleSteamIdUpdated))]
     ulong steamId;
-    
-    //[SyncVar(hook = nameof(HandlePlayerColorUpdated))]
-    [SerializeField] Color playerColour = Color.white;
+
+    [SyncVar(hook = nameof(HandlePlayerColorUpdated))]
+    [SerializeField] Color playerColor = Color.white;
 
     [SerializeField] TMP_Text displayNameText = null;
     [SerializeField] TMP_Text redScoreText;
@@ -97,6 +97,7 @@ public class MyNetworkPlayer : NetworkBehaviour
     public void RpcSetTeamName(string newTeamName)
     {
         teamName = newTeamName;
+        Debug.Log($"Setting a new team name for {displayName}: {teamName} on every client!");
     }
 
     [Command]
@@ -125,9 +126,13 @@ public class MyNetworkPlayer : NetworkBehaviour
     [Command]
     public void CmdSetTeamName(string newTeamName)
     {
-        //Debug.Log($"8. Sending a command to the server that the player is being assigned to the: {newTeamName}");
-      
-        RpcSetTeamName(newTeamName);
+        ServerSetTeamName(newTeamName);
+    }
+
+    [Server]
+    void ServerSetTeamName(string newTeamName)
+    {
+        teamName = newTeamName;
     }
     #endregion
     #region Client
@@ -191,6 +196,7 @@ public class MyNetworkPlayer : NetworkBehaviour
         AuthorityOnPartyOwnerStateUpdated?.Invoke(newState);
     }
 
+    [Client]
     private void HandlePlayerNameUpdated(string oldName, string newName)
     {
         Debug.Log($"6. Handling that the name has been changed on the server!");
@@ -200,23 +206,50 @@ public class MyNetworkPlayer : NetworkBehaviour
     
     public void SetTeamName(string name)
     {
+        Debug.Log($"Changing team from: {teamName} to: {name} on the client!");
         teamName = name;
         CmdSetTeamName(name);
     }
 
+    [Client]
     private void HandlePlayerTeamAssigned(string oldTeam, string newTeam)
     {
+        Debug.Log("Handling that the team name is being changed on the client!");
         if (teamName == "Red Team")
         {
             displayNameText.color = Color.red;
+            CmdSetTextColor(Color.red);
+            //playerColor = Color.red;
         }
         else
         {
             displayNameText.color = Color.blue;
+            CmdSetTextColor(Color.blue);
+            //playerColor = Color.blue;
         }
 
         OnClientTeamUpdated?.Invoke();
         Debug.Log($"Setting {displayName} text color to: {teamName}");
+    }
+
+    [Client]
+    void HandlePlayerColorUpdated(Color oldColor, Color newColor)
+    {
+        Debug.Log("The clients color has been updated!");
+        CmdSetTextColor(playerColor);
+    }
+
+    [Command]
+    void CmdSetTextColor(Color color)
+    {
+        ServerSetTextColor(color);
+    }
+
+    [Server]
+    void ServerSetTextColor(Color color)
+    {
+        Debug.Log($"Updating {displayName}'s team color to: {color}!");
+        displayNameText.color = color;
     }
 
     [ClientRpc]

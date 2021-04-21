@@ -107,11 +107,11 @@ public class LobbyMenu : MonoBehaviour
 
         if(redPlayers >= 3 && bluePlayers < 3)
         {
-            newPlayer.SetTeamName("Blue Team");
+            newPlayer.CmdSetTeamName("Blue Team");
         }
         else
         {
-            newPlayer.SetTeamName("Red Team");
+            newPlayer.CmdSetTeamName("Red Team");
         }
 
         UpdateNameLists();
@@ -179,6 +179,7 @@ public class LobbyMenu : MonoBehaviour
     
     public void UpdateNameLists()
     {
+        Debug.Log("UPDATING THE NAME LIST!");
         List<MyNetworkPlayer> players = ((MyNetworkManager)NetworkManager.singleton).Players;
 
         ((MyNetworkManager)NetworkManager.singleton).ClearMenuPlayers();
@@ -205,6 +206,44 @@ public class LobbyMenu : MonoBehaviour
         {
             blueTeamNames[i].text = "Waiting For Player...";
         }
+
+        //for (int i = 0; i < players.Count; i++)
+        //{
+        //    if (players[i].TeamName == "Red Team")
+        //    {
+        //        for (int j = 0; j < redTeamNames.Length; j++)
+        //        {
+        //            if (redTeamNames[j].text == "Waiting For Player...")
+        //            {
+        //                redTeamNames[j].text = players[i].GetDisplayName();
+        //                break;
+        //            }
+        //        }
+
+        //    }
+        //    else if (players[i].TeamName == "Blue Team")
+        //    {
+        //        for (int j = 0; j < blueTeamNames.Length; j++)
+        //        {
+        //            if (blueTeamNames[j].text == "Waiting For Player...")
+        //            {
+        //                blueTeamNames[j].text = players[i].GetDisplayName();
+        //                break;
+        //            }
+        //        }
+        //    }
+        //}
+
+
+
+
+
+
+
+
+
+
+
 
         for (int i = 0; i < players.Count; i++)
         {
