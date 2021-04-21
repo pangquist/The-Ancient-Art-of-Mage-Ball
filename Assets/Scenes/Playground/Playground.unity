@@ -761,6 +761,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3370910843736119665, guid: 3380115eac747b8468f1c8f82ea8b0d1,
+        type: 3}
+      propertyPath: sceneId
+      value: 2641104775
+      objectReference: {fileID: 0}
     - target: {fileID: 1039085756111124631, guid: 3380115eac747b8468f1c8f82ea8b0d1,
         type: 3}
       propertyPath: m_RootOrder
@@ -826,6 +831,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2231224937087288903, guid: 3380115eac747b8468f1c8f82ea8b0d1,
+        type: 3}
+      propertyPath: gmManager
+      value: 
+      objectReference: {fileID: 932137157}
+    - target: {fileID: 2253635040460120726, guid: 3380115eac747b8468f1c8f82ea8b0d1,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2253635040460120726, guid: 3380115eac747b8468f1c8f82ea8b0d1,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -858,10 +873,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8890923103834530407, guid: 784ad36bc36c0544bbaf184f629af1ac,
         type: 3}
+    - target: {fileID: 7477057248850063105, guid: 3380115eac747b8468f1c8f82ea8b0d1,
+        type: 3}
+      propertyPath: sceneId
+      value: 2728054511
+      objectReference: {fileID: 0}
     - target: {fileID: 8296719921864505826, guid: 3380115eac747b8468f1c8f82ea8b0d1,
         type: 3}
       propertyPath: m_Name
       value: Goal Blue
+      objectReference: {fileID: 0}
+    - target: {fileID: 8296719921864505826, guid: 3380115eac747b8468f1c8f82ea8b0d1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3380115eac747b8468f1c8f82ea8b0d1, type: 3}
@@ -1701,10 +1726,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7570416675691879119, guid: aebe3368b6b19b1479bcc77539432a9e,
+        type: 3}
+      propertyPath: sceneId
+      value: 1242819674
+      objectReference: {fileID: 0}
+    - target: {fileID: 2172080175601900679, guid: aebe3368b6b19b1479bcc77539432a9e,
+        type: 3}
+      propertyPath: sceneId
+      value: 3681741631
+      objectReference: {fileID: 0}
     - target: {fileID: 2907211513784310456, guid: aebe3368b6b19b1479bcc77539432a9e,
         type: 3}
       propertyPath: sceneId
       value: 44066744
+      objectReference: {fileID: 0}
+    - target: {fileID: 4181507992514434067, guid: aebe3368b6b19b1479bcc77539432a9e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4181507992514434067, guid: aebe3368b6b19b1479bcc77539432a9e,
         type: 3}
@@ -1720,6 +1760,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Goal Red
+      objectReference: {fileID: 0}
+    - target: {fileID: 4181507993175177970, guid: aebe3368b6b19b1479bcc77539432a9e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4181507993175177974, guid: aebe3368b6b19b1479bcc77539432a9e,
         type: 3}
@@ -4338,6 +4383,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GamestateManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3718856610359258601, guid: 946dac0630fca4d45ad1a2d4a2c6e700,
+        type: 3}
+      propertyPath: startTime
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3718856610359258602, guid: 946dac0630fca4d45ad1a2d4a2c6e700,
         type: 3}

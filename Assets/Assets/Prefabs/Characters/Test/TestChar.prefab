@@ -316,7 +316,6 @@ GameObject:
   - component: {fileID: 8648654545112387897}
   - component: {fileID: 8648654545112387880}
   - component: {fileID: 8648654545112387791}
-  - component: {fileID: 8648654545112387780}
   m_Layer: 0
   m_Name: ScoreRed
   m_TagString: Untagged
@@ -440,21 +439,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &8648654545112387780
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8648654545112387988}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66927a00ec53722478be54efbd01022a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  score: 0
-  scoreText: {fileID: 8648654545112387791}
-  isRed: 1
 --- !u!1 &8648654545112387992
 GameObject:
   m_ObjectHideFlags: 0
@@ -805,7 +789,6 @@ GameObject:
   - component: {fileID: 8648654545112387892}
   - component: {fileID: 8648654545112387885}
   - component: {fileID: 8648654545112387800}
-  - component: {fileID: 8648654545112387796}
   m_Layer: 0
   m_Name: ScoreBlue
   m_TagString: Untagged
@@ -929,21 +912,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &8648654545112387796
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8648654545112388005}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66927a00ec53722478be54efbd01022a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  score: 0
-  scoreText: {fileID: 8648654545112387800}
-  isRed: 0
 --- !u!1 &8648654545112388088
 GameObject:
   m_ObjectHideFlags: 0
@@ -1199,7 +1167,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8648654545112387922}
   - component: {fileID: 8648654545112387776}
-  - component: {fileID: 8648654545112387811}
   - component: {fileID: 8648654545112387883}
   - component: {fileID: 8648654545112387881}
   - component: {fileID: 8648654545112387785}
@@ -1251,24 +1218,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.01
+  teamName: 
   displayName: Missing Name
-  playerColour: {r: 1, g: 1, b: 1, a: 1}
+  playerColor: {r: 1, g: 1, b: 1, a: 1}
   displayNameText: {fileID: 8648654545112387789}
---- !u!114 &8648654545112387811
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8648654545112388095}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8700a807f508c6641a1dbddf1dc29180, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  timerText: {fileID: 8648654545112387787}
+  redScoreText: {fileID: 8648654545112387791}
+  blueScoreText: {fileID: 8648654545112387800}
+  timeText: {fileID: 8648654545112387787}
+  gamestateManager: {fileID: 0}
 --- !u!136 &8648654545112387883
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1340,6 +1297,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneId: 0
   serverOnly: 0
+  visible: 0
   m_AssetId: 
   hasSpawned: 0
 --- !u!114 &8648654545112387805
@@ -1360,6 +1318,9 @@ MonoBehaviour:
   localPositionSensitivity: 0.01
   localRotationSensitivity: 0.01
   localScaleSensitivity: 0.01
+  compressRotation: 0
+  interpolateScale: 1
+  syncScale: 1
 --- !u!114 &8648654545112387783
 MonoBehaviour:
   m_ObjectHideFlags: 0
