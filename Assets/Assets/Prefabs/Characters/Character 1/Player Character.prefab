@@ -343,7 +343,7 @@ MonoBehaviour:
   syncInterval: 0.001
   teamName: 
   displayName: Missing Name
-  playerColour: {r: 1, g: 1, b: 1, a: 1}
+  playerColor: {r: 1, g: 1, b: 1, a: 1}
   displayNameText: {fileID: 2782714423443914302}
   redScoreText: {fileID: 2304103363279501702}
   blueScoreText: {fileID: 6308363265070594642}
@@ -2775,7 +2775,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 893cc373f0f301d44b06a758df59c8d7, type: 2}
+  - {fileID: 2100000, guid: 3e3fb0f4de81fcc428c48015acb786d9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3556,7 +3556,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 893cc373f0f301d44b06a758df59c8d7, type: 2}
+  - {fileID: 2100000, guid: 3e3fb0f4de81fcc428c48015acb786d9, type: 2}
   - {fileID: 2100000, guid: c5737eff3086bc04c936631d6a458df0, type: 2}
   - {fileID: 2100000, guid: 5a2bc85b1daf9ef488fbe74f3af016c8, type: 2}
   m_StaticBatchInfo:
