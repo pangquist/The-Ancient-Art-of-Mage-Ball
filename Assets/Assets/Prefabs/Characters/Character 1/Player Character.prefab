@@ -520,8 +520,7 @@ MonoBehaviour:
   hitableLayer:
     serializedVersion: 2
     m_Bits: 64
-  hitableObject: {fileID: 8064140242585256329, guid: 62da8ef2cdaa94745b1556ae9ac28593,
-    type: 3}
+  range: 40
   pushAmount: 500
   pushRadius: 5
   forceJumpHeight: 16
