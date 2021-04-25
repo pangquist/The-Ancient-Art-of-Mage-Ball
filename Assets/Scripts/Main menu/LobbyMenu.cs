@@ -10,6 +10,7 @@ public class LobbyMenu : MonoBehaviour
 {
     [SerializeField] GameObject lobbyUI;
     [SerializeField] Button startGameButton;
+    [SerializeField] Button changeSceneButton;
 
     [SerializeField] TeamManager teamManager;
 
@@ -116,6 +117,7 @@ public class LobbyMenu : MonoBehaviour
 
         UpdateNameLists();
 
+        changeSceneButton.interactable = players.Count >= MyNetworkManager.playersRequiredToStart;
         startGameButton.interactable = players.Count >= MyNetworkManager.playersRequiredToStart; 
     }
     

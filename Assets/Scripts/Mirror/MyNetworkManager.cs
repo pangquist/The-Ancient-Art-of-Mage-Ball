@@ -19,6 +19,7 @@ public class MyNetworkManager : NetworkManager
     [SerializeField] GameObject ballStartPos;
     [SerializeField] GameObject lobby;
     [SerializeField] GameObject[] characters;
+    [SerializeField] string selectedScene = "Playground";
 
     public static event Action ClientOnConnected;
     public static event Action ClientOnDisconnected;
@@ -40,6 +41,7 @@ public class MyNetworkManager : NetworkManager
     int chosenCharacter = 0;
 
     public int ChosenCharacter { get { return chosenCharacter; } set { chosenCharacter = value; } }
+    public string SelectedScene { get { return selectedScene; } set { selectedScene = value; } }
 
     public override void OnStartServer()
     {
@@ -63,9 +65,9 @@ public class MyNetworkManager : NetworkManager
 
         isGameInProgress = true;
         
-        ServerChangeScene("Playground");
+        ServerChangeScene(selectedScene);
     }
-
+    
     [Server]
     public void EndGame()
     {
@@ -123,7 +125,7 @@ public class MyNetworkManager : NetworkManager
     public override void OnServerSceneChanged(string sceneName)
     {
         //Debug.Log($"Scene has been changed to: {sceneName}");
-        if (sceneName == "Playground")
+        if (sceneName == SelectedScene)
         {
             playerPrefab = characters[chosenCharacter]; //Here is where it is decided what character the player will spawn in as. Make it work with character select in lobby!
             GamestateManager.gameIsOver = false;
@@ -132,7 +134,6 @@ public class MyNetworkManager : NetworkManager
             GameObject instantiatedBall;
             instantiatedBall = Instantiate(ball, ballStartPos.transform.position, ballStartPos.transform.rotation);
             NetworkServer.Spawn(instantiatedBall.gameObject);
-            //ballIsSpawned = true;
         }
         else if (sceneName == "PostMatch")
         {
