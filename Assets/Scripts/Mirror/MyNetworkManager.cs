@@ -157,7 +157,10 @@ public class MyNetworkManager : NetworkManager
     public override void OnStopHost()
     {
         base.OnStopHost();
-        Destroy(gamestateManager.gameObject);
+        //if (gamestateManager.gameObject != null)
+        //{
+        //    Destroy(gamestateManager.gameObject);
+        //}
     }
 
     void AssignNames()

@@ -59,9 +59,8 @@ public class LobbyMenu : MonoBehaviour
         else
         {
             NetworkManager.singleton.StopClient();
-
-            SceneManager.LoadScene(0);
         }
+        SceneManager.LoadScene(0);
     }
 
     void AuthorityHandlePartyOwnerStateUpdated(bool state)
