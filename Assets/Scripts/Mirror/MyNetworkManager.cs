@@ -73,7 +73,7 @@ public class MyNetworkManager : NetworkManager
     {
         ServerChangeScene("PostMatch");
     }
-
+    
     public override void OnClientConnect(NetworkConnection conn)
     {
         //Debug.Log("A client has connected to the server!");
@@ -102,6 +102,7 @@ public class MyNetworkManager : NetworkManager
     public override void OnServerDisconnect(NetworkConnection conn)
     {
         Players.Remove(conn.identity.GetComponent<MyNetworkPlayer>());
+        OnServerSceneChanged("MainMenu");
 
         base.OnServerDisconnect(conn);
     }
@@ -142,6 +143,9 @@ public class MyNetworkManager : NetworkManager
             gamestateManager.AssignScoreAtPostScreen();
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
+
+            selectedScene = "Playground";
+            Players.Clear();
         }
     }
 
@@ -149,7 +153,7 @@ public class MyNetworkManager : NetworkManager
     {
         Players.Clear();
     }
-
+    
     public override void OnStopHost()
     {
         base.OnStopHost();

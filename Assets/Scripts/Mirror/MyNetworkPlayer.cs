@@ -40,6 +40,7 @@ public class MyNetworkPlayer : NetworkBehaviour
     public TMP_Text RedScore { get { return redScoreText; } set { redScoreText = value; } }
     public TMP_Text TimeText { get { return timeText; } set { timeText = value; } }
     public string TeamName { get { return teamName; } }
+    public bool IsPartyOwner { get { return isPartyOwner; } }
 
 
     public bool GetIsPartyOwner()
@@ -108,7 +109,7 @@ public class MyNetworkPlayer : NetworkBehaviour
 
         ((MyNetworkManager)NetworkManager.singleton).StartGame();
     }
-
+    
     //Sends a command to the server telling it to update the display name of the client.
     [Command]
     void CmdSetDisplayName(string newDisplayName)
@@ -166,6 +167,7 @@ public class MyNetworkPlayer : NetworkBehaviour
         GamestateManager.HandleScoreChanged -= SetScoreText;
         ((MyNetworkManager)NetworkManager.singleton).Players.Remove(this);
     }
+    
 
     //Hook method that is called whenever the steam ID of the client is updated. Starts a method that finds the steam name that is connected to that steam id.
     [Client]
@@ -237,6 +239,12 @@ public class MyNetworkPlayer : NetworkBehaviour
     {
         Debug.Log("The clients color has been updated!");
         CmdSetTextColor(playerColor);
+    }
+
+    [Client]
+    void ChangeBackground()
+    {
+        
     }
 
     [Command]

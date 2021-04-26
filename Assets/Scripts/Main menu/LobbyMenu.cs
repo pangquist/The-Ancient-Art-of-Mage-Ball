@@ -116,8 +116,7 @@ public class LobbyMenu : MonoBehaviour
         }
 
         UpdateNameLists();
-
-        changeSceneButton.interactable = players.Count >= MyNetworkManager.playersRequiredToStart;
+        
         startGameButton.interactable = players.Count >= MyNetworkManager.playersRequiredToStart; 
     }
     
@@ -167,11 +166,6 @@ public class LobbyMenu : MonoBehaviour
                 bluePlayers++;
             }
         }
-
-        //RpcUpdateNameLists();
-
-        //Debug.Log($"Changing player to: {team}");
-        //Debug.Log($"Red players: {redPlayers} Blue players: {bluePlayers}");
     }
     
     void ClientHandleTeamUpdated()
@@ -208,44 +202,6 @@ public class LobbyMenu : MonoBehaviour
         {
             blueTeamNames[i].text = "Waiting For Player...";
         }
-
-        //for (int i = 0; i < players.Count; i++)
-        //{
-        //    if (players[i].TeamName == "Red Team")
-        //    {
-        //        for (int j = 0; j < redTeamNames.Length; j++)
-        //        {
-        //            if (redTeamNames[j].text == "Waiting For Player...")
-        //            {
-        //                redTeamNames[j].text = players[i].GetDisplayName();
-        //                break;
-        //            }
-        //        }
-
-        //    }
-        //    else if (players[i].TeamName == "Blue Team")
-        //    {
-        //        for (int j = 0; j < blueTeamNames.Length; j++)
-        //        {
-        //            if (blueTeamNames[j].text == "Waiting For Player...")
-        //            {
-        //                blueTeamNames[j].text = players[i].GetDisplayName();
-        //                break;
-        //            }
-        //        }
-        //    }
-        //}
-
-
-
-
-
-
-
-
-
-
-
 
         for (int i = 0; i < players.Count; i++)
         {
