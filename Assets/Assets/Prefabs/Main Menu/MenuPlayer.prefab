@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1504607087717462477}
-  - component: {fileID: 5299423744293201137}
   - component: {fileID: 7310477066133465343}
+  - component: {fileID: -1487377803937004933}
   m_Layer: 0
   m_Name: MenuPlayer
-  m_TagString: Untagged
+  m_TagString: MenuPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33,23 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5299423744293201137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1504607087717462475}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01350ceada6d5034b9ef053da81b1c4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.01
-  displayName: Missing Name
-  playerColour: {r: 1, g: 1, b: 1, a: 1}
-  displayNameText: {fileID: 2385083037381758238}
 --- !u!114 &7310477066133465343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,6 +50,28 @@ MonoBehaviour:
   visible: 0
   m_AssetId: 
   hasSpawned: 0
+--- !u!114 &-1487377803937004933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1504607087717462475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e169aed864a5a5249957333bffd59e85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  teamName: 
+  displayName: Missing Name
+  playerColor: {r: 1, g: 1, b: 1, a: 1}
+  displayNameText: {fileID: 2385083037381758238}
+  redScoreText: {fileID: 0}
+  blueScoreText: {fileID: 0}
+  timeText: {fileID: 0}
+  gamestateManager: {fileID: 0}
 --- !u!1 &3147893098308486558
 GameObject:
   m_ObjectHideFlags: 0

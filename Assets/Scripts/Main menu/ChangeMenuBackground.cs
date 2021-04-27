@@ -23,9 +23,9 @@ public class ChangeMenuBackground : MonoBehaviour
 
     public void ToggleSceneWindow(bool state)
     {
-        List<MyNetworkPlayer> players = networkManager.Players;
+        List<MyNetworkMenuPlayer> menuPlayers = networkManager.MenuPlayers;
 
-        foreach (MyNetworkPlayer player in players)
+        foreach (MyNetworkMenuPlayer player in menuPlayers)
         {
             if (player.isLocalPlayer && player.IsPartyOwner)
             {

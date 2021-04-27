@@ -28,20 +28,26 @@ public class MyNetworkManager : NetworkManager
     public static bool timeIsStarted = false; //ÄNDRA
     public static MyNetworkPlayer connectedPlayer;
 
-    public List<string[]> menuPlayers = new List<string[]>();
+    //public List<string[]> menuPlayers = new List<string[]>();
 
-    public List<string[]> MenuPlayers { get { return menuPlayers; } set { menuPlayers = value; } }
+    //public List<string[]> MenuPlayers { get { return menuPlayers; } set { menuPlayers = value; } }
 
-    public void ClearMenuPlayers()
-    {
-        menuPlayers.Clear();
-    }
+
+    public List<MyNetworkMenuPlayer> MenuPlayers { get; } = new List<MyNetworkMenuPlayer>();
+    public List<string[]> NameAndTeamList = new List<string[]>();
 
     public List<MyNetworkPlayer> Players { get; } = new List<MyNetworkPlayer>();
+
+
     int chosenCharacter = 0;
 
     public int ChosenCharacter { get { return chosenCharacter; } set { chosenCharacter = value; } }
     public string SelectedScene { get { return selectedScene; } set { selectedScene = value; } }
+
+    public void ClearMenuPlayers()
+    {
+        MenuPlayers.Clear();
+    }
 
     public override void OnStartServer()
     {
@@ -51,6 +57,7 @@ public class MyNetworkManager : NetworkManager
 
     public override void OnStopServer()
     {
+        MenuPlayers.Clear();
         Players.Clear();
 
         isGameInProgress = false;
@@ -60,11 +67,21 @@ public class MyNetworkManager : NetworkManager
     [Server]
     public void StartGame()
     {
-        if (Players.Count < playersRequiredToStart)
+        if (MenuPlayers.Count < playersRequiredToStart)
             return;
 
-        isGameInProgress = true;
+        foreach (MyNetworkMenuPlayer menuPlayer in MenuPlayers)
+        {
+            string[] nameAndTeamCombo = new string[2];
+            nameAndTeamCombo[0] = menuPlayer.GetDisplayName();
+            nameAndTeamCombo[1] = menuPlayer.TeamName;
+
+            NameAndTeamList.Add(nameAndTeamCombo);
+        }
         
+
+        isGameInProgress = true;
+
         ServerChangeScene(selectedScene);
     }
     
@@ -85,7 +102,7 @@ public class MyNetworkManager : NetworkManager
     public override void OnClientDisconnect(NetworkConnection conn)
     {
         base.OnClientDisconnect(conn);
-
+        
         ClientOnDisconnected?.Invoke();
     }
 
@@ -102,6 +119,7 @@ public class MyNetworkManager : NetworkManager
     public override void OnServerDisconnect(NetworkConnection conn)
     {
         Players.Remove(conn.identity.GetComponent<MyNetworkPlayer>());
+        MenuPlayers.Remove(conn.identity.GetComponent<MyNetworkMenuPlayer>());
         OnServerSceneChanged("MainMenu");
 
         base.OnServerDisconnect(conn);
@@ -111,21 +129,36 @@ public class MyNetworkManager : NetworkManager
     public override void OnServerAddPlayer(NetworkConnection conn)
     {
         base.OnServerAddPlayer(conn);
-        //Debug.Log("2. Player has been added to the server!");
-        MyNetworkPlayer player = conn.identity.GetComponent<MyNetworkPlayer>();
-        Players.Add(player);
-        
-        CSteamID steamId = SteamMatchmaking.GetLobbyMemberByIndex(MainMenu.LobbyId, numPlayers - 1);
-        player.SetSteamId(steamId.m_SteamID);
 
-        AssignNames();
-        player.SetPartyOwner(Players.Count == 1);
+        if (conn.identity.tag == "MenuPlayer")
+        {
+            MyNetworkMenuPlayer menuPlayer = conn.identity.GetComponent<MyNetworkMenuPlayer>();
+            MenuPlayers.Add(menuPlayer);
+        
+            CSteamID steamId = SteamMatchmaking.GetLobbyMemberByIndex(MainMenu.LobbyId, numPlayers - 1);
+            menuPlayer.SetSteamId(steamId.m_SteamID);
+            
+            menuPlayer.SetPartyOwner(MenuPlayers.Count == 1);
+        }
+        else if (conn.identity.tag == "Player")
+        {
+            MyNetworkPlayer player = conn.identity.GetComponent<MyNetworkPlayer>();
+            Players.Add(player);
+            
+            Debug.Log($"Name and team list: {NameAndTeamList.Count}");
+            foreach (string[] nameAndTeamString in NameAndTeamList)
+            {
+                Debug.Log(nameAndTeamString);
+            }
+            
+            player.AssignNameInGame();
+            //AssignNamesInGame();
+        }
     }
 
     //Called whenever a scene is changed. The players spawns a player prefabs that is decided in the character select. If the scene is an arena map, the ball is spawned and the game begins.
     public override void OnServerSceneChanged(string sceneName)
     {
-        //Debug.Log($"Scene has been changed to: {sceneName}");
         if (sceneName == SelectedScene)
         {
             playerPrefab = characters[chosenCharacter]; //Here is where it is decided what character the player will spawn in as. Make it work with character select in lobby!
@@ -146,40 +179,41 @@ public class MyNetworkManager : NetworkManager
 
             selectedScene = "Playground";
             Players.Clear();
+            MenuPlayers.Clear();
         }
     }
 
     public override void OnStopClient()
     {
         Players.Clear();
+        MenuPlayers.Clear();
     }
     
     public override void OnStopHost()
     {
         base.OnStopHost();
-        //if (gamestateManager.gameObject != null)
-        //{
-        //    Destroy(gamestateManager.gameObject);
-        //}
     }
 
-    void AssignNames()
-    {
-        //Debug.Log($"11. Time to assign the players to their teams!");
-        foreach(string[] menuPlayer in menuPlayers)
-        {
-            foreach (MyNetworkPlayer player in Players)
-            {
-                for (int i = 0; i < menuPlayers.Count; i += 2)
-                {
-                    if (player.GetDisplayName() == menuPlayer[i])
-                    {
-                        player.CmdSetTeamName(menuPlayer[i+1]);
-                        continue;
-                    }
-                }
-            }
-               
-        }
-    }
+    //[Server]
+    //void AssignNamesInGame()
+    //{
+    //    Debug.Log($"PlayerList has : {Players.Count} players in it.");
+    //    foreach (MyNetworkPlayer player in Players)
+    //    {
+    //        if (!player.isLocalPlayer)
+    //        {
+    //            continue;
+    //        }
+    //        Debug.Log($"Player: {player.GetDisplayName()}, Team: {player.TeamName}");
+    //        for (int i = 0; i < NameAndTeamList.Count; i+= 2)
+    //        {
+    //            player.SetDisplayName(NameAndTeamList[i]);
+
+    //            if (player.GetDisplayName() == NameAndTeamList[i])
+    //            {
+    //                player.SetTeamName(NameAndTeamList[i + 1]);
+    //            }
+    //        }
+    //    }
+    //}
 }

@@ -1,14 +1,13 @@
 using Mirror;
-using Steamworks;
 using System;
+using Steamworks;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
-public class MyNetworkPlayer : NetworkBehaviour
+public class MyNetworkMenuPlayer : NetworkBehaviour
 {
     public static event Action<bool> AuthorityOnPartyOwnerStateUpdated;
     public static event Action OnClientTeamUpdated;
@@ -39,7 +38,7 @@ public class MyNetworkPlayer : NetworkBehaviour
     public TMP_Text BlueScore { get { return blueScoreText; } set { blueScoreText = value; } }
     public TMP_Text RedScore { get { return redScoreText; } set { redScoreText = value; } }
     public TMP_Text TimeText { get { return timeText; } set { timeText = value; } }
-    public string TeamName { get { return teamName; } set { teamName = value; } }
+    public string TeamName { get { return teamName; } }
     public bool IsPartyOwner { get { return isPartyOwner; } }
 
 
@@ -92,13 +91,6 @@ public class MyNetworkPlayer : NetworkBehaviour
         displayName = newDisplayName;
     }
 
-    [ClientRpc]
-    public void RpcSetTeamName(string newTeamName)
-    {
-        teamName = newTeamName;
-        Debug.Log($"Setting a new team name for {displayName}: {teamName} on every client!");
-    }
-
     [Command]
     public void CmdStartGame()
     {
@@ -143,8 +135,7 @@ public class MyNetworkPlayer : NetworkBehaviour
         if (NetworkServer.active)
             return;
 
-        ((MyNetworkManager)NetworkManager.singleton).Players.Add(this);
-        
+        ((MyNetworkManager)NetworkManager.singleton).MenuPlayers.Add(this);
         //gameObject.GetComponent<Animator>().enabled = true;
     }
 
@@ -157,7 +148,7 @@ public class MyNetworkPlayer : NetworkBehaviour
 
         GamestateManager.HandleTimeChanged -= SetTimerText;
         GamestateManager.HandleScoreChanged -= SetScoreText;
-        ((MyNetworkManager)NetworkManager.singleton).Players.Remove(this);
+        ((MyNetworkManager)NetworkManager.singleton).MenuPlayers.Remove(this);
     }
 
 
@@ -192,32 +183,33 @@ public class MyNetworkPlayer : NetworkBehaviour
     [Client]
     private void HandlePlayerNameUpdated(string oldName, string newName)
     {
-        Debug.Log($"6. Handling that the name has been changed on the server!");
         ClientOnInfoUpdated?.Invoke();
         displayNameText.text = displayName;
     }
 
     public void SetTeamName(string name)
     {
-        Debug.Log($"Changing team from: {teamName} to: {name} on the client!");
         teamName = name;
         CmdSetTeamName(name);
     }
-
-    [Client]
+    
     private void HandlePlayerTeamAssigned(string oldTeam, string newTeam)
     {
         if (hasAuthority)
         {
             if (teamName == "Red Team")
             {
+                //playerColor = Color.red;
                 CmdSetPlayerColor(Color.red);
             }
             else
             {
+                //playerColor = Color.blue;
                 CmdSetPlayerColor(Color.blue);
             }
+           
         }
+
         OnClientTeamUpdated?.Invoke();
     }
 
@@ -236,7 +228,11 @@ public class MyNetworkPlayer : NetworkBehaviour
     [Client]
     void HandlePlayerColorUpdated(Color oldColor, Color newColor)
     {
-        Debug.Log("The clients color has been updated!");
+        if (!hasAuthority)
+        {
+            return;
+        }
+
         CmdSetTextColor();
     }
 
@@ -252,20 +248,6 @@ public class MyNetworkPlayer : NetworkBehaviour
         Debug.Log($"Updating {displayName}'s team color to: {playerColor}!");
         displayNameText.color = playerColor;
     }
-    
-    public void AssignNameInGame()
-    {
-        List<MyNetworkPlayer> players = ((MyNetworkManager)NetworkManager.singleton).Players;
-        List<string[]> nameAndTeamList = ((MyNetworkManager)NetworkManager.singleton).NameAndTeamList;
 
-        Debug.Log($"PlayerList has : {players.Count} players in it.");
-        
-        Debug.Log($"Player: {GetDisplayName()}, Team: {TeamName}");
-        
-        
-        SetDisplayName(nameAndTeamList[players.Count-1].GetValue(0).ToString());
-        SetTeamName(nameAndTeamList[players.Count - 1].GetValue(1).ToString());
-    }
     #endregion
-
 }

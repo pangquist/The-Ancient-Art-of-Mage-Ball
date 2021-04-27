@@ -91,7 +91,15 @@ public class ForcePush : NetworkBehaviour
     [Command]
     void CmdDoPush(GameObject ball)
     {
-        RpcMoveBall(ball);
+        //RpcMoveBall(ball);
+        ServerMoveBall(ball);
+    }
+
+    [Server]
+    void ServerMoveBall(GameObject ball)
+    {
+        ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        ball.GetComponent<Rigidbody>().AddExplosionForce(pushAmount, hit.point, pushRadius);
     }
 
     [ClientRpc]

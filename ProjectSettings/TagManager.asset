@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - NetworkManager
+  - MenuPlayer
   layers:
   - Default
   - TransparentFX
