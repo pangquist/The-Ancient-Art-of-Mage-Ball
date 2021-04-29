@@ -8,10 +8,11 @@ public class GravitySwap : NetworkBehaviour
     [SerializeField] Camera mainCamera;
     [SerializeField] LayerMask hitableLayer;
     [SerializeField] GameObject attackEffect;
+    [SerializeField] float range;
     [SerializeField] Vector3 appliedForce;
 
-    float cooldown;
-    float range;
+    [SerializeField] float duration;
+    
 
     RaycastHit hit;
 
@@ -24,6 +25,8 @@ public class GravitySwap : NetworkBehaviour
 
     public void DoSpell()
     {
+        Debug.Log("Casting Gravity Warp");
+
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         Physics.Raycast(ray, out hit, range, hitableLayer);
 
@@ -32,9 +35,9 @@ public class GravitySwap : NetworkBehaviour
             return;
         }
 
+        Debug.Log($"Hit object name: {hit.collider.gameObject}");
         hit.collider.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
         hit.collider.gameObject.GetComponent<Rigidbody>().AddForce(appliedForce);
-        hit.collider.gameObject.GetComponent<Rigidbody>().useGravity = false;
-
+        hit.collider.gameObject.GetComponent<BallMovement>().RevertGravity(duration);
     }
 }

@@ -20,6 +20,7 @@ public class UseAbilities : MonoBehaviour
 
         if (Input.GetKeyDown(castAbility1Button) && cooldownAbility1 <= 0)
         {
+            Debug.Log("Trying to cast abbility 1!");
             UseAbility1();
         }
     }

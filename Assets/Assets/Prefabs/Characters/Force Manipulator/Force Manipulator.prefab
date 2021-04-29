@@ -1098,7 +1098,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e02350a964ee556459b11c4f9e0a7d07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  castAbility1Button: 323
+  castAbility1Button: 49
   castAbility2Button: 0
   castAbility3Button: 0
   castAbility4Button: 0
@@ -1123,9 +1123,11 @@ MonoBehaviour:
   mainCamera: {fileID: 3758272145470057082}
   hitableLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   attackEffect: {fileID: 0}
-  appliedForce: {x: 0, y: 10, z: 0}
+  range: 20
+  appliedForce: {x: 0, y: 300, z: 0}
+  duration: 1
 --- !u!1 &7456107687649526127
 GameObject:
   m_ObjectHideFlags: 0
