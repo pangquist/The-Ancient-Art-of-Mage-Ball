@@ -5,6 +5,7 @@ using UnityEngine;
 public class BallMovement : MonoBehaviour
 {
     Rigidbody rb;
+    [SerializeField] GameObject FXEffect;
 
     float revertedGravityDuration = 0;
     // Start is called before the first frame update
@@ -29,6 +30,7 @@ public class BallMovement : MonoBehaviour
        if (revertedGravityDuration <= 0)
        {
             rb.useGravity = true;
+            FXEffect.SetActive(false);
             revertedGravityDuration = 0;
        }
     }
@@ -37,5 +39,6 @@ public class BallMovement : MonoBehaviour
     {
         rb.useGravity = false;
         revertedGravityDuration = duration;
+        FXEffect.SetActive(true);
     }
 }

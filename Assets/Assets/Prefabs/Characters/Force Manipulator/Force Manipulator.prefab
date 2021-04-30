@@ -1126,8 +1126,8 @@ MonoBehaviour:
     m_Bits: 128
   attackEffect: {fileID: 0}
   range: 20
-  appliedForce: {x: 0, y: 300, z: 0}
-  duration: 1
+  appliedForce: {x: 0, y: 150, z: 0}
+  duration: 2
 --- !u!1 &7456107687649526127
 GameObject:
   m_ObjectHideFlags: 0
