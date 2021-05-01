@@ -1,8 +1,9 @@
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BallMovement : MonoBehaviour
+public class BallMovement : NetworkBehaviour
 {
     Rigidbody rb;
     [SerializeField] GameObject FXEffect;
@@ -34,7 +35,7 @@ public class BallMovement : MonoBehaviour
             revertedGravityDuration = 0;
        }
     }
-
+    
     public void RevertGravity(float duration)
     {
         rb.useGravity = false;

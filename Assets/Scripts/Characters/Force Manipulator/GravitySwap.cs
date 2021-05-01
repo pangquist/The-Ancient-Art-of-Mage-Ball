@@ -23,8 +23,14 @@ public class GravitySwap : NetworkBehaviour
         enabled = true;
     }
 
+    [Client]
     public void DoSpell()
     {
+        if (!hasAuthority)
+        {
+            return;
+        }
+
         Debug.Log("Casting Gravity Warp");
 
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
@@ -36,8 +42,23 @@ public class GravitySwap : NetworkBehaviour
         }
 
         Debug.Log($"Hit object name: {hit.collider.gameObject}");
-        hit.collider.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        hit.collider.gameObject.GetComponent<Rigidbody>().AddForce(appliedForce);
+        CmdDoSpell();
+    }
+
+    [Command]
+    void CmdDoSpell()
+    {
+        ServerDoSpell();
+    }
+
+    [Server]
+    void ServerDoSpell()
+    {
+        affectedBody = hit.collider.gameObject.GetComponent<Rigidbody>();
+
+        affectedBody.velocity = Vector3.zero;
+        affectedBody.AddForce(appliedForce);
+
         hit.collider.gameObject.GetComponent<BallMovement>().RevertGravity(duration);
     }
 }
