@@ -16,12 +16,7 @@ public class GravitySwap : NetworkBehaviour
 
     RaycastHit hit;
 
-    Rigidbody affectedBody;
-
-    public override void OnStartAuthority()
-    {
-        enabled = true;
-    }
+    GameObject ball;
 
     [Client]
     public void DoSpell()
@@ -42,23 +37,20 @@ public class GravitySwap : NetworkBehaviour
         }
 
         Debug.Log($"Hit object name: {hit.collider.gameObject}");
-        CmdDoSpell();
+        ball = hit.collider.gameObject;
+        CmdDoSpell(ball);
     }
 
     [Command]
-    void CmdDoSpell()
+    void CmdDoSpell(GameObject ballObject)
     {
-        ServerDoSpell();
-    }
+        ballObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        ballObject.GetComponent<Rigidbody>().AddForce(appliedForce);
 
-    [Server]
+        ballObject.GetComponent<BallMovement>().RevertGravity(duration);
+    }
+    
     void ServerDoSpell()
     {
-        affectedBody = hit.collider.gameObject.GetComponent<Rigidbody>();
-
-        affectedBody.velocity = Vector3.zero;
-        affectedBody.AddForce(appliedForce);
-
-        hit.collider.gameObject.GetComponent<BallMovement>().RevertGravity(duration);
     }
 }

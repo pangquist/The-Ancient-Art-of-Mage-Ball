@@ -36,6 +36,7 @@ public class BallMovement : NetworkBehaviour
        }
     }
     
+    [ClientRpc]
     public void RevertGravity(float duration)
     {
         rb.useGravity = false;

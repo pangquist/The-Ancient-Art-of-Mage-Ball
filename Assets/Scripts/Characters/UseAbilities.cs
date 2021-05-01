@@ -1,8 +1,9 @@
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UseAbilities : MonoBehaviour
+public class UseAbilities : NetworkBehaviour
 {
     [SerializeField] KeyCode castAbility1Button;
     [SerializeField] KeyCode castAbility2Button;
@@ -13,6 +14,11 @@ public class UseAbilities : MonoBehaviour
     [SerializeField] float cooldownAbility2;
     [SerializeField] float cooldownAbility3;
     [SerializeField] float cooldownAbility4;
+
+    public override void OnStartAuthority()
+    {
+        enabled = true;
+    }
 
     private void Update()
     {
