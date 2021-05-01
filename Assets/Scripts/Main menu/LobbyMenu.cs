@@ -87,8 +87,7 @@ public class LobbyMenu : MonoBehaviour
         {
             return;
         }
-        Debug.Log($"The new player is named: {newPlayer.GetDisplayName()} and has Authority: {newPlayer.hasAuthority}");
-        
+
         int redPlayers = 0;
         int bluePlayers = 0;
 
@@ -113,8 +112,7 @@ public class LobbyMenu : MonoBehaviour
         {
             newPlayer.CmdSetTeamName("Red Team");
         }
-        
-        Debug.Log($"There are currently {redPlayers} players on the red team, and {bluePlayers} players on the blue team");
+
         startGameButton.interactable = menuPlayers.Count >= MyNetworkManager.playersRequiredToStart; 
     }
     
@@ -176,11 +174,6 @@ public class LobbyMenu : MonoBehaviour
     public void UpdateNameLists()
     {
         List<MyNetworkMenuPlayer> menuPlayers = ((MyNetworkManager)NetworkManager.singleton).MenuPlayers;
-        
-        foreach (MyNetworkMenuPlayer player in menuPlayers)
-        {
-            Debug.Log($"There are {menuPlayers.Count} players in the list, currently on: {player.GetDisplayName()} who is on the {player.TeamName}");
-        }
         
         for (int i = 0; i < redTeamNames.Length; i++)
         {

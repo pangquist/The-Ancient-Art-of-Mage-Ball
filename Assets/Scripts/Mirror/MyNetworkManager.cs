@@ -145,14 +145,7 @@ public class MyNetworkManager : NetworkManager
             MyNetworkPlayer player = conn.identity.GetComponent<MyNetworkPlayer>();
             Players.Add(player);
             
-            Debug.Log($"Name and team list: {NameAndTeamList.Count}");
-            foreach (string[] nameAndTeamString in NameAndTeamList)
-            {
-                Debug.Log(nameAndTeamString);
-            }
-            
-            player.AssignNameInGame();
-            //AssignNamesInGame();
+            player.AssignNameInGame(Players.Count - 1);
         }
     }
 
@@ -193,27 +186,4 @@ public class MyNetworkManager : NetworkManager
     {
         base.OnStopHost();
     }
-
-    //[Server]
-    //void AssignNamesInGame()
-    //{
-    //    Debug.Log($"PlayerList has : {Players.Count} players in it.");
-    //    foreach (MyNetworkPlayer player in Players)
-    //    {
-    //        if (!player.isLocalPlayer)
-    //        {
-    //            continue;
-    //        }
-    //        Debug.Log($"Player: {player.GetDisplayName()}, Team: {player.TeamName}");
-    //        for (int i = 0; i < NameAndTeamList.Count; i+= 2)
-    //        {
-    //            player.SetDisplayName(NameAndTeamList[i]);
-
-    //            if (player.GetDisplayName() == NameAndTeamList[i])
-    //            {
-    //                player.SetTeamName(NameAndTeamList[i + 1]);
-    //            }
-    //        }
-    //    }
-    //}
 }

@@ -19,11 +19,6 @@ public class ForcePush : NetworkBehaviour
     Rigidbody pushedBody;
 
     #region Client
-
-    public override void OnStartAuthority()
-    {
-        enabled = true;
-    }
     
     [Client]
     void DoPush()
@@ -91,15 +86,16 @@ public class ForcePush : NetworkBehaviour
     [Command]
     void CmdDoPush(GameObject ball)
     {
-        //RpcMoveBall(ball);
-        ServerMoveBall(ball);
+        //ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        //ball.GetComponent<Rigidbody>().AddExplosionForce(pushAmount, hit.point, pushRadius);
+        //ServerMoveBall(ball);
+        RpcMoveBall(ball);
     }
 
     [Server]
     void ServerMoveBall(GameObject ball)
     {
-        ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        ball.GetComponent<Rigidbody>().AddExplosionForce(pushAmount, hit.point, pushRadius);
+        RpcMoveBall(ball);
     }
 
     [ClientRpc]
