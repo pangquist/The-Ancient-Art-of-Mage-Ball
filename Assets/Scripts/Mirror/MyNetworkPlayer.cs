@@ -159,7 +159,10 @@ public class MyNetworkPlayer : NetworkBehaviour
 
         displayNameText.color = playerColor;
 
-        CmdSetTextColor();
+        if (hasAuthority)
+        {
+            CmdSetTextColor();
+        }
     }
 
     [Command]
