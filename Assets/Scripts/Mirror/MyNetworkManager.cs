@@ -37,11 +37,7 @@ public class MyNetworkManager : NetworkManager
     public List<string[]> NameAndTeamList = new List<string[]>();
 
     public List<MyNetworkPlayer> Players { get; } = new List<MyNetworkPlayer>();
-
-
-    int chosenCharacter = 0;
-
-    public int ChosenCharacter { get { return chosenCharacter; } set { chosenCharacter = value; } }
+    
     public string SelectedScene { get { return selectedScene; } set { selectedScene = value; } }
 
     public void ClearMenuPlayers()
@@ -161,7 +157,7 @@ public class MyNetworkManager : NetworkManager
     {
         if (sceneName == SelectedScene)
         {
-            playerPrefab = characters[chosenCharacter]; //Here is where it is decided what character the player will spawn in as. Make it work with character select in lobby!
+            playerPrefab = characters[]; //Here is where it is decided what character the player will spawn in as. Make it work with character select in lobby!
             GamestateManager.gameIsOver = false;
             ballStartPos = GameObject.Find("BallSpawnPosition");
 

@@ -3,20 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GravitySwap : NetworkBehaviour
+public class ForceWall : NetworkBehaviour
 {
     [SerializeField] Camera mainCamera;
     [SerializeField] LayerMask hitableLayer;
-    [SerializeField] GameObject attackEffect;
+    [SerializeField] GameObject forceWall;
     [SerializeField] float range;
-    [SerializeField] Vector3 appliedForce;
-
     [SerializeField] float duration;
     
-
     RaycastHit hit;
 
-    GameObject ball;
 
     [Client]
     public void DoSpell()
@@ -26,7 +22,7 @@ public class GravitySwap : NetworkBehaviour
             return;
         }
 
-        Debug.Log("Casting Gravity Warp");
+        Debug.Log("Casting Force Wall");
 
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         Physics.Raycast(ray, out hit, range, hitableLayer);
@@ -36,17 +32,13 @@ public class GravitySwap : NetworkBehaviour
             return;
         }
 
-        Debug.Log($"Hit object name: {hit.collider.gameObject}");
-        ball = hit.collider.gameObject;
-        CmdDoSpell(ball);
+        CmdDoSpell(hit.point);
     }
 
     [Command]
-    void CmdDoSpell(GameObject ballObject)
+    void CmdDoSpell(Vector3 hitLocation)
     {
-        ballObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        ballObject.GetComponent<Rigidbody>().AddForce(appliedForce);
-
-        ballObject.GetComponent<BallMovement>().RevertGravity(duration);
+        GameObject instantiatedForceWall = Instantiate(forceWall, hitLocation + new Vector3(0, 2, 0), gameObject.GetComponent<Transform>().transform.rotation) as GameObject;
+        NetworkServer.Spawn(instantiatedForceWall);
     }
 }

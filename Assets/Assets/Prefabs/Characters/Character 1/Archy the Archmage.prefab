@@ -302,7 +302,7 @@ GameObject:
   - component: {fileID: 4492199172709615581}
   - component: {fileID: 7124487153561252743}
   m_Layer: 0
-  m_Name: Player Character
+  m_Name: Archy the Archmage
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -518,9 +518,11 @@ MonoBehaviour:
   syncInterval: 0.1
   mainCamera: {fileID: 1398020549020263658}
   playerMovement: {fileID: 1398020548929700584}
-  hitableLayer:
-    serializedVersion: 2
+  hitableLayers:
+  - serializedVersion: 2
     m_Bits: 64
+  - serializedVersion: 2
+    m_Bits: 128
   range: 40
   pushAmount: 500
   pushRadius: 5
