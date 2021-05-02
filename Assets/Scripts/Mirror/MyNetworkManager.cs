@@ -34,7 +34,7 @@ public class MyNetworkManager : NetworkManager
 
 
     public List<MyNetworkMenuPlayer> MenuPlayers { get; } = new List<MyNetworkMenuPlayer>();
-    public List<string[]> NameAndTeamList = new List<string[]>();
+    public List<string[]> CharacterInfoList = new List<string[]>();
 
     public List<MyNetworkPlayer> Players { get; } = new List<MyNetworkPlayer>();
     
@@ -68,11 +68,12 @@ public class MyNetworkManager : NetworkManager
 
         foreach (MyNetworkMenuPlayer menuPlayer in MenuPlayers)
         {
-            string[] nameAndTeamCombo = new string[2];
-            nameAndTeamCombo[0] = menuPlayer.GetDisplayName();
-            nameAndTeamCombo[1] = menuPlayer.TeamName;
+            string[] characterInfo = new string[3];
+            characterInfo[0] = menuPlayer.GetDisplayName();
+            characterInfo[1] = menuPlayer.TeamName;
+            characterInfo[2] = menuPlayer.ChosenCharacter.ToString();
 
-            NameAndTeamList.Add(nameAndTeamCombo);
+            CharacterInfoList.Add(characterInfo);
         }
         
 

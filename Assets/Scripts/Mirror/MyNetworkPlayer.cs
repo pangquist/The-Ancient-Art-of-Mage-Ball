@@ -19,6 +19,8 @@ public class MyNetworkPlayer : NetworkBehaviour
     [SyncVar(hook = nameof(HandlePlayerColorUpdated))]
     [SerializeField] Color playerColor = Color.white;
 
+    [SerializeField] int chosenCharacter;
+
     [SerializeField] GameObject inGameUI;
     [SerializeField] TMP_Text displayNameText = null;
     [SerializeField] TMP_Text redScoreText;
@@ -183,10 +185,11 @@ public class MyNetworkPlayer : NetworkBehaviour
         Debug.Log("ASSIGNING NAMES AND TEAMS");
 
         List<MyNetworkPlayer> players = ((MyNetworkManager)NetworkManager.singleton).Players;
-        List<string[]> nameAndTeamList = ((MyNetworkManager)NetworkManager.singleton).NameAndTeamList;
+        List<string[]> characterInfoList = ((MyNetworkManager)NetworkManager.singleton).CharacterInfoList;
 
-        displayName = nameAndTeamList[playerIndex].GetValue(0).ToString();
-        teamName = nameAndTeamList[playerIndex].GetValue(1).ToString();
+        displayName = characterInfoList[playerIndex].GetValue(0).ToString();
+        teamName = characterInfoList[playerIndex].GetValue(1).ToString();
+        chosenCharacter = Convert.ToInt32(characterInfoList[playerIndex].GetValue(2));
     }
     #endregion
 

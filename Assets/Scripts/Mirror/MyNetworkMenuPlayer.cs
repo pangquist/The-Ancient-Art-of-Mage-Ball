@@ -203,12 +203,10 @@ public class MyNetworkMenuPlayer : NetworkBehaviour
         {
             if (teamName == "Red Team")
             {
-                //playerColor = Color.red;
                 CmdSetPlayerColor(Color.red);
             }
             else
             {
-                //playerColor = Color.blue;
                 CmdSetPlayerColor(Color.blue);
             }
            
