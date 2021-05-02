@@ -10,6 +10,7 @@ public class LobbyMenu : MonoBehaviour
 {
     [SerializeField] GameObject lobbyUI;
     [SerializeField] Button startGameButton;
+    [SerializeField] Button changeSceneButton;
 
     [SerializeField] TeamManager teamManager;
 
@@ -21,31 +22,30 @@ public class LobbyMenu : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("Lobbymenu started! Subscribing to events!");
         MyNetworkManager.ClientOnConnected += HandleClientConnected;
-        MyNetworkPlayer.AuthorityOnPartyOwnerStateUpdated += AuthorityHandlePartyOwnerStateUpdated;
-        MyNetworkPlayer.ClientOnInfoUpdated += ClientHandleInfoUpdated;
-        MyNetworkPlayer.OnClientTeamUpdated += ClientHandleTeamUpdated;
+        MyNetworkMenuPlayer.AuthorityOnPartyOwnerStateUpdated += AuthorityHandlePartyOwnerStateUpdated;
+        MyNetworkMenuPlayer.ClientOnInfoUpdated += ClientHandleInfoUpdated;
+        MyNetworkMenuPlayer.OnClientTeamUpdated += ClientHandleTeamUpdated;
     }
 
     private void OnDestroy()
     {
         MyNetworkManager.ClientOnConnected -= HandleClientConnected;
-        MyNetworkPlayer.AuthorityOnPartyOwnerStateUpdated -= AuthorityHandlePartyOwnerStateUpdated;
-        MyNetworkPlayer.ClientOnInfoUpdated -= ClientHandleInfoUpdated;
-        MyNetworkPlayer.OnClientTeamUpdated -= ClientHandleTeamUpdated;
+        MyNetworkMenuPlayer.AuthorityOnPartyOwnerStateUpdated -= AuthorityHandlePartyOwnerStateUpdated;
+        MyNetworkMenuPlayer.ClientOnInfoUpdated -= ClientHandleInfoUpdated;
+        MyNetworkMenuPlayer.OnClientTeamUpdated -= ClientHandleTeamUpdated;
     }
     
     // When a client connects to the server, they set the Lobby UI to be active.
     void HandleClientConnected()
     {
-        //Debug.Log("Setting the lobby UI to active for the client!");
-
         lobbyUI.SetActive(true);
     }
     // Method that starts the command in the player script, telling the server to start the game if the neccesary requirements are fullfilled.
     public void StartGame() 
     {
-        NetworkClient.connection.identity.GetComponent<MyNetworkPlayer>().CmdStartGame();
+        NetworkClient.connection.identity.GetComponent<MyNetworkMenuPlayer>().CmdStartGame();
     }
 
     // Method that checks whether the player is the server or a client. If they are the server, the lobby is shut down. If they are the client they are reloaded to the main menu scene.
@@ -58,9 +58,8 @@ public class LobbyMenu : MonoBehaviour
         else
         {
             NetworkManager.singleton.StopClient();
-
-            SceneManager.LoadScene(0);
         }
+        SceneManager.LoadScene(0);
     }
 
     void AuthorityHandlePartyOwnerStateUpdated(bool state)
@@ -72,26 +71,27 @@ public class LobbyMenu : MonoBehaviour
     // Method that is connected to the action event from MyNetworkPlayer. This method activates whenever the player name is changed on the client and gets the displayname and writes it out on the corresponding slot in the lobby.
     void ClientHandleInfoUpdated() 
     {
-        //Debug.Log("7. Handling that the clients info has been updated!");
-        List<MyNetworkPlayer> players = ((MyNetworkManager)NetworkManager.singleton).Players;
-        Debug.Log($"Number of players in list: {players.Count}");
-        MyNetworkPlayer newPlayer;
-
-
-        if (players.Count != 0)
+        List<MyNetworkMenuPlayer> menuPlayers = ((MyNetworkManager)NetworkManager.singleton).MenuPlayers;
+        MyNetworkMenuPlayer newPlayer;
+        
+        if (menuPlayers.Count != 0)
         {
-            newPlayer = players[players.Count - 1];
+            newPlayer = menuPlayers[menuPlayers.Count - 1];
         }
         else
         {
             return;
         }
-        Debug.Log($"The new player is named: {newPlayer.GetDisplayName()}");
-        
+
+        if (!newPlayer.hasAuthority)
+        {
+            return;
+        }
+
         int redPlayers = 0;
         int bluePlayers = 0;
 
-        foreach(MyNetworkPlayer player in players)
+        foreach(MyNetworkMenuPlayer player in menuPlayers)
         {
             if(player.TeamName == "Red Team")
             {
@@ -103,7 +103,6 @@ public class LobbyMenu : MonoBehaviour
             }
         }
 
-        Debug.Log($"There are currently {redPlayers} players on the red team, and {bluePlayers} players on the blue team");
 
         if(redPlayers >= 3 && bluePlayers < 3)
         {
@@ -114,18 +113,18 @@ public class LobbyMenu : MonoBehaviour
             newPlayer.CmdSetTeamName("Red Team");
         }
 
-        UpdateNameLists();
-
-        startGameButton.interactable = players.Count >= MyNetworkManager.playersRequiredToStart; 
+        startGameButton.interactable = menuPlayers.Count >= MyNetworkManager.playersRequiredToStart; 
     }
     
     public void ChangeTeam(string team)
     {
-        MyNetworkPlayer localPlayer = NetworkClient.localPlayer.gameObject.GetComponent<MyNetworkPlayer>();
+        Debug.Log("-------------------------------------------------------------------");
 
-        List<MyNetworkPlayer> players = ((MyNetworkManager)NetworkManager.singleton).Players;
+        MyNetworkMenuPlayer localMenuPlayer = NetworkClient.localPlayer.gameObject.GetComponent<MyNetworkMenuPlayer>();
 
-        if (players.Count == 0)
+        List<MyNetworkMenuPlayer> menuPlayers = ((MyNetworkManager)NetworkManager.singleton).MenuPlayers;
+
+        if (menuPlayers.Count == 0)
         {
             return;
         }
@@ -135,25 +134,25 @@ public class LobbyMenu : MonoBehaviour
         
         if (team == "Red Team")
         {
-            if (redPlayers >= 3 || localPlayer.TeamName == "Red Team")
+            if (redPlayers >= 3 || localMenuPlayer.TeamName == "Red Team")
             {
                 return;
             }
 
-            localPlayer.CmdSetTeamName("Red Team");
+            localMenuPlayer.CmdSetTeamName("Red Team");
         }
 
         if (team == "Blue Team")
         {
-            if (bluePlayers >= 3 || localPlayer.TeamName == "Blue Team")
+            if (bluePlayers >= 3 || localMenuPlayer.TeamName == "Blue Team")
             {
                 return;
             }
 
-            localPlayer.CmdSetTeamName("Blue Team");
+            localMenuPlayer.CmdSetTeamName("Blue Team");
         }
 
-        foreach (MyNetworkPlayer player in players)
+        foreach (MyNetworkMenuPlayer player in menuPlayers)
         {
             if (player.TeamName == "Red Team")
             {
@@ -165,11 +164,6 @@ public class LobbyMenu : MonoBehaviour
                 bluePlayers++;
             }
         }
-
-        //RpcUpdateNameLists();
-
-        //Debug.Log($"Changing player to: {team}");
-        //Debug.Log($"Red players: {redPlayers} Blue players: {bluePlayers}");
     }
     
     void ClientHandleTeamUpdated()
@@ -179,24 +173,8 @@ public class LobbyMenu : MonoBehaviour
     
     public void UpdateNameLists()
     {
-        Debug.Log("UPDATING THE NAME LIST!");
-        List<MyNetworkPlayer> players = ((MyNetworkManager)NetworkManager.singleton).Players;
-
-        ((MyNetworkManager)NetworkManager.singleton).ClearMenuPlayers();
-
-        foreach (MyNetworkPlayer player in players)
-        {
-            Debug.Log($"There are {players.Count} players in the list, currently on: {player.GetDisplayName()} who is on the {player.TeamName}");
-            menuPlayers.Add(new string[] { player.GetDisplayName(), player.TeamName });
-        }
-
-        foreach (string[] listItem in menuPlayers)
-        {
-            Debug.Log($"Lising up all the players in the list: {listItem[0]} is on the {listItem[1]}");
-        }
-
-        ((MyNetworkManager)NetworkManager.singleton).MenuPlayers = menuPlayers;
-
+        List<MyNetworkMenuPlayer> menuPlayers = ((MyNetworkManager)NetworkManager.singleton).MenuPlayers;
+        
         for (int i = 0; i < redTeamNames.Length; i++)
         {
             redTeamNames[i].text = "Waiting For Player...";
@@ -207,65 +185,27 @@ public class LobbyMenu : MonoBehaviour
             blueTeamNames[i].text = "Waiting For Player...";
         }
 
-        //for (int i = 0; i < players.Count; i++)
-        //{
-        //    if (players[i].TeamName == "Red Team")
-        //    {
-        //        for (int j = 0; j < redTeamNames.Length; j++)
-        //        {
-        //            if (redTeamNames[j].text == "Waiting For Player...")
-        //            {
-        //                redTeamNames[j].text = players[i].GetDisplayName();
-        //                break;
-        //            }
-        //        }
-
-        //    }
-        //    else if (players[i].TeamName == "Blue Team")
-        //    {
-        //        for (int j = 0; j < blueTeamNames.Length; j++)
-        //        {
-        //            if (blueTeamNames[j].text == "Waiting For Player...")
-        //            {
-        //                blueTeamNames[j].text = players[i].GetDisplayName();
-        //                break;
-        //            }
-        //        }
-        //    }
-        //}
-
-
-
-
-
-
-
-
-
-
-
-
-        for (int i = 0; i < players.Count; i++)
+        for (int i = 0; i < menuPlayers.Count; i++)
         {
-            if (players[i].TeamName == "Red Team")
+            if (menuPlayers[i].TeamName == "Red Team")
             {
                 for (int j = 0; j < redTeamNames.Length; j++)
                 {
                     if (redTeamNames[j].text == "Waiting For Player...")
                     {
-                        redTeamNames[j].text = players[i].GetDisplayName();
+                        redTeamNames[j].text = menuPlayers[i].GetDisplayName();
                         break;
                     }
                 }
 
             }
-            else if (players[i].TeamName == "Blue Team")
+            else if (menuPlayers[i].TeamName == "Blue Team")
             {
                 for (int j = 0; j < blueTeamNames.Length; j++)
                 {
                     if (blueTeamNames[j].text == "Waiting For Player...")
                     {
-                        blueTeamNames[j].text = players[i].GetDisplayName();
+                        blueTeamNames[j].text = menuPlayers[i].GetDisplayName();
                         break;
                     }
                 }
