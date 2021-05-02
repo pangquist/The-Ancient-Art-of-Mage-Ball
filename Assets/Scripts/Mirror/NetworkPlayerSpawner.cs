@@ -1,32 +1,32 @@
 using Mirror;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class NetworkPlayerSpawner : NetworkBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    [SerializeField] int chosenCharacter;
+    
     [Server]
-    public void AssignNameInGame(int playerIndex)
+    public void AssignCharacterPrefab(int playerIndex)
     {
-        Debug.Log("ASSIGNING NAMES AND TEAMS");
-
-        List<MyNetworkPlayer> players = ((MyNetworkManager)NetworkManager.singleton).Players;
         List<string[]> characterInfoList = ((MyNetworkManager)NetworkManager.singleton).CharacterInfoList;
-
-        displayName = characterInfoList[playerIndex].GetValue(0).ToString();
-        teamName = characterInfoList[playerIndex].GetValue(1).ToString();
+        
         chosenCharacter = Convert.ToInt32(characterInfoList[playerIndex].GetValue(2));
+
+        SpawnCharacter(chosenCharacter);
+    }
+
+    void SpawnCharacter(int characterIndex)
+    {
+        GameObject[] characters = ((MyNetworkManager)NetworkManager.singleton).Characters;
+
+        GameObject instantiatedCharacter = Instantiate(characters[characterIndex + 1], gameObject.transform.position, gameObject.transform.rotation);
+        
+        NetworkServer.Spawn(instantiatedCharacter, connectionToClient);
+        ((MyNetworkManager)NetworkManager.singleton).Players.Add(instantiatedCharacter.GetComponent<MyNetworkPlayer>());
+
+        instantiatedCharacter.GetComponent<MyNetworkPlayer>().AssignNameInGame(((MyNetworkManager)NetworkManager.singleton).Players.Count - 1);
     }
 }

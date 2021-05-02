@@ -8,6 +8,7 @@ TagManager:
   - NetworkManager
   - MenuPlayer
   - Ball
+  - CharacterSelecter
   layers:
   - Default
   - TransparentFX
