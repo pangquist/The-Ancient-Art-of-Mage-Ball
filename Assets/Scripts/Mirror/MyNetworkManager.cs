@@ -172,8 +172,9 @@ public class MyNetworkManager : NetworkManager
             Cursor.lockState = CursorLockMode.None;
 
             selectedScene = "Playground";
-            Players.Clear();
-            MenuPlayers.Clear();
+            //Players.Clear();
+            //MenuPlayers.Clear();
+            //CharacterInfoList.Clear();
         }
     }
 

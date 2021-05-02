@@ -345,6 +345,7 @@ MonoBehaviour:
   teamName: 
   displayName: Missing Name
   playerColor: {r: 1, g: 1, b: 1, a: 1}
+  chosenCharacter: 0
   inGameUI: {fileID: 3821483350630335701}
   displayNameText: {fileID: 2782714423443914302}
   redScoreText: {fileID: 2304103363279501702}
@@ -1932,14 +1933,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4193140426983900408}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5108896485128339571}
   m_Father: {fileID: 1398020548929700589}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 1.073}
