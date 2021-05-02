@@ -2218,7 +2218,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.8621826, y: 0}
+  m_AnchoredPosition: {x: 0.8623047, y: 0}
   m_SizeDelta: {x: 1.7243652, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &432759724
@@ -2989,6 +2989,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myNetworkManager: {fileID: 763365371}
+  myNetworkMenuPlayer: {fileID: 0}
 --- !u!1 &706871502
 GameObject:
   m_ObjectHideFlags: 0
@@ -8783,18 +8784,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2076335661}
   m_CullTransparentMesh: 1
---- !u!114 &2083462310 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7027079361099392648, guid: f9f2dd1600203254eabef20669d45d98,
-    type: 3}
-  m_PrefabInstance: {fileID: 2726291146046865531}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b0fecffa3f624585964b0d0eb21b18e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2726291146046865531
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8802,35 +8791,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 23307860, guid: f9f2dd1600203254eabef20669d45d98, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7027079361099392649, guid: f9f2dd1600203254eabef20669d45d98,
-        type: 3}
-      propertyPath: lobby
-      value: 
-      objectReference: {fileID: 1651184680}
-    - target: {fileID: 7027079361099392649, guid: f9f2dd1600203254eabef20669d45d98,
-        type: 3}
-      propertyPath: transport
-      value: 
-      objectReference: {fileID: 2083462310}
-    - target: {fileID: 7027079361099392649, guid: f9f2dd1600203254eabef20669d45d98,
-        type: 3}
-      propertyPath: SelectedScene
-      value: Playground
-      objectReference: {fileID: 0}
-    - target: {fileID: 7027079361099392649, guid: f9f2dd1600203254eabef20669d45d98,
-        type: 3}
-      propertyPath: spawnPrefabs.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7027079361099392649, guid: f9f2dd1600203254eabef20669d45d98,
-        type: 3}
-      propertyPath: spawnPrefabs.Array.data[3]
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 7027079361099392651, guid: f9f2dd1600203254eabef20669d45d98,
         type: 3}
       propertyPath: m_Name

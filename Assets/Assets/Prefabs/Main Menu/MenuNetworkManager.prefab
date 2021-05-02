@@ -70,7 +70,8 @@ MonoBehaviour:
   - {fileID: 8027473195609965283, guid: e06bdea1510a3e547a2ed554aac7f5f9, type: 3}
   - {fileID: 6900089734390674399, guid: cdfef3025cfccd94496940f289e08a6a, type: 3}
   - {fileID: 1398020548929700587, guid: 8d7dd92b185d0384fa5d85921e37d5da, type: 3}
-  - {fileID: 6564914001525594577, guid: 1fcb2a32dc44eae4e854ce717eab0c04, type: 3}
+  - {fileID: 3758272146365123707, guid: ffbcc04f70fa4fb44a37e1da06fe5194, type: 3}
+  - {fileID: 7071215757399754216, guid: 81a3252bb33bfe646877702ab802a6c6, type: 3}
   teamManager: {fileID: 0}
   gamestateManager: {fileID: 0}
   mainMenuPlayer: {fileID: 1504607087717462475, guid: f5cf5b5d05b7cb34399cf42d0b093170,
@@ -80,7 +81,8 @@ MonoBehaviour:
   lobby: {fileID: 0}
   characters:
   - {fileID: 1398020548929700587, guid: 8d7dd92b185d0384fa5d85921e37d5da, type: 3}
-  - {fileID: 8648654545112388095, guid: 75531380ff2fce8478e2280a6a278e4a, type: 3}
+  - {fileID: 3758272146365123707, guid: ffbcc04f70fa4fb44a37e1da06fe5194, type: 3}
+  selectedScene: Playground
 --- !u!114 &7027079361099392648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,7 +142,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7027079361099392651}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84e244f1e1ae2df44b7b923f8d685691, type: 3}
   m_Name: 

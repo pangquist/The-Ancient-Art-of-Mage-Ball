@@ -7,7 +7,7 @@ public class ForcePush : NetworkBehaviour
 {
     [SerializeField] Camera mainCamera;
     [SerializeField] PlayerMovement playerMovement;
-    [SerializeField] LayerMask hitableLayer;
+    [SerializeField] LayerMask[] hitableLayers;
     
     RaycastHit hit;
 
@@ -24,12 +24,22 @@ public class ForcePush : NetworkBehaviour
     void DoPush()
     {
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-        Physics.Raycast(ray, out hit, range, hitableLayer);
+
+        foreach (LayerMask hitableLayer in hitableLayers)
+        {
+            Physics.Raycast(ray, out hit, range, hitableLayer);
+           
+            if (hit.collider != null)
+            {
+                break;
+            }
+        }
 
         if (hit.collider == null)
         {
             return;
         }
+
 
         CmdSpawnHitEffect(hit.point);
 

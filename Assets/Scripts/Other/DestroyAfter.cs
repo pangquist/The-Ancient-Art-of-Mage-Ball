@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class DestroyAfter : MonoBehaviour
 {
-    public float lifeLength;
-    void Start()
+    [SerializeField] float time;
+
+    private void Start()
     {
-        Destroy(gameObject, lifeLength);
+        DestroyObjectAfterSeconds(time);
+    }
+
+    public void DestroyObjectAfterSeconds(float value)
+    {
+        Destroy(gameObject, value);
     }
 }

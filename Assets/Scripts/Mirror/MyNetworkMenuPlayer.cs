@@ -28,6 +28,9 @@ public class MyNetworkMenuPlayer : NetworkBehaviour
     [SyncVar(hook = nameof(HandlePlayerColorUpdated))]
     [SerializeField] Color playerColor = Color.white;
 
+    [SyncVar(hook = nameof(HandleChosenCharacterUpdated))]
+    [SerializeField] int chosenCharacter;
+
     [SerializeField] TMP_Text displayNameText = null;
     [SerializeField] TMP_Text redScoreText;
     [SerializeField] TMP_Text blueScoreText;
@@ -40,6 +43,7 @@ public class MyNetworkMenuPlayer : NetworkBehaviour
     public TMP_Text TimeText { get { return timeText; } set { timeText = value; } }
     public string TeamName { get { return teamName; } }
     public bool IsPartyOwner { get { return isPartyOwner; } }
+    public int ChosenCharacter { get { return chosenCharacter; } set { chosenCharacter = value; } }
 
 
     public bool GetIsPartyOwner()
@@ -245,14 +249,39 @@ public class MyNetworkMenuPlayer : NetworkBehaviour
     [Server]
     void ServerSetTextColor()
     {
-        //Debug.Log($"Updating {displayName}'s team color to: {playerColor}!");
-        //displayNameText.color = playerColor;
-    }
-    
-    [ClientRpc]
-    void RpcSetTextColor()
-    {
+        Debug.Log($"Updating {displayName}'s team color to: {playerColor}!");
         displayNameText.color = playerColor;
     }
+
+    [Command]
+    public void CmdUpdateChosenCharacter(int charactedIndex)
+    {
+        chosenCharacter = charactedIndex;
+    }
+
+    [Client]
+    void HandleChosenCharacterUpdated(int oldCharacter, int newCharacter)
+    {
+        if (!hasAuthority)
+        {
+            return;
+        }
+
+        CmdSetChosenCharacter();
+    }
+
+    [Command]
+    void CmdSetChosenCharacter()
+    {
+        ServerSetChosenCharacter();
+    }
+
+    [Server]
+    void ServerSetChosenCharacter()
+    {
+        Debug.Log($"Updating {displayName}'s chosen character to: {chosenCharacter}!");
+    }
+
+
     #endregion
 }
