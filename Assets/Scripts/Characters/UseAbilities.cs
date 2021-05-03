@@ -83,17 +83,17 @@ public class UseAbilities : NetworkBehaviour
             currentAbility4Cooldown -= Time.deltaTime;
         }
 
-        if (Input.GetKeyDown(castAbility1Button) && currentAbility1Cooldown <= 0)
+        if (Input.GetKeyDown(castAbility1Button) && currentAbility1Cooldown <= 0 && anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
         {
             StartAbility1Animation();
         }
 
-        if (Input.GetKeyDown(castAbility2Button) && currentAbility2Cooldown <= 0)
+        if (Input.GetKeyDown(castAbility2Button) && currentAbility2Cooldown <= 0 && anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
         {
             StartAbility2Animation();
         }
 
-        if (Input.GetKeyDown(castAbility3Button) && currentAbility3Cooldown <= 0)
+        if (Input.GetKeyDown(castAbility3Button) && currentAbility3Cooldown <= 0 && anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
         {
             StartAbility3Animation();
         }

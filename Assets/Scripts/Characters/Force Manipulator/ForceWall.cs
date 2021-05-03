@@ -38,6 +38,12 @@ public class ForceWall : NetworkBehaviour
     [Command]
     void CmdDoSpell(Vector3 hitLocation)
     {
+        RpcDoSpell(hitLocation);
+    }
+
+    [ClientRpc]
+    void RpcDoSpell(Vector3 hitLocation)
+    {
         GameObject instantiatedForceWall = Instantiate(forceWall, hitLocation + new Vector3(0, 2, 0), gameObject.GetComponent<Transform>().transform.rotation) as GameObject;
         NetworkServer.Spawn(instantiatedForceWall);
     }
