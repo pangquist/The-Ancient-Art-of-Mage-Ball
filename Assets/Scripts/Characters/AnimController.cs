@@ -9,19 +9,19 @@ public class AnimController : NetworkBehaviour
     public PlayerMovement playerMovement;
 
     [SerializeField]
-    KeyCode castButton;
+    KeyCode ability1Button;
     [SerializeField]
-    string castAnimationName;
+    string ability1Name;
 
     [SerializeField]
-    KeyCode jumpButton;
+    KeyCode ability2Button;
     [SerializeField]
-    string jumpAnimationName;
+    string ability2Name;
 
     [SerializeField]
-    KeyCode dashButton;
+    KeyCode ability3Button;
     [SerializeField]
-    string dashAnimationName;
+    string ability3Name;
     
     void Start()
     {
@@ -40,18 +40,18 @@ public class AnimController : NetworkBehaviour
         if (!hasAuthority)
             return;
 
-        if (Input.GetKeyDown(castButton) && !anim.GetCurrentAnimatorStateInfo(0).IsName(castAnimationName))
+        if (Input.GetKeyDown(ability1Button) && !anim.GetCurrentAnimatorStateInfo(0).IsName(ability1Name))
         {
-            anim.Play(castAnimationName);
+            anim.Play(ability1Name);
         }
-        if (Input.GetKeyDown(jumpButton) && playerMovement.isGrounded)
+        if (Input.GetKeyDown(ability2Button) && !anim.GetCurrentAnimatorStateInfo(0).IsName(ability2Name)/* && playerMovement.isGrounded*/)
         {
-            anim.Play(jumpAnimationName);
+            anim.Play(ability2Name);
         }
-        if (Input.GetKeyDown(dashButton) && ForceDash.currentNumberOfCharges != 0)
+        if (Input.GetKeyDown(ability3Button) && !anim.GetCurrentAnimatorStateInfo(0).IsName(ability3Name)/* && ForceDash.currentNumberOfCharges != 0*/)
         {
-            anim.Play(dashAnimationName);
-            ForceDash.currentNumberOfCharges--;
+            anim.Play(ability3Name);
+            //ForceDash.currentNumberOfCharges--;
         }
     }
 }

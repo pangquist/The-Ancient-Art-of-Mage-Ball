@@ -35,11 +35,11 @@ public class ScoreArea : NetworkBehaviour
     {
         if (parentName.name == "Goal Blue")
         {
-            gmManager.BlueScore += 1;
+            gmManager.RedScore += 1;
         }
         else
         {
-            gmManager.RedScore += 1;
+            gmManager.BlueScore += 1;
         }
         
     }

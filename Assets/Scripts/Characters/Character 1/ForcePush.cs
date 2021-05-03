@@ -5,41 +5,42 @@ using UnityEngine;
 
 public class ForcePush : NetworkBehaviour
 {
-    [SerializeField]
-    Camera mainCamera;
-   
-    [SerializeField]
-    PlayerMovement playerMovement;
-
-    [SerializeField]
-    LayerMask hitableLayer;
-
-    [SerializeField]
-    GameObject hitableObject;
+    [SerializeField] Camera mainCamera;
+    [SerializeField] PlayerMovement playerMovement;
+    [SerializeField] LayerMask[] hitableLayers;
+    
     RaycastHit hit;
 
-    public float pushAmount;
-    public float pushRadius;
-    public float forceJumpHeight;
+    [SerializeField] float range;
+    [SerializeField] float pushAmount;
+    [SerializeField] float pushRadius;
+    [SerializeField] float forceJumpHeight;
+    [SerializeField] GameObject hitEffect;
     Rigidbody pushedBody;
-    public GameObject hitEffect;
 
     #region Client
-
-    public override void OnStartAuthority()
-    {
-        enabled = true;
-    }
-    
-    [Client]
-    void Update()
-    {
-        Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, hitableLayer);
-    }
     
     [Client]
     void DoPush()
     {
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+
+        foreach (LayerMask hitableLayer in hitableLayers)
+        {
+            Physics.Raycast(ray, out hit, range, hitableLayer);
+           
+            if (hit.collider != null)
+            {
+                break;
+            }
+        }
+
+        if (hit.collider == null)
+        {
+            return;
+        }
+
+
         CmdSpawnHitEffect(hit.point);
 
         Collider[] colliders = Physics.OverlapSphere(hit.point, pushRadius);
@@ -68,6 +69,7 @@ public class ForcePush : NetworkBehaviour
     {
         GameObject magicExplosion = Instantiate(hitEffect, hitLocation, Quaternion.identity) as GameObject;
         NetworkServer.Spawn(magicExplosion);
+        Debug.Log($"Intantiating the hit effect: {magicExplosion}");
     }
 
     [Command]
@@ -93,6 +95,15 @@ public class ForcePush : NetworkBehaviour
 
     [Command]
     void CmdDoPush(GameObject ball)
+    {
+        //ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        //ball.GetComponent<Rigidbody>().AddExplosionForce(pushAmount, hit.point, pushRadius);
+        //ServerMoveBall(ball);
+        RpcMoveBall(ball);
+    }
+
+    [Server]
+    void ServerMoveBall(GameObject ball)
     {
         RpcMoveBall(ball);
     }
