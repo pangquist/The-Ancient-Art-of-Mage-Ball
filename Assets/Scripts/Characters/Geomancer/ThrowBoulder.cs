@@ -9,19 +9,27 @@ public class ThrowBoulder : NetworkBehaviour
     Camera mainCamera;
 
     [SerializeField]
+    Transform boulderStartPoint;
+
+    [SerializeField]
     PlayerMovement playerMovement;
 
     [SerializeField]
     LayerMask hitableLayer;
 
     [SerializeField]
+    GameObject boulderPrefab;
+
+    [SerializeField]
     GameObject hitableObject;
 
     RaycastHit hit;
 
+    public float throwForceForward;
+    public float throwForceUpward;
+
     public float pushAmount;
     public float pushRadius;
-    public float forceJumpHeight;
 
     Rigidbody pushedBody;
     public GameObject hitEffect;
@@ -35,13 +43,6 @@ public class ThrowBoulder : NetworkBehaviour
     void Update()
     {
         Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, hitableLayer);
-    }
-
-    [Client]
-    void DoPush()
-    {
-        CmdSpawnHitEffect(hit.point);
-
         Collider[] colliders = Physics.OverlapSphere(hit.point, pushRadius);
         foreach (Collider pushedObject in colliders)
         {
@@ -53,43 +54,60 @@ public class ThrowBoulder : NetworkBehaviour
         }
     }
 
-
-
     [Client]
-    void DoForceJump()
+    void DoBoulderThrow()
     {
-        playerMovement.velocity.y += forceJumpHeight;
+        Vector3 directionOfBoulder = hit.point - boulderStartPoint.position;
+        GameObject projectileInstance;
+        projectileInstance = Instantiate(boulderPrefab, boulderStartPoint.position, Quaternion.identity);
+       
+        projectileInstance.transform.forward = directionOfBoulder.normalized;
+
+        projectileInstance.GetComponent<Rigidbody>().AddForce(directionOfBoulder.normalized * throwForceForward, ForceMode.Force);
+        projectileInstance.GetComponent<Rigidbody>().AddForce(mainCamera.transform.up * throwForceUpward , ForceMode.Force);
+        //CmdSpawnHitEffect(hit.point);
+
+        //Collider[] colliders = Physics.OverlapSphere(hit.point, pushRadius);
+        //foreach (Collider pushedObject in colliders)
+        //{
+        //    if (pushedObject.CompareTag("Enemy"))
+        //    {
+        //        Debug.Log("Client is pushing!");
+        //        CmdDoPush(pushedObject.gameObject);
+        //    }
+        //}
     }
+
     #endregion
 
     #region Server
-    [Command]
-    void CmdSpawnHitEffect(Vector3 hitLocation)
-    {
-        GameObject magicExplosion = Instantiate(hitEffect, hitLocation, Quaternion.identity) as GameObject;
-        NetworkServer.Spawn(magicExplosion);
-    }
+    //[Command]
+    //void CmdSpawnHitEffect(Vector3 hitLocation)
+    //{
+    //    GameObject magicExplosion = Instantiate(hitEffect, hitLocation, Quaternion.identity) as GameObject;
+    //    NetworkServer.Spawn(magicExplosion);
+    //}
 
-    [Command]
-    void CmdDoChargePush()
-    {
-        pushedBody.AddExplosionForce(pushAmount * 1.5f, transform.position + transform.forward * 7, pushRadius * 1.5f);
-    }
+    //[Command]
+    //void CmdDoChargePush()
+    //{
+    //    pushedBody.AddExplosionForce(pushAmount * 1.5f, transform.position + transform.forward * 7, pushRadius * 1.5f);
+    //}
 
-    [ClientCallback]
-    void DoChargePush()
-    {
-        Collider[] colliders = Physics.OverlapSphere(transform.position + transform.forward * 7, pushRadius);
-        CmdSpawnHitEffect(transform.position + transform.forward * 7);
-        foreach (Collider pushedObject in colliders)
-        {
-            if (pushedObject.CompareTag("Enemy"))
-            {
-                pushedBody = pushedObject.GetComponent<Rigidbody>();
-                CmdDoChargePush();
-            }
-        }
-    }
+    //[ClientCallback]
+    //void DoChargePush()
+    //{
+    //    Collider[] colliders = Physics.OverlapSphere(transform.position + transform.forward * 7, pushRadius);
+    //    CmdSpawnHitEffect(transform.position + transform.forward * 7);
+    //    foreach (Collider pushedObject in colliders)
+    //    {
+    //        if (pushedObject.CompareTag("Enemy"))
+    //        {
+    //            pushedBody = pushedObject.GetComponent<Rigidbody>();
+    //            CmdDoChargePush();
+    //        }
+    //    }
+    //}
 
     [Command]
     void CmdDoPush(GameObject ball)
