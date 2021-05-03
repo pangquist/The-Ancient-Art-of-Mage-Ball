@@ -7,13 +7,7 @@ public class CharacterSelect : MonoBehaviour
 {
     [SerializeField] MyNetworkManager myNetworkManager;
     [SerializeField] MyNetworkMenuPlayer myNetworkMenuPlayer;
-
-    //public override void OnStartAuthority()
-    //{
-    //    this.enabled = true;
-    //    base.OnStartAuthority();
-    //}
-
+    
     private void Start()
     {
         myNetworkMenuPlayer = myNetworkManager.MenuPlayers[myNetworkManager.MenuPlayers.Count - 1];
@@ -22,6 +16,12 @@ public class CharacterSelect : MonoBehaviour
     //Method that is called through a button click that changes the selected character integer in the manager script
     public void PickCharacter(int characterIndex)
     {
-        myNetworkMenuPlayer.CmdUpdateChosenCharacter(characterIndex);
+        foreach (MyNetworkMenuPlayer menuPlayer in myNetworkManager.MenuPlayers)
+        {
+            if (menuPlayer.isLocalPlayer)
+            {
+                menuPlayer.CmdUpdateChosenCharacter(characterIndex);
+            }
+        }
     }
 }
