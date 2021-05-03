@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: -8833970150620472887}
   - component: {fileID: 6857888942344050580}
   - component: {fileID: -2620973643909619175}
+  - component: {fileID: 6718893157384613305}
   m_Layer: 7
   m_Name: Ball
   m_TagString: Enemy
@@ -279,7 +280,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52c75e9889331934dbf6dccc52f7a327, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   FXEffect: {fileID: 1860389352054586038}
+--- !u!135 &6718893157384613305
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6900089734390674399}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.87895834
+  m_Center: {x: 0, y: 0, z: -0.06013155}
 --- !u!1 &7510897164302336416
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,6 +541,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6091641462948931941}
     m_Modifications:
+    - target: {fileID: -4378778332943661210, guid: 81a3252bb33bfe646877702ab802a6c6,
+        type: 3}
+      propertyPath: m_AssetId
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7071215757399754216, guid: 81a3252bb33bfe646877702ab802a6c6,
         type: 3}
       propertyPath: m_Name
