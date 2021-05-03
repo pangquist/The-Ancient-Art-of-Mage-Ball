@@ -31,6 +31,16 @@ public class UseAbilities : NetworkBehaviour
     float currentAbility4Cooldown;
     [SerializeField] AnimationClip ability4Name;
 
+    public float CooldownAbility1() { return cooldownAbility1; }
+    public float CooldownAbility2() { return cooldownAbility2; }
+    public float CooldownAbility3() { return cooldownAbility3; }
+    public float CooldownAbility4() { return cooldownAbility4; }
+
+    public float CurrentAbility1Cooldown() { return currentAbility1Cooldown; }
+    public float CurrentAbility2Cooldown() { return currentAbility2Cooldown; }
+    public float CurrentAbility3Cooldown() { return currentAbility3Cooldown; }
+    public float CurrentAbility4Cooldown() { return currentAbility4Cooldown; }
+
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -63,6 +73,16 @@ public class UseAbilities : NetworkBehaviour
             currentAbility2Cooldown -= Time.deltaTime;
         }
 
+        if (currentAbility3Cooldown > 0)
+        {
+            currentAbility3Cooldown -= Time.deltaTime;
+        }
+
+        if (currentAbility4Cooldown > 0)
+        {
+            currentAbility4Cooldown -= Time.deltaTime;
+        }
+
         if (Input.GetKeyDown(castAbility1Button) && currentAbility1Cooldown <= 0)
         {
             StartAbility1Animation();
@@ -77,6 +97,11 @@ public class UseAbilities : NetworkBehaviour
         {
             StartAbility3Animation();
         }
+
+        //if (Input.GetKeyDown(castAbility4Button) && currentAbility4Cooldown <= 0)
+        //{
+        //    StartAbility4Animation();
+        //}
     }
 
     void StartAbility1Animation()
