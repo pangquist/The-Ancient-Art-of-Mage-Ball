@@ -11,25 +11,25 @@ public class UseAbilities : NetworkBehaviour
     [SerializeField] KeyCode castAbility1Button;
     [SerializeField] float cooldownAbility1; //Stop the hardcode
     float currentAbility1Cooldown;
-    [SerializeField] string ability1Name;
+    [SerializeField] AnimationClip ability1Name;
 
     [Header("Ability 2")]
     [SerializeField] KeyCode castAbility2Button;
     [SerializeField] float cooldownAbility2;
     float currentAbility2Cooldown;
-    [SerializeField] string ability2Name;
+    [SerializeField] AnimationClip ability2Name;
 
     [Header("Ability 3")]
     [SerializeField] KeyCode castAbility3Button;
     [SerializeField] float cooldownAbility3;
     float currentAbility3Cooldown;
-    [SerializeField] string ability3Name;
+    [SerializeField] AnimationClip ability3Name;
 
     [Header("Ability 4")]
     [SerializeField] KeyCode castAbility4Button;
     [SerializeField] float cooldownAbility4;
     float currentAbility4Cooldown;
-    [SerializeField] string ability4Name;
+    [SerializeField] AnimationClip ability4Name;
 
     void Start()
     {
@@ -81,19 +81,19 @@ public class UseAbilities : NetworkBehaviour
 
     void StartAbility1Animation()
     {
-        anim.Play(ability1Name);
+        anim.Play(ability1Name.name);
         currentAbility1Cooldown = cooldownAbility1;
     }
 
     void StartAbility2Animation()
     {
-        anim.Play(ability2Name);
+        anim.Play(ability2Name.name);
         currentAbility2Cooldown = cooldownAbility2;
     }
 
     void StartAbility3Animation()
     {
-        anim.Play(ability3Name);
+        anim.Play(ability3Name.name);
         currentAbility3Cooldown = cooldownAbility3;
     }
 }

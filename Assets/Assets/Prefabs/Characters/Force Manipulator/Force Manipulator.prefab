@@ -1993,16 +1993,16 @@ MonoBehaviour:
   syncInterval: 0.1
   castAbility1Button: 323
   cooldownAbility1: 5
-  ability1Name: Gravity Warp
+  ability1Name: {fileID: 7400000, guid: 834ecba741c56ca47867786c278d087c, type: 2}
   castAbility2Button: 324
   cooldownAbility2: 10
-  ability2Name: Force Wall
+  ability2Name: {fileID: 7400000, guid: 350cadcee6930b6448a626195465363b, type: 2}
   castAbility3Button: 49
   cooldownAbility3: 0
-  ability3Name: 
+  ability3Name: {fileID: 0}
   castAbility4Button: 50
   cooldownAbility4: 0
-  ability4Name: 
+  ability4Name: {fileID: 0}
 --- !u!95 &6004741204329823607
 Animator:
   serializedVersion: 3
