@@ -26,6 +26,7 @@ public class MyNetworkPlayer : NetworkBehaviour
     [SerializeField] TMP_Text redScoreText;
     [SerializeField] TMP_Text blueScoreText;
     [SerializeField] TMP_Text timeText;
+    [SerializeField] GameObject nameCanvas;
 
 
     [SerializeField] GamestateManager gamestateManager;
@@ -89,6 +90,7 @@ public class MyNetworkPlayer : NetworkBehaviour
     public override void OnStartAuthority()
     {
         inGameUI.SetActive(true);
+        nameCanvas.SetActive(false);
         gamestateManager = GameObject.Find("GamestateManager").GetComponent<GamestateManager>();
         GamestateManager.HandleTimeChanged += SetTimerText;
         GamestateManager.HandleScoreChanged += SetScoreText;

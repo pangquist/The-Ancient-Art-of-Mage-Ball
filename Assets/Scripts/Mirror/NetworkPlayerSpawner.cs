@@ -28,5 +28,7 @@ public class NetworkPlayerSpawner : NetworkBehaviour
         ((MyNetworkManager)NetworkManager.singleton).Players.Add(instantiatedCharacter.GetComponent<MyNetworkPlayer>());
 
         instantiatedCharacter.GetComponent<MyNetworkPlayer>().AssignNameInGame(((MyNetworkManager)NetworkManager.singleton).Players.Count - 1);
+
+        Destroy(gameObject);
     }
 }

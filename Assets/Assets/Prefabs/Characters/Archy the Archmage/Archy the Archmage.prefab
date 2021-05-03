@@ -351,6 +351,7 @@ MonoBehaviour:
   redScoreText: {fileID: 2304103363279501702}
   blueScoreText: {fileID: 6308363265070594642}
   timeText: {fileID: 1028667098871470237}
+  nameCanvas: {fileID: 4193140426983900408}
   gamestateManager: {fileID: 0}
 --- !u!136 &1398020548929700590
 CapsuleCollider:
@@ -498,12 +499,12 @@ MonoBehaviour:
   syncInterval: 0.1
   anim: {fileID: 282141968}
   playerMovement: {fileID: 1398020548929700584}
-  castButton: 323
-  castAnimationName: Cast spell
-  jumpButton: 324
-  jumpAnimationName: Cast jump spell
-  dashButton: 49
-  dashAnimationName: Cast dash
+  ability1Button: 0
+  ability1Name: 
+  ability2Button: 0
+  ability2Name: 
+  ability3Button: 0
+  ability3Name: 
 --- !u!114 &3887848313203973047
 MonoBehaviour:
   m_ObjectHideFlags: 0
