@@ -8,14 +8,18 @@ using UnityEngine.SceneManagement;
 
 public class MyNetworkManager : NetworkManager
 {
-    [SerializeField] TeamManager teamManager;
+    public static int playersRequiredToStart = 1;
 
-    bool ballIsSpawned = false;
+    [SerializeField] TeamManager teamManager;
+    [SerializeField] GamestateManager gamestateManager;
+
+    //bool ballIsSpawned = false;
     [SerializeField] GameObject mainMenuPlayer;
     [SerializeField] GameObject ball;
     [SerializeField] GameObject ballStartPos;
+    [SerializeField] GameObject lobby;
     [SerializeField] GameObject[] characters;
-    [SerializeField] public int playersRequiredToStart = 1;
+    [SerializeField] string selectedScene = "Playground";
 
     public static event Action ClientOnConnected;
     public static event Action ClientOnDisconnected;
@@ -24,32 +28,33 @@ public class MyNetworkManager : NetworkManager
     public static bool timeIsStarted = false; //ÄNDRA
     public static MyNetworkPlayer connectedPlayer;
 
+    //public List<string[]> menuPlayers = new List<string[]>();
+
+    //public List<string[]> MenuPlayers { get { return menuPlayers; } set { menuPlayers = value; } }
+
+    public GameObject[] Characters { get { return characters; } }
+
+    public List<MyNetworkMenuPlayer> MenuPlayers { get; } = new List<MyNetworkMenuPlayer>();
+    public List<string[]> CharacterInfoList = new List<string[]>();
 
     public List<MyNetworkPlayer> Players { get; } = new List<MyNetworkPlayer>();
-    int chosenCharacter = 0;
+    public List<NetworkPlayerSpawner> Spawners { get; } = new List<NetworkPlayerSpawner>();
 
-    public int ChosenCharacter { get { return chosenCharacter; } set { chosenCharacter = value; } }
+    public string SelectedScene { get { return selectedScene; } set { selectedScene = value; } }
 
-    //If the player attemts to connect while the game is in progress, they are disconnected.
-    public override void OnServerConnect(NetworkConnection conn)
+    public void ClearMenuPlayers()
     {
-        if (!isGameInProgress)
-            return;
-        conn.Disconnect();
+        MenuPlayers.Clear();
     }
 
-    //Removes the player from the list of active players so they wont be included in future code-interactions
-    public override void OnServerDisconnect(NetworkConnection conn)
+    public override void OnStartServer()
     {
-        MyNetworkPlayer player = conn.identity.GetComponent<MyNetworkPlayer>();
-
-        Players.Remove(player);
-
-        base.OnServerDisconnect(conn);
+        base.OnStartServer();
     }
 
     public override void OnStopServer()
     {
+        MenuPlayers.Clear();
         Players.Clear();
 
         isGameInProgress = false;
@@ -59,27 +64,34 @@ public class MyNetworkManager : NetworkManager
     [Server]
     public void StartGame()
     {
-        if (Players.Count < playersRequiredToStart)
+        if (MenuPlayers.Count < playersRequiredToStart)
             return;
+
+        foreach (MyNetworkMenuPlayer menuPlayer in MenuPlayers)
+        {
+            string[] characterInfo = new string[3];
+            characterInfo[0] = menuPlayer.GetDisplayName();
+            characterInfo[1] = menuPlayer.TeamName;
+            characterInfo[2] = menuPlayer.ChosenCharacter.ToString();
+
+            CharacterInfoList.Add(characterInfo);
+        }
+        
 
         isGameInProgress = true;
 
-        foreach (MyNetworkPlayer player in Players)
-        {
-
-        }
-
-        ServerChangeScene("Playground");
+        ServerChangeScene(selectedScene);
     }
-
+    
     [Server]
     public void EndGame()
     {
         ServerChangeScene("PostMatch");
     }
-
+    
     public override void OnClientConnect(NetworkConnection conn)
     {
+        //Debug.Log("A client has connected to the server!");
         base.OnClientConnect(conn);
 
         ClientOnConnected?.Invoke();
@@ -88,8 +100,27 @@ public class MyNetworkManager : NetworkManager
     public override void OnClientDisconnect(NetworkConnection conn)
     {
         base.OnClientDisconnect(conn);
-
+        
         ClientOnDisconnected?.Invoke();
+    }
+
+    //If the player attemts to connect while the game is in progress, they are disconnected.
+    public override void OnServerConnect(NetworkConnection conn)
+    {
+        //Debug.Log("1. Trying to connect to the server");
+        if (!isGameInProgress)
+            return;
+        conn.Disconnect();
+    }
+
+    //Removes the player from the list of active players so they wont be included in future code-interactions
+    public override void OnServerDisconnect(NetworkConnection conn)
+    {
+        Players.Remove(conn.identity.GetComponent<MyNetworkPlayer>());
+        MenuPlayers.Remove(conn.identity.GetComponent<MyNetworkMenuPlayer>());
+        OnServerSceneChanged("MainMenu");
+
+        base.OnServerDisconnect(conn);
     }
 
     //When the player enters the server, this method sets the steam ID of that player and subsequentially gets all the information from that ID.
@@ -97,71 +128,64 @@ public class MyNetworkManager : NetworkManager
     {
         base.OnServerAddPlayer(conn);
 
-        MyNetworkPlayer player = conn.identity.GetComponent<MyNetworkPlayer>();
-        CSteamID steamId = SteamMatchmaking.GetLobbyMemberByIndex(MainMenu.LobbyId, numPlayers - 1);
-        Players.Add(player);
-        player.SetSteamId(steamId.m_SteamID);
-
-
-        AssignNames();
-        GameObject playerGameObject = conn.identity.gameObject;
-        player.SetPartyOwner(Players.Count == 1);
+        if (conn.identity.tag == "MenuPlayer")
+        {
+            MyNetworkMenuPlayer menuPlayer = conn.identity.GetComponent<MyNetworkMenuPlayer>();
+            MenuPlayers.Add(menuPlayer);
+        
+            CSteamID steamId = SteamMatchmaking.GetLobbyMemberByIndex(MainMenu.LobbyId, numPlayers - 1);
+            menuPlayer.SetSteamId(steamId.m_SteamID);
+            
+            menuPlayer.SetPartyOwner(MenuPlayers.Count == 1);
+        }
+        else if (conn.identity.tag == "CharacterSelecter") //Old was "Player"
+        {
+            NetworkPlayerSpawner spawner = conn.identity.GetComponent<NetworkPlayerSpawner>();
+            Spawners.Add(spawner);
+            spawner.AssignCharacterPrefab(Spawners.Count - 1);
+            //Players.Add(player);
+            
+            //player.Assi
+            //player.AssignNameInGame(Players.Count - 1);
+        }
     }
 
     //Called whenever a scene is changed. The players spawns a player prefabs that is decided in the character select. If the scene is an arena map, the ball is spawned and the game begins.
     public override void OnServerSceneChanged(string sceneName)
     {
-        Debug.Log("Current scene is: " + SceneManager.GetActiveScene().name);
-        if (sceneName == "Playground")
+        if (sceneName == SelectedScene)
         {
-
-
-            playerPrefab = characters[chosenCharacter]; //Here is where it is decided what character the player will spawn in as. Make it work with character select in lobby!
-
+            playerPrefab = Characters[0]; //Here is where it is decided what character the player will spawn in as. Make it work with character select in lobby!
+            GamestateManager.gameIsOver = false;
             ballStartPos = GameObject.Find("BallSpawnPosition");
-            ball = Instantiate(ball, ballStartPos.transform.position, ballStartPos.transform.rotation);
-            NetworkServer.Spawn(ball.gameObject);
-            ballIsSpawned = true;
-            //AssignNames();
+
+            GameObject instantiatedBall;
+            instantiatedBall = Instantiate(ball, ballStartPos.transform.position, ballStartPos.transform.rotation);
+            NetworkServer.Spawn(instantiatedBall.gameObject);
         }
         else if (sceneName == "PostMatch")
         {
             playerPrefab = mainMenuPlayer;
+            gamestateManager = GameObject.Find("GamestateManager").GetComponent<GamestateManager>();
+            gamestateManager.AssignScoreAtPostScreen();
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+
+            selectedScene = "Playground";
+            //Players.Clear();
+            //MenuPlayers.Clear();
+            //CharacterInfoList.Clear();
         }
     }
 
     public override void OnStopClient()
     {
         Players.Clear();
+        MenuPlayers.Clear();
     }
-
-    void AssignNames()
+    
+    public override void OnStopHost()
     {
-        for (int i = 0; i < teamManager.redTeam.Count; i++)
-        {
-            Debug.Log("Searching for name: " + teamManager.redTeam[i]);
-            for (int j = 0; j < Players.Count; j++)
-            {
-                if (teamManager.redTeam[i] == Players[j].GetDisplayName())
-                {
-                    Players[j].TeamName = "Red Team";
-                    continue;
-                }
-
-            }
-        }
-
-        for (int i = 0; i < teamManager.blueTeam.Count; i++)
-        {
-            for (int j = 0; j < Players.Count; j++)
-            {
-                if (teamManager.blueTeam[i] == Players[j].GetDisplayName())
-                {
-                    Players[j].TeamName = "Blue Team";
-                    continue;
-                }
-
-            }
-        }
+        base.OnStopHost();
     }
 }

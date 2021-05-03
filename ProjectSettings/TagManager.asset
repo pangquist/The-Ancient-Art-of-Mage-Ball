@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Enemy
   - NetworkManager
+  - MenuPlayer
+  - Ball
+  - CharacterSelecter
   layers:
   - Default
   - TransparentFX
@@ -14,9 +17,9 @@ TagManager:
   - Water
   - UI
   - Jumpable
-  - 
-  - 
-  - 
+  - Hitable
+  - Force Field
+  - Player
   - 
   - 
   - 
