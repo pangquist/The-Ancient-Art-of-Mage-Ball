@@ -15,7 +15,7 @@ public class ForceWall : NetworkBehaviour
 
 
     [Client]
-    public void DoSpell()
+    public void DoForceWallSpell()
     {
         if (!hasAuthority)
         {

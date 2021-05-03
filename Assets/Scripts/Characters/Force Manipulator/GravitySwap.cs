@@ -19,7 +19,7 @@ public class GravitySwap : NetworkBehaviour
     GameObject ball;
 
     [Client]
-    public void DoSpell()
+    public void DoGravityWarpSpell()
     {
         if (!hasAuthority)
         {
