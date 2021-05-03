@@ -296,11 +296,11 @@ GameObject:
   - component: {fileID: 7659744450119290579}
   - component: {fileID: -418170281396793602}
   - component: {fileID: 282141968}
-  - component: {fileID: 920328545}
   - component: {fileID: 3887848313203973047}
   - component: {fileID: 8890351901005270611}
   - component: {fileID: 4492199172709615581}
   - component: {fileID: 7124487153561252743}
+  - component: {fileID: 7626238677252518089}
   m_Layer: 0
   m_Name: Archy the Archmage
   m_TagString: Player
@@ -483,28 +483,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &920328545
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1398020548929700587}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12219f85b174c154ca0e87539706f48f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  anim: {fileID: 282141968}
-  playerMovement: {fileID: 1398020548929700584}
-  ability1Button: 0
-  ability1Name: 
-  ability2Button: 0
-  ability2Name: 
-  ability3Button: 0
-  ability3Name: 
 --- !u!114 &3887848313203973047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -623,6 +601,32 @@ MonoBehaviour:
   useLocalTransformOnly: 0
   ownerChangeIndicator: 1
   receivedStatesCounter: 0
+--- !u!114 &7626238677252518089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1398020548929700587}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e02350a964ee556459b11c4f9e0a7d07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  castAbility1Button: 323
+  cooldownAbility1: 0
+  ability1Name: Cast spell
+  castAbility2Button: 324
+  cooldownAbility2: 7
+  ability2Name: Cast jump spell
+  castAbility3Button: 49
+  cooldownAbility3: 5
+  ability3Name: Cast dash
+  castAbility4Button: 0
+  cooldownAbility4: 0
+  ability4Name: 
 --- !u!1 &1398020549020263655
 GameObject:
   m_ObjectHideFlags: 0

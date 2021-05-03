@@ -72,6 +72,11 @@ public class UseAbilities : NetworkBehaviour
         {
             StartAbility2Animation();
         }
+
+        if (Input.GetKeyDown(castAbility3Button) && currentAbility3Cooldown <= 0)
+        {
+            StartAbility3Animation();
+        }
     }
 
     void StartAbility1Animation()
@@ -84,5 +89,11 @@ public class UseAbilities : NetworkBehaviour
     {
         anim.Play(ability2Name);
         currentAbility2Cooldown = cooldownAbility2;
+    }
+
+    void StartAbility3Animation()
+    {
+        anim.Play(ability3Name);
+        currentAbility3Cooldown = cooldownAbility3;
     }
 }
