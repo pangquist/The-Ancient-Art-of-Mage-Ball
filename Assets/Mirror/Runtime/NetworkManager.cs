@@ -1236,11 +1236,13 @@ namespace Mirror
         // TODO client only ever uses NetworkClient.connection. this parameter is redundant.
         public virtual void OnClientConnect(NetworkConnection conn)
         {
+            Debug.Log("Första");
             // OnClientConnect by default calls AddPlayer but it should not do
             // that when we have online/offline scenes. so we need the
             // clientLoadedScene flag to prevent it.
             if (!clientLoadedScene)
             {
+                Debug.Log("Andra");
                 // Ready/AddPlayer is usually triggered by a scene load
                 // completing. if no scene was loaded, then Ready/AddPlayer it
                 // here instead.
@@ -1248,6 +1250,7 @@ namespace Mirror
                 if (autoCreatePlayer)
                 {
                     NetworkClient.AddPlayer();
+                    Debug.Log("A player is automatically created!");
                 }
             }
         }
