@@ -328,7 +328,7 @@ MonoBehaviour:
   grappleable:
     serializedVersion: 2
     m_Bits: 64
-  castPoint: {fileID: 0}
+  castPoint: {fileID: 7250251895069680147}
   camera: {fileID: 1398020549020263659}
   player: {fileID: 1398020548929700589}
   grappleSpeed: 10
@@ -348,9 +348,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  castAbility1Button: 0
+  castAbility1Button: 323
   cooldownAbility1: 0
-  ability1Name: {fileID: 0}
+  ability1Name: {fileID: -8785670206197227324, guid: 9e4ffdc569190ea4c8012060b0b0f0ef,
+    type: 3}
   castAbility2Button: 0
   cooldownAbility2: 0
   ability2Name: {fileID: 0}
@@ -484,7 +485,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1398020549020263655}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.09, z: 0.068}
+  m_LocalPosition: {x: 0, y: -0.09, z: -0.205}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8918007585456626152}
@@ -1426,6 +1427,36 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &7533157395895286173
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7250251895069680147}
+  m_Layer: 0
+  m_Name: CastPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7250251895069680147
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7533157395895286173}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.88, y: 0.482, z: 0.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2926707049476339294}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &7795778489372896930
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1503,6 +1534,12 @@ PrefabInstance:
 --- !u!4 &7762677737207007561 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9e4ffdc569190ea4c8012060b0b0f0ef,
+    type: 3}
+  m_PrefabInstance: {fileID: 7795778489372896930}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2926707049476339294 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4948870729968441596, guid: 9e4ffdc569190ea4c8012060b0b0f0ef,
     type: 3}
   m_PrefabInstance: {fileID: 7795778489372896930}
   m_PrefabAsset: {fileID: 0}

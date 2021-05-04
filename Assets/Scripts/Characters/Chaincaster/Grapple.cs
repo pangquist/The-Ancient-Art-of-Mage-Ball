@@ -47,10 +47,10 @@ public class Grapple : NetworkBehaviour
     //[Client]
     private void Update()
     {
-        if (!hasAuthority)
-        {
-            return;
-        }
+        //if (!hasAuthority)
+        //{
+        //    return;
+        //}
 
         material.mainTextureOffset += offsetSpeed * Time.deltaTime;
 
