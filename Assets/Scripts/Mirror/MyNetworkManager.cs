@@ -94,6 +94,8 @@ public class MyNetworkManager : NetworkManager
         Debug.Log($"A client has connected to the server! It has the connection: {conn}");
         base.OnClientConnect(conn);
 
+        NetworkClient.AddPlayer();
+
         ClientOnConnected?.Invoke();
     }
 
