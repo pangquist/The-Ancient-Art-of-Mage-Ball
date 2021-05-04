@@ -91,7 +91,7 @@ public class MyNetworkManager : NetworkManager
     
     public override void OnClientConnect(NetworkConnection conn)
     {
-        //Debug.Log("A client has connected to the server!");
+        Debug.Log("A client has connected to the server!");
         base.OnClientConnect(conn);
 
         ClientOnConnected?.Invoke();
@@ -128,25 +128,26 @@ public class MyNetworkManager : NetworkManager
     {
         base.OnServerAddPlayer(conn);
 
+        Debug.Log("Server has added a player!");
+
         if (conn.identity.tag == "MenuPlayer")
         {
+            Debug.Log("The player was a Menu Player");
             MyNetworkMenuPlayer menuPlayer = conn.identity.GetComponent<MyNetworkMenuPlayer>();
             MenuPlayers.Add(menuPlayer);
-        
+
+            Debug.Log($"Number of players in Menu Players: {MenuPlayers.Count}");
+
             CSteamID steamId = SteamMatchmaking.GetLobbyMemberByIndex(MainMenu.LobbyId, numPlayers - 1);
             menuPlayer.SetSteamId(steamId.m_SteamID);
             
             menuPlayer.SetPartyOwner(MenuPlayers.Count == 1);
         }
-        else if (conn.identity.tag == "CharacterSelecter") //Old was "Player"
+        else if (conn.identity.tag == "CharacterSelecter")
         {
             NetworkPlayerSpawner spawner = conn.identity.GetComponent<NetworkPlayerSpawner>();
             Spawners.Add(spawner);
             spawner.AssignCharacterPrefab(Spawners.Count - 1);
-            //Players.Add(player);
-            
-            //player.Assi
-            //player.AssignNameInGame(Players.Count - 1);
         }
     }
 

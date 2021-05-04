@@ -8,7 +8,7 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] GameObject landingPagePanel;
 
-    [SerializeField] bool useSteam = false;
+    [SerializeField] bool useSteam;
 
     protected Callback<LobbyCreated_t> lobbyCreated;
     protected Callback<GameLobbyJoinRequested_t> gameLobbyJoinRequested;
@@ -19,7 +19,9 @@ public class MainMenu : MonoBehaviour
     private void Start()
     {
         if (!useSteam)
+        {
             return;
+        }
 
         lobbyCreated = Callback<LobbyCreated_t>.Create(OnLobbyCreated);
         gameLobbyJoinRequested = Callback<GameLobbyJoinRequested_t>.Create(OnGameLobbyJoinRequested);
@@ -57,6 +59,8 @@ public class MainMenu : MonoBehaviour
             LobbyId,
             "HostAdDress",
             SteamUser.GetSteamID().ToString());
+
+        Debug.Log("A lobby has been created!");
     }
 
     void OnGameLobbyJoinRequested(GameLobbyJoinRequested_t callback)
@@ -67,11 +71,15 @@ public class MainMenu : MonoBehaviour
     void OnLobbyEntered(LobbyEnter_t callback)
     {
         if (NetworkServer.active)
+        {
             return;
+        }
 
         string hostAddress = SteamMatchmaking.GetLobbyData(
             new CSteamID(callback.m_ulSteamIDLobby),
             "HostAddress");
+
+        Debug.Log($"Host address: {hostAddress}");
 
         NetworkManager.singleton.networkAddress = hostAddress;
         NetworkManager.singleton.StartClient();

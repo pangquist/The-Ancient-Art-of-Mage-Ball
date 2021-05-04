@@ -63,6 +63,11 @@ public class PlayerMovement : NetworkBehaviour
             velocity.y = -2;
         }
 
+        if (velocity.y < -9.81f)
+        {
+            velocity.y = -9.81f;
+        }
+
         move = transform.right * x + transform.forward * z;
         
         CmdMove(move, velocity);
