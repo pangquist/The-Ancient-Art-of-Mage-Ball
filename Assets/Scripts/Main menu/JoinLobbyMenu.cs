@@ -40,6 +40,7 @@ public class JoinLobbyMenu : MonoBehaviour
 
         gameObject.SetActive(false);
         landingPagePanel.SetActive(false);
+        Debug.Log("Old UI has been set to Inactive!");
     }
 
     void HandleClientDisconnected()

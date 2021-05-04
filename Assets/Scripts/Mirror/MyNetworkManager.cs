@@ -91,7 +91,7 @@ public class MyNetworkManager : NetworkManager
     
     public override void OnClientConnect(NetworkConnection conn)
     {
-        Debug.Log("A client has connected to the server!");
+        Debug.Log($"A client has connected to the server! It has the connection: {conn}");
         base.OnClientConnect(conn);
 
         ClientOnConnected?.Invoke();

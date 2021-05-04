@@ -41,6 +41,7 @@ public class LobbyMenu : MonoBehaviour
     void HandleClientConnected()
     {
         lobbyUI.SetActive(true);
+        Debug.Log("UI has been set to active!");
     }
     // Method that starts the command in the player script, telling the server to start the game if the neccesary requirements are fullfilled.
     public void StartGame() 
