@@ -347,9 +347,7 @@ namespace Mirror
                 return;
             }
             // Debug.Log("NetworkManager StartClient address:" + networkAddress);
-
-            Debug.Log("a Debug in Start Client method!");
-
+            
             NetworkClient.Connect(networkAddress);
 
             OnStartClient();
