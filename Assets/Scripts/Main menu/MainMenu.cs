@@ -10,6 +10,8 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField] bool useSteam;
 
+    private const string HostAddressKey = "HostAddress";
+
     protected Callback<LobbyCreated_t> lobbyCreated;
     protected Callback<GameLobbyJoinRequested_t> gameLobbyJoinRequested;
     protected Callback<LobbyEnter_t> lobbyEntered;
