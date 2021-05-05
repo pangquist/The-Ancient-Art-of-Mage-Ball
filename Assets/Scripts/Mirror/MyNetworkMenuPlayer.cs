@@ -79,10 +79,10 @@ public class MyNetworkMenuPlayer : NetworkBehaviour
 
         steamId = _steamId;
 
-        if (steamId == 0) //THIS SHOULD BE REMOVED WHEN TESTING FOR REAL
-        {
-            steamId = 1;
-        }
+        //if (steamId == 0) //THIS SHOULD BE REMOVED WHEN TESTING FOR REAL
+        //{
+        //    steamId = 1;
+        //}
     }
 
     [Server]
