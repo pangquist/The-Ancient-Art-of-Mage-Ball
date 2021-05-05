@@ -126,10 +126,9 @@ public class MyNetworkManager : NetworkManager
     //When the player enters the server, this method sets the steam ID of that player and subsequentially gets all the information from that ID.
     public override void OnServerAddPlayer(NetworkConnection conn)
     {
+        Debug.Log("Server has added a player! Performing base functions!");
         base.OnServerAddPlayer(conn);
-
-        Debug.Log("Server has added a player!");
-
+        
         if (conn.identity.tag == "MenuPlayer")
         {
             Debug.Log("The player was a Menu Player");

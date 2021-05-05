@@ -1036,6 +1036,8 @@ namespace Mirror
         /// <summary>Get the next NetworkStartPosition based on the selected PlayerSpawnMethod.</summary>
         public Transform GetStartPosition()
         {
+            Debug.Log("Fetching Start Positions!");
+
             // first remove any dead transforms
             startPositions.RemoveAll(t => t == null);
 
@@ -1220,6 +1222,7 @@ namespace Mirror
             // instantiating a "Player" prefab gives it the name "Player(clone)"
             // => appending the connectionId is WAY more useful for debugging!
             player.name = $"{playerPrefab.name} [connId={conn.connectionId}]";
+            Debug.Log($"Trying to add player: {player.name}");
             NetworkServer.AddPlayerForConnection(conn, player);
         }
 
@@ -1236,26 +1239,23 @@ namespace Mirror
         // TODO client only ever uses NetworkClient.connection. this parameter is redundant.
         public virtual void OnClientConnect(NetworkConnection conn)
         {
-            Debug.Log("Första");
             // OnClientConnect by default calls AddPlayer but it should not do
             // that when we have online/offline scenes. so we need the
             // clientLoadedScene flag to prevent it.
             if (!clientLoadedScene)
             {
-                Debug.Log("Andra");
                 // Ready/AddPlayer is usually triggered by a scene load
                 // completing. if no scene was loaded, then Ready/AddPlayer it
                 // here instead.
                 if (!NetworkClient.ready)
                 {
                     NetworkClient.Ready();
-                    Debug.Log("Client is ready!");
                 }
 
                 if (autoCreatePlayer)
                 {
+                    Debug.Log("Trying to Automatically create a player!");
                     NetworkClient.AddPlayer();
-                    Debug.Log("A player is automatically created!");
                 }
             }
         }
