@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class PlayerMovement : NetworkBehaviour
 {
+    // This script handles player input for movement and limitations to that movement.
+    // During the update, Input is checked for X and Z, and the appropriate movement is calculated.
+    // A networking part of this script is responsible for making sure that the movement that happens are happening for all clients.
+    // Author: Valter Lindecrantz
+
     [SerializeField] CharacterController controller;
     [SerializeField] Transform groundCheck;
     [SerializeField] LayerMask groundMask;
@@ -21,6 +26,7 @@ public class PlayerMovement : NetworkBehaviour
     public bool isGrounded;
 
     #region Server
+    // The command send information from the client to the server that the character should move with the parameters that determines movement for X,Y and Z.
     [Command]
     void CmdMove(Vector3 _move, Vector3 _velocity)
     {
@@ -30,6 +36,7 @@ public class PlayerMovement : NetworkBehaviour
 
     #region Client
 
+    //During the update, checks for if the character is standing on the ground and calculations for the characters movement is performed.
     [ClientCallback]
     void Update()
     {
@@ -60,6 +67,7 @@ public class PlayerMovement : NetworkBehaviour
         CmdMove(move, velocity);
     }
 
+    // The ClientRpc sends out the appropriate information to all active clients, telling them to move the character in the given direction.
     [ClientRpc]
     void RpcMove(Vector3 _move, Vector3 _velocity)
     {
