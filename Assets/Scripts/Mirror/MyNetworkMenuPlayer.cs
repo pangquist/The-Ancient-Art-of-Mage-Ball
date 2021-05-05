@@ -138,8 +138,12 @@ public class MyNetworkMenuPlayer : NetworkBehaviour
 
     public override void OnStartClient()
     {
+        Debug.Log("Before return!");
+
         if (NetworkServer.active)
             return;
+
+        Debug.Log("After return!");
 
         ((MyNetworkManager)NetworkManager.singleton).MenuPlayers.Add(this);
         //gameObject.GetComponent<Animator>().enabled = true;
