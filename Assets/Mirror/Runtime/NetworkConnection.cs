@@ -77,6 +77,7 @@ namespace Mirror
         {
             using (PooledNetworkWriter writer = NetworkWriterPool.GetWriter())
             {
+                Debug.Log($"Sending the message to create the player! Channel ID: {channelId}");
                 // pack message and send allocation free
                 MessagePacking.Pack(msg, writer);
                 NetworkDiagnostics.OnSend(msg, channelId, writer.Position, 1);
