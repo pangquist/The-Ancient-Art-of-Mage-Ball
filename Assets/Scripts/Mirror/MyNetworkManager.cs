@@ -172,9 +172,6 @@ public class MyNetworkManager : NetworkManager
             Cursor.lockState = CursorLockMode.None;
 
             selectedScene = "Playground";
-            //Players.Clear();
-            //MenuPlayers.Clear();
-            //CharacterInfoList.Clear();
         }
     }
 
@@ -188,4 +185,5 @@ public class MyNetworkManager : NetworkManager
     {
         base.OnStopHost();
     }
+    
 }

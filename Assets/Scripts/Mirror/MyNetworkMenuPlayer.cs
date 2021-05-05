@@ -75,6 +75,8 @@ public class MyNetworkMenuPlayer : NetworkBehaviour
     [Server]
     public void SetSteamId(ulong _steamId)
     {
+        Debug.Log("Setting steam ID!!");
+
         steamId = _steamId;
 
         if (steamId == 0) //THIS SHOULD BE REMOVED WHEN TESTING FOR REAL
