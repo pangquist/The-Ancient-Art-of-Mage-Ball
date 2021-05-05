@@ -59,7 +59,7 @@ public class MainMenu : MonoBehaviour
 
         SteamMatchmaking.SetLobbyData(
             LobbyId,
-            "HostAddress",
+            HostAddressKey,
             SteamUser.GetSteamID().ToString());
 
         Debug.Log("A lobby has been created!");
@@ -79,7 +79,7 @@ public class MainMenu : MonoBehaviour
 
         string hostAddress = SteamMatchmaking.GetLobbyData(
             new CSteamID(callback.m_ulSteamIDLobby),
-            "HostAddress");
+            HostAddressKey);
 
         Debug.Log($"Host address: {hostAddress}");
 
