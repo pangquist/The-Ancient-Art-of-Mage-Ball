@@ -11,7 +11,6 @@ public class UseAbilities : NetworkBehaviour
     // When the appropriate key is pressed, the current cooldown will be set to max and the animation will be player.
     // Author: Valter Lindecrantz
     
-
     Animator anim;
 
     #region Ability1

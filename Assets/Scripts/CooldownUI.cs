@@ -7,6 +7,10 @@ using UnityEngine.UI;
 
 public class CooldownUI : MonoBehaviour
 {
+    // This script handles all the graphical components of the cooldown UI system.
+    // During the update, the GUI will update to show the current cooldown of the ability which it is connected to.
+    // Author: Valter Lindecrantz
+
     [Tooltip("Drag in the Character GameObject")]
     [SerializeField] UseAbilities abilities;
 
@@ -26,6 +30,7 @@ public class CooldownUI : MonoBehaviour
     [SerializeField] Image ability4Icon;
     [SerializeField] TMP_Text ability4Text;
     
+    // During the update, callculations are performed to make the UI accurately display the current cooldown of the given ability.
     void Update()
     {
         #region Ability1
