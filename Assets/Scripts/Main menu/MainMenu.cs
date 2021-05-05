@@ -35,7 +35,7 @@ public class MainMenu : MonoBehaviour
 
         if (useSteam)
         {
-            SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypeFriendsOnly, 4);
+            SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypeFriendsOnly, 6);
             return;
         }
 
@@ -57,7 +57,7 @@ public class MainMenu : MonoBehaviour
 
         SteamMatchmaking.SetLobbyData(
             LobbyId,
-            "HostAdDress",
+            "HostAddress",
             SteamUser.GetSteamID().ToString());
 
         Debug.Log("A lobby has been created!");
