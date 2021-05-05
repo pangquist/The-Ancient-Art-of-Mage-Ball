@@ -5,13 +5,12 @@ using UnityEngine;
 
 public class ForceDash : NetworkBehaviour
 {
-    [SerializeField]
-    Camera playerCamera;
-
-    PlayerMovement playerMovement;
+    [SerializeField] Camera playerCamera;
+    [SerializeField] CharacterController controller;
     [SerializeField] float dashSpeed;
     [SerializeField] float dashDuration;
     [SerializeField] float cooldown;
+    PlayerMovement playerMovement;
     float timeSinceLastCast;
     bool isOnCooldown;
 
@@ -32,10 +31,11 @@ public class ForceDash : NetworkBehaviour
         while(Time.time <startTime + dashDuration)
         {
             if (playerMovement.isGrounded)
-                playerMovement.controller.Move(transform.forward * dashSpeed * Time.deltaTime);
+                controller.Move(transform.forward * dashSpeed * Time.deltaTime);
             else
-                playerMovement.controller.Move(playerCamera.transform.forward * dashSpeed * 2 * Time.deltaTime); //aerial dash
+                controller.Move(playerCamera.transform.forward * dashSpeed * 2 * Time.deltaTime); //aerial dash
             yield return null;
         }
+        
     }
 }

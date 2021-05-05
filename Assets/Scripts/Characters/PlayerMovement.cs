@@ -5,30 +5,20 @@ using UnityEngine;
 
 public class PlayerMovement : NetworkBehaviour
 {
-    
-    public CharacterController controller;
-    [SerializeField]
-    float speed = 8;
-    [SerializeField]
-    Transform groundCheck;
+    [SerializeField] CharacterController controller;
+    [SerializeField] Transform groundCheck;
+    [SerializeField] LayerMask groundMask;
+    [SerializeField] KeyCode jumpButton;
+    [SerializeField] float jumpPower;
+    [SerializeField] float gravity = -9.81f;
+    [SerializeField] float speed = 8;
+
+    float directionX;
+    float directionZ;
     float groundDistance = 0.2f;
-    [SerializeField]
-    LayerMask groundMask;
-
-    public bool isGrounded;
-
-    [SerializeField]
-    KeyCode jumpButton;
-    [SerializeField]
-    float jumpPower;
-
-    float x;
-    float z;
-    [SerializeField]
-    float gravity = -9.81f;
-
     Vector3 move;
-    public Vector3 velocity;  
+    public Vector3 velocity;
+    public bool isGrounded;
 
     #region Server
     [Command]
@@ -44,26 +34,28 @@ public class PlayerMovement : NetworkBehaviour
     void Update()
     {
         if (!hasAuthority)
+        {
             return;
+        }
 
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-
 
         if (isGrounded && Input.GetKeyDown(jumpButton))
         {
             velocity.y = jumpPower;
         }
+
         velocity.y += gravity * Time.deltaTime;
 
-        x = Input.GetAxis("Horizontal");
-        z = Input.GetAxis("Vertical");
+        directionX = Input.GetAxis("Horizontal");
+        directionZ = Input.GetAxis("Vertical");
 
         if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2;
         }
 
-        move = transform.right * x + transform.forward * z;
+        move = transform.right * directionX + transform.forward * directionZ;
         
         CmdMove(move, velocity);
     }

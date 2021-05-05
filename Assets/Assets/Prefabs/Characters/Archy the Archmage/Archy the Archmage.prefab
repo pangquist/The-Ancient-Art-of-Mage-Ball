@@ -400,16 +400,16 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   controller: {fileID: 1398020548929700585}
-  speed: 12
   groundCheck: {fileID: 1398020549391249274}
   groundMask:
     serializedVersion: 2
     m_Bits: 64
-  isGrounded: 0
   jumpButton: 32
   jumpPower: 6
   gravity: -9.81
+  speed: 12
   velocity: {x: 0, y: 0, z: 0}
+  isGrounded: 0
 --- !u!114 &7130249670396189663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -525,6 +525,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   playerCamera: {fileID: 1398020549020263658}
+  controller: {fileID: 1398020548929700585}
   dashSpeed: 70
   dashDuration: 0.25
   cooldown: 4
