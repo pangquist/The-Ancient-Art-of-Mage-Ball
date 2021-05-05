@@ -2,11 +2,15 @@ using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterSelect : MonoBehaviour
 {
     [SerializeField] MyNetworkManager myNetworkManager;
     [SerializeField] MyNetworkMenuPlayer myNetworkMenuPlayer;
+    [SerializeField] Image characterImage;
+
+    [SerializeField] Sprite[] characterImages;
     
     private void Start()
     {
@@ -23,5 +27,6 @@ public class CharacterSelect : MonoBehaviour
                 menuPlayer.CmdUpdateChosenCharacter(characterIndex);
             }
         }
+        characterImage.sprite = characterImages[characterIndex];
     }
 }
