@@ -862,7 +862,7 @@ namespace Mirror
                 return false;
             }
 
-            Debug.Log("NetworkClient.AddPlayer() called with connection [" + readyConnection + "]");
+            //Debug.Log("NetworkClient.AddPlayer() called with connection [" + readyConnection + "]");
             connection.Send(new AddPlayerMessage());
             return true;
         }
