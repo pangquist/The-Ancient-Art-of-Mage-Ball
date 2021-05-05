@@ -155,7 +155,7 @@ public class MyNetworkManager : NetworkManager
     {
         if (sceneName == SelectedScene)
         {
-            playerPrefab = Characters[0]; //Here is where it is decided what character the player will spawn in as. Make it work with character select in lobby!
+            playerPrefab = Characters[1]; //Here is where it is decided what character the player will spawn in as. Make it work with character select in lobby!
             GamestateManager.gameIsOver = false;
             ballStartPos = GameObject.Find("BallSpawnPosition");
 
