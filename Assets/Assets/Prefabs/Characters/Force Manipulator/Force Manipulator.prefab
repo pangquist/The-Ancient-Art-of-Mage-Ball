@@ -443,7 +443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 3758272145470057082}
-  force: {x: 0, y: 5, z: 0}
+  force: {x: 0, y: 4.5, z: 0}
   amplify: {fileID: 8404522335574230688}
 --- !u!1 &1044814289403977746
 GameObject:
