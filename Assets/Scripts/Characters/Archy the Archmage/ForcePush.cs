@@ -6,7 +6,6 @@ using UnityEngine;
 public class ForcePush : NetworkBehaviour
 {
     [SerializeField] Camera mainCamera;
-    [SerializeField] PlayerMovement playerMovement;
     [SerializeField] LayerMask[] hitableLayers;
     
     RaycastHit hit;
@@ -14,7 +13,6 @@ public class ForcePush : NetworkBehaviour
     [SerializeField] float range;
     [SerializeField] float pushAmount;
     [SerializeField] float pushRadius;
-    [SerializeField] float forceJumpHeight;
     [SerializeField] GameObject hitEffect;
     Rigidbody pushedBody;
 
@@ -39,8 +37,7 @@ public class ForcePush : NetworkBehaviour
         {
             return;
         }
-
-
+        
         CmdSpawnHitEffect(hit.point);
 
         Collider[] colliders = Physics.OverlapSphere(hit.point, pushRadius);
@@ -54,13 +51,6 @@ public class ForcePush : NetworkBehaviour
         }
     }
     
-    
-
-    [Client]
-    void DoForceJump()
-    {
-         playerMovement.velocity.y += forceJumpHeight;
-    }
     #endregion
     #region Server
 
@@ -69,28 +59,6 @@ public class ForcePush : NetworkBehaviour
     {
         GameObject magicExplosion = Instantiate(hitEffect, hitLocation, Quaternion.identity) as GameObject;
         NetworkServer.Spawn(magicExplosion);
-        Debug.Log($"Intantiating the hit effect: {magicExplosion}");
-    }
-
-    [Command]
-    void CmdDoChargePush()
-    {
-        pushedBody.AddExplosionForce(pushAmount * 1.5f, transform.position + transform.forward * 7, pushRadius * 1.5f);
-    }
-
-    [ClientCallback]
-    void DoChargePush()
-    {
-        Collider[] colliders = Physics.OverlapSphere(transform.position + transform.forward * 7, pushRadius);
-        CmdSpawnHitEffect(transform.position + transform.forward * 7);
-        foreach (Collider pushedObject in colliders)
-        {
-            if (pushedObject.CompareTag("Enemy"))
-            {
-                pushedBody = pushedObject.GetComponent<Rigidbody>();
-                CmdDoChargePush();
-            }
-        }
     }
 
     [Command]
