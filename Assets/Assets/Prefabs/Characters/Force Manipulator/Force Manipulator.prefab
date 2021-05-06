@@ -2531,16 +2531,16 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   controller: {fileID: 3758272146365123705}
-  speed: 12
   groundCheck: {fileID: 3758272145769701866}
   groundMask:
     serializedVersion: 2
     m_Bits: 64
-  isGrounded: 1
   jumpButton: 32
   jumpPower: 6
   gravity: -9.81
+  speed: 12
   velocity: {x: 0, y: 0, z: 0}
+  isGrounded: 1
 --- !u!114 &5025287790405866831
 MonoBehaviour:
   m_ObjectHideFlags: 0
