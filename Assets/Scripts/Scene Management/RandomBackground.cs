@@ -25,26 +25,22 @@ public class RandomBackground : MonoBehaviour
 
         if (x == 0)
         {
-            transform.localEulerAngles = new Vector3(transform.localEulerAngles.x + 31f,
-           transform.localEulerAngles.y + 124f, transform.localEulerAngles.z);
+            light.transform.localEulerAngles = new Vector3(transform.localEulerAngles.x + 31f, transform.localEulerAngles.y + 124f, transform.localEulerAngles.z);
         }
 
         if (x == 1)
         {
-            transform.localEulerAngles = new Vector3(transform.localEulerAngles.x + 25f,
-           transform.localEulerAngles.y + 185f, transform.localEulerAngles.z + 3f);
+            light.transform.localEulerAngles = new Vector3(transform.localEulerAngles.x + 25f, transform.localEulerAngles.y + 185f, transform.localEulerAngles.z + 3f);
         }
 
         if (x == 2)
         {
-            transform.localEulerAngles = new Vector3(transform.localEulerAngles.x + 25f,
-           transform.localEulerAngles.y + 185f, transform.localEulerAngles.z + 3f);
+            light.transform.localEulerAngles = new Vector3(transform.localEulerAngles.x + 25f, transform.localEulerAngles.y + 185f, transform.localEulerAngles.z + 3f);
         }
 
         if (x == 3)
         {
-            transform.localEulerAngles = new Vector3(transform.localEulerAngles.x + 30f,
-           transform.localEulerAngles.y + 175.5f, transform.localEulerAngles.z + (-9f));
+            light.transform.localEulerAngles = new Vector3(transform.localEulerAngles.x + 30f, transform.localEulerAngles.y + 175.5f, transform.localEulerAngles.z + (-9f));
         }
     }
 }
