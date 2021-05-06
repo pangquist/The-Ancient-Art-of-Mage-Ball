@@ -6,8 +6,12 @@ using UnityEngine;
 
 public class NetworkPlayerSpawner : NetworkBehaviour
 {
+    // This script assign the correct character to each player when they enter the game.
+    // Author: Valter Lindecrantz.
+
     [SerializeField] int chosenCharacter;
     
+    // Called on the server from the network Manager to assign each player their chosen player prefab (character).
     [Server]
     public void AssignCharacterPrefab(int playerIndex)
     {
@@ -18,6 +22,7 @@ public class NetworkPlayerSpawner : NetworkBehaviour
         SpawnCharacter(chosenCharacter);
     }
 
+    // Take in the parameter of what character the player has chosen, and spawns a prefab from the array of available characters to play as.
     void SpawnCharacter(int characterIndex)
     {
         GameObject[] characters = ((MyNetworkManager)NetworkManager.singleton).Characters;

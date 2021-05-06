@@ -9,6 +9,11 @@ using UnityEngine.SceneManagement;
 
 public class MyNetworkMenuPlayer : NetworkBehaviour
 {
+    // This script stores and syncronizes information regarding the player during the menu scene.
+    // It also functions as a general tool to relay information regarding map-selectiona and character-selection.
+    // The script also describes what happens when a client or host disconnects from the server.
+    // Authors: Valter Lindecrantz.
+
     public static event Action<bool> AuthorityOnPartyOwnerStateUpdated;
     public static event Action OnClientTeamUpdated;
     public static event Action ClientOnInfoUpdated;
@@ -27,8 +32,7 @@ public class MyNetworkMenuPlayer : NetworkBehaviour
 
     [SyncVar(hook = nameof(HandlePlayerColorUpdated))]
     [SerializeField] Color playerColor = Color.white;
-
-    [SyncVar(hook = nameof(HandleChosenCharacterUpdated))]
+    
     [SerializeField] int chosenCharacter;
 
     [SerializeField] TMP_Text displayNameText = null;
@@ -56,22 +60,9 @@ public class MyNetworkMenuPlayer : NetworkBehaviour
         return displayName;
     }
 
-    void SetTimerText()
-    {
-
-        float minutes = Mathf.FloorToInt(gamestateManager.Timer / 60);
-        float seconds = Mathf.FloorToInt(gamestateManager.Timer % 60);
-        timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-    }
-
-    void SetScoreText()
-    {
-        redScoreText.text = "Red: " + gamestateManager.RedScore.ToString();
-        blueScoreText.text = "Blue: " + gamestateManager.BlueScore.ToString();
-    }
-
     #region Server
 
+    // Gives the player the correct steam ID, which is passed in as a parameter from the NetworkManager.
     [Server]
     public void SetSteamId(ulong _steamId)
     {
@@ -125,22 +116,12 @@ public class MyNetworkMenuPlayer : NetworkBehaviour
     #endregion
     #region Client
 
-    private void Start()
-    {
-        if (SceneManager.GetActiveScene().name == "MainMenu")
-            return;
-        gamestateManager = GameObject.Find("GamestateManager").GetComponent<GamestateManager>();
-        GamestateManager.HandleTimeChanged += SetTimerText;
-        GamestateManager.HandleScoreChanged += SetScoreText;
-    }
-
     public override void OnStartClient()
     {
         if (NetworkServer.active)
             return;
 
         ((MyNetworkManager)NetworkManager.singleton).MenuPlayers.Add(this);
-        //gameObject.GetComponent<Animator>().enabled = true;
     }
 
     public override void OnStopClient()
@@ -150,8 +131,6 @@ public class MyNetworkMenuPlayer : NetworkBehaviour
         if (!hasAuthority)
             return;
 
-        GamestateManager.HandleTimeChanged -= SetTimerText;
-        GamestateManager.HandleScoreChanged -= SetScoreText;
         ((MyNetworkManager)NetworkManager.singleton).MenuPlayers.Remove(this);
     }
 
@@ -184,6 +163,8 @@ public class MyNetworkMenuPlayer : NetworkBehaviour
         AuthorityOnPartyOwnerStateUpdated?.Invoke(newState);
     }
 
+    // When the players name is updated to match their steam name, the text above their characters change to reflect their new name.
+    // An event is also called which calls methods in other scripts where they are subscribed to the event.
     [Client]
     private void HandlePlayerNameUpdated(string oldName, string newName)
     {
@@ -191,12 +172,14 @@ public class MyNetworkMenuPlayer : NetworkBehaviour
         displayNameText.text = displayName;
     }
 
+    // Sets the team name based on what button the player presses, and calls a command to the server to change the team name aswell.
     public void SetTeamName(string name)
     {
         teamName = name;
         CmdSetTeamName(name);
     }
     
+    // When a players team name change, their player color should change aswell to visually display what team the player is on.
     private void HandlePlayerTeamAssigned(string oldTeam, string newTeam)
     {
         if (hasAuthority)
@@ -215,6 +198,7 @@ public class MyNetworkMenuPlayer : NetworkBehaviour
         OnClientTeamUpdated?.Invoke();
     }
 
+    // Command that calls on the server to change the players color.
     [Command]
     void CmdSetPlayerColor(Color color)
     {
@@ -227,6 +211,7 @@ public class MyNetworkMenuPlayer : NetworkBehaviour
         playerColor = color;
     }
 
+    //When the players color is updated, a command is called to change the color of the text above the players character.
     [Client]
     void HandlePlayerColorUpdated(Color oldColor, Color newColor)
     {
@@ -238,12 +223,14 @@ public class MyNetworkMenuPlayer : NetworkBehaviour
         CmdSetTextColor();
     }
 
+    // Command that tells the server to set the text color for the player.
     [Command]
     void CmdSetTextColor()
     {
         ServerSetTextColor();
     }
 
+    // The players text color is updated on the server to reflect what team the player is on.
     [Server]
     void ServerSetTextColor()
     {
@@ -251,35 +238,12 @@ public class MyNetworkMenuPlayer : NetworkBehaviour
         displayNameText.color = playerColor;
     }
 
+    // Sends a command to the server to tell the server that the player has chosen a character in the character select.
     [Command]
     public void CmdUpdateChosenCharacter(int charactedIndex)
     {
         chosenCharacter = charactedIndex;
     }
-
-    [Client]
-    void HandleChosenCharacterUpdated(int oldCharacter, int newCharacter)
-    {
-        if (!hasAuthority)
-        {
-            return;
-        }
-
-        CmdSetChosenCharacter();
-    }
-
-    [Command]
-    void CmdSetChosenCharacter()
-    {
-        ServerSetChosenCharacter();
-    }
-
-    [Server]
-    void ServerSetChosenCharacter()
-    {
-        Debug.Log($"Updating {displayName}'s chosen character to: {chosenCharacter}!");
-    }
-
 
     #endregion
 }

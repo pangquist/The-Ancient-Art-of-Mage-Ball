@@ -6,6 +6,10 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
+    // This script makes it possible for the host to establish a lobby using the Steam API.
+    // Additionally it handles the clients request to connect to the lobby, and establishes a connection between the client and the server.
+    // Author: Valter Lindecrantz (Reference: "How To Connect Using Steam - Unity Multiplayer Tutorial" - Dapper Dino on youtube)
+
     [SerializeField] GameObject landingPagePanel;
 
     [SerializeField] bool useSteam = false;
@@ -59,6 +63,7 @@ public class MainMenu : MonoBehaviour
             SteamUser.GetSteamID().ToString());
     }
 
+    // When a request to join the lobby is made, Steamworkshops makes a call for the client to join the lobby.
     void OnGameLobbyJoinRequested(GameLobbyJoinRequested_t callback)
     {
         SteamMatchmaking.JoinLobby(callback.m_steamIDLobby);
