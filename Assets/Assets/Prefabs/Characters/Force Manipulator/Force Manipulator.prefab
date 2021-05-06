@@ -2735,9 +2735,6 @@ MonoBehaviour:
   castAbility3Button: 49
   cooldownAbility3: 10
   ability3Name: {fileID: 7400000, guid: 350cadcee6930b6448a626195465363b, type: 2}
-  castAbility4Button: 50
-  cooldownAbility4: 10
-  ability4Name: {fileID: 7400000, guid: 350cadcee6930b6448a626195465363b, type: 2}
 --- !u!95 &6004741204329823607
 Animator:
   serializedVersion: 3
@@ -2774,8 +2771,8 @@ MonoBehaviour:
   mainCamera: {fileID: 3758272145470057082}
   amplifyBeam: {fileID: 907603169916725692}
   range: 0
-  duration: 4
-  force: {x: 0, y: 5, z: 0}
+  duration: 4.5
+  force: {x: 0, y: 4.5, z: 0}
 --- !u!1 &3906260169555093223
 GameObject:
   m_ObjectHideFlags: 0
