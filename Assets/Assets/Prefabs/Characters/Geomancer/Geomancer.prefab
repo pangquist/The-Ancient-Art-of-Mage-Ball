@@ -1601,6 +1601,7 @@ GameObject:
   - component: {fileID: 441384180641011023}
   - component: {fileID: 441384180641011010}
   - component: {fileID: 8612802140423036942}
+  - component: {fileID: -3439214597019910920}
   - component: {fileID: 1106491956633752253}
   - component: {fileID: 2106470732702085849}
   m_Layer: 0
@@ -1805,12 +1806,31 @@ MonoBehaviour:
   boulderPrefab: {fileID: 5085287005239035577, guid: 48e40556ab3d3014bb367cbe5722d489,
     type: 3}
   hitableObject: {fileID: 0}
+  maxDistance: 0
   throwForceForward: 1000
-  throwForceUpward: 500
+  throwForceUpward: 250
   pushAmount: 1000
   pushRadius: 20
   hitEffect: {fileID: 8027473195609965283, guid: e06bdea1510a3e547a2ed554aac7f5f9,
     type: 3}
+--- !u!114 &-3439214597019910920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2502805589157441407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fae44c6a7c29f449a55db5696035446, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  stonePrefab: {fileID: 5085287005239035577, guid: f4b877c6443256c43b333799f66249c8,
+    type: 3}
+  stoneSpawnPosition: {fileID: 7275183300368150349}
+  timeBetweenStones: 2
 --- !u!95 &1106491956633752253
 Animator:
   serializedVersion: 3

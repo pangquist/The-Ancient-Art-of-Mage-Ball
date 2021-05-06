@@ -10,12 +10,15 @@ public class CollisionExplosion : NetworkBehaviour
     Vector3 rotateAxis = new Vector3(4, 5, 2);
     bool hasCollided = false;
     [SerializeField]
-    float explosionForce;
+    float explosionForce, explosionUpwards;
+    [SerializeField]
+    float explosionRadius;
+
 
     [SerializeField]
     GameObject hitEffect;
 
-
+    [Client]
     private void Update()
     {
         if (!hasCollided)
@@ -28,12 +31,23 @@ public class CollisionExplosion : NetworkBehaviour
     void OnCollisionEnter(Collision col)
     {
         hasCollided = true;
+        
         if (col.gameObject.CompareTag("Enemy"))
-            {            
+            {
+            CmdSpawnHitEffect(transform.position);
                 Debug.Log("Collided with ball");
                 CmdDoPush(col.gameObject);
+            Destroy(gameObject);
             }
 
+
+    }
+    [Command]
+    void CmdSpawnHitEffect(Vector3 hitLocation)
+    {
+        GameObject magicExplosion = Instantiate(hitEffect, hitLocation, Quaternion.identity) as GameObject;
+        NetworkServer.Spawn(magicExplosion);
+        Debug.Log($"Intantiating the hit effect: {magicExplosion}");
     }
 
     [Command]
@@ -41,7 +55,8 @@ public class CollisionExplosion : NetworkBehaviour
     {
         Debug.Log("Server is moving the ball for the clients!");
         ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        ball.GetComponent<Rigidbody>().AddExplosionForce(explosionForce, ball.transform.position, 30);
+        ball.GetComponent<Rigidbody>().AddExplosionForce(explosionForce, gameObject.transform.position, explosionRadius, explosionUpwards);
+        
     }
 
 
