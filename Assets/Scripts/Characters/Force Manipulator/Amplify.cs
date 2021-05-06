@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Amplify : NetworkBehaviour
 {
+    // New amplify!
     [SerializeField] Camera mainCamera;
     [SerializeField] GameObject amplifyBeam;
     [SerializeField] float range;
