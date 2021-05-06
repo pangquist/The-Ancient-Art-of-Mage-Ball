@@ -625,9 +625,6 @@ MonoBehaviour:
   castAbility3Button: 49
   cooldownAbility3: 5
   ability3Name: {fileID: 7400000, guid: 40b2eff336eb3cd459714aebda6afcc3, type: 2}
-  castAbility4Button: 0
-  cooldownAbility4: 0
-  ability4Name: {fileID: 0}
 --- !u!1 &1398020549020263655
 GameObject:
   m_ObjectHideFlags: 0
@@ -668,7 +665,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1398020549020263655}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
@@ -1767,7 +1764,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8918007585456626152
 RectTransform:
   m_ObjectHideFlags: 0
