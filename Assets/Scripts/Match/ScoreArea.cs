@@ -6,12 +6,10 @@ using UnityEngine;
 
 public class ScoreArea : NetworkBehaviour
 {
-
     public GameObject effectObject;
     public GameObject parentName;
     [SerializeField] GamestateManager gmManager;
     GameObject ballStartPos;
-
 
     private void Start()
     {
