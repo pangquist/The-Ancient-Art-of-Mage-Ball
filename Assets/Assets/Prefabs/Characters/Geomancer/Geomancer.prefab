@@ -1805,8 +1805,8 @@ MonoBehaviour:
   boulderPrefab: {fileID: 5085287005239035577, guid: 48e40556ab3d3014bb367cbe5722d489,
     type: 3}
   hitableObject: {fileID: 0}
-  throwForceForward: 500
-  throwForceUpward: 200
+  throwForceForward: 1000
+  throwForceUpward: 500
   pushAmount: 1000
   pushRadius: 20
   hitEffect: {fileID: 8027473195609965283, guid: e06bdea1510a3e547a2ed554aac7f5f9,

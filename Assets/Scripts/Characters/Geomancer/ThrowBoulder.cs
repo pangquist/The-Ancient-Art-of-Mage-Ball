@@ -23,11 +23,15 @@ public class ThrowBoulder : NetworkBehaviour
     [SerializeField]
     GameObject hitableObject;
 
+    [SerializeField]
+    int maxDistance;
+    
     RaycastHit hit;
-
+    GameObject projectileInstance;
     public float throwForceForward;
     public float throwForceUpward;
 
+   
     public float pushAmount;
     public float pushRadius;
 
@@ -43,31 +47,31 @@ public class ThrowBoulder : NetworkBehaviour
     void Update()
     {
         Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, hitableLayer);
-        Collider[] colliders = Physics.OverlapSphere(hit.point, pushRadius);
-        foreach (Collider pushedObject in colliders)
-        {
-            if (pushedObject.CompareTag("Enemy"))
-            {
-                Debug.Log("Client is pushing!");
-                CmdDoPush(pushedObject.gameObject);
-            }
-        }
+        
     }
 
     [Client]
     void DoBoulderThrow()
     {
-        Vector3 directionOfBoulder = hit.point - boulderStartPoint.position;
-        GameObject projectileInstance;
+        Vector3 directionOfBoulder;
+        if(hit.collider != null)
+        {
+            directionOfBoulder = hit.point - boulderStartPoint.position;            
+        }
+        else
+        {
+            directionOfBoulder =  mainCamera.transform.forward;
+        }
         projectileInstance = Instantiate(boulderPrefab, boulderStartPoint.position, Quaternion.identity);
-       
-        projectileInstance.transform.forward = directionOfBoulder.normalized;
+        NetworkServer.Spawn(projectileInstance, connectionToClient);
+        //projectileInstance.transform.forward = directionOfBoulder.normalized;
+        
 
         projectileInstance.GetComponent<Rigidbody>().AddForce(directionOfBoulder.normalized * throwForceForward, ForceMode.Force);
         projectileInstance.GetComponent<Rigidbody>().AddForce(mainCamera.transform.up * throwForceUpward , ForceMode.Force);
         //CmdSpawnHitEffect(hit.point);
 
-        //Collider[] colliders = Physics.OverlapSphere(hit.point, pushRadius);
+        //Collider[] colliders = Physics.OverlapSphere(projectileInstance.transform.position, pushRadius);
         //foreach (Collider pushedObject in colliders)
         //{
         //    if (pushedObject.CompareTag("Enemy"))
@@ -120,7 +124,7 @@ public class ThrowBoulder : NetworkBehaviour
     {
         Debug.Log("Server is moving the ball for the clients!");
         ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        ball.GetComponent<Rigidbody>().AddExplosionForce(pushAmount, hit.point, pushRadius);
+        ball.GetComponent<Rigidbody>().AddExplosionForce(pushAmount, projectileInstance.transform.position, pushRadius);
     }
     #endregion
 }
