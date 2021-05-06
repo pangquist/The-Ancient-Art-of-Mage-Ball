@@ -38,7 +38,7 @@ public class ForceDash : NetworkBehaviour
     IEnumerator Dash()
     {
         float startTime = Time.time;
-
+        Debug.Log("dashing!");
         while(Time.time <startTime + dashDuration)
         {
             if (playerMovement.isGrounded)
@@ -47,6 +47,7 @@ public class ForceDash : NetworkBehaviour
                 controller.Move(playerCamera.transform.forward * dashSpeed * 2 * Time.deltaTime); //aerial dash
             yield return null;
         }
+        CmdDoChargePush();
         
     }
 
@@ -54,32 +55,17 @@ public class ForceDash : NetworkBehaviour
     void CmdDoChargePush()
     {
         Debug.Log("Doing charge push!");
-        Collider[] colliders = Physics.OverlapSphere(transform.position + transform.forward * 7, pushRadius);
-        CmdSpawnHitEffect(transform.position + transform.forward * 7);
+        Collider[] colliders = Physics.OverlapSphere(transform.position + transform.forward, pushRadius);
+        CmdSpawnHitEffect(transform.position + transform.forward);
         foreach (Collider pushedObject in colliders)
         {
             if (pushedObject.CompareTag("Enemy"))
             {
-                pushedObject.GetComponent<Rigidbody>().AddExplosionForce(pushAmount * 1.5f, transform.position + transform.forward * 7, pushRadius * 1.5f);
+                pushedObject.GetComponent<Rigidbody>().AddExplosionForce(pushAmount, transform.position + transform.forward, pushRadius * 1.5f);
             }
         }
 
     }
-
-    //[Client]
-    //void DoChargePush()
-    //{
-    //    Debug.Log("Doing charge push!");
-    //    Collider[] colliders = Physics.OverlapSphere(transform.position + transform.forward * 7, pushRadius);
-    //    CmdSpawnHitEffect(transform.position + transform.forward * 7);
-    //    foreach (Collider pushedObject in colliders)
-    //    {
-    //        if (pushedObject.CompareTag("Enemy"))
-    //        {
-    //            CmdDoChargePush(pushedObject.gameObject);
-    //        }
-    //    }
-    //}
 
     [Command]
     void CmdSpawnHitEffect(Vector3 hitLocation)

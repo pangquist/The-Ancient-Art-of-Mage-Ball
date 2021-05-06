@@ -525,9 +525,9 @@ MonoBehaviour:
   syncInterval: 0.1
   playerCamera: {fileID: 1398020549020263658}
   controller: {fileID: 1398020548929700585}
-  dashSpeed: 70
-  dashDuration: 0.25
-  pushAmount: 10
+  dashSpeed: 40
+  dashDuration: 0.2
+  pushAmount: 500
   pushRadius: 5
   hitEffect: {fileID: 8027473195609965283, guid: e06bdea1510a3e547a2ed554aac7f5f9,
     type: 3}
