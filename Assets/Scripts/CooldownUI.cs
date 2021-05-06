@@ -7,6 +7,10 @@ using UnityEngine.UI;
 
 public class CooldownUI : MonoBehaviour
 {
+    // This script handles all the graphical components of the cooldown UI system.
+    // During the update, the GUI will update to show the current cooldown of the ability which it is connected to.
+    // Author: Valter Lindecrantz
+
     [Tooltip("Drag in the Character GameObject")]
     [SerializeField] UseAbilities abilities;
 
@@ -25,58 +29,47 @@ public class CooldownUI : MonoBehaviour
     [Header("Ability 4")]
     [SerializeField] Image ability4Icon;
     [SerializeField] TMP_Text ability4Text;
-
     
-    // Update is called once per frame
+    // During the update, callculations are performed to make the UI accurately display the current cooldown of the given ability.
     void Update()
     {
-
-        //Ability 1
-        if (abilities.CurrentAbility1Cooldown() <= 0)
+        #region Ability1
+        if (abilities.GetCooldown(0) <= 0)
         {
             ability1Icon.fillAmount = 0;
             ability1Text.text = "";
         }
         else
         {
-            ability1Icon.fillAmount = (abilities.CurrentAbility1Cooldown() / abilities.CooldownAbility1());
-            ability1Text.text = (abilities.CurrentAbility1Cooldown()).ToString(".#");
+            ability1Icon.fillAmount = (abilities.GetCooldown(0) / abilities.CooldownAbility1());
+            ability1Text.text = (abilities.GetCooldown(0)).ToString(".#");
         }
+        #endregion
 
-        //Ability 2
-        if (abilities.CurrentAbility2Cooldown() <= 0)
+        #region Ability2
+        if (abilities.GetCooldown(1) <= 0)
         {
             ability2Icon.fillAmount = 0;
             ability2Text.text = "";
         }
         else
         {
-            ability2Icon.fillAmount = abilities.CurrentAbility2Cooldown() / abilities.CooldownAbility2();
-            ability2Text.text = Convert.ToInt32(abilities.CurrentAbility2Cooldown()).ToString();
+            ability2Icon.fillAmount = abilities.GetCooldown(1) / abilities.CooldownAbility2();
+            ability2Text.text = Convert.ToInt32(abilities.GetCooldown(1)).ToString();
         }
+        #endregion
 
-        //Ability 3
-        if (abilities.CurrentAbility3Cooldown() <= 0)
+        #region Ability3
+        if (abilities.GetCooldown(2) <= 0)
         {
             ability3Icon.fillAmount = 0;
             ability3Text.text = "";
         }
         else
         {
-            ability3Icon.fillAmount = abilities.CurrentAbility3Cooldown() / abilities.CooldownAbility3();
-            ability3Text.text = Convert.ToInt32(abilities.CurrentAbility3Cooldown()).ToString();
+            ability3Icon.fillAmount = abilities.GetCooldown(2) / abilities.CooldownAbility3();
+            ability3Text.text = Convert.ToInt32(abilities.GetCooldown(2)).ToString();
         }
-
-        //Ability 4
-        if (abilities.CurrentAbility4Cooldown() <= 0)
-        {
-            ability4Icon.fillAmount = 0;
-            ability4Text.text = "";
-        }
-        else
-        {
-            ability4Icon.fillAmount = abilities.CurrentAbility4Cooldown() / abilities.CooldownAbility4();
-            ability4Text.text = Convert.ToInt32(abilities.CurrentAbility4Cooldown()).ToString();
-        }
+        #endregion
     }
 }
