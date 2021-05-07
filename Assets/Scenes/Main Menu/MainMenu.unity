@@ -484,6 +484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14458b49eedbbba4295c7d71a1492fed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tooltipBackground: {fileID: 69312783}
   headers:
   - Ability 1
   - 2
@@ -662,6 +663,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31e85bb188be374419c28ad30cc1c24a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &69312783 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 665056466, guid: 051421fd528b768428e0c0b1ff6820f8,
+    type: 3}
+  m_PrefabInstance: {fileID: 754492410}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &106704814
 GameObject:
   m_ObjectHideFlags: 0
@@ -4646,6 +4653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14458b49eedbbba4295c7d71a1492fed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tooltipBackground: {fileID: 69312783}
   headers:
   - Bean
   - 2
@@ -4941,6 +4949,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14458b49eedbbba4295c7d71a1492fed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tooltipBackground: {fileID: 0}
   headers:
   - Ability 1
   - 2
@@ -5728,6 +5737,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14458b49eedbbba4295c7d71a1492fed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tooltipBackground: {fileID: 0}
   headers:
   - Ability 1
   - 2
