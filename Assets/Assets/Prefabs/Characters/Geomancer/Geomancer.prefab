@@ -1050,7 +1050,7 @@ Transform:
   m_GameObject: {fileID: 441384181115929203}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.102, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.48713, z: 1}
   m_Children: []
   m_Father: {fileID: 3021933770428593605}
   m_RootOrder: 4
@@ -1600,6 +1600,7 @@ GameObject:
   - component: {fileID: 441384180641011022}
   - component: {fileID: 441384180641011023}
   - component: {fileID: 441384180641011010}
+  - component: {fileID: 5600849304467265354}
   - component: {fileID: 8612802140423036942}
   - component: {fileID: -3439214597019910920}
   - component: {fileID: 1106491956633752253}
@@ -1620,7 +1621,7 @@ Transform:
   m_GameObject: {fileID: 2502805589157441407}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.118, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1.0659893, z: 1}
   m_Children:
   - {fileID: 2992907406705390284}
   - {fileID: 5448438070231775986}
@@ -1721,9 +1722,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 1
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 0.99853206, z: 0}
 --- !u!143 &441384180641011022
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1761,7 +1762,7 @@ MonoBehaviour:
   groundCheck: {fileID: 441384181115929202}
   groundMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 1024
   isGrounded: 0
   jumpButton: 32
   jumpPower: 6
@@ -1783,6 +1784,28 @@ MonoBehaviour:
   syncInterval: 0.1
   mouseSensitivity: 300
   playerCamera: {fileID: 441384181137064641}
+--- !u!114 &5600849304467265354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2502805589157441407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b7baa3f33ea6434c94db40f37fa98ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  pillarPrefab: {fileID: 100000, guid: 7a5323530c35456419bf36f393b3376f, type: 3}
+  pillarTop: {fileID: 2915109659609430778, guid: 32900dd9e56c80d4cad0e667b8b283b7,
+    type: 3}
+  mainCamera: {fileID: 441384181137064641}
+  range: 100
+  hitableLayers:
+  - serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &8612802140423036942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1830,7 +1853,11 @@ MonoBehaviour:
   stonePrefab: {fileID: 5085287005239035577, guid: f4b877c6443256c43b333799f66249c8,
     type: 3}
   stoneSpawnPosition: {fileID: 7275183300368150349}
-  timeBetweenStones: 2
+  timeBetweenStones: 1.5
+  scaleMin: 0.2
+  scaleMax: 1
+  hitEffect: {fileID: 1295856588731438336, guid: ebc43cfaa13d3a3429ca01e6b97e5e4a,
+    type: 3}
 --- !u!95 &1106491956633752253
 Animator:
   serializedVersion: 3
@@ -1867,9 +1894,9 @@ MonoBehaviour:
   castAbility1Button: 323
   cooldownAbility1: 2
   ability1Name: {fileID: 7400000, guid: 10530bb4f36826b4fb8700f3fd2e21e0, type: 2}
-  castAbility2Button: 0
-  cooldownAbility2: 0
-  ability2Name: {fileID: 0}
+  castAbility2Button: 324
+  cooldownAbility2: 1
+  ability2Name: {fileID: 7400000, guid: 91a7aa5e20ee43d4bb6f2132b52025ed, type: 2}
   castAbility3Button: 0
   cooldownAbility3: 0
   ability3Name: {fileID: 0}

@@ -6,12 +6,20 @@ using UnityEngine;
 public class BoulderTrail : NetworkBehaviour
 {
     PlayerMovement playerMovement;
-    [SerializeField]
-    GameObject stonePrefab;
-    [SerializeField]
-    Transform stoneSpawnPosition;
-    [SerializeField]
-    float timeBetweenStones = 1f;
+    [SerializeField] GameObject stonePrefab;
+
+    [SerializeField] Transform stoneSpawnPosition;
+
+    [SerializeField] float timeBetweenStones = 1f;
+
+
+    [SerializeField] float scaleMin, scaleMax;
+
+
+    [SerializeField] GameObject hitEffect;
+
+
+
 
     Vector3 dropPosition;
 
@@ -20,10 +28,10 @@ public class BoulderTrail : NetworkBehaviour
     private void Update()
     {
         timer += Time.deltaTime;
-
+        
         if(timer % 0.7 >0 && timer % 0.7< 0.2)
         {
-            dropPosition = gameObject.transform.position;
+            dropPosition = stoneSpawnPosition.transform.position;
         }
         playerMovement = GetComponent<PlayerMovement>();
         if(timer> timeBetweenStones)
@@ -32,16 +40,30 @@ public class BoulderTrail : NetworkBehaviour
             {
                 if(gameObject.transform.position.x > dropPosition.x + 2 || 
                     gameObject.transform.position.x < dropPosition.x -2 ||
-                    gameObject.transform.position.y > dropPosition.y + 2 || 
-                    gameObject.transform.position.y < dropPosition.y - 2)
+                    gameObject.transform.position.z > dropPosition.z + 2 || 
+                    gameObject.transform.position.z < dropPosition.z - 2)
                 {
+                    Debug.Log("Inside BoulderTrail!");
+                    stonePrefab.transform.localScale = new Vector3(Random.Range(scaleMin, scaleMax), Random.Range(scaleMin, scaleMax), Random.Range(scaleMin, scaleMax));
                     projectileInstance = Instantiate(stonePrefab, dropPosition, Quaternion.identity);
+
+                        CmdSpawnHitEffect();
+
+                    NetworkServer.Spawn(projectileInstance, connectionToClient);
                     timer = 0;
                 }
                
             }
         }
         
+    }
+    [Command]
+    void CmdSpawnHitEffect()
+    {
+        Vector3 offSet = new Vector3(1, 0, 0);
+        GameObject smokeEffect = Instantiate(hitEffect, projectileInstance.transform.position + offSet, Quaternion.identity) as GameObject;
+        NetworkServer.Spawn(smokeEffect);
+        Debug.Log($"Intantiating the hit effect:");
     }
 
 }

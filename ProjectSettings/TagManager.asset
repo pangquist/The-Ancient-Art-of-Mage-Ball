@@ -16,12 +16,12 @@ TagManager:
   - 
   - Water
   - UI
-  - LayerMask
   - Jumpable
   - Hitable
   - Force Field
   - Player
-  - SeeThrough
+  - Ground
+  - 
   - 
   - 
   - 
