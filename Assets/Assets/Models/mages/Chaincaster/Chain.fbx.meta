@@ -1,29 +1,29 @@
 fileFormatVersion: 2
-guid: 9e4ffdc569190ea4c8012060b0b0f0ef
+guid: a629b0314d6bbe5449ce1b4bcaa5f6c4
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
-      74: 509105597034011356
-    second: Ghost_Idle
+      74: 5230971527630107360
+    second: Armature|Armature|Ghost_Attack|BaseLayer
   - first:
-      74: 1244583831288140583
-    second: Ghost_Idle_long
+      74: 9104059217154010689
+    second: Armature|Armature|Ghost_Damage|BaseLayer
   - first:
-      74: -3734770174895157986
-    second: Ghost_Fly
+      74: 1185599094475698102
+    second: Armature|Armature|Ghost_Death|BaseLayer
   - first:
-      74: 6278625067615193013
-    second: Ghost_Attack
+      74: -5914758460899611743
+    second: Armature|Armature|Ghost_Fly|BaseLayer
   - first:
-      74: -1676210732090460862
-    second: Ghost_Damage
+      74: 3119901910560507806
+    second: Armature|Armature|Ghost_Idle_long|BaseLayer
   - first:
-      74: -4117793352673500940
-    second: Ghost_Death
+      74: -7094247535997191232
+    second: Armature|Armature|Ghost_Idle|BaseLayer
   - first:
-      74: -2715319392430918553
-    second: Ghost_Tpose
+      74: -2592221370484563045
+    second: Armature|Armature|Ghost_Tpose|BaseLayer
   externalObjects: {}
   materials:
     materialImportMode: 2

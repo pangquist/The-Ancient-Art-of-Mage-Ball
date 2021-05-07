@@ -3,30 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Grapple : NetworkBehaviour
+public class ChainGrapple : NetworkBehaviour
 {
     private LineRenderer lr;
     private Material material;
     private Vector2 offsetSpeed = new Vector2(15, 0);
-
+    private RaycastHit raycastHit;
     private Vector3 grapplePoint;
+    private PlayerMovement playerMovement;
+
     [SerializeField] LayerMask grappleable;
     [SerializeField] Transform castPoint, camera, player;
-    private float maxRange = 25f;
-
-    private RaycastHit raycastHit;
-
-    PlayerMovement playerMovement;
-    [SerializeField]
-    float grappleSpeed;
-
-    [SerializeField]
-    float duration;
-    float currentDuration;
-    float cooldown;
-    float timeSinceLastCast;
-    [SerializeField]
-    bool isOnCooldown;
+    [SerializeField] private float maxRange = 25f;
+    [SerializeField] float grappleSpeed;
+    [SerializeField] float duration;
+    [SerializeField] float currentDuration;
 
     void Start()
     {
@@ -44,7 +35,6 @@ public class Grapple : NetworkBehaviour
         currentDuration = duration;
     }
 
-    //[Client]
     private void Update()
     {
         //if (!hasAuthority)
@@ -54,11 +44,11 @@ public class Grapple : NetworkBehaviour
 
         material.mainTextureOffset += offsetSpeed * Time.deltaTime;
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            StartGrapple();
-        }
-        else if (Input.GetMouseButtonUp(0))
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    StartGrapple();
+        //}
+        if (Input.GetMouseButtonUp(0))
         {
             StopGrapple();
         }
