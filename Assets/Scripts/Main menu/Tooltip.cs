@@ -7,7 +7,6 @@ using UnityEngine.UI;
 [ExecuteInEditMode()]
 public class Tooltip : MonoBehaviour
 {
-    
     public static Tooltip instance;
     public static List<GameObject> tooltips;
     public TextMeshProUGUI headerField;
@@ -27,7 +26,6 @@ public class Tooltip : MonoBehaviour
         if (string.IsNullOrEmpty(header))
         {
             headerField.gameObject.SetActive(false);
-            
         }
         else
         {
