@@ -59,7 +59,7 @@ public class MainMenu : MonoBehaviour
 
         SteamMatchmaking.SetLobbyData(
             LobbyId,
-            "HostAdDress",
+            "HostAddress",
             SteamUser.GetSteamID().ToString());
     }
 
