@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Castle.unity
     guid: eba7d42d291aa7e42927b8b5795ad2f6
+  - enabled: 1
+    path: Assets/Scenes/Magical Forest/MagicalForest.unity
+    guid: 7608f5818fdb3f94aa7e53410d61a28e
   m_configObjects: {}
