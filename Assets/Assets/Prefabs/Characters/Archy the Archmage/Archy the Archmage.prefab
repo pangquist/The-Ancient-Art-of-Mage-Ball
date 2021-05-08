@@ -404,7 +404,7 @@ MonoBehaviour:
   groundCheck: {fileID: 1398020549391249274}
   groundMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 1088
   isGrounded: 0
   jumpButton: 32
   jumpPower: 6
@@ -504,6 +504,8 @@ MonoBehaviour:
     m_Bits: 64
   - serializedVersion: 2
     m_Bits: 128
+  - serializedVersion: 2
+    m_Bits: 1024
   range: 40
   pushAmount: 500
   pushRadius: 5
@@ -616,17 +618,17 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   castAbility1Button: 323
-  cooldownAbility1: 0
-  ability1Name: Cast spell
+  cooldownAbility1: 1
+  ability1Name: {fileID: 7400000, guid: 485d67863fd61984f941cc4d7a352986, type: 2}
   castAbility2Button: 324
   cooldownAbility2: 7
-  ability2Name: Cast jump spell
+  ability2Name: {fileID: 7400000, guid: 7259bfe6441871e4c8849ad2211fc81d, type: 2}
   castAbility3Button: 49
   cooldownAbility3: 5
-  ability3Name: Cast dash
+  ability3Name: {fileID: 7400000, guid: 40b2eff336eb3cd459714aebda6afcc3, type: 2}
   castAbility4Button: 0
   cooldownAbility4: 0
-  ability4Name: 
+  ability4Name: {fileID: 0}
 --- !u!1 &1398020549020263655
 GameObject:
   m_ObjectHideFlags: 0
