@@ -9,6 +9,7 @@ TagManager:
   - MenuPlayer
   - Ball
   - CharacterSelecter
+  - Ground
   layers:
   - Default
   - TransparentFX

@@ -11,14 +11,14 @@ GameObject:
   - component: {fileID: 400000}
   - component: {fileID: 3300000}
   - component: {fileID: 2300000}
-  - component: {fileID: 3111623024549838915}
-  - component: {fileID: 2942527303517142905}
   - component: {fileID: 5212380023461343734}
+  - component: {fileID: -870689706916881031}
   - component: {fileID: 2911840670284712828}
   - component: {fileID: -3692204764891702877}
-  - component: {fileID: -1861368206861200383}
+  - component: {fileID: 4279170184029155917}
+  - component: {fileID: -652194848023892740}
   m_Layer: 6
-  m_Name: Geomancer Pillar
+  m_Name: Geomancer PillarBridge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 1, z: 0.5}
+  m_LocalScale: {x: 0.4, y: 1.5, z: 0.4}
   m_Children:
   - {fileID: 4347461318120124393}
   m_Father: {fileID: 0}
@@ -88,37 +88,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &3111623024549838915
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7729d64f5f9dd264584c3a5669f2043e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  time: 2
---- !u!114 &2942527303517142905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7581593270a206346835e81dc283a6da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  ForceUpwards: 15
-  hitEffect: {fileID: 1295856588731438336, guid: 7b57febdf0b12d44aa2774edf5f22912,
-    type: 3}
-  ballForce: 600
 --- !u!65 &5212380023461343734
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -132,6 +101,27 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 7.94561, y: 13.778495, z: 6.691928}
   m_Center: {x: 0.36532307, y: 4.9555, z: 0.14061594}
+--- !u!114 &-870689706916881031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f74aedd71d9a4f55b3ce499326d45fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  clientAuthority: 0
+  localPositionSensitivity: 0.01
+  localRotationSensitivity: 0.01
+  localScaleSensitivity: 0.01
+  compressRotation: 0
+  interpolateScale: 1
+  syncScale: 1
 --- !u!114 &2911840670284712828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,7 +196,7 @@ MonoBehaviour:
   useLocalTransformOnly: 0
   ownerChangeIndicator: 1
   receivedStatesCounter: 0
---- !u!114 &-1861368206861200383
+--- !u!114 &4279170184029155917
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -215,18 +205,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f74aedd71d9a4f55b3ce499326d45fb, type: 3}
+  m_Script: {fileID: 11500000, guid: 7729d64f5f9dd264584c3a5669f2043e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 1
+--- !u!114 &-652194848023892740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21a2d8206269a1a43abdcd04d02b75c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  clientAuthority: 0
-  localPositionSensitivity: 0.01
-  localRotationSensitivity: 0.01
-  localScaleSensitivity: 0.01
-  compressRotation: 0
-  interpolateScale: 1
-  syncScale: 1
+  forceUpwards: 50
+  hitEffect: {fileID: 1295856588731438336, guid: 7b57febdf0b12d44aa2774edf5f22912,
+    type: 3}
+  ballForce: 100
 --- !u!1001 &1450657994874901779
 PrefabInstance:
   m_ObjectHideFlags: 0

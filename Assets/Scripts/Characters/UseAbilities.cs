@@ -62,6 +62,10 @@ public class UseAbilities : NetworkBehaviour
         {
             currentAbility2Cooldown -= Time.deltaTime;
         }
+        if (currentAbility3Cooldown > 0)
+        {
+            currentAbility3Cooldown -= Time.deltaTime;
+        }
 
         if (Input.GetKeyDown(castAbility1Button) && currentAbility1Cooldown <= 0)
         {

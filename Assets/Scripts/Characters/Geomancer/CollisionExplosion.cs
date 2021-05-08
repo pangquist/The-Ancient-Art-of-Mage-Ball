@@ -53,10 +53,21 @@ public class CollisionExplosion : NetworkBehaviour
     [Command]
     void CmdDoPush(GameObject ball)
     {
+        ServerDoExplosion(ball);        
+    }
+
+    [Server]
+    void ServerDoExplosion(GameObject ball)
+    {
+        RpcDoExplosion(ball);
+    }
+
+    [ClientRpc]
+    void RpcDoExplosion(GameObject ball)
+    {
         Debug.Log("Server is moving the ball for the clients!");
         ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
         ball.GetComponent<Rigidbody>().AddExplosionForce(explosionForce, gameObject.transform.position, explosionRadius, explosionUpwards);
-        
     }
 
 

@@ -25,6 +25,7 @@ public class BoulderTrail : NetworkBehaviour
 
     float timer = 0;
     GameObject projectileInstance;
+
     private void Update()
     {
         timer += Time.deltaTime;

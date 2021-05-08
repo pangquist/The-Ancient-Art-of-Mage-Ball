@@ -1093,14 +1093,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 441384181137064644}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.807, z: 0.17}
+  m_LocalRotation: {x: 0.18409668, y: -0, z: -0, w: 0.9829082}
+  m_LocalPosition: {x: 0, y: 1.807, z: 0.257}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 441384179828623691}
   m_Father: {fileID: 3021933770428593605}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 21.217, y: 0, z: 0}
 --- !u!20 &441384181137064641
 Camera:
   m_ObjectHideFlags: 0
@@ -1605,9 +1605,10 @@ GameObject:
   - component: {fileID: -3439214597019910920}
   - component: {fileID: 1106491956633752253}
   - component: {fileID: 2106470732702085849}
+  - component: {fileID: 3596875746671384777}
   m_Layer: 0
   m_Name: Geomancer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1650,12 +1651,12 @@ MonoBehaviour:
   displayName: Missing Name
   playerColor: {r: 1, g: 1, b: 1, a: 1}
   chosenCharacter: 0
-  inGameUI: {fileID: 0}
+  inGameUI: {fileID: 441384179828623688}
   displayNameText: {fileID: 441384179978255247}
   redScoreText: {fileID: 441384180924577096}
   blueScoreText: {fileID: 441384179451071495}
   timeText: {fileID: 441384179359953882}
-  nameCanvas: {fileID: 0}
+  nameCanvas: {fileID: 441384180949702156}
   gamestateManager: {fileID: 0}
 --- !u!114 &441384180641011008
 MonoBehaviour:
@@ -1688,7 +1689,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.001
-  clientAuthority: 0
+  clientAuthority: 1
   localPositionSensitivity: 0.01
   localRotationSensitivity: 0.01
   localScaleSensitivity: 0.01
@@ -1710,7 +1711,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   clientAuthority: 0
-  animator: {fileID: 0}
+  animator: {fileID: 1106491956633752253}
 --- !u!136 &441384180641011017
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1799,8 +1800,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   pillarPrefab: {fileID: 100000, guid: 7a5323530c35456419bf36f393b3376f, type: 3}
-  pillarTop: {fileID: 2915109659609430778, guid: 32900dd9e56c80d4cad0e667b8b283b7,
-    type: 3}
   mainCamera: {fileID: 441384181137064641}
   range: 100
   hitableLayers:
@@ -1829,7 +1828,7 @@ MonoBehaviour:
   boulderPrefab: {fileID: 5085287005239035577, guid: 48e40556ab3d3014bb367cbe5722d489,
     type: 3}
   hitableObject: {fileID: 0}
-  maxDistance: 0
+  maxDistance: 50
   throwForceForward: 1000
   throwForceUpward: 250
   pushAmount: 1000
@@ -1892,17 +1891,35 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   castAbility1Button: 323
-  cooldownAbility1: 2
+  cooldownAbility1: 1
   ability1Name: {fileID: 7400000, guid: 10530bb4f36826b4fb8700f3fd2e21e0, type: 2}
   castAbility2Button: 324
   cooldownAbility2: 1
   ability2Name: {fileID: 7400000, guid: 91a7aa5e20ee43d4bb6f2132b52025ed, type: 2}
-  castAbility3Button: 0
-  cooldownAbility3: 0
-  ability3Name: {fileID: 0}
+  castAbility3Button: 101
+  cooldownAbility3: 1
+  ability3Name: {fileID: 7400000, guid: d10693a90854a244d85f40eb4661f7a6, type: 2}
   castAbility4Button: 0
   cooldownAbility4: 0
   ability4Name: {fileID: 0}
+--- !u!114 &3596875746671384777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2502805589157441407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c335ff1cc46bcbe49a372a8e61d66424, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  pillarBridgePrefab: {fileID: 100000, guid: 633fe62a85a30ad4a9506e1704f472c5, type: 3}
+  groundTransform: []
+  abilityDuration: 5
+  pillarSpawnInterval: 0.5
 --- !u!1 &2504937733938519409
 GameObject:
   m_ObjectHideFlags: 0

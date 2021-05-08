@@ -7,7 +7,7 @@ public class LaunchForce : NetworkBehaviour
 {
     [SerializeField]
     float ForceUpwards;
-    [SerializeField]
+
     Transform topPartPillar;
 
     bool hasPlayedAnime = false;
@@ -22,13 +22,18 @@ public class LaunchForce : NetworkBehaviour
     float heightOfPillar;
     [SerializeField]
     float ballForce = 100f;
-    
 
+    public override void OnStartAuthority()
+    {
+        enabled = true;
+    }
     private void Start()
     {
+
+        topPartPillar = gameObject.transform.GetChild(0);
+
         originposition = gameObject.transform.position;
         heightOfPillar = (topPartPillar.position.y - originposition.y);
-        Debug.Log(heightOfPillar);
     }   
 
     private void Update()
@@ -37,7 +42,6 @@ public class LaunchForce : NetworkBehaviour
         {
             CmdSpawnHitEffect();
         }
-        Debug.Log(transform.up.ToString());
         if (gameObject.transform.position.y < originposition.y + heightOfPillar)
         {
             MovePillar();

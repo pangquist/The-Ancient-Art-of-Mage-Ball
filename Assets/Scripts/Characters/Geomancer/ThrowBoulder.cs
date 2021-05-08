@@ -63,68 +63,29 @@ public class ThrowBoulder : NetworkBehaviour
             directionOfBoulder =  mainCamera.transform.forward;
         }
         projectileInstance = Instantiate(boulderPrefab, boulderStartPoint.position, Quaternion.identity);
-        NetworkServer.Spawn(projectileInstance, connectionToClient);
-        //projectileInstance.transform.forward = directionOfBoulder.normalized;
-        
+        NetworkServer.Spawn(projectileInstance, connectionToClient);       
 
         projectileInstance.GetComponent<Rigidbody>().AddForce(directionOfBoulder.normalized * throwForceForward, ForceMode.Force);
         projectileInstance.GetComponent<Rigidbody>().AddForce(mainCamera.transform.up * throwForceUpward , ForceMode.Force);
-        //CmdSpawnHitEffect(hit.point);
 
-        //Collider[] colliders = Physics.OverlapSphere(projectileInstance.transform.position, pushRadius);
-        //foreach (Collider pushedObject in colliders)
-        //{
-        //    if (pushedObject.CompareTag("Enemy"))
-        //    {
-        //        Debug.Log("Client is pushing!");
-        //        CmdDoPush(pushedObject.gameObject);
-        //    }
-        //}
     }
 
     #endregion
 
     #region Server
-    //[Command]
-    //void CmdSpawnHitEffect(Vector3 hitLocation)
-    //{
-    //    GameObject magicExplosion = Instantiate(hitEffect, hitLocation, Quaternion.identity) as GameObject;
-    //    NetworkServer.Spawn(magicExplosion);
-    //}
 
     //[Command]
-    //void CmdDoChargePush()
+    //void CmdDoPush(GameObject ball)
     //{
-    //    pushedBody.AddExplosionForce(pushAmount * 1.5f, transform.position + transform.forward * 7, pushRadius * 1.5f);
+    //    RpcMoveBall(ball);
     //}
 
-    //[ClientCallback]
-    //void DoChargePush()
+    //[ClientRpc]
+    //void RpcMoveBall(GameObject ball)
     //{
-    //    Collider[] colliders = Physics.OverlapSphere(transform.position + transform.forward * 7, pushRadius);
-    //    CmdSpawnHitEffect(transform.position + transform.forward * 7);
-    //    foreach (Collider pushedObject in colliders)
-    //    {
-    //        if (pushedObject.CompareTag("Enemy"))
-    //        {
-    //            pushedBody = pushedObject.GetComponent<Rigidbody>();
-    //            CmdDoChargePush();
-    //        }
-    //    }
+    //    Debug.Log("Server is moving the ball for the clients!");
+    //    ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
+    //    ball.GetComponent<Rigidbody>().AddExplosionForce(pushAmount, projectileInstance.transform.position, pushRadius);
     //}
-
-    [Command]
-    void CmdDoPush(GameObject ball)
-    {
-        RpcMoveBall(ball);
-    }
-
-    [ClientRpc]
-    void RpcMoveBall(GameObject ball)
-    {
-        Debug.Log("Server is moving the ball for the clients!");
-        ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        ball.GetComponent<Rigidbody>().AddExplosionForce(pushAmount, projectileInstance.transform.position, pushRadius);
-    }
     #endregion
 }
