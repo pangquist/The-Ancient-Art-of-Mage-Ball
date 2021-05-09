@@ -1056,6 +1056,7 @@ GameObject:
   - component: {fileID: 5422635038026886995}
   - component: {fileID: 3053985108755493253}
   - component: {fileID: 5455180443092731572}
+  - component: {fileID: 7481987156526725099}
   m_Layer: 0
   m_Name: pCube96_polySurface16
   m_TagString: Untagged
@@ -1131,6 +1132,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &7481987156526725099
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4640244168222349092}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5561727464597887649, guid: efc360207ce5f6148b8dc233e9d5e821, type: 3}
 --- !u!1 &5196647235197981013
 GameObject:
   m_ObjectHideFlags: 0

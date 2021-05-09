@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 441542867022765744}
   - component: {fileID: 3174742029560145455}
   - component: {fileID: 4596059323789358444}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 114488352167090871}
   m_LocalRotation: {x: -0.44313604, y: 0.20214684, z: 0.20194761, w: 0.8496966}
-  m_LocalPosition: {x: 0.13545471, y: 0.20642318, z: 0.19022734}
+  m_LocalPosition: {x: 0.1354547, y: 0.20642318, z: 0.1902273}
   m_LocalScale: {x: 1, y: 1, z: 0.9999999}
   m_Children: []
   m_Father: {fileID: 1057844747638869208}
@@ -90,7 +90,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1057844747638869208}
-  m_Layer: 0
+  - component: {fileID: 7201251462113726855}
+  m_Layer: 6
   m_Name: FloatingIsland
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,6 +132,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &7201251462113726855
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 425001504625612386}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c77fe5c0c1298fc49acd1c82ae24f710, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1357384373510712757
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,7 +160,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3280256745742204308}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: b_root 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,7 +175,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1357384373510712757}
   m_LocalRotation: {x: 0.000000015454294, y: 0.000000015454294, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.16385284, y: 0.37689716, z: -0.53413814}
+  m_LocalPosition: {x: 0.1638528, y: 0.37689716, z: -0.5341381}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1057844747638869208}
@@ -172,7 +192,7 @@ GameObject:
   - component: {fileID: 2386488597420843307}
   - component: {fileID: 616572485321040456}
   - component: {fileID: 3034437405465324731}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,7 +207,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1593343040290305811}
   m_LocalRotation: {x: -0.51199514, y: 0.0060375156, z: 0.2389114, w: 0.82507324}
-  m_LocalPosition: {x: -0.06814514, y: 0.18326034, z: 0.19022734}
+  m_LocalPosition: {x: -0.06814514, y: 0.18326034, z: 0.1902273}
   m_LocalScale: {x: 0.9999999, y: 1.0000001, z: 0.9999999}
   m_Children: []
   m_Father: {fileID: 1057844747638869208}
@@ -253,7 +273,7 @@ GameObject:
   - component: {fileID: 4384053802576691195}
   - component: {fileID: 8725539641827009420}
   - component: {fileID: 143228154054091911}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane010
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -268,7 +288,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1811796478721112377}
   m_LocalRotation: {x: 0.19257692, y: 0.6891156, z: 0.43537137, w: 0.5463384}
-  m_LocalPosition: {x: -0.043822937, y: 0.1986003, z: -0.27143607}
+  m_LocalPosition: {x: -0.04382294, y: 0.1986003, z: -0.2714361}
   m_LocalScale: {x: 0.83787197, y: 0.8378718, z: 0.8378718}
   m_Children: []
   m_Father: {fileID: 1057844747638869208}
@@ -334,7 +354,7 @@ GameObject:
   - component: {fileID: 1081691893712599263}
   - component: {fileID: 2223425778141878065}
   - component: {fileID: 6621411963940128765}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: to anim leaf 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -349,7 +369,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2425886034171004610}
   m_LocalRotation: {x: 0.014874621, y: 0.48566228, z: 0.8735, w: -0.030144164}
-  m_LocalPosition: {x: 0.22550201, y: 0.82859355, z: -0.35078666}
+  m_LocalPosition: {x: 0.225502, y: 0.82859355, z: -0.3507867}
   m_LocalScale: {x: 0.59621406, y: 0.59621406, z: 0.59621406}
   m_Children: []
   m_Father: {fileID: 1057844747638869208}
@@ -415,7 +435,7 @@ GameObject:
   - component: {fileID: 3667403574793016181}
   - component: {fileID: 2168701300667504855}
   - component: {fileID: 7819921077008081847}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: rock 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -430,7 +450,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4180820395036167224}
   m_LocalRotation: {x: 0.00000008146034, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.5766187, y: -0.44367245, z: 0}
+  m_LocalPosition: {x: -3.576619, y: -0.44367245, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1057844747638869208}
@@ -496,7 +516,7 @@ GameObject:
   - component: {fileID: 3134405541771407241}
   - component: {fileID: 4565619617250658010}
   - component: {fileID: 7751757932025444902}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -511,7 +531,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4196466650232753007}
   m_LocalRotation: {x: 0.00000008146034, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.6660002, y: 0.96431285, z: -0.24373199}
+  m_LocalPosition: {x: 0.6660002, y: 0.96431285, z: -0.243732}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1057844747638869208}
@@ -577,7 +597,7 @@ GameObject:
   - component: {fileID: 690326361897664771}
   - component: {fileID: 5987704484099492996}
   - component: {fileID: 6674317392359510093}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane009
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -592,7 +612,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4465978960132129250}
   m_LocalRotation: {x: -0.22320156, y: 0.7221819, z: 0.639379, w: 0.14081497}
-  m_LocalPosition: {x: 0.045536194, y: 0.07508102, z: -0.44363335}
+  m_LocalPosition: {x: 0.04553619, y: 0.07508102, z: -0.4436333}
   m_LocalScale: {x: 0.83787173, y: 0.83787215, z: 0.8378719}
   m_Children: []
   m_Father: {fileID: 1057844747638869208}
@@ -658,7 +678,7 @@ GameObject:
   - component: {fileID: 617676675889574926}
   - component: {fileID: 6919060438614584563}
   - component: {fileID: 4894239799596799544}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -739,7 +759,7 @@ GameObject:
   - component: {fileID: 9083840919799389762}
   - component: {fileID: 9203888301664647216}
   - component: {fileID: 3583789412176884927}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: to anim leaf 004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -754,7 +774,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5476927306036489246}
   m_LocalRotation: {x: 0.6299658, y: 0.59196436, z: 0.50110894, w: -0.040139098}
-  m_LocalPosition: {x: -0.33313063, y: 0.87803936, z: -0.5432003}
+  m_LocalPosition: {x: -0.3331306, y: 0.87803936, z: -0.5432003}
   m_LocalScale: {x: 0.5962141, y: 0.59621406, z: 0.59621406}
   m_Children: []
   m_Father: {fileID: 1057844747638869208}
@@ -820,7 +840,7 @@ GameObject:
   - component: {fileID: 1150755337354611138}
   - component: {fileID: 1751014049872930794}
   - component: {fileID: 1597717183169549039}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -835,7 +855,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5929640596740818543}
   m_LocalRotation: {x: -0.4068924, y: -0.24297515, z: 0.06603895, w: 0.8780892}
-  m_LocalPosition: {x: -0.091265865, y: 0.14937851, z: 0.20669219}
+  m_LocalPosition: {x: -0.09126586, y: 0.14937851, z: 0.2066922}
   m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1}
   m_Children: []
   m_Father: {fileID: 1057844747638869208}
@@ -901,7 +921,7 @@ GameObject:
   - component: {fileID: 6965604747224923706}
   - component: {fileID: 5478100022028138879}
   - component: {fileID: 4393294296786492270}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: to anim leaf 003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -916,7 +936,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6086979143059484789}
   m_LocalRotation: {x: 0.6299658, y: 0.59196436, z: 0.50110894, w: -0.040139098}
-  m_LocalPosition: {x: -0.019915313, y: 1.1623485, z: -0.32248497}
+  m_LocalPosition: {x: -0.01991531, y: 1.1623485, z: -0.322485}
   m_LocalScale: {x: 0.5962141, y: 0.59621406, z: 0.59621406}
   m_Children: []
   m_Father: {fileID: 1057844747638869208}
@@ -982,7 +1002,7 @@ GameObject:
   - component: {fileID: 6514643294258409639}
   - component: {fileID: 7710010042292406167}
   - component: {fileID: 2135630614364490028}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: leafs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -997,7 +1017,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7013559580018434192}
   m_LocalRotation: {x: 0.00000013985814, y: -0.00000001841267, z: -0.13052617, w: 0.9914449}
-  m_LocalPosition: {x: -0.38872254, y: 0.14365822, z: 0.023711089}
+  m_LocalPosition: {x: -0.3887225, y: 0.14365822, z: 0.02371109}
   m_LocalScale: {x: 1.826945, y: 2.005154, z: 2.30969}
   m_Children: []
   m_Father: {fileID: 1057844747638869208}
@@ -1061,7 +1081,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8936328727822230648}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: b_ropes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1092,7 +1112,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8928829292296935059}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: b swing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1123,7 +1143,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4675418108910322920}
   - component: {fileID: 535511052590823938}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: swing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1138,7 +1158,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8136914273962157743}
   m_LocalRotation: {x: 0.0000003171423, y: -0.000000041752568, z: -0.13052617, w: 0.9914449}
-  m_LocalPosition: {x: 0.562541, y: 0.24341491, z: -0.48945442}
+  m_LocalPosition: {x: 0.562541, y: 0.24341491, z: -0.4894544}
   m_LocalScale: {x: 1.826945, y: 2.005154, z: 2.30969}
   m_Children: []
   m_Father: {fileID: 1057844747638869208}
@@ -1210,7 +1230,7 @@ GameObject:
   - component: {fileID: 2189832134155449669}
   - component: {fileID: 6446361786943615248}
   - component: {fileID: 3143211271495314579}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1225,7 +1245,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8139707560712494719}
   m_LocalRotation: {x: -0.35115743, y: 0.08036838, z: -0.018645622, w: 0.9326745}
-  m_LocalPosition: {x: 0.22540283, y: -0.23555098, z: 0.37331152}
+  m_LocalPosition: {x: 0.2254028, y: -0.23555098, z: 0.3733115}
   m_LocalScale: {x: 1.0000001, y: 1.0000002, z: 1}
   m_Children: []
   m_Father: {fileID: 1057844747638869208}
@@ -1291,7 +1311,7 @@ GameObject:
   - component: {fileID: 5273670153667039654}
   - component: {fileID: 6963070166883633093}
   - component: {fileID: 9219489669487460482}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1370,7 +1390,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5591849802223668440}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: b_leaves
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1385,7 +1405,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8399928915446641505}
   m_LocalRotation: {x: 0.000000039453063, y: 0.000000039453063, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.16385284, y: 1.4955678, z: -0.53413814}
+  m_LocalPosition: {x: 0.1638528, y: 1.4955678, z: -0.5341381}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1057844747638869208}
@@ -1400,7 +1420,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8190889828491799251}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: b_root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1415,7 +1435,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8583291189940128747}
   m_LocalRotation: {x: 0.000000015454576, y: 0.000000015454575, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.54556596, y: 0.8947659, z: -0.48945442}
+  m_LocalPosition: {x: 0.545566, y: 0.8947659, z: -0.4894544}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8936328727822230648}
@@ -1432,7 +1452,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3221921012950838326}
   - component: {fileID: 174702061255445718}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Object001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1447,7 +1467,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8656536951534675918}
   m_LocalRotation: {x: 0.00000013985814, y: -0.00000001841267, z: -0.13052617, w: 0.9914449}
-  m_LocalPosition: {x: 0.25493744, y: 0.9201532, z: -0.5027143}
+  m_LocalPosition: {x: 0.2549374, y: 0.9201532, z: -0.5027143}
   m_LocalScale: {x: 1.826945, y: 2.005154, z: 2.30969}
   m_Children: []
   m_Father: {fileID: 1057844747638869208}
@@ -1518,7 +1538,7 @@ GameObject:
   - component: {fileID: 5417763470460360855}
   - component: {fileID: 1474995394582221392}
   - component: {fileID: 6220936740227887267}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1533,7 +1553,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9048124943409548050}
   m_LocalRotation: {x: -0.55353636, y: -0.10443815, z: -0.08707726, w: 0.8216494}
-  m_LocalPosition: {x: -0.36830488, y: 0.13925277, z: 0.11134765}
+  m_LocalPosition: {x: -0.3683049, y: 0.13925277, z: 0.1113477}
   m_LocalScale: {x: 0.99999994, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1057844747638869208}

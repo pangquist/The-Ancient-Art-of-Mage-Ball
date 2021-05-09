@@ -335,7 +335,7 @@ GameObject:
   - component: {fileID: 7134644959863505568}
   - component: {fileID: 6845830590677030893}
   - component: {fileID: 3485836064301980038}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TreeSmallLeaves.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -416,7 +416,7 @@ GameObject:
   - component: {fileID: 2629720968767291326}
   - component: {fileID: 8699734756990093078}
   - component: {fileID: 3322175693582580695}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ropes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -497,7 +497,7 @@ GameObject:
   - component: {fileID: 3943497251433947987}
   - component: {fileID: 4349117124898684573}
   - component: {fileID: 7946750323177038375}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: High_RoofTiles_UV.049
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -578,7 +578,7 @@ GameObject:
   - component: {fileID: 1422367791717184355}
   - component: {fileID: 1424144726339447179}
   - component: {fileID: 5532229510697118431}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Grass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -659,7 +659,7 @@ GameObject:
   - component: {fileID: 6036826513882350547}
   - component: {fileID: 1673251193544832136}
   - component: {fileID: 8376201783191791700}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ExportLeavesDecimated.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -740,7 +740,7 @@ GameObject:
   - component: {fileID: 7895531971705008720}
   - component: {fileID: 7071831888062534939}
   - component: {fileID: 6976175134351917903}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FishPot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -821,7 +821,7 @@ GameObject:
   - component: {fileID: 6585809048492760607}
   - component: {fileID: 7227016225745354460}
   - component: {fileID: 795404572465441929}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FishPot.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -902,7 +902,7 @@ GameObject:
   - component: {fileID: 6277122250124595003}
   - component: {fileID: 3496034339052045665}
   - component: {fileID: 6015819007712963200}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Back_Pillar.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1145,7 +1145,7 @@ GameObject:
   - component: {fileID: 6393796181002100595}
   - component: {fileID: 5639871979180418830}
   - component: {fileID: 8129375451575991172}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Back_Pillar.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1388,7 +1388,7 @@ GameObject:
   - component: {fileID: 2261285948564322797}
   - component: {fileID: 5289751418015986518}
   - component: {fileID: 3412520379875041207}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Group28446.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1469,7 +1469,7 @@ GameObject:
   - component: {fileID: 908934146729199427}
   - component: {fileID: 7389041454981019346}
   - component: {fileID: 7000428059653972486}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Low_Edges_Roof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1550,7 +1550,7 @@ GameObject:
   - component: {fileID: 8010993574405586748}
   - component: {fileID: 3264317159415920625}
   - component: {fileID: 1113873911768592113}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Back_Pillar.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1631,7 +1631,7 @@ GameObject:
   - component: {fileID: 8289771853060245062}
   - component: {fileID: 7039969394220781680}
   - component: {fileID: 3798243497611657000}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Grass.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1712,7 +1712,7 @@ GameObject:
   - component: {fileID: 7458314671491000889}
   - component: {fileID: 2007977810438878909}
   - component: {fileID: 3852304652422130717}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StoneWallUV.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1875,6 +1875,7 @@ GameObject:
   - component: {fileID: 3989381803876312139}
   - component: {fileID: 3989381803872887915}
   - component: {fileID: 3989381803874018987}
+  - component: {fileID: 4254248471644972089}
   m_Layer: 0
   m_Name: 1_trunk_lod0
   m_TagString: Untagged
@@ -1946,6 +1947,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &4254248471644972089
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3989381803876284523}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300004, guid: 519af33b0008fd34fabf2234045f231c, type: 3}
 --- !u!1 &3989381803876284525
 GameObject:
   m_ObjectHideFlags: 0
@@ -2196,7 +2211,7 @@ GameObject:
   - component: {fileID: 7387783584480794220}
   - component: {fileID: 5522371985949316969}
   - component: {fileID: 1304756145321162666}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Group49713
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2277,7 +2292,7 @@ GameObject:
   - component: {fileID: 7319879041333900315}
   - component: {fileID: 3454473054724748105}
   - component: {fileID: 513277318010271427}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Low_Edges_Roof.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2358,7 +2373,7 @@ GameObject:
   - component: {fileID: 1919488031614684316}
   - component: {fileID: 5599940320735509394}
   - component: {fileID: 680523934150315747}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Group58173
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2439,7 +2454,7 @@ GameObject:
   - component: {fileID: 3374893290470304881}
   - component: {fileID: 826860974692235934}
   - component: {fileID: 8613294363119725495}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ropes.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2682,7 +2697,7 @@ GameObject:
   - component: {fileID: 2665616498130745614}
   - component: {fileID: 3733309441824002485}
   - component: {fileID: 4724713236585368312}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ZBrush_defualt_group.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2763,7 +2778,7 @@ GameObject:
   - component: {fileID: 211561027621396850}
   - component: {fileID: 2087656091851930076}
   - component: {fileID: 1602227389760379139}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Front_Pillar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2844,7 +2859,7 @@ GameObject:
   - component: {fileID: 1571871786933482269}
   - component: {fileID: 8925373668819418667}
   - component: {fileID: 4959605425919364187}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Group28492
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2925,7 +2940,7 @@ GameObject:
   - component: {fileID: 5565683831013902584}
   - component: {fileID: 5877768807186734967}
   - component: {fileID: 7698722594777253480}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Group28446
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3168,7 +3183,7 @@ GameObject:
   - component: {fileID: 6970759537087100929}
   - component: {fileID: 835621888242817928}
   - component: {fileID: 8780927202335867035}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StoneWallUV
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3249,7 +3264,7 @@ GameObject:
   - component: {fileID: 5752832360792131619}
   - component: {fileID: 8676008966415915103}
   - component: {fileID: 6896026769158972947}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Low_Edges_Roof.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3330,7 +3345,7 @@ GameObject:
   - component: {fileID: 4462559090155495216}
   - component: {fileID: 3147147251052576068}
   - component: {fileID: 155127801325695966}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3411,7 +3426,7 @@ GameObject:
   - component: {fileID: 2771597447533966221}
   - component: {fileID: 4083541270674595525}
   - component: {fileID: 4654132611627031486}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Group1675
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3492,7 +3507,7 @@ GameObject:
   - component: {fileID: 4145339549266477787}
   - component: {fileID: 4083582067092879210}
   - component: {fileID: 3084349497900395637}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Group27362
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3573,7 +3588,7 @@ GameObject:
   - component: {fileID: 3257018905949147657}
   - component: {fileID: 6001756741978010897}
   - component: {fileID: 1027185759291173734}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ropes.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3654,7 +3669,7 @@ GameObject:
   - component: {fileID: 4151508765116382620}
   - component: {fileID: 7044100781251123883}
   - component: {fileID: 7912553199305431637}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StoneWallUV.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3735,7 +3750,7 @@ GameObject:
   - component: {fileID: 8668883334068049990}
   - component: {fileID: 696712923279747531}
   - component: {fileID: 6161828125909273095}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mball.051
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3816,7 +3831,7 @@ GameObject:
   - component: {fileID: 4453001092522130753}
   - component: {fileID: 6386354448152279577}
   - component: {fileID: 7664078877885568215}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: High_RoofTiles_UV.108
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3897,7 +3912,7 @@ GameObject:
   - component: {fileID: 2330015745230132024}
   - component: {fileID: 4367191715353330959}
   - component: {fileID: 9017313292724016565}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ZBrush_defualt_group.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3978,7 +3993,7 @@ GameObject:
   - component: {fileID: 246998399553086794}
   - component: {fileID: 2619506353382475171}
   - component: {fileID: 9203224157927463796}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TreeLowNew
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4124,7 +4139,7 @@ GameObject:
   - component: {fileID: 792772964334535249}
   - component: {fileID: 5876731130394159195}
   - component: {fileID: 4570370274189233443}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: High_RoofTiles_UV.056
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4205,7 +4220,7 @@ GameObject:
   - component: {fileID: 6834261684474379340}
   - component: {fileID: 7722102689072908951}
   - component: {fileID: 1418601231198623511}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FlyersUV
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4286,7 +4301,7 @@ GameObject:
   - component: {fileID: 5075511884626528985}
   - component: {fileID: 2407716433533000495}
   - component: {fileID: 2991136068808243761}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BezierCurve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4367,7 +4382,7 @@ GameObject:
   - component: {fileID: 6508286289149747504}
   - component: {fileID: 73906081643284340}
   - component: {fileID: 9015885968057573037}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube.004_Cube.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4447,7 +4462,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7376400508402197226}
   - component: {fileID: 7049404809948923148}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Shrine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4462,7 +4477,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7860449869979367504}
   m_LocalRotation: {x: -0, y: -0.33736327, z: -0, w: 0.94137454}
-  m_LocalPosition: {x: -2.43, y: -0.84, z: -0.56}
+  m_LocalPosition: {x: -2.43, y: -0.972, z: -0.56}
   m_LocalScale: {x: 0.41815996, y: 0.3484667, z: 0.41815996}
   m_Children:
   - {fileID: 6277122250124595003}
@@ -4612,7 +4627,7 @@ GameObject:
   - component: {fileID: 339674069720937069}
   - component: {fileID: 2090130702071924866}
   - component: {fileID: 2803437824477195968}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ZBrush_defualt_group
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4693,7 +4708,7 @@ GameObject:
   - component: {fileID: 4452717224188306172}
   - component: {fileID: 1278536598608234896}
   - component: {fileID: 6887490756230748572}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: High_RoofTiles_UV.022
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4774,7 +4789,7 @@ GameObject:
   - component: {fileID: 4758514142599363093}
   - component: {fileID: 6943740964895404906}
   - component: {fileID: 3081364113769661188}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StoneWallUV.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4855,7 +4870,7 @@ GameObject:
   - component: {fileID: 7041596084975291891}
   - component: {fileID: 985569712124848739}
   - component: {fileID: 6721484046552064262}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Group62609
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5098,7 +5113,7 @@ GameObject:
   - component: {fileID: 6387310230765314230}
   - component: {fileID: 6288698820561254469}
   - component: {fileID: 6278059579620612409}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ropes.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5179,7 +5194,7 @@ GameObject:
   - component: {fileID: 1605794165620030840}
   - component: {fileID: 9101605034651625535}
   - component: {fileID: 908827318175811138}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Group39387
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5260,7 +5275,7 @@ GameObject:
   - component: {fileID: 3064167640300168330}
   - component: {fileID: 7234375044029981073}
   - component: {fileID: 2071508119719499601}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Low_Edges_Roof.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5341,7 +5356,7 @@ GameObject:
   - component: {fileID: 3787775332812520180}
   - component: {fileID: 913749420792693064}
   - component: {fileID: 4951496084477744997}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Roof_UV
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5422,7 +5437,7 @@ GameObject:
   - component: {fileID: 3178174066988212598}
   - component: {fileID: 8725307947483802962}
   - component: {fileID: 2914765019150640855}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Logo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
