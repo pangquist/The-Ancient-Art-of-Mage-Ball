@@ -79,20 +79,24 @@ public class UseAbilities : NetworkBehaviour
         }
 
         // If the correct key is pressed and the cooldown is less then or equal to 0, calls on the method that starts the appropriate animation.
-        if (Input.GetKeyDown(castAbility1Button) && currentCooldowns[0] <= 0 /*&& anim.GetCurrentAnimatorStateInfo(0).IsName("Idle")*/)
+        if(!InGameMenu.gameIsPaused)
         {
-            StartAbility1Animation();
-        }
+            if (Input.GetKeyDown(castAbility1Button) && currentCooldowns[0] <= 0 /*&& anim.GetCurrentAnimatorStateInfo(0).IsName("Idle")*/)
+            {
+                StartAbility1Animation();
+            }
 
-        if (Input.GetKeyDown(castAbility2Button) && currentCooldowns[1] <= 0 /*&& anim.GetCurrentAnimatorStateInfo(0).IsName("Idle")*/)
-        {
-            StartAbility2Animation();
-        }
+            if (Input.GetKeyDown(castAbility2Button) && currentCooldowns[1] <= 0 /*&& anim.GetCurrentAnimatorStateInfo(0).IsName("Idle")*/)
+            {
+                StartAbility2Animation();
+            }
 
-        if (Input.GetKeyDown(castAbility3Button) && currentCooldowns[2] <= 0 /*&& anim.GetCurrentAnimatorStateInfo(0).IsName("Idle")*/)
-        {
-            StartAbility3Animation();
+            if (Input.GetKeyDown(castAbility3Button) && currentCooldowns[2] <= 0 /*&& anim.GetCurrentAnimatorStateInfo(0).IsName("Idle")*/)
+            {
+                StartAbility3Animation();
+            }
         }
+        
     }
 
     // Plays the appropriate animation (which contains the method for the ability) and sets the cooldown to max.

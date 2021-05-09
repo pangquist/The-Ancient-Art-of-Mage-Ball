@@ -47,7 +47,7 @@ public class PlayerMovement : NetworkBehaviour
 
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
-        if (isGrounded && Input.GetKeyDown(jumpButton))
+        if (isGrounded && Input.GetKeyDown(jumpButton) && !InGameMenu.gameIsPaused)
         {
             velocity.y = jumpPower;
         }
@@ -63,7 +63,12 @@ public class PlayerMovement : NetworkBehaviour
         }
 
         move = transform.right * directionX + transform.forward * directionZ;
-        
+        if (InGameMenu.gameIsPaused)
+        {
+            move = new Vector3(0, 0, 0);
+        }
+
+
         CmdMove(move, velocity);
     }
 
