@@ -243,8 +243,8 @@ MonoBehaviour:
   rotateX: 2
   rotateY: 3
   rotateZ: 2
-  explosionForce: 800
-  explosionUpwards: 200
+  explosionForceForward: 700
+  explosionForceUpwards: 200
   explosionRadius: 30
   hitEffect: {fileID: 3712248344953752656, guid: f96e1aee39b2c444bb13b1c14307edb3,
     type: 3}

@@ -5,37 +5,42 @@ using UnityEngine;
 
 public class LaunchForce : NetworkBehaviour
 {
-    [SerializeField]
-    float ForceUpwards;
+    [SerializeField] float ForceUpwards;
+
+    [SerializeField] GameObject hitEffect;
+
+    [SerializeField] float ballForce = 100f;
+
+    [Header("This is a radius, around 2 is default")]
+    [SerializeField] float collideBallRadius = 2;
 
     Transform topPartPillar;
-
+    //So animation and collision only happens once.
     bool hasPlayedAnime = false;
     bool hasCollided = false;
 
-    [SerializeField]
-    GameObject hitEffect;
-
-    Rigidbody pushedBody;
-
     Vector3 originposition;
+
     float heightOfPillar;
-    [SerializeField]
-    float ballForce = 100f;
 
     public override void OnStartAuthority()
     {
         enabled = true;
     }
+
     private void Start()
     {
+        CalculatePillarHeight();
+    }
 
-        topPartPillar = gameObject.transform.GetChild(0);
-
+    private void CalculatePillarHeight()
+    {
+        topPartPillar = gameObject.transform.GetChild(0);// pillar has one child in it's object-structure (pillarTop). NOTE: If this changes this might be obsolete.
         originposition = gameObject.transform.position;
-        heightOfPillar = (topPartPillar.position.y - originposition.y);
-    }   
+        heightOfPillar = topPartPillar.position.y - originposition.y;
+    }
 
+    [Client]
     private void Update()
     {
         if (!hasPlayedAnime)
@@ -44,25 +49,19 @@ public class LaunchForce : NetworkBehaviour
         }
         if (gameObject.transform.position.y < originposition.y + heightOfPillar)
         {
-            MovePillar();
+            CmdMovePillar();
         }
-        Collider[] colliders = Physics.OverlapSphere(topPartPillar.transform.position, 5f);
+        Collider[] colliders = Physics.OverlapSphere(topPartPillar.transform.position, collideBallRadius);
         foreach (Collider pushedObject in colliders)
         {
             if (pushedObject.CompareTag("Enemy"))
-            {
-                
+            {                
                 if (!hasCollided)
                 {
                     CmdPushBall(pushedObject.gameObject);
-                }
-                
+                }                
             }
         }
-        //else
-        //{
-        //    Destroy(gameObject);
-        //}
     }
     [Command]
     void CmdPushBall(GameObject ball)
@@ -79,20 +78,22 @@ public class LaunchForce : NetworkBehaviour
         Vector3 right = new Vector3(2, 0, 0);
         Vector3 above = new Vector3(0, 0, -2);
         Vector3 under = new Vector3(0, 0, 2);
+
         GameObject magicExplosionLeft = Instantiate(hitEffect, topPartPillar.transform.position + left, Quaternion.identity) as GameObject;
         GameObject magicExplosionRight = Instantiate(hitEffect, topPartPillar.transform.position + right, Quaternion.identity) as GameObject;
         GameObject magicExplosionAbove = Instantiate(hitEffect, topPartPillar.transform.position + above, Quaternion.identity) as GameObject;
         GameObject magicExplosionBelow = Instantiate(hitEffect, topPartPillar.transform.position + under, Quaternion.identity) as GameObject;
+
         NetworkServer.Spawn(magicExplosionLeft);
         NetworkServer.Spawn(magicExplosionRight);
         NetworkServer.Spawn(magicExplosionAbove);
         NetworkServer.Spawn(magicExplosionBelow);
-        Debug.Log($"Intantiating the hit effect:");
+
         hasPlayedAnime = true;
     }
 
-    [Client]
-    void MovePillar()
+    [Command]
+    void CmdMovePillar()
     {
         transform.Translate(0, Time.deltaTime * ForceUpwards, 0, Space.World);
     }

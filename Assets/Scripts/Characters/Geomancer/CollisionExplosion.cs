@@ -5,23 +5,32 @@ using UnityEngine;
 
 public class CollisionExplosion : NetworkBehaviour
 {
-    [SerializeField]
-    float rotateX, rotateY, rotateZ;
-    Vector3 rotateAxis = new Vector3(4, 5, 2);
+    [SerializeField] float rotateX, rotateY, rotateZ;
+
+    [SerializeField] float explosionForceForward, explosionForceUpwards;
+
+    [SerializeField] float explosionRadius;
+
+    [SerializeField] GameObject hitEffect;
+
     bool hasCollided = false;
-    [SerializeField]
-    float explosionForce, explosionUpwards;
-    [SerializeField]
-    float explosionRadius;
 
+    Vector3 rotateAxis;
 
-    [SerializeField]
-    GameObject hitEffect;
+    public override void OnStartAuthority()
+    {
+        enabled = true;
+    }
+
+    private void Start()
+    {
+        rotateAxis = new Vector3(rotateX, rotateY, rotateZ);// point of boulder-rotation in air.
+    }  
 
     [Client]
     private void Update()
     {
-        if (!hasCollided)
+        if (!hasCollided) //The boulder will only be forced to rotate during the initial airtime.
         {
             transform.Rotate(rotateAxis, 3f);
         }
@@ -32,16 +41,15 @@ public class CollisionExplosion : NetworkBehaviour
     {
         hasCollided = true;
         
-        if (col.gameObject.CompareTag("Enemy"))
+        if (col.gameObject.CompareTag("Enemy"))//if the ball is the object being collided with.
             {
-            CmdSpawnHitEffect(transform.position);
+                CmdSpawnHitEffect(transform.position);
                 Debug.Log("Collided with ball");
                 CmdDoPush(col.gameObject);
-            Destroy(gameObject);
+                Destroy(gameObject);//Destroy boulder when it explodes. this can be changed to splitting stones in later itteration.
             }
-
-
     }
+
     [Command]
     void CmdSpawnHitEffect(Vector3 hitLocation)
     {
@@ -67,7 +75,7 @@ public class CollisionExplosion : NetworkBehaviour
     {
         Debug.Log("Server is moving the ball for the clients!");
         ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        ball.GetComponent<Rigidbody>().AddExplosionForce(explosionForce, gameObject.transform.position, explosionRadius, explosionUpwards);
+        ball.GetComponent<Rigidbody>().AddExplosionForce(explosionForceForward, gameObject.transform.position, explosionRadius, explosionForceUpwards);
     }
 
 

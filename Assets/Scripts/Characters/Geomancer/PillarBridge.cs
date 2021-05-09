@@ -5,27 +5,26 @@ using UnityEngine;
 
 public class PillarBridge : NetworkBehaviour
 {
-    [SerializeField]
-    GameObject pillarBridgePrefab;
+    [SerializeField] GameObject pillarBridgePrefab;
 
-    [SerializeField]
-    GameObject [] groundTransform;
+    [SerializeField] float abilityDuration;
 
-    CharacterController controller;
+    [SerializeField] float pillarSpawnInterval;
+
+    [Header("Multiply with player direction")]
+    [SerializeField] float offSetPillarSpawnMultiplier = 2;
 
     Transform pillarTop;
 
-    PlayerMovement playerMovement;
+    GameObject[] groundTransform;
 
-    [SerializeField]
-    float abilityDuration;
-
-    [SerializeField]
-    float pillarSpawnInterval;
+    PlayerMovement playerMovement;    
 
     float timer = 0;
 
     bool startAbility = false;
+    bool hasSpawnedPillar;
+
     public override void OnStartAuthority()
     {
         enabled = true;
@@ -33,7 +32,7 @@ public class PillarBridge : NetworkBehaviour
     private void Start()
     {
         groundTransform = GameObject.FindGameObjectsWithTag("Ground");
-        controller = gameObject.GetComponent<CharacterController>();
+        hasSpawnedPillar = true;
     }
 
     [Client]
@@ -45,44 +44,43 @@ public class PillarBridge : NetworkBehaviour
         playerMovement = GetComponent<PlayerMovement>();
     }
 
+    [Client]
     private void Update()
     {
         
         if (startAbility)
         {
-            timer += Time.deltaTime;
-            bool hasSpawnedPillar = true;
+            timer += Time.deltaTime;            
 
             if (timer > abilityDuration)//Handles the duration of the ability
             {
                 startAbility = false;
             }
 
-            if (!playerMovement.isGrounded)
+            if (!playerMovement.isGrounded)//Only spawns the pillars if the player is above ground.
             {
                 if(timer%pillarSpawnInterval>0.05 && timer% pillarSpawnInterval < 0.1)
                 {
                     hasSpawnedPillar = false;
                 }
-
             }
             if (!hasSpawnedPillar)
             {
-                float offSetMultiplier = 2;
-                Vector3 playerFuturePosition = gameObject.transform.forward * offSetMultiplier;
-
-                Debug.Log(playerFuturePosition);
-
-                Vector3 groundPositionUnderPlayer = new Vector3(gameObject.transform.position.x, groundTransform[0].transform.position.y, gameObject.transform.position.z) + playerFuturePosition;
-
-                GameObject pillarSpawn = Instantiate(pillarBridgePrefab, groundPositionUnderPlayer - pillarTop.position, Quaternion.identity);
-
-                NetworkServer.Spawn(pillarSpawn, connectionToClient);
-                hasSpawnedPillar = true;
+                CmdSpawnPillarBridge();
             }
-        }
-        
-        
-        
+        }                       
+    }
+
+    [Command]
+    void CmdSpawnPillarBridge()//Spawns pillar at groundlevel under player
+    {
+        Vector3 playerFuturePosition = gameObject.transform.forward * offSetPillarSpawnMultiplier;
+        Vector3 groundPositionUnderPlayer = new Vector3(gameObject.transform.position.x, groundTransform[0].transform.position.y, gameObject.transform.position.z) + playerFuturePosition;
+
+        GameObject pillarSpawn = Instantiate(pillarBridgePrefab, groundPositionUnderPlayer - pillarTop.position, Quaternion.identity);
+
+        NetworkServer.Spawn(pillarSpawn, connectionToClient);
+
+        hasSpawnedPillar = true;
     }
 }
