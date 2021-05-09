@@ -1905,7 +1905,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9d19b17327eb49a48a6ce776a2c104ac, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 20e6814c9a091be429a56c7f83bd1b99, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8886,7 +8886,7 @@ MonoBehaviour:
   backgrounds:
   - {fileID: 21300000, guid: 768840308b8304d429ad2855d779ff0e, type: 3}
   - {fileID: 21300000, guid: a91eba80be9e502428fa723191ba0609, type: 3}
-  - {fileID: 21300000, guid: 9d19b17327eb49a48a6ce776a2c104ac, type: 3}
+  - {fileID: 21300000, guid: 20e6814c9a091be429a56c7f83bd1b99, type: 3}
   sceneSelectCanvas: {fileID: 432759722}
 --- !u!114 &2051290249
 MonoBehaviour:

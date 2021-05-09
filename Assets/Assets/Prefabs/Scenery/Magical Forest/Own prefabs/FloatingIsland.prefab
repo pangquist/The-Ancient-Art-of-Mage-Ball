@@ -435,6 +435,7 @@ GameObject:
   - component: {fileID: 3667403574793016181}
   - component: {fileID: 2168701300667504855}
   - component: {fileID: 7819921077008081847}
+  - component: {fileID: 1119797231640399947}
   m_Layer: 6
   m_Name: rock 2
   m_TagString: Untagged
@@ -505,6 +506,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &1119797231640399947
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4180820395036167224}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3184849126436316180, guid: 4edd73fef3ed6e447aee00a19d8a2eaf, type: 3}
 --- !u!1 &4196466650232753007
 GameObject:
   m_ObjectHideFlags: 0
@@ -516,6 +531,7 @@ GameObject:
   - component: {fileID: 3134405541771407241}
   - component: {fileID: 4565619617250658010}
   - component: {fileID: 7751757932025444902}
+  - component: {fileID: 3171107158240837638}
   m_Layer: 6
   m_Name: tree
   m_TagString: Untagged
@@ -586,6 +602,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &3171107158240837638
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4196466650232753007}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4781277628412113339, guid: 4edd73fef3ed6e447aee00a19d8a2eaf, type: 3}
 --- !u!1 &4465978960132129250
 GameObject:
   m_ObjectHideFlags: 0
