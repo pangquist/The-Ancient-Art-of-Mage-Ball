@@ -56,6 +56,6 @@ public class InGameMenu : MonoBehaviour
     {
         Debug.Log("Quitted Game");
         Application.Quit();
-        UnityEditor.EditorApplication.isPlaying = false;
+        //UnityEditor.EditorApplication.isPlaying = false;
     }
 }
