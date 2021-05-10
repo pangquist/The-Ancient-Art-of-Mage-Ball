@@ -56,7 +56,7 @@ MonoBehaviour:
   serverBatchInterval: 0
   offlineScene: 
   onlineScene: 
-  transport: {fileID: 7027079361099392648}
+  transport: {fileID: 763365374}
   networkAddress: localhost
   maxConnections: 6
   disconnectInactiveConnections: 0
@@ -135,7 +135,7 @@ MonoBehaviour:
   Timeout: 25
   SteamAppID: 480
   AllowSteamRelay: 1
-  UseNextGenSteamNetworking: 1
+  UseNextGenSteamNetworking: 0
   SteamUserID: 0
 --- !u!114 &23307860
 MonoBehaviour:
