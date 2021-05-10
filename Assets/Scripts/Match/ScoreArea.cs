@@ -7,7 +7,7 @@ using UnityEngine;
 public class ScoreArea : NetworkBehaviour
 {
     public GameObject effectObject;
-    public GameObject parentName;
+    [SerializeField] string teamOwnership;
     [SerializeField] GamestateManager gmManager;
     GameObject ballStartPos;
 
@@ -31,11 +31,11 @@ public class ScoreArea : NetworkBehaviour
     [Server]
     private void AddScore()
     {
-        if (parentName.name == "Goal Blue")
+        if (teamOwnership == "Blue")
         {
             gmManager.RedScore += 1;
         }
-        else
+        else if (teamOwnership == "Red")
         {
             gmManager.BlueScore += 1;
         }
