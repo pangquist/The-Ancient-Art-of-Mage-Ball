@@ -119,6 +119,7 @@ MonoBehaviour:
   hitEffect: {fileID: 1295856588731438336, guid: 7b57febdf0b12d44aa2774edf5f22912,
     type: 3}
   ballForce: 600
+  collideBallRadius: 2
 --- !u!65 &5212380023461343734
 BoxCollider:
   m_ObjectHideFlags: 0

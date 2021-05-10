@@ -1768,6 +1768,7 @@ MonoBehaviour:
   jumpButton: 32
   jumpPower: 6
   gravity: -9.81
+  move: {x: 0, y: 0, z: 0}
   velocity: {x: 0, y: 0, z: 0}
 --- !u!114 &441384180641011010
 MonoBehaviour:
@@ -1896,7 +1897,7 @@ MonoBehaviour:
   cooldownAbility2: 1
   ability2Name: {fileID: 7400000, guid: 91a7aa5e20ee43d4bb6f2132b52025ed, type: 2}
   castAbility3Button: 101
-  cooldownAbility3: 1
+  cooldownAbility3: 5
   ability3Name: {fileID: 7400000, guid: d10693a90854a244d85f40eb4661f7a6, type: 2}
   castAbility4Button: 0
   cooldownAbility4: 0
@@ -1918,7 +1919,10 @@ MonoBehaviour:
   pillarBridgePrefab: {fileID: 100000, guid: 633fe62a85a30ad4a9506e1704f472c5, type: 3}
   abilityDuration: 5
   pillarSpawnInterval: 0.3
-  forceUpwards: 100
+  forceUpwards: 3
+  hitEffect: {fileID: 1295856588731438336, guid: adfe2ec0ca790154db6c00c640ca4f6d,
+    type: 3}
+  ballForce: 100
   offSetPillarSpawnMultiplier: 2
 --- !u!1 &2504937733938519409
 GameObject:

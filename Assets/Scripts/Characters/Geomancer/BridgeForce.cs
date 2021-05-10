@@ -33,7 +33,7 @@ public class BridgeForce : NetworkBehaviour
     private void Start()
     {
         CalculatePillarHeight();
-        playerMovement = connectionToClient.clientOwnedObjects<PlayerMovement>()
+        //playerMovement = connectionToClient.clientOwnedObjects<PlayerMovement>()
     }
     private void CalculatePillarHeight()
     {
