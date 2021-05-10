@@ -3,16 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BridgeForce : NetworkBehaviour
+public class BridgeForceNew : NetworkBehaviour
 {
     [SerializeField] float forceUpwards;
 
     [SerializeField] GameObject hitEffect;
 
     [SerializeField] float ballForce = 100f;
-
-    PlayerMovement playerMovement;
-
 
     Transform topPartPillar;
 
@@ -33,7 +30,6 @@ public class BridgeForce : NetworkBehaviour
     private void Start()
     {
         CalculatePillarHeight();
-        playerMovement = connectionToClient.clientOwnedObjects<PlayerMovement>()
     }
     private void CalculatePillarHeight()
     {
