@@ -2334,6 +2334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28c03f8732690142823efa4be0926d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  changeBackground: {fileID: 2051290248}
 --- !u!114 &442861475 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2447474911330567595, guid: b33521ddef89b284881744b4ad3d8cb2,
@@ -10136,6 +10137,7 @@ GameObject:
   - component: {fileID: 2051290250}
   - component: {fileID: 2051290249}
   - component: {fileID: 2051290248}
+  - component: {fileID: 2051290251}
   m_Layer: 0
   m_Name: ChosenMap
   m_TagString: Untagged
@@ -10174,10 +10176,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ea6057376006b942830b1c505ed74e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   backgrounds:
   - {fileID: 21300000, guid: 768840308b8304d429ad2855d779ff0e, type: 3}
   - {fileID: 21300000, guid: a91eba80be9e502428fa723191ba0609, type: 3}
   sceneSelectCanvas: {fileID: 432759722}
+  chosenMapName: 
 --- !u!114 &2051290249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10216,6 +10221,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2051290246}
   m_CullTransparentMesh: 1
+--- !u!114 &2051290251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2051290246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 436625340
+  serverOnly: 0
+  visible: 0
+  m_AssetId: 
+  hasSpawned: 0
 --- !u!1 &2064022503
 GameObject:
   m_ObjectHideFlags: 0

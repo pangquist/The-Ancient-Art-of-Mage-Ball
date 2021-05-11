@@ -7,6 +7,7 @@ using UnityEngine;
 public class SceneSelect : MonoBehaviour
 {
     MyNetworkManager networkManager;
+    [SerializeField] ChangeMenuBackground changeBackground;
 
     public static event Action OnMenuBackgroundUpdated;
 
@@ -17,7 +18,8 @@ public class SceneSelect : MonoBehaviour
 
     public void ChangeSelectedScene(string sceneName)
     {
-        ((MyNetworkManager)NetworkManager.singleton).SelectedScene = sceneName;
+        networkManager.SelectedScene = sceneName;
+        changeBackground.SetMapName(sceneName);
         OnMenuBackgroundUpdated?.Invoke();
     }
 }
