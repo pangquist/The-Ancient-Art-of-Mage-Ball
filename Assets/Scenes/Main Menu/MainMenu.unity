@@ -7962,6 +7962,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1508985428}
   m_CullTransparentMesh: 1
+--- !u!114 &1513735168 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7027079361099392648, guid: f9f2dd1600203254eabef20669d45d98,
+    type: 3}
+  m_PrefabInstance: {fileID: 2726291146046865531}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b0fecffa3f624585964b0d0eb21b18e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1524024835
 GameObject:
   m_ObjectHideFlags: 0
@@ -8642,6 +8654,18 @@ MonoBehaviour:
   - {fileID: 801817982}
   redPlayers: 0
   bluePlayers: 0
+  characterSprites:
+  - {fileID: 21300000, guid: c1c8224f2956ea449a5be23c74e91b8f, type: 3}
+  - {fileID: 21300000, guid: 654036297ce232e44a5f3d20d6b80b9e, type: 3}
+  - {fileID: 21300000, guid: e27be3938de5039409a3de2dc7d09f40, type: 3}
+  redTeamImage:
+  - {fileID: 1259647667}
+  - {fileID: 275067162}
+  - {fileID: 1929337896}
+  blueTeamImage:
+  - {fileID: 78866973}
+  - {fileID: 105783712}
+  - {fileID: 1423837771}
 --- !u!1 &1709910709
 GameObject:
   m_ObjectHideFlags: 0
@@ -11331,6 +11355,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7027079361099392649, guid: f9f2dd1600203254eabef20669d45d98,
+        type: 3}
+      propertyPath: transport
+      value: 
+      objectReference: {fileID: 1513735168}
     - target: {fileID: 7027079361099392651, guid: f9f2dd1600203254eabef20669d45d98,
         type: 3}
       propertyPath: m_Name

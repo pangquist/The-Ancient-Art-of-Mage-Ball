@@ -23,6 +23,9 @@ public class LobbyMenu : MonoBehaviour
     [SerializeField] int redPlayers = 0;
     [SerializeField] int bluePlayers = 0;
 
+    [SerializeField] Sprite[] characterSprites;
+    [SerializeField] Image[] redTeamImage = new Image[3];
+    [SerializeField] Image[] blueTeamImage = new Image[3];
 
     private void Start()
     {
@@ -30,7 +33,8 @@ public class LobbyMenu : MonoBehaviour
         MyNetworkManager.ClientOnConnected += HandleClientConnected;
         MyNetworkMenuPlayer.AuthorityOnPartyOwnerStateUpdated += AuthorityHandlePartyOwnerStateUpdated;
         MyNetworkMenuPlayer.ClientOnInfoUpdated += ClientHandleInfoUpdated;
-        MyNetworkMenuPlayer.OnClientTeamUpdated += ClientHandleTeamUpdated;
+        MyNetworkMenuPlayer.OnClientTeamUpdated += UpdateNameLists;
+        MyNetworkMenuPlayer.ClientOnCharacterUpdated += UpdateNameLists;
     }
 
     private void OnDestroy()
@@ -38,7 +42,8 @@ public class LobbyMenu : MonoBehaviour
         MyNetworkManager.ClientOnConnected -= HandleClientConnected;
         MyNetworkMenuPlayer.AuthorityOnPartyOwnerStateUpdated -= AuthorityHandlePartyOwnerStateUpdated;
         MyNetworkMenuPlayer.ClientOnInfoUpdated -= ClientHandleInfoUpdated;
-        MyNetworkMenuPlayer.OnClientTeamUpdated -= ClientHandleTeamUpdated;
+        MyNetworkMenuPlayer.OnClientTeamUpdated -= UpdateNameLists;
+        MyNetworkMenuPlayer.ClientOnCharacterUpdated -= UpdateNameLists;
     }
     
     // When a client connects to the server, they set the Lobby UI to be active.
@@ -172,11 +177,6 @@ public class LobbyMenu : MonoBehaviour
         }
     }
     
-    void ClientHandleTeamUpdated()
-    {
-        UpdateNameLists();
-    }
-    
     public void UpdateNameLists()
     {
         List<MyNetworkMenuPlayer> menuPlayers = ((MyNetworkManager)NetworkManager.singleton).MenuPlayers;
@@ -184,11 +184,13 @@ public class LobbyMenu : MonoBehaviour
         for (int i = 0; i < redTeamNames.Length; i++)
         {
             redTeamNames[i].text = "Waiting For Player...";
+            redTeamImage[i].sprite = characterSprites[characterSprites.Length-1];
         }
 
         for (int i = 0; i < blueTeamNames.Length; i++)
         {
             blueTeamNames[i].text = "Waiting For Player...";
+            blueTeamImage[i].sprite = characterSprites[characterSprites.Length - 1];
         }
 
         for (int i = 0; i < menuPlayers.Count; i++)
@@ -200,6 +202,7 @@ public class LobbyMenu : MonoBehaviour
                     if (redTeamNames[j].text == "Waiting For Player...")
                     {
                         redTeamNames[j].text = menuPlayers[i].GetDisplayName();
+                        redTeamImage[j].sprite = characterSprites[menuPlayers[i].ChosenCharacter];
                         break;
                     }
                 }
@@ -212,6 +215,7 @@ public class LobbyMenu : MonoBehaviour
                     if (blueTeamNames[j].text == "Waiting For Player...")
                     {
                         blueTeamNames[j].text = menuPlayers[i].GetDisplayName();
+                        blueTeamImage[j].sprite = characterSprites[menuPlayers[i].ChosenCharacter];
                         break;
                     }
                 }

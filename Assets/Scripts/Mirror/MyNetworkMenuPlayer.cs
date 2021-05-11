@@ -17,6 +17,7 @@ public class MyNetworkMenuPlayer : NetworkBehaviour
     public static event Action<bool> AuthorityOnPartyOwnerStateUpdated;
     public static event Action OnClientTeamUpdated;
     public static event Action ClientOnInfoUpdated;
+    public static event Action ClientOnCharacterUpdated;
 
     [SyncVar(hook = nameof(HandlePlayerTeamAssigned))]
     [SerializeField] string teamName;
@@ -33,6 +34,7 @@ public class MyNetworkMenuPlayer : NetworkBehaviour
     [SyncVar(hook = nameof(HandlePlayerColorUpdated))]
     [SerializeField] Color playerColor = Color.white;
 
+    [SyncVar(hook = nameof(HandlePlayerCharacterUpdated))]
     [SerializeField] int chosenCharacter;
 
     [SerializeField] TMP_Text displayNameText = null;
@@ -254,5 +256,10 @@ public class MyNetworkMenuPlayer : NetworkBehaviour
         chosenCharacter = charactedIndex;
     }
 
+    [Client]
+    void HandlePlayerCharacterUpdated(int oldValue, int newValue)
+    {
+        ClientOnCharacterUpdated?.Invoke();
+    }
     #endregion
 }
