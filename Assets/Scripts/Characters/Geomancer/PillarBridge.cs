@@ -38,10 +38,7 @@ public class PillarBridge : NetworkBehaviour
 
     Vector3 playerFuturePosition;
 
-    GameObject magicExplosionLeft;
-    GameObject magicExplosionRight;
-    GameObject magicExplosionAbove;
-    GameObject magicExplosionBelow;
+    GameObject pillarSmoke;
 
     float timer = 0;
     bool hasSpawnedPillar = false;
@@ -54,7 +51,7 @@ public class PillarBridge : NetworkBehaviour
     {
         groundTransform = GameObject.FindGameObjectsWithTag("Ground");
         hasSpawnedPillar = false;
-        useAbility = gameObject.GetComponent<UseAbilities>();        
+        useAbility = gameObject.GetComponent<UseAbilities>(); 
     }
 
     [Client]
@@ -131,20 +128,10 @@ public class PillarBridge : NetworkBehaviour
     [Command]
     void CmdSpawnHitEffect()
     {
-        Vector3 left = new Vector3(-2, 1, 0);
-        Vector3 right = new Vector3(2, 1, 0);
-        Vector3 above = new Vector3(0, 1, -2);
-        Vector3 under = new Vector3(0, 1, 2);
 
-        magicExplosionLeft = Instantiate(hitEffect, groundPositionUnderPlayer + left, Quaternion.identity) as GameObject;
-        magicExplosionRight = Instantiate(hitEffect, groundPositionUnderPlayer + right, Quaternion.identity) as GameObject;
-        magicExplosionAbove = Instantiate(hitEffect, groundPositionUnderPlayer + above, Quaternion.identity) as GameObject;
-        magicExplosionBelow = Instantiate(hitEffect, groundPositionUnderPlayer + under, Quaternion.identity) as GameObject;
+        pillarSmoke = Instantiate(hitEffect, groundPositionUnderPlayer, Quaternion.identity) as GameObject;
+        NetworkServer.Spawn(pillarSmoke);
 
-        NetworkServer.Spawn(magicExplosionLeft);
-        NetworkServer.Spawn(magicExplosionRight);
-        NetworkServer.Spawn(magicExplosionAbove);
-        NetworkServer.Spawn(magicExplosionBelow);
     }
 
     [Command]
@@ -152,10 +139,7 @@ public class PillarBridge : NetworkBehaviour
     {
         Vector3 playerMove = playerMovement.move * playerMovement.speed * Time.deltaTime;
        
-        magicExplosionLeft.transform.Translate(playerMove, Space.World);
-        magicExplosionRight.transform.Translate(playerMove, Space.World);
-        magicExplosionAbove.transform.Translate(playerMove, Space.World);
-        magicExplosionBelow.transform.Translate(playerMove, Space.World);
+        pillarSmoke.transform.Translate(playerMove, Space.World);
 
     }
     [Command]

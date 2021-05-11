@@ -15,20 +15,30 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField]
     LayerMask groundMask;
 
+    [SerializeField] AnimationClip runningAnimation;
+    float timer;
+
     public bool isGrounded;
+
+    bool playingAnim = false;
 
     [SerializeField]
     KeyCode jumpButton;
     [SerializeField]
     float jumpPower;
-
+    Animator anim;
     float x;
     float z;
     [SerializeField]
     float gravity = -9.81f;
 
     public Vector3 move;
-    public Vector3 velocity;  
+    public Vector3 velocity;
+
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
 
     #region Server
     [Command]
@@ -45,7 +55,7 @@ public class PlayerMovement : NetworkBehaviour
     {
         if (!hasAuthority)
             return;
-
+        
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
 
@@ -61,6 +71,18 @@ public class PlayerMovement : NetworkBehaviour
         if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2;
+        }
+
+        timer += Time.deltaTime;
+
+        if (move.x != 0 || move.z != 0)
+        {
+            Debug.Log("Inside");
+            if (timer> runningAnimation.length)
+            {
+                anim.Play(runningAnimation.name);
+                timer = 0;                
+            }            
         }
 
         move = transform.right * x + transform.forward * z;

@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1737291233341285240}
-  - component: {fileID: 2806874751226023647}
-  - component: {fileID: 8717352103709134443}
   - component: {fileID: 3981856394343552687}
   - component: {fileID: -1919569724117732052}
+  - component: {fileID: 5375050644507232039}
+  - component: {fileID: 4891889093614785501}
   m_Layer: 0
   m_Name: PillarBridgeSmoke
   m_TagString: Untagged
@@ -28,13 +28,43 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1295856588731438336}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1, y: 1, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!2083052967 &2806874751226023647
+--- !u!114 &3981856394343552687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1295856588731438336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 094afedfda236ce4a9b23d05100ef1d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeTime: 5
+--- !u!114 &-1919569724117732052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1295856588731438336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  visible: 0
+  m_AssetId: 
+  hasSpawned: 0
+--- !u!2083052967 &5375050644507232039
 VisualEffect:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -51,21 +81,27 @@ VisualEffect:
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 6
+      - m_Value: 500
         m_Name: Spawn Rate
-        m_Overridden: 0
-      - m_Value: 1.5
-        m_Name: LifeTime
-        m_Overridden: 0
-    m_Vector2f:
-      m_Array:
-      - m_Value: {x: -30, y: 30}
-        m_Name: Angle Min/Max
         m_Overridden: 1
+      - m_Value: 5
+        m_Name: LifeTime
+        m_Overridden: 1
+      - m_Value: 0.1
+        m_Name: Initial Velocity Divergence
+        m_Overridden: 1
+      - m_Value: 1
+        m_Name: Drag
+        m_Overridden: 1
+      - m_Value: 2
+        m_Name: Soft Particle Fade Distance
+        m_Overridden: 1
+    m_Vector2f:
+      m_Array: []
     m_Vector3f:
       m_Array:
-      - m_Value: {x: 2, y: 3, z: 2}
-        m_Name: Bounds_size
+      - m_Value: {x: 0, y: 0, z: 0}
+        m_Name: Initial Position_position
         m_Overridden: 0
     m_Vector4f:
       m_Array: []
@@ -81,22 +117,22 @@ VisualEffect:
           serializedVersion: 2
           m_Curve:
           - serializedVersion: 3
-            time: -0.024291992
-            value: 0.5665879
-            inSlope: 0.033458468
-            outSlope: 0.033458468
+            time: 0.0083351135
+            value: 0.5022569
+            inSlope: 0.4983209
+            outSlope: 0.4983209
             tangentMode: 34
             weightedMode: 0
             inWeight: 0
-            outWeight: 0.33333334
+            outWeight: 0
           - serializedVersion: 3
-            time: 1
-            value: 0.60085917
-            inSlope: 0.033458468
-            outSlope: 0.033458468
+            time: 1.0249939
+            value: 1.0088792
+            inSlope: 0.4983209
+            outSlope: 0.4983209
             tangentMode: 34
             weightedMode: 0
-            inWeight: 0.33333334
+            inWeight: 0
             outWeight: 0
           m_PreInfinity: 2
           m_PostInfinity: 2
@@ -107,43 +143,40 @@ VisualEffect:
       m_Array:
       - m_Value:
           serializedVersion: 2
-          key0: {r: 1, g: 1, b: 1, a: 0}
-          key1: {r: 1, g: 1, b: 1, a: 1}
-          key2: {r: 0, g: 0, b: 0, a: 0.9577465}
+          key0: {r: 1, g: 0.4255889, b: 0, a: 1}
+          key1: {r: 1, g: 0.4593778, b: 0.05882353, a: 1}
+          key2: {r: 1, g: 1, b: 1, a: 0}
           key3: {r: 0, g: 0, b: 0, a: 0}
           key4: {r: 0, g: 0, b: 0, a: 0}
           key5: {r: 0, g: 0, b: 0, a: 0}
           key6: {r: 0, g: 0, b: 0, a: 0}
           key7: {r: 0, g: 0, b: 0, a: 0}
-          ctime0: 0
-          ctime1: 65535
-          ctime2: 0
+          ctime0: 39321
+          ctime1: 51850
+          ctime2: 65535
           ctime3: 0
           ctime4: 0
           ctime5: 0
           ctime6: 0
           ctime7: 0
           atime0: 0
-          atime1: 5975
-          atime2: 50886
-          atime3: 65535
+          atime1: 65535
+          atime2: 0
+          atime3: 0
           atime4: 0
           atime5: 0
           atime6: 0
           atime7: 0
           m_Mode: 0
-          m_NumColorKeys: 2
-          m_NumAlphaKeys: 4
+          m_NumColorKeys: 3
+          m_NumAlphaKeys: 2
         m_Name: Color Over Life
-        m_Overridden: 0
+        m_Overridden: 1
     m_NamedObject:
-      m_Array:
-      - m_Value: {fileID: 2800000, guid: de0fae515169ff246a20d58a8a440ed0, type: 3}
-        m_Name: Main Texture
-        m_Overridden: 0
+      m_Array: []
     m_Bool:
       m_Array: []
---- !u!73398921 &8717352103709134443
+--- !u!73398921 &4891889093614785501
 VFXRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -183,33 +216,3 @@ VFXRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &3981856394343552687
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1295856588731438336}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 094afedfda236ce4a9b23d05100ef1d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lifeTime: 5
---- !u!114 &-1919569724117732052
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1295856588731438336}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 0
-  serverOnly: 0
-  visible: 0
-  m_AssetId: 
-  hasSpawned: 0

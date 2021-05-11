@@ -34,7 +34,7 @@ public class BoulderTrail : NetworkBehaviour
     private void Update()
     {        
         timer += Time.deltaTime;
-        if (timer % 0.7 > 0 && timer % 0.7 < 0.1) // 0.1 sec window to set a new dropPosition. every 0.7 sec
+        if (timer % 0.3 > 0 && timer % 0.3 < 0.1) // 0.1 sec window to set a new dropPosition. every 0.7 sec
         {
             dropPosition = stoneSpawnPosition.transform.position;
         }
