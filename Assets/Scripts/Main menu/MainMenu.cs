@@ -12,6 +12,7 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField] GameObject landingPagePanel;
     [SerializeField] bool useSteam = false;
+    [SerializeField] MyNetworkManager myNetworkManager;
 
     protected Callback<LobbyCreated_t> lobbyCreated;
     protected Callback<GameLobbyJoinRequested_t> gameLobbyJoinRequested;
@@ -36,7 +37,7 @@ public class MainMenu : MonoBehaviour
 
         if (useSteam)
         {
-            SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypeFriendsOnly, MyNetworkManager.playersRequiredToStart);
+            SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypeFriendsOnly, myNetworkManager.maxConnections);
             return;
         }
 
