@@ -9,6 +9,8 @@ public class Settings : MonoBehaviour
     public AudioMixer audioMixer;
     public Dropdown resDropDown;
     Resolution[] resolutions;
+    bool alreadyAdded = false;
+
 
     private void Start()
     {
@@ -22,21 +24,27 @@ public class Settings : MonoBehaviour
 
         for (int i = 0; i < resolutions.Length; i++)
         {
-            
             string option = resolutions[i].width + " x " + resolutions[i].height;
+            
+            alreadyAdded = false;
             options.Add(option);
+            
 
-            if(resolutions[i].width == Screen.currentResolution.width 
-                && resolutions[i].height == Screen.currentResolution.height)
+            if (resolutions[i].width == Screen.width
+                    && resolutions[i].height == Screen.height)
             {
                 currentResolutionIndex = i;
             }
-        }
 
+        }
+        Screen.SetResolution(1920, 1080, Screen.fullScreen);
+        SetFullSreen(true);
         resDropDown.AddOptions(options);
         resDropDown.value = currentResolutionIndex;
         resDropDown.RefreshShownValue();
+        
     }
+
 
     public void SetVolume(float volume)
     {
@@ -67,5 +75,10 @@ public class Settings : MonoBehaviour
     public void SetFullSreen(bool isFullScreen)
     {
         Screen.fullScreen = isFullScreen;
+    }
+
+    public void SetMouseSense(float mouseSense)
+    {
+        MouseLook.mouseSensitivity = mouseSense;
     }
 }

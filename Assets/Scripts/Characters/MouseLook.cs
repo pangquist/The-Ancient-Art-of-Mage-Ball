@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MouseLook : NetworkBehaviour
 {
-    public float mouseSensitivity = 100f;
+    public static float mouseSensitivity = 100f;
     [SerializeField] Camera playerCamera;
 
     float xRotation = 0f;
