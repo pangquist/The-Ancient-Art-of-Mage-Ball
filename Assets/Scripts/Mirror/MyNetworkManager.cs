@@ -169,7 +169,7 @@ public class MyNetworkManager : NetworkManager
             selectedScene = "Playground";
         }
     }
-
+    
     public override void OnStopClient()
     {
         Players.Clear();
