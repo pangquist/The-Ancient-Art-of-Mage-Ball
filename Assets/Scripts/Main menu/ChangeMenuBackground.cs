@@ -21,6 +21,17 @@ public class ChangeMenuBackground : MonoBehaviour
         SceneSelect.OnMenuBackgroundUpdated -= ChangeBackground;
     }
 
+    private void Update()
+    {
+        for (int i = 0; i < backgrounds.Length; i++)
+        {
+            if (backgrounds[i].name == networkManager.SelectedScene)
+            {
+                gameObject.GetComponent<Image>().sprite = backgrounds[i];
+            }
+        }
+    }
+
     public void ToggleSceneWindow(bool state)
     {
         List<MyNetworkMenuPlayer> menuPlayers = networkManager.MenuPlayers;
