@@ -20,6 +20,10 @@ public class LobbyMenu : MonoBehaviour
     private List<string[]> menuPlayers = new List<string[]>();
 
 
+    [SerializeField] int redPlayers = 0;
+    [SerializeField] int bluePlayers = 0;
+
+
     private void Start()
     {
         Debug.Log("Lobbymenu started! Subscribing to events!");
@@ -129,8 +133,6 @@ public class LobbyMenu : MonoBehaviour
             return;
         }
 
-        int redPlayers = 0;
-        int bluePlayers = 0;
         
         if (team == "Red Team")
         {
@@ -151,6 +153,10 @@ public class LobbyMenu : MonoBehaviour
 
             localMenuPlayer.CmdSetTeamName("Blue Team");
         }
+
+        //Vhanged position on these ones!
+        redPlayers = 0;
+        bluePlayers = 0;
 
         foreach (MyNetworkMenuPlayer player in menuPlayers)
         {

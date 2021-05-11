@@ -28,5 +28,6 @@ public class CharacterSelect : MonoBehaviour
             }
         }
         characterImage.sprite = characterImages[characterIndex];
+        //Get the players current position, the image and give the image the sprite of the character
     }
 }
