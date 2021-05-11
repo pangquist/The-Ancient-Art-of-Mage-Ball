@@ -15,7 +15,6 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField]
     LayerMask groundMask;
 
-    [SerializeField] AnimationClip runningAnimation;
     float timer;
 
     public bool isGrounded;
@@ -73,21 +72,31 @@ public class PlayerMovement : NetworkBehaviour
             velocity.y = -2;
         }
 
-        timer += Time.deltaTime;
+        //timer += Time.deltaTime;
+
+        //if (move.x != 0 || move.z != 0)
+        //{
+        //    Debug.Log("Inside");
+        //    if (timer> runningAnimation.length)
+        //    {
+        //        anim.Play(runningAnimation.name);
+        //        timer = 0;                
+        //    }            
+        //}
+
+        move = transform.right * x + transform.forward * z;
 
         if (move.x != 0 || move.z != 0)
         {
-            Debug.Log("Inside");
-            if (timer> runningAnimation.length)
-            {
-                anim.Play(runningAnimation.name);
-                timer = 0;                
-            }            
+            Running();
+        }
+        else
+        {
+            Idle();
         }
 
-        move = transform.right * x + transform.forward * z;
-        
-        CmdMove(move, velocity);
+
+            CmdMove(move, velocity);
     }
 
     [ClientRpc]
@@ -95,6 +104,17 @@ public class PlayerMovement : NetworkBehaviour
     {
         controller.Move(_move * speed * Time.deltaTime); //X and Z
         controller.Move(_velocity * Time.deltaTime); //Y
+    }
+    [Client]
+    void Idle()
+    {
+        anim.SetFloat("Speed", 0);
+    }
+
+    [Client]
+    void Running()
+    {
+        anim.SetFloat("Speed", 1f, 0.1f, Time.deltaTime);
     }
     #endregion
 }
