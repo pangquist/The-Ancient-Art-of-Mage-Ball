@@ -51,11 +51,9 @@ public class InGameMenu : MonoBehaviour
         gameIsPaused = true;
     }
 
-
     public void QuitGame()
     {
         Debug.Log("Quitted Game");
         Application.Quit();
-        //UnityEditor.EditorApplication.isPlaying = false;
     }
 }

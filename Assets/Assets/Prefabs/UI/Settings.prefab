@@ -2596,6 +2596,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: a2f8cedd03163d74f9e5896a1a093144, type: 2}
   resDropDown: {fileID: 1208939884023186787}
+  qualityDropDown: {fileID: 2447474911330567595}
+  masterSlider: {fileID: 2349433180195478805}
+  sfxSlider: {fileID: 4491692287969020335}
+  musicSlider: {fileID: 8809259333240457696}
+  senseSlider: {fileID: 7150876407416917284}
+  fullscreenToggler: {fileID: 3841876743059382930}
 --- !u!1 &3372190724442119519
 GameObject:
   m_ObjectHideFlags: 0
