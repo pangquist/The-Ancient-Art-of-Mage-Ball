@@ -89,6 +89,7 @@ public class MyNetworkPlayer : NetworkBehaviour
 
     public override void OnStartAuthority()
     {
+        gameObject.GetComponent<AudioListener>().enabled = true;
         inGameUI.SetActive(true);
         nameCanvas.SetActive(false);
         gamestateManager = GameObject.Find("GamestateManager").GetComponent<GamestateManager>();

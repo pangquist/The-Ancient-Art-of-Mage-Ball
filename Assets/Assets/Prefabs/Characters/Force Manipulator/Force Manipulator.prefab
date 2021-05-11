@@ -2432,6 +2432,7 @@ GameObject:
   - component: {fileID: 8625832493932510498}
   - component: {fileID: 6004741204329823607}
   - component: {fileID: 8404522335574230688}
+  - component: {fileID: 7825197277653462414}
   m_Layer: 9
   m_Name: Force Manipulator
   m_TagString: Player
@@ -2610,7 +2611,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  mouseSensitivity: 500
   playerCamera: {fileID: 3758272145470057082}
 --- !u!114 &5012954450347326743
 MonoBehaviour:
@@ -2774,6 +2774,14 @@ MonoBehaviour:
   range: 0
   duration: 4.5
   force: {x: 0, y: 4.5, z: 0}
+--- !u!81 &7825197277653462414
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3758272146365123707}
+  m_Enabled: 0
 --- !u!1 &3906260169555093223
 GameObject:
   m_ObjectHideFlags: 0
