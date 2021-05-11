@@ -4,11 +4,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ChangeMenuBackground : MonoBehaviour
+public class ChangeMenuBackground : NetworkBehaviour
 {
     MyNetworkManager networkManager;
     [SerializeField] Sprite[] backgrounds = new Sprite[0];
     [SerializeField] GameObject sceneSelectCanvas;
+    [SyncVar(hook= nameof(HandleMapChange))]
+    [SerializeField] string chosenMapName;
+
+    public void SetMapName(string name)
+    {
+        chosenMapName = name;
+    }
 
     private void Start()
     {
@@ -19,6 +26,17 @@ public class ChangeMenuBackground : MonoBehaviour
     private void OnDestroy()
     {
         SceneSelect.OnMenuBackgroundUpdated -= ChangeBackground;
+    }
+    
+    void HandleMapChange(string oldValue, string newValue)
+    {
+        for (int i = 0; i < backgrounds.Length; i++)
+        {
+            if (backgrounds[i].name == chosenMapName)
+            {
+                gameObject.GetComponent<Image>().sprite = backgrounds[i];
+            }
+        }
     }
 
     public void ToggleSceneWindow(bool state)

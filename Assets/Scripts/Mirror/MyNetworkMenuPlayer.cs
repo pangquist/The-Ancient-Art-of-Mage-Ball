@@ -32,7 +32,7 @@ public class MyNetworkMenuPlayer : NetworkBehaviour
 
     [SyncVar(hook = nameof(HandlePlayerColorUpdated))]
     [SerializeField] Color playerColor = Color.white;
-    
+
     [SerializeField] int chosenCharacter;
 
     [SerializeField] TMP_Text displayNameText = null;
@@ -121,6 +121,8 @@ public class MyNetworkMenuPlayer : NetworkBehaviour
         if (NetworkServer.active)
             return;
 
+        SceneSelect.OnMenuBackgroundUpdated += HandleSceneChanged;
+
         ((MyNetworkManager)NetworkManager.singleton).MenuPlayers.Add(this);
     }
 
@@ -131,6 +133,7 @@ public class MyNetworkMenuPlayer : NetworkBehaviour
         if (!hasAuthority)
             return;
 
+        SceneSelect.OnMenuBackgroundUpdated -= HandleSceneChanged;
         ((MyNetworkManager)NetworkManager.singleton).MenuPlayers.Remove(this);
     }
 
@@ -153,6 +156,12 @@ public class MyNetworkMenuPlayer : NetworkBehaviour
         {
             CmdSetDisplayName($"Player 1");
         }
+    }
+
+    [Client]
+    void HandleSceneChanged()
+    {
+        Debug.Log("Scene has been changed!");
     }
 
     private void AuthorityHandlePartyOwnerStateUpdated(bool oldState, bool newState)
