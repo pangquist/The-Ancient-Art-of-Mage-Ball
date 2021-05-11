@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class MouseLook : NetworkBehaviour
 {
-    [SerializeField] float mouseSensitivity = 100f;
+    public static float mouseSensitivity = 100f;
     [SerializeField] Camera playerCamera;
 
     float xRotation = 0f;
-    float mouseXRotation;
-    float mouseYRotation;
+    float mouseX;
+    float mouseY;
 
     private void Start()
     {
@@ -22,21 +22,27 @@ public class MouseLook : NetworkBehaviour
         playerCamera.gameObject.GetComponent<Camera>().enabled = true;
         enabled = true;
     }
-    
+
     void Update()
     {
         if (!hasAuthority)
-        {
             return;
+        if (!InGameMenu.gameIsPaused)
+        {
+            
+
+            mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+            mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+
+            xRotation -= mouseY;
+            xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+
+
+            gameObject.transform.Rotate(Vector3.up * mouseX);
+            playerCamera.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
         }
 
-        mouseXRotation = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        mouseYRotation = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
-        xRotation -= mouseYRotation;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
-        gameObject.transform.Rotate(Vector3.up * mouseXRotation);
-        playerCamera.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
     }
 }
