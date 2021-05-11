@@ -17,7 +17,7 @@ public class SceneSelect : MonoBehaviour
 
     public void ChangeSelectedScene(string sceneName)
     {
-        networkManager.SelectedScene = sceneName;
+        ((MyNetworkManager)NetworkManager.singleton).SelectedScene = sceneName;
         OnMenuBackgroundUpdated?.Invoke();
     }
 }
