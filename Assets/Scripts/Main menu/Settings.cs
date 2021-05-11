@@ -3,48 +3,40 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using System.Linq;
 
 public class Settings : MonoBehaviour
 {
     public AudioMixer audioMixer;
     public Dropdown resDropDown;
     Resolution[] resolutions;
-    bool alreadyAdded = false;
-
 
     private void Start()
     {
-        resolutions = Screen.resolutions;
-
+        int currentRefreshRate = Screen.currentResolution.refreshRate;
+        resolutions = Screen.resolutions.Where(resolution => resolution.refreshRate == currentRefreshRate).ToArray();
         resDropDown.ClearOptions();
-
         List<string> options = new List<string>();
-
         int currentResolutionIndex = 0;
 
         for (int i = 0; i < resolutions.Length; i++)
         {
             string option = resolutions[i].width + " x " + resolutions[i].height;
-            
-            alreadyAdded = false;
             options.Add(option);
-            
 
             if (resolutions[i].width == Screen.width
                     && resolutions[i].height == Screen.height)
             {
                 currentResolutionIndex = i;
             }
-
         }
-        Screen.SetResolution(1920, 1080, Screen.fullScreen);
+
         SetFullSreen(true);
         resDropDown.AddOptions(options);
         resDropDown.value = currentResolutionIndex;
+        SetResolution(currentResolutionIndex);
         resDropDown.RefreshShownValue();
-        
     }
-
 
     public void SetVolume(float volume)
     {
