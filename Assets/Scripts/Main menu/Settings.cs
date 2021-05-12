@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using System.Linq;
+using System;
 
 public class Settings : MonoBehaviour
 {
@@ -89,7 +90,8 @@ public class Settings : MonoBehaviour
     public void SetResolutionsValues()
     {
         int currentRefreshRate = Screen.currentResolution.refreshRate;
-        resolutions = Screen.resolutions.Where(resolution => resolution.refreshRate == currentRefreshRate).ToArray();
+        
+        resolutions = Screen.resolutions.Where(resolution => resolution.refreshRate >= currentRefreshRate).ToArray();
         resDropDown.ClearOptions();
         List<string> options = new List<string>();
         int currentResolutionIndex = 0;
