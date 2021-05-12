@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LobbyMenu : MonoBehaviour
+public class LobbyMenu : NetworkBehaviour
 {
     [SerializeField] GameObject lobbyUI;
     [SerializeField] Button startGameButton;
@@ -19,8 +19,9 @@ public class LobbyMenu : MonoBehaviour
     
     private List<string[]> menuPlayers = new List<string[]>();
 
-
+    [SyncVar (hook = nameof(HandlePlayersChanged))]
     [SerializeField] int redPlayers = 0;
+    [SyncVar(hook = nameof(HandlePlayersChanged))]
     [SerializeField] int bluePlayers = 0;
 
     [SerializeField] Sprite[] characterSprites;
@@ -75,7 +76,6 @@ public class LobbyMenu : MonoBehaviour
     {
         startGameButton.gameObject.SetActive(state);
     }
-
     
     // Method that is connected to the action event from MyNetworkPlayer. This method activates whenever the player name is changed on the client and gets the displayname and writes it out on the corresponding slot in the lobby.
     void ClientHandleInfoUpdated() 
@@ -97,12 +97,9 @@ public class LobbyMenu : MonoBehaviour
             return;
         }
 
-        int redPlayers = 0;
-        int bluePlayers = 0;
-
         foreach(MyNetworkMenuPlayer player in menuPlayers)
         {
-            if(player.TeamName == "Red Team")
+            if (player.TeamName == "Red Team" || player.TeamName == "")
             {
                 redPlayers++;
             }
@@ -112,8 +109,7 @@ public class LobbyMenu : MonoBehaviour
             }
         }
 
-
-        if(redPlayers >= 3 && bluePlayers < 3)
+        if (redPlayers >= 3 && bluePlayers < 3)
         {
             newPlayer.CmdSetTeamName("Blue Team");
         }
@@ -122,7 +118,7 @@ public class LobbyMenu : MonoBehaviour
             newPlayer.CmdSetTeamName("Red Team");
         }
 
-        startGameButton.interactable = menuPlayers.Count >= MyNetworkManager.playersRequiredToStart; 
+        startGameButton.interactable = menuPlayers.Count >= MyNetworkManager.playersRequiredToStart;
     }
     
     public void ChangeTeam(string team)
@@ -138,7 +134,6 @@ public class LobbyMenu : MonoBehaviour
             return;
         }
 
-        
         if (team == "Red Team")
         {
             if (redPlayers >= 3 || localMenuPlayer.TeamName == "Red Team")
@@ -158,29 +153,31 @@ public class LobbyMenu : MonoBehaviour
 
             localMenuPlayer.CmdSetTeamName("Blue Team");
         }
-
-        //Vhanged position on these ones!
-        redPlayers = 0;
-        bluePlayers = 0;
-
-        foreach (MyNetworkMenuPlayer player in menuPlayers)
-        {
-            if (player.TeamName == "Red Team")
-            {
-                redPlayers++;
-            }
-
-            else if (player.TeamName == "Blue Team")
-            {
-                bluePlayers++;
-            }
-        }
     }
     
     public void UpdateNameLists()
     {
         List<MyNetworkMenuPlayer> menuPlayers = ((MyNetworkManager)NetworkManager.singleton).MenuPlayers;
-        
+
+        int numberOfRedPlayer = 0;
+        int numberOfBluePlayer = 0;
+
+        foreach (MyNetworkMenuPlayer player in menuPlayers)
+        {
+            if (player.TeamName == "Red Team")
+            {
+                numberOfRedPlayer++;
+            }
+
+            else if (player.TeamName == "Blue Team")
+            {
+                numberOfBluePlayer++;
+            }
+        }
+
+        redPlayers = numberOfRedPlayer;
+        bluePlayers = numberOfBluePlayer;
+
         for (int i = 0; i < redTeamNames.Length; i++)
         {
             redTeamNames[i].text = "Waiting For Player...";
@@ -223,5 +220,10 @@ public class LobbyMenu : MonoBehaviour
                 }
             }
         }
+    }
+
+    void HandlePlayersChanged(int oldValue, int newValue)
+    {
+        UpdateNameLists();
     }
 }

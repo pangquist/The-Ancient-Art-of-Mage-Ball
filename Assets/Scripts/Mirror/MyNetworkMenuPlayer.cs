@@ -35,7 +35,7 @@ public class MyNetworkMenuPlayer : NetworkBehaviour
     [SerializeField] Color playerColor = Color.white;
 
     [SyncVar(hook = nameof(HandlePlayerCharacterUpdated))]
-    [SerializeField] int chosenCharacter;
+    [SerializeField] int chosenCharacter = 0;
 
     [SerializeField] TMP_Text displayNameText = null;
     [SerializeField] TMP_Text redScoreText;
