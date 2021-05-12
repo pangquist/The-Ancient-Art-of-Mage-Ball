@@ -8951,8 +8951,8 @@ MonoBehaviour:
   redPlayers: 0
   bluePlayers: 0
   characterSprites:
-  - {fileID: 21300000, guid: c1c8224f2956ea449a5be23c74e91b8f, type: 3}
-  - {fileID: 21300000, guid: 654036297ce232e44a5f3d20d6b80b9e, type: 3}
+  - {fileID: 21300000, guid: bf29e64e4a02f9d4782d0412d19d2228, type: 3}
+  - {fileID: 21300000, guid: db29bfa4118488c4b9e73bc5327edec3, type: 3}
   - {fileID: 21300000, guid: e27be3938de5039409a3de2dc7d09f40, type: 3}
   redTeamImage:
   - {fileID: 1259647667}
