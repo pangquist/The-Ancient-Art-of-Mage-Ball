@@ -20,7 +20,7 @@ public class PlayerMovement : NetworkBehaviour
 
     float directionX;
     float directionZ;
-    float groundDistance = 0.2f;
+    float groundDistance = 0.6f;
     Vector3 move;
     public Vector3 velocity;
     public bool isGrounded;
