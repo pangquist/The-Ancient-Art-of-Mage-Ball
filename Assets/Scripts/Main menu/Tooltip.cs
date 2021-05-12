@@ -17,7 +17,6 @@ public class Tooltip : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        
     }
 
     public void ShowToolTip(GameObject tooltipGO,Tooltip tooltip, string content, string header = "")
@@ -34,8 +33,6 @@ public class Tooltip : MonoBehaviour
         
         tooltip.contentField.text = content;
         tooltip.headerField.text = header;
-        
-        
     }
 
     public void HideToolTip(GameObject tooltip)
@@ -43,8 +40,6 @@ public class Tooltip : MonoBehaviour
         tooltip.SetActive(false);
     }
     
-
-
     private void Update()
     {
 
@@ -54,9 +49,13 @@ public class Tooltip : MonoBehaviour
             int contentLength = contentField.text.Length;
 
             if (headerLength > characterLimit || contentLength > characterLimit)
+            {
                 layoutElement.enabled = true;
+            }
             else
+            {
                 layoutElement.enabled = false;
+            }
         }
 
     }
