@@ -158,29 +158,32 @@ public class LobbyMenu : MonoBehaviour
 
             localMenuPlayer.CmdSetTeamName("Blue Team");
         }
-
-        //Vhanged position on these ones!
-        redPlayers = 0;
-        bluePlayers = 0;
-
-        foreach (MyNetworkMenuPlayer player in menuPlayers)
-        {
-            if (player.TeamName == "Red Team")
-            {
-                redPlayers++;
-            }
-
-            else if (player.TeamName == "Blue Team")
-            {
-                bluePlayers++;
-            }
-        }
     }
     
     public void UpdateNameLists()
     {
         List<MyNetworkMenuPlayer> menuPlayers = ((MyNetworkManager)NetworkManager.singleton).MenuPlayers;
-        
+
+        int numberOfRedPlayer = 0;
+        int numberOfBluePlayer = 0;
+
+        foreach (MyNetworkMenuPlayer player in menuPlayers)
+        {
+            if (player.TeamName == "Red Team")
+            {
+                numberOfRedPlayer++;
+            }
+
+            else if (player.TeamName == "Blue Team")
+            {
+                numberOfBluePlayer++;
+            }
+        }
+
+        redPlayers = numberOfRedPlayer;
+        bluePlayers = numberOfBluePlayer;
+
+
         for (int i = 0; i < redTeamNames.Length; i++)
         {
             redTeamNames[i].text = "Waiting For Player...";
