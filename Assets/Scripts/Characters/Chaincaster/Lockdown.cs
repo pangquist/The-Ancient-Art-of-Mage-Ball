@@ -5,13 +5,15 @@ using UnityEngine;
 
 public class Lockdown : NetworkBehaviour
 {
-    private LineRenderer lr, targetLr1, targetLr2, targetLr3;
-    private GameObject targetPoint1, targetPoint2, targetPoint3;
-    private Material material;
+    private LineRenderer chain1, chain2, chain3;
+    private GameObject anchor1, anchor2, anchor3;
     private RaycastHit raycastHit;
     private GameObject target;
     private PlayerMovement playerMovement;
+    private Vector2 offsetSpeed = new Vector2(15, 0);
 
+    [SerializeField] GameObject chain;
+    [SerializeField] Material material;
     [SerializeField] LayerMask grappleable;
     [SerializeField] Transform castPoint, camera, player;
     [SerializeField] private float maxRange = 25f;
@@ -28,29 +30,6 @@ public class Lockdown : NetworkBehaviour
 
     private void Awake()
     {
-        lr = GetComponent<LineRenderer>();
-
-        lr.positionCount = 0;
-
-        material = lr.material;
-
-        targetPoint1 = new GameObject();
-        targetPoint2 = new GameObject();
-        targetPoint3 = new GameObject();
-
-        targetLr1 = targetPoint1.AddComponent<LineRenderer>();
-        targetLr2 = targetPoint2.AddComponent<LineRenderer>();
-        targetLr3 = targetPoint3.AddComponent<LineRenderer>();
-
-        targetLr1.positionCount = 0;
-        targetLr1.material = lr.material;
-
-        targetLr2.positionCount = 0;
-        targetLr2.material = lr.material;
-
-        targetLr3.positionCount = 0;
-        targetLr3.material = lr.material;
-
         currentDuration = duration;
     }
 
@@ -64,27 +43,26 @@ public class Lockdown : NetworkBehaviour
 
         currentDuration -= Time.deltaTime;
 
+        material.mainTextureOffset += offsetSpeed * Time.deltaTime;
+
         if (currentDuration <= 0)
         {
             StopLockdown();
         }
 
-        Collider[] hitColliders = Physics.OverlapSphere(target.transform.position, 5f);
-        foreach (var hitCollider in hitColliders)
-        {
-            if(targetPoint1.transform.position == Vector3.zero)
-            {
-                targetPoint1.transform.position = hitCollider.ClosestPoint(target.transform.position);
-            }
-            else if (targetPoint2.transform.position == Vector3.zero)
-            {
-                targetPoint2.transform.position = hitCollider.ClosestPoint(target.transform.position);
-            }
-            else if (targetPoint3.transform.position == Vector3.zero)
-            {
-                targetPoint3.transform.position = hitCollider.ClosestPoint(target.transform.position);
-            }
-        }
+        Rigidbody ball = target.gameObject.GetComponent<Rigidbody>();
+
+        anchor1.transform.LookAt(target.transform);
+        anchor2.transform.LookAt(target.transform);
+        anchor3.transform.LookAt(target.transform);
+
+        Vector3 vector1 = anchor1.transform.position - target.transform.position;
+        Vector3 vector2 = anchor2.transform.position - target.transform.position;
+        Vector3 vector3 = anchor2.transform.position - target.transform.position;
+
+        ball.AddForce(vector1 * 20 * Time.deltaTime);
+        ball.AddForce(vector2 * 20 * Time.deltaTime);
+        ball.AddForce(vector3 * 20 * Time.deltaTime);
     }
 
     private void LateUpdate()
@@ -100,9 +78,20 @@ public class Lockdown : NetworkBehaviour
         {
             target = hit.transform.gameObject;
 
-            targetLr1.positionCount = 2;
-            targetLr2.positionCount = 2;
-            targetLr3.positionCount = 2;
+            anchor1 = Instantiate(chain, target.transform.position + Random.insideUnitSphere * 5, transform.rotation) as GameObject;
+            anchor2 = Instantiate(chain, target.transform.position + Random.insideUnitSphere * 5, transform.rotation) as GameObject;
+            anchor3 = Instantiate(chain, target.transform.position + Random.insideUnitSphere * 5, transform.rotation) as GameObject;
+
+            NetworkServer.Spawn(anchor1);
+            NetworkServer.Spawn(anchor2);
+            NetworkServer.Spawn(anchor3);
+
+            chain1 = anchor1.GetComponent<LineRenderer>();
+            chain2 = anchor2.GetComponent<LineRenderer>();
+            chain3 = anchor3.GetComponent<LineRenderer>();
+            chain1.positionCount = 2;
+            chain2.positionCount = 2;
+            chain3.positionCount = 2;
 
             lockActive = true;
 
@@ -112,27 +101,26 @@ public class Lockdown : NetworkBehaviour
 
     void StopLockdown()
     {
-        currentDuration = duration;
-        targetLr1.positionCount = 0;
-        targetLr2.positionCount = 0;
-        targetLr3.positionCount = 0;
+        Destroy(anchor1);
+        Destroy(anchor2);
+        Destroy(anchor3);
 
-        targetPoint1.transform.position = Vector3.zero;
-        targetPoint2.transform.position = Vector3.zero;
-        targetPoint3.transform.position = Vector3.zero;
+        currentDuration = duration;
+
+        lockActive = false;
     }
 
     void DrawChains()
     {
-        if (targetLr1.positionCount == 0) return;
+        if (!lockActive) return;
 
-        targetLr1.SetPosition(0, targetPoint1.transform.position);
-        targetLr1.SetPosition(1, raycastHit.point);
+        chain1.SetPosition(0, anchor1.transform.position);
+        chain1.SetPosition(1, target.transform.position);
 
-        targetLr2.SetPosition(0, targetPoint2.transform.position);
-        targetLr2.SetPosition(1, raycastHit.point);
+        chain2.SetPosition(0, anchor2.transform.position);
+        chain2.SetPosition(1, target.transform.position);
 
-        targetLr3.SetPosition(0, targetPoint3.transform.position );
-        targetLr3.SetPosition(1, raycastHit.point);
+        chain3.SetPosition(0, anchor3.transform.position );
+        chain3.SetPosition(1, target.transform.position);
     }
 }
