@@ -184,13 +184,13 @@ public class LobbyMenu : MonoBehaviour
         for (int i = 0; i < redTeamNames.Length; i++)
         {
             redTeamNames[i].text = "Waiting For Player...";
-            redTeamImage[i].sprite = characterSprites[characterSprites.Length-1];
+            redTeamImage[i].enabled = false;
         }
 
         for (int i = 0; i < blueTeamNames.Length; i++)
         {
             blueTeamNames[i].text = "Waiting For Player...";
-            blueTeamImage[i].sprite = characterSprites[characterSprites.Length - 1];
+            blueTeamImage[i].enabled = false;
         }
 
         for (int i = 0; i < menuPlayers.Count; i++)
@@ -202,6 +202,7 @@ public class LobbyMenu : MonoBehaviour
                     if (redTeamNames[j].text == "Waiting For Player...")
                     {
                         redTeamNames[j].text = menuPlayers[i].GetDisplayName();
+                        redTeamImage[j].enabled = true;
                         redTeamImage[j].sprite = characterSprites[menuPlayers[i].ChosenCharacter];
                         break;
                     }
@@ -215,6 +216,7 @@ public class LobbyMenu : MonoBehaviour
                     if (blueTeamNames[j].text == "Waiting For Player...")
                     {
                         blueTeamNames[j].text = menuPlayers[i].GetDisplayName();
+                        blueTeamImage[j].enabled = true;
                         blueTeamImage[j].sprite = characterSprites[menuPlayers[i].ChosenCharacter];
                         break;
                     }
