@@ -17337,6 +17337,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8192599543309878284, guid: 11113dcaab48bff4ca9c20a955500a94,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.453
+      objectReference: {fileID: 0}
+    - target: {fileID: 8192599543309878284, guid: 11113dcaab48bff4ca9c20a955500a94,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.022
+      objectReference: {fileID: 0}
+    - target: {fileID: 8192599543309878284, guid: 11113dcaab48bff4ca9c20a955500a94,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.299
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11113dcaab48bff4ca9c20a955500a94, type: 3}
 --- !u!1001 &1762125987
@@ -18828,6 +18843,7 @@ GameObject:
   - component: {fileID: 1935959782}
   - component: {fileID: 1935959784}
   - component: {fileID: 1935959783}
+  - component: {fileID: 1935959785}
   m_Layer: 0
   m_Name: rock4_LOD1 (1)
   m_TagString: Untagged
@@ -18897,6 +18913,20 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1935959781}
+  m_Mesh: {fileID: 4300002, guid: 146537144f4cc704280ea83956b7354d, type: 3}
+--- !u!64 &1935959785
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935959781}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
   m_Mesh: {fileID: 4300002, guid: 146537144f4cc704280ea83956b7354d, type: 3}
 --- !u!1001 &1950537326
 PrefabInstance:
@@ -19678,17 +19708,17 @@ PrefabInstance:
     - target: {fileID: 1057844747638869208, guid: f0c5056fa9166bb4f9ee4a85022aaab2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.17519
+      value: -79.9
       objectReference: {fileID: 0}
     - target: {fileID: 1057844747638869208, guid: f0c5056fa9166bb4f9ee4a85022aaab2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.36
+      value: 5.03
       objectReference: {fileID: 0}
     - target: {fileID: 1057844747638869208, guid: f0c5056fa9166bb4f9ee4a85022aaab2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -88.66001
+      value: -34.85
       objectReference: {fileID: 0}
     - target: {fileID: 1057844747638869208, guid: f0c5056fa9166bb4f9ee4a85022aaab2,
         type: 3}
