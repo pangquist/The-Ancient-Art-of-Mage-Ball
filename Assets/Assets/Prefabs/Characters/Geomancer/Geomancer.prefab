@@ -1909,19 +1909,18 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2502805589157441407}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c335ff1cc46bcbe49a372a8e61d66424, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  pillarBridgePrefab: {fileID: 100000, guid: 633fe62a85a30ad4a9506e1704f472c5, type: 3}
+  pillarBridgePrefab: {fileID: 0}
   abilityDuration: 5
   pillarSpawnInterval: 0.3
   forceUpwards: 3
-  hitEffect: {fileID: 1295856588731438336, guid: adfe2ec0ca790154db6c00c640ca4f6d,
-    type: 3}
+  hitEffect: {fileID: 0}
   ballForce: 200
   offSetPillarSpawnMultiplier: 2
 --- !u!1 &2504937733938519409

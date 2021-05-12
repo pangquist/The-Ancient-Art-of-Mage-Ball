@@ -50,21 +50,21 @@ public class ThrowBoulder : NetworkBehaviour
         {
             directionOfBoulder =  mainCamera.transform.forward;
         }
+        Vector3 forceDirection = mainCamera.transform.forward;
         projectileInstance = Instantiate(boulderPrefab, boulderStartPoint.position, Quaternion.identity);
 
-        CmdBoulderThrow(directionOfBoulder); //calls command to spawn and add force to the instantiated object
+        CmdBoulderThrow(directionOfBoulder, forceDirection, projectileInstance); //calls command to spawn and add force to the instantiated object
     }
 
     #endregion
 
     #region Server
     [Command]
-    void CmdBoulderThrow(Vector3 directionOfBoulder)
+    void CmdBoulderThrow(Vector3 directionOfBoulder, Vector3 direction, GameObject projectileServerSpawn)
     {
-        NetworkServer.Spawn(projectileInstance, connectionToClient);
-
+        NetworkServer.Spawn(projectileServerSpawn);
         projectileInstance.GetComponent<Rigidbody>().AddForce(directionOfBoulder.normalized * throwForceForward, ForceMode.Force);
-        projectileInstance.GetComponent<Rigidbody>().AddForce(mainCamera.transform.up * throwForceUpward, ForceMode.Force);
+        projectileInstance.GetComponent<Rigidbody>().AddForce(direction * throwForceUpward, ForceMode.Force);
     }
 
     #endregion
