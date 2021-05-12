@@ -1763,7 +1763,7 @@ MonoBehaviour:
   groundCheck: {fileID: 441384181115929202}
   groundMask:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 1088
   isGrounded: 0
   jumpButton: 32
   jumpPower: 6
@@ -1895,10 +1895,10 @@ MonoBehaviour:
   ability1Name: {fileID: 7400000, guid: 10530bb4f36826b4fb8700f3fd2e21e0, type: 2}
   castAbility2Button: 324
   cooldownAbility2: 1
-  ability2Name: {fileID: 7400000, guid: 91a7aa5e20ee43d4bb6f2132b52025ed, type: 2}
+  ability2Name: {fileID: 0}
   castAbility3Button: 101
   cooldownAbility3: 5
-  ability3Name: {fileID: 7400000, guid: d10693a90854a244d85f40eb4661f7a6, type: 2}
+  ability3Name: {fileID: 0}
   castAbility4Button: 0
   cooldownAbility4: 0
   ability4Name: {fileID: 0}
@@ -1909,7 +1909,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2502805589157441407}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c335ff1cc46bcbe49a372a8e61d66424, type: 3}
   m_Name: 

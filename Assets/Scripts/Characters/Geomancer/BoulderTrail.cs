@@ -22,19 +22,28 @@ public class BoulderTrail : NetworkBehaviour
 
     Vector3 dropPosition;
 
-    float timer = 0;
+    float timer;
+
     GameObject projectileInstance;
+
+    public override void OnStartAuthority()
+    {
+        enabled = true;
+    }
 
     private void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
+        float timer = 0;
     }
 
     [Client]
     private void Update()
     {        
         timer += Time.deltaTime;
-        if (timer % 0.3 > 0 && timer % 0.3 < 0.1) // 0.1 sec window to set a new dropPosition. every 0.7 sec
+
+        Debug.Log(timer + "for" + gameObject.transform.position);
+        if (timer % 0.4 > 0 && timer % 0.4 < 0.1) // 0.1 sec window to set a new dropPosition. every 0.7 sec
         {
             dropPosition = stoneSpawnPosition.transform.position;
         }
@@ -48,14 +57,15 @@ public class BoulderTrail : NetworkBehaviour
                     gameObject.transform.position.z > dropPosition.z + dropPositionMarginalToPlayer ||
                     gameObject.transform.position.z < dropPosition.z - dropPositionMarginalToPlayer)
                 {
-                    CmdDropBoulder();//Spawns boulder
+                    CmdDropBoulder(dropPosition);//Spawns boulder
+                    timer = 0;
                 }
             }
         }
     }
 
     [Command]
-    void CmdDropBoulder()
+    void CmdDropBoulder(Vector3 dropPosition)
     {        
             stonePrefab.transform.localScale = new Vector3(Random.Range(scaleMin, scaleMax), Random.Range(scaleMin, scaleMax), Random.Range(scaleMin, scaleMax));
             projectileInstance = Instantiate(stonePrefab, dropPosition, Quaternion.identity);
@@ -63,7 +73,7 @@ public class BoulderTrail : NetworkBehaviour
             CmdSpawnHitEffect();
 
             NetworkServer.Spawn(projectileInstance, connectionToClient);
-            timer = 0;
+            
     }
     [Command]
     void CmdSpawnHitEffect()
