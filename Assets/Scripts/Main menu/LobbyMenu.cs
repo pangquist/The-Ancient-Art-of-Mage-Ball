@@ -23,6 +23,7 @@ public class LobbyMenu : MonoBehaviour
     [SerializeField] int redPlayers = 0;
     [SerializeField] int bluePlayers = 0;
 
+    [SerializeField] GameObject[] mapButtons;
     [SerializeField] Sprite[] characterSprites;
     [SerializeField] Image[] redTeamImage = new Image[3];
     [SerializeField] Image[] blueTeamImage = new Image[3];
@@ -74,6 +75,11 @@ public class LobbyMenu : MonoBehaviour
     void AuthorityHandlePartyOwnerStateUpdated(bool state)
     {
         startGameButton.gameObject.SetActive(state);
+        foreach (GameObject mapButton in mapButtons)
+        {
+            mapButton.GetComponent<Button>().enabled = true;
+            mapButton.GetComponent<OnHoverButton>().enabled = true;
+        }
     }
 
     

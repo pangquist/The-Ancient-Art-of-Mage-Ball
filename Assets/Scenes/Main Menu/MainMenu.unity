@@ -443,7 +443,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Archy
+          m_StringArgument: Archy the Archmage
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &54057265
@@ -681,6 +681,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 754492410}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &70374725 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7027079361099392648, guid: f9f2dd1600203254eabef20669d45d98,
+    type: 3}
+  m_PrefabInstance: {fileID: 2726291146046865531}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b0fecffa3f624585964b0d0eb21b18e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &78866971
 GameObject:
   m_ObjectHideFlags: 0
@@ -2570,7 +2582,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Archy
+  m_text: Archy the Archmage
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
@@ -2660,6 +2672,8 @@ GameObject:
   - component: {fileID: 432759725}
   - component: {fileID: 432759724}
   - component: {fileID: 432759727}
+  - component: {fileID: 432759729}
+  - component: {fileID: 432759728}
   m_Layer: 0
   m_Name: MapSelectionScreen
   m_TagString: Untagged
@@ -2761,6 +2775,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeBackground: {fileID: 2051290248}
+--- !u!114 &432759728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 432759722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.7058824}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &432759729
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 432759722}
+  m_CullTransparentMesh: 1
 --- !u!114 &442861475 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2447474911330567595, guid: b33521ddef89b284881744b4ad3d8cb2,
@@ -3663,6 +3715,8 @@ GameObject:
   - component: {fileID: 662605747}
   - component: {fileID: 662605746}
   - component: {fileID: 662605749}
+  - component: {fileID: 662605751}
+  - component: {fileID: 662605750}
   m_Layer: 0
   m_Name: CharacterSelectScreen
   m_TagString: Untagged
@@ -3770,6 +3824,44 @@ MonoBehaviour:
   characterImages:
   - {fileID: 21300000, guid: c1c8224f2956ea449a5be23c74e91b8f, type: 3}
   - {fileID: 21300000, guid: 654036297ce232e44a5f3d20d6b80b9e, type: 3}
+--- !u!114 &662605750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662605744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.7058824}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &662605751
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662605744}
+  m_CullTransparentMesh: 1
 --- !u!1 &707012065
 GameObject:
   m_ObjectHideFlags: 0
@@ -4005,18 +4097,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 713050593}
   m_CullTransparentMesh: 1
---- !u!114 &734484980 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 763365374, guid: f9f2dd1600203254eabef20669d45d98,
-    type: 3}
-  m_PrefabInstance: {fileID: 2726291146046865531}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea368fb6f27ec2f40a40e20977992b9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &754492410
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6164,7 +6244,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1067611730}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31e85bb188be374419c28ad30cc1c24a, type: 3}
   m_Name: 
@@ -6176,7 +6256,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1067611730}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -6222,7 +6302,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: MagicalForest
+          m_StringArgument: Magical Forest
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 432759722}
@@ -6456,7 +6536,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1118702434}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -6562,7 +6642,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1118702434}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31e85bb188be374419c28ad30cc1c24a, type: 3}
   m_Name: 
@@ -7576,7 +7656,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1304837421}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -7682,7 +7762,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1304837421}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31e85bb188be374419c28ad30cc1c24a, type: 3}
   m_Name: 
@@ -8215,18 +8295,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 965061994}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 181803654}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -9902,10 +9970,13 @@ MonoBehaviour:
   - {fileID: 801817982}
   redPlayers: 0
   bluePlayers: 0
+  mapButtons:
+  - {fileID: 1304837421}
+  - {fileID: 1118702434}
+  - {fileID: 1067611730}
   characterSprites:
   - {fileID: 21300000, guid: bf29e64e4a02f9d4782d0412d19d2228, type: 3}
   - {fileID: 21300000, guid: db29bfa4118488c4b9e73bc5327edec3, type: 3}
-  - {fileID: 21300000, guid: e27be3938de5039409a3de2dc7d09f40, type: 3}
   redTeamImage:
   - {fileID: 1259647667}
   - {fileID: 275067162}
@@ -9949,7 +10020,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -126.482, y: -73.966}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1655216728
 MonoBehaviour:
@@ -11386,13 +11457,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3392718763726121946, guid: b33521ddef89b284881744b4ad3d8cb2,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3392718763726121946, guid: b33521ddef89b284881744b4ad3d8cb2,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 965061994}
+      objectReference: {fileID: 181803654}
     - target: {fileID: 3392718763726121946, guid: b33521ddef89b284881744b4ad3d8cb2,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 3392718763726121946, guid: b33521ddef89b284881744b4ad3d8cb2,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3445757650211655536, guid: b33521ddef89b284881744b4ad3d8cb2,
         type: 3}
@@ -12158,6 +12239,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a91eba80be9e502428fa723191ba0609, type: 3}
   - {fileID: 21300000, guid: 20e6814c9a091be429a56c7f83bd1b99, type: 3}
   sceneSelectCanvas: {fileID: 432759722}
+  sceneNameText: {fileID: 1655216728}
   chosenMapName: 
 --- !u!114 &2051290249
 MonoBehaviour:
@@ -12747,7 +12829,7 @@ PrefabInstance:
         type: 3}
       propertyPath: transport
       value: 
-      objectReference: {fileID: 734484980}
+      objectReference: {fileID: 70374725}
     - target: {fileID: 7027079361099392651, guid: f9f2dd1600203254eabef20669d45d98,
         type: 3}
       propertyPath: m_Name

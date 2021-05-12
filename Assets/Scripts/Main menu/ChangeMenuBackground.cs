@@ -1,6 +1,7 @@
 using Mirror;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,7 @@ public class ChangeMenuBackground : NetworkBehaviour
     MyNetworkManager networkManager;
     [SerializeField] Sprite[] backgrounds = new Sprite[0];
     [SerializeField] GameObject sceneSelectCanvas;
+    [SerializeField] TMP_Text sceneNameText;
     [SyncVar(hook= nameof(HandleMapChange))]
     [SerializeField] string chosenMapName;
 
@@ -35,6 +37,7 @@ public class ChangeMenuBackground : NetworkBehaviour
             if (backgrounds[i].name == chosenMapName)
             {
                 gameObject.GetComponent<Image>().sprite = backgrounds[i];
+                sceneNameText.text = backgrounds[i].name;
             }
         }
     }
