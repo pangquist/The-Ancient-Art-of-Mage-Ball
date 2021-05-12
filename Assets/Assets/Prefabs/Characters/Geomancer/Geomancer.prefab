@@ -1764,7 +1764,6 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 1024
-  runningAnimation: {fileID: 7400000, guid: 4722e147e552d3c46af557905a1c7a73, type: 2}
   isGrounded: 0
   jumpButton: 32
   jumpPower: 6
@@ -1923,7 +1922,7 @@ MonoBehaviour:
   forceUpwards: 3
   hitEffect: {fileID: 1295856588731438336, guid: adfe2ec0ca790154db6c00c640ca4f6d,
     type: 3}
-  ballForce: 100
+  ballForce: 200
   offSetPillarSpawnMultiplier: 2
 --- !u!1 &2504937733938519409
 GameObject:
