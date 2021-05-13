@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 8411324308295044390}
   - component: {fileID: 8413375738975072130}
   - component: {fileID: 8423554194334785626}
-  - component: {fileID: 6361618498168177270}
-  m_Layer: 0
+  - component: {fileID: 7287756585219781113}
+  m_Layer: 6
   m_Name: RosPumpa
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -82,8 +82,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6361618498168177270
-MeshCollider:
+--- !u!136 &7287756585219781113
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -92,7 +92,7 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300052, guid: 62e6e864606372a4c9902b06ace8289a, type: 3}
+  m_Radius: 0.3673331
+  m_Height: 1.2711809
+  m_Direction: 1
+  m_Center: {x: 0.034402113, y: 0.6093973, z: 0.0021066866}
