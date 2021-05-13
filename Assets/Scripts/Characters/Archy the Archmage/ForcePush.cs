@@ -6,7 +6,6 @@ using UnityEngine;
 public class ForcePush : NetworkBehaviour
 {
     [SerializeField] Camera mainCamera;
-    [SerializeField] PlayerMovement playerMovement;
     [SerializeField] LayerMask[] hitableLayers;
     
     RaycastHit hit;
@@ -14,7 +13,6 @@ public class ForcePush : NetworkBehaviour
     [SerializeField] float range;
     [SerializeField] float pushAmount;
     [SerializeField] float pushRadius;
-    [SerializeField] float forceJumpHeight;
     [SerializeField] GameObject hitEffect;
     Rigidbody pushedBody;
 
@@ -53,14 +51,7 @@ public class ForcePush : NetworkBehaviour
             }
         }
     }
-    
-    
 
-    [Client]
-    void DoForceJump()
-    {
-         playerMovement.velocity.y += forceJumpHeight;
-    }
     #endregion
     #region Server
 
@@ -96,9 +87,6 @@ public class ForcePush : NetworkBehaviour
     [Command]
     void CmdDoPush(GameObject ball)
     {
-        //ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        //ball.GetComponent<Rigidbody>().AddExplosionForce(pushAmount, hit.point, pushRadius);
-        //ServerMoveBall(ball);
         RpcMoveBall(ball);
     }
 
