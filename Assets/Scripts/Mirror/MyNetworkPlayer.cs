@@ -27,6 +27,7 @@ public class MyNetworkPlayer : NetworkBehaviour
     [SerializeField] TMP_Text blueScoreText;
     [SerializeField] TMP_Text timeText;
     [SerializeField] GameObject nameCanvas;
+    [SerializeField] GameObject settingsCanvas;
 
 
     [SerializeField] GamestateManager gamestateManager;
@@ -89,6 +90,7 @@ public class MyNetworkPlayer : NetworkBehaviour
 
     public override void OnStartAuthority()
     {
+        settingsCanvas.SetActive(true);
         gameObject.GetComponent<AudioListener>().enabled = true;
         inGameUI.SetActive(true);
         nameCanvas.SetActive(false);

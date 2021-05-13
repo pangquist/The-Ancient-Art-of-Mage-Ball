@@ -2485,6 +2485,7 @@ MonoBehaviour:
   blueScoreText: {fileID: 8125929851197043906}
   timeText: {fileID: 2956713848170468877}
   nameCanvas: {fileID: 2125650449804872296}
+  settingsCanvas: {fileID: 5645776363944970007}
   gamestateManager: {fileID: 0}
 --- !u!136 &3758272146365123710
 CapsuleCollider:
@@ -5210,8 +5211,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: InGameMenuCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 823015156951041711, guid: be83251efa637d447a4aafc371a13301,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be83251efa637d447a4aafc371a13301, type: 3}
+--- !u!1 &5645776363944970007 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 823015156951041711, guid: be83251efa637d447a4aafc371a13301,
+    type: 3}
+  m_PrefabInstance: {fileID: 4986114103369580984}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &5645776363944970011 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 823015156951041699, guid: be83251efa637d447a4aafc371a13301,
