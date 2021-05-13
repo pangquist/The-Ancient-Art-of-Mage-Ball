@@ -69,10 +69,11 @@ public class MyNetworkManager : NetworkManager
 
         foreach (MyNetworkMenuPlayer menuPlayer in MenuPlayers)
         {
-            string[] characterInfo = new string[3];
-            characterInfo[0] = menuPlayer.GetDisplayName();
-            characterInfo[1] = menuPlayer.TeamName;
-            characterInfo[2] = menuPlayer.ChosenCharacter.ToString();
+            string[] characterInfo = new string[4];
+            characterInfo[0] = menuPlayer.SteamId.ToString();
+            characterInfo[1] = menuPlayer.GetDisplayName();
+            characterInfo[2] = menuPlayer.TeamName;
+            characterInfo[3] = menuPlayer.ChosenCharacter.ToString();
 
             CharacterInfoList.Add(characterInfo);
         }
@@ -141,7 +142,7 @@ public class MyNetworkManager : NetworkManager
         {
             NetworkPlayerSpawner spawner = conn.identity.GetComponent<NetworkPlayerSpawner>();
             Spawners.Add(spawner);
-            spawner.AssignCharacterPrefab(Spawners.Count - 1);
+            spawner.AssignCharacterPrefab();
         }
     }
 

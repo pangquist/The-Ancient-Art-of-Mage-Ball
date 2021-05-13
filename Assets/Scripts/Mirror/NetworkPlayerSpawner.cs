@@ -1,4 +1,5 @@
 using Mirror;
+using Steamworks;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,11 +14,19 @@ public class NetworkPlayerSpawner : NetworkBehaviour
     
     // Called on the server from the network Manager to assign each player their chosen player prefab (character).
     [Server]
-    public void AssignCharacterPrefab(int playerIndex)
+    public void AssignCharacterPrefab()
     {
         List<string[]> characterInfoList = ((MyNetworkManager)NetworkManager.singleton).CharacterInfoList;
-        
-        chosenCharacter = Convert.ToInt32(characterInfoList[playerIndex].GetValue(2));
+
+        CSteamID steamId = SteamUser.GetSteamID();
+
+        foreach (string[] infoArray in characterInfoList)
+        {
+            if (steamId.ToString() == infoArray.GetValue(0).ToString())
+            {
+                chosenCharacter = Convert.ToInt32(infoArray.GetValue(3));
+            }
+        }
 
         SpawnCharacter(chosenCharacter);
     }

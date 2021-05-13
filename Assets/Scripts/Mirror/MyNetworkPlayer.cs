@@ -192,9 +192,9 @@ public class MyNetworkPlayer : NetworkBehaviour
         List<MyNetworkPlayer> players = ((MyNetworkManager)NetworkManager.singleton).Players;
         List<string[]> characterInfoList = ((MyNetworkManager)NetworkManager.singleton).CharacterInfoList;
 
-        displayName = characterInfoList[playerIndex].GetValue(0).ToString();
-        teamName = characterInfoList[playerIndex].GetValue(1).ToString();
-        chosenCharacter = Convert.ToInt32(characterInfoList[playerIndex].GetValue(2));
+        displayName = characterInfoList[playerIndex].GetValue(1).ToString();
+        teamName = characterInfoList[playerIndex].GetValue(2).ToString();
+        chosenCharacter = Convert.ToInt32(characterInfoList[playerIndex].GetValue(3));
     }
     #endregion
 
