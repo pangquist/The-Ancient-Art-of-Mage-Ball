@@ -17,10 +17,25 @@ public class ForcePush : NetworkBehaviour
     Rigidbody pushedBody;
 
     #region Client
-    
+
+    private void Start()
+    {
+        
+    }
+
+    public override void OnStartAuthority()
+    {
+        enabled = true;
+    }
+
     [Client]
     void DoPush()
     {
+        if (!hasAuthority)
+        {
+            return;
+        }
+
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
         foreach (LayerMask hitableLayer in hitableLayers)
@@ -40,68 +55,47 @@ public class ForcePush : NetworkBehaviour
 
 
         CmdSpawnHitEffect(hit.point);
-
         Collider[] colliders = Physics.OverlapSphere(hit.point, pushRadius);
         foreach (Collider pushedObject in colliders)
         {
             if (pushedObject.CompareTag("Enemy"))
             {
                 Debug.Log("Client is pushing!");
-                CmdDoPush(pushedObject.gameObject);
+                CmdMoveBall(pushedObject.gameObject, hit.point);
             }
         }
     }
 
     #endregion
     #region Server
+    
+    [Command]
+    void CmdMoveBall(GameObject pushedObject, Vector3 location)
+    {
+        pushedObject.GetComponent<Rigidbody>().AddExplosionForce(pushAmount, location, pushRadius);
+    }
 
     [Command]
     void CmdSpawnHitEffect(Vector3 hitLocation)
     {
         GameObject magicExplosion = Instantiate(hitEffect, hitLocation, Quaternion.identity) as GameObject;
         NetworkServer.Spawn(magicExplosion);
-        Debug.Log($"Intantiating the hit effect: {magicExplosion}");
+        Debug.Log($"Instantiating the hit effect: {magicExplosion}");
     }
 
-    [Command]
-    void CmdDoChargePush()
-    {
-        pushedBody.AddExplosionForce(pushAmount * 1.5f, transform.position + transform.forward * 7, pushRadius * 1.5f);
-    }
+    //[ClientRpc]
+    //void RpcMoveBall(Vector3 location)
+    //{
+    //    Collider[] colliders = Physics.OverlapSphere(location, pushRadius);
+    //    foreach (Collider pushedObject in colliders)
+    //    {
+    //        if (pushedObject.CompareTag("Enemy"))
+    //        {
+    //            Debug.Log($"Player: {gameObject.GetComponent<MyNetworkPlayer>().GetDisplayName()}, Ball: {pushedObject.gameObject.name}, Location: {location}, Velocity: {pushedObject.gameObject.GetComponent<Rigidbody>().velocity}, Push Amount: {pushAmount}");
+    //            pushedObject.GetComponent<Rigidbody>().AddForce(new Vector3(0,200,0));
+    //        }
+    //    }
 
-    [ClientCallback]
-    void DoChargePush()
-    {
-        Collider[] colliders = Physics.OverlapSphere(transform.position + transform.forward * 7, pushRadius);
-        CmdSpawnHitEffect(transform.position + transform.forward * 7);
-        foreach (Collider pushedObject in colliders)
-        {
-            if (pushedObject.CompareTag("Enemy"))
-            {
-                pushedBody = pushedObject.GetComponent<Rigidbody>();
-                CmdDoChargePush();
-            }
-        }
-    }
-
-    [Command]
-    void CmdDoPush(GameObject ball)
-    {
-        RpcMoveBall(ball);
-    }
-
-    [Server]
-    void ServerMoveBall(GameObject ball)
-    {
-        RpcMoveBall(ball);
-    }
-
-    [ClientRpc]
-    void RpcMoveBall(GameObject ball)
-    {
-        Debug.Log("Server is moving the ball for the clients!");
-        ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        ball.GetComponent<Rigidbody>().AddExplosionForce(pushAmount, hit.point, pushRadius);
-    }
+    //}
     #endregion
 }
