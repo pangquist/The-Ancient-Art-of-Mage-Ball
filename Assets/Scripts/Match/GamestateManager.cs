@@ -71,27 +71,27 @@ public class GamestateManager : NetworkBehaviour
     {
         Debug.Log("Trying to find texts!");
 
-        postGameRedScoreDisplay = 
-            GameObject.Find("Canvas").
-            gameObject.transform.Find("BackgroundRedTeam").
-            gameObject.transform.Find("RedTeamScoreText").gameObject.GetComponent<TMP_Text>();
+        //postGameRedScoreDisplay = 
+        //    GameObject.Find("Canvas").
+        //    gameObject.transform.Find("BackgroundRedTeam").
+        //    gameObject.transform.Find("RedTeamScoreText").gameObject.GetComponent<TMP_Text>();
 
-        postGameBlueScoreDisplay =
-            GameObject.Find("Canvas").
-            gameObject.transform.Find("BackgroundBlueTeam").
-            gameObject.transform.Find("BlueTeamScoreText").gameObject.GetComponent<TMP_Text>();
+        //postGameBlueScoreDisplay =
+        //    GameObject.Find("Canvas").
+        //    gameObject.transform.Find("BackgroundBlueTeam").
+        //    gameObject.transform.Find("BlueTeamScoreText").gameObject.GetComponent<TMP_Text>();
 
-        winningTeamText = GameObject.Find("Canvas").gameObject.transform.Find("WinningTeamText").gameObject.GetComponent<TMP_Text>();
+        //winningTeamText = GameObject.Find("Canvas").gameObject.transform.Find("WinningTeamText").gameObject.GetComponent<TMP_Text>();
 
-        Debug.Log("Red: " + redScore + " and Blue: " + blueScore);
+        //Debug.Log("Red: " + redScore + " and Blue: " + blueScore);
 
-        postGameRedScoreDisplay.text = "Red Team score: " + redScore;
-        postGameBlueScoreDisplay.text = "Blue Team score: " + blueScore;
+        //postGameRedScoreDisplay.text = "Red Team score: " + redScore;
+        //postGameBlueScoreDisplay.text = "Blue Team score: " + blueScore;
 
-        if (redScore > blueScore)
-            winningTeamText.text = "Red Team Wins!";
-        else
-            winningTeamText.text = "Blue Team Wins!";
+        //if (redScore > blueScore)
+        //    winningTeamText.text = "Red Team Wins!";
+        //else
+        //    winningTeamText.text = "Blue Team Wins!";
     }
 
     public void ResetScore()
