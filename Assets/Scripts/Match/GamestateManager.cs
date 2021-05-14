@@ -151,20 +151,26 @@ public class GamestateManager : NetworkBehaviour
 
         foreach (MyNetworkPlayer player in players)
         {
-            for (int i = 0; i < redTeam.Count; i++)
+            if (player.TeamName == "Red Team")
             {
-                if (player.GetDisplayName() == redTeam[i])
+                for (int i = 0; i < redTeam.Count; i++)
                 {
-                    player.gameObject.transform.position = spawnpointPositions[i].transform.position;
-                    break;
+                    if (player.GetDisplayName() == redTeam[i])
+                    {
+                        player.gameObject.transform.position = spawnpointPositions[i].transform.position;
+                        break;
+                    }
                 }
             }
-            for (int i = 0; i < blueTeam.Count; i++)
+            else if (player.TeamName == "Blue Team")
             {
-                if (player.GetDisplayName() == blueTeam[i])
+                for (int i = 0; i < blueTeam.Count; i++)
                 {
-                    player.gameObject.transform.position = spawnpointPositions[i + 3].transform.position;
-                    break;
+                    if (player.GetDisplayName() == blueTeam[i])
+                    {
+                        player.gameObject.transform.position = spawnpointPositions[i + 3].transform.position;
+                        break;
+                    }
                 }
             }
         }
