@@ -7,10 +7,12 @@ using System;
 
 public class GamestateManager : NetworkBehaviour
 {
-    public static bool gameIsOver = false;
+    public bool gameIsOver = false;
 
-    List<MyNetworkPlayer> blueTeam = new List<MyNetworkPlayer>();
-    List<MyNetworkPlayer> redTeam = new List<MyNetworkPlayer>();
+    [SerializeField] List<string> redTeam = new List<string>();
+    [SerializeField] List<string> blueTeam = new List<string>();
+    [SerializeField] List<Transform> spawnpointPositions = new List<Transform>();
+    //[SerializeField] Transform[] spawnpointPositions = new Transform[6];
 
     [SerializeField] MyNetworkManager myNetworkManager;
 
@@ -102,7 +104,6 @@ public class GamestateManager : NetworkBehaviour
     
     public void HandleTimeChange(float oldTime, float newTime)
     {
-        
         HandleTimeChanged?.Invoke();
     }
 
@@ -116,6 +117,57 @@ public class GamestateManager : NetworkBehaviour
     {
         Debug.Log("Red score has been changed!");
         HandleScoreChanged?.Invoke();
+    }
+
+    public void StartGame()
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            spawnpointPositions.Add(GameObject.Find("Spawnpoints").transform.GetChild(i));
+        }
+    }
+
+    public void ClearPlayerList()
+    {
+        redTeam.Clear();
+        blueTeam.Clear();
+    }
+
+    public void AddPlayerToTeam(MyNetworkMenuPlayer player, string team)
+    {
+        if (team == "Red")
+        {
+            redTeam.Add(player.GetDisplayName());
+        }
+        else
+        {
+            blueTeam.Add(player.GetDisplayName());
+        }
+    }
+
+    public void OnGoal()
+    {
+        List<MyNetworkPlayer> players = ((MyNetworkManager)NetworkManager.singleton).Players;
+
+        foreach (MyNetworkPlayer player in players)
+        {
+            for (int i = 0; i < redTeam.Count; i++)
+            {
+                if (player.GetDisplayName() == redTeam[i])
+                {
+                    player.gameObject.transform.position = spawnpointPositions[i].transform.position;
+                    break;
+                }
+            }
+            for (int i = 0; i < blueTeam.Count; i++)
+            {
+                if (player.GetDisplayName() == blueTeam[i])
+                {
+                    player.gameObject.transform.position = spawnpointPositions[i + 3].transform.position;
+                    break;
+                }
+            }
+        }
     }
 }
 

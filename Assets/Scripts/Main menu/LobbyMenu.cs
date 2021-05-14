@@ -12,7 +12,7 @@ public class LobbyMenu : MonoBehaviour
     [SerializeField] Button startGameButton;
     [SerializeField] Button changeSceneButton;
 
-    [SerializeField] TeamManager teamManager;
+    [SerializeField] GamestateManager gamestateManager;
 
     [SerializeField] TMP_Text[] redTeamNames = new TMP_Text[3];
     [SerializeField] TMP_Text[] blueTeamNames = new TMP_Text[3];
@@ -170,6 +170,8 @@ public class LobbyMenu : MonoBehaviour
     {
         List<MyNetworkMenuPlayer> menuPlayers = ((MyNetworkManager)NetworkManager.singleton).MenuPlayers;
 
+        gamestateManager.ClearPlayerList();
+
         int numberOfRedPlayer = 0;
         int numberOfBluePlayer = 0;
 
@@ -206,6 +208,7 @@ public class LobbyMenu : MonoBehaviour
         {
             if (menuPlayers[i].TeamName == "Red Team")
             {
+                gamestateManager.AddPlayerToTeam(menuPlayers[i], "Red");
                 for (int j = 0; j < redTeamNames.Length; j++)
                 {
                     if (redTeamNames[j].text == "Waiting For Player...")
@@ -220,6 +223,7 @@ public class LobbyMenu : MonoBehaviour
             }
             else if (menuPlayers[i].TeamName == "Blue Team")
             {
+                gamestateManager.AddPlayerToTeam(menuPlayers[i], "Blue");
                 for (int j = 0; j < blueTeamNames.Length; j++)
                 {
                     if (blueTeamNames[j].text == "Waiting For Player...")

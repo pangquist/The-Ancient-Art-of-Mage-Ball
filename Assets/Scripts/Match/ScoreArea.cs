@@ -14,6 +14,7 @@ public class ScoreArea : NetworkBehaviour
     private void Start()
     {
         ballStartPos = GameObject.Find("BallSpawnPosition");
+        gmManager = GameObject.Find("MenuNetworkManager").transform.GetChild(0).GetComponent<GamestateManager>();
     }
 
     //Triggers an effect when the ball hits the goal, and resets the ball to start position
@@ -39,7 +40,7 @@ public class ScoreArea : NetworkBehaviour
         {
             gmManager.BlueScore += 1;
         }
-        
+        gmManager.OnGoal();
     }
     
     private void ResetBallPosition(GameObject ball)
