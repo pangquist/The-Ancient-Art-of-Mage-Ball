@@ -152,41 +152,11 @@ public class GamestateManager : NetworkBehaviour
         }
     }
 
-    //public void OnGoal()
-    //{
-    //    Debug.Log("ON GOAL GSMANAGER");
-
-    //    List<MyNetworkPlayer> players = ((MyNetworkManager)NetworkManager.singleton).Players;
-
-    //    foreach (MyNetworkPlayer player in players)
-    //    {
-    //        if (player.TeamName == "Red Team")
-    //        {
-    //            for (int i = 0; i < redTeam.Count; i++)
-    //            {
-    //                if (player.GetDisplayName() == redTeam[i])
-    //                {
-    //                    player.Respawn(spawnpointPositions[i].transform.position);
-    //                    break;
-    //                }
-    //            }
-    //        }
-    //        else if (player.TeamName == "Blue Team")
-    //        {
-    //            for (int i = 0; i < blueTeam.Count; i++)
-    //            {
-    //                if (player.GetDisplayName() == blueTeam[i])
-    //                {
-    //                    player.Respawn(spawnpointPositions[i + 3].transform.position);
-    //                    break;
-    //                }
-    //            }
-    //        }
-    //    }
-    //}
     public Vector3 GetRespawnPosition(string name)
     {
         List<MyNetworkPlayer> players = ((MyNetworkManager)NetworkManager.singleton).Players;
+
+        Debug.Log($"NUMBER OF PLAYERS IN LIST: {players.Count}, NAME GIVEN: {name}");
 
         foreach (MyNetworkPlayer player in players)
         {

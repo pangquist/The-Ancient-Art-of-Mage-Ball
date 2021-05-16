@@ -99,7 +99,6 @@ public class MyNetworkPlayer : NetworkBehaviour
         GamestateManager.HandleScoreChanged += SetScoreText;
         GamestateManager.HandleScoreChanged += Respawn;
 
-
         base.OnStartAuthority();
     }
 
@@ -210,7 +209,7 @@ public class MyNetworkPlayer : NetworkBehaviour
         Vector3 respawnPosition = gamestateManager.GetRespawnPosition(GetDisplayName());
 
         Debug.Log($"RESPAWNING! Respawn position: {respawnPosition}");
-        //gameObject.transform.position = respawnPosition;
+        gameObject.transform.position = respawnPosition;
         CmdRespawn(respawnPosition);
     }
 

@@ -12,8 +12,6 @@ public class ScoreArea : NetworkBehaviour
     [SerializeField] GamestateManager gmManager;
     GameObject ballStartPos;
 
-    public static event Action ClientOnGoal;
-
     private void Start()
     {
         ballStartPos = GameObject.Find("BallSpawnPosition");
@@ -42,9 +40,7 @@ public class ScoreArea : NetworkBehaviour
         {
             gmManager.BlueScore += 1;
         }
-        //gmManager.OnGoal();
         Debug.Log("TRIGGERING CLIENT ON GOAL");
-        ClientOnGoal?.Invoke();
     }
     
     private void ResetBallPosition(GameObject ball)
