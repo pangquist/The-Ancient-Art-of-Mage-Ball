@@ -97,6 +97,8 @@ public class MyNetworkPlayer : NetworkBehaviour
         gamestateManager = GameObject.Find("GamestateManager").GetComponent<GamestateManager>();
         GamestateManager.HandleTimeChanged += SetTimerText;
         GamestateManager.HandleScoreChanged += SetScoreText;
+        GamestateManager.HandleScoreChanged += Respawn;
+
 
         base.OnStartAuthority();
     }
@@ -198,12 +200,16 @@ public class MyNetworkPlayer : NetworkBehaviour
     }
 
     [Client]
-    public void Respawn(Vector3 respawnPosition)
+    public void Respawn()
     {
         if (!hasAuthority)
         {
             return;
         }
+
+        Vector3 respawnPosition = gamestateManager.GetRespawnPosition(GetDisplayName());
+
+        Debug.Log($"RESPAWNING! Respawn position: {respawnPosition}");
         //gameObject.transform.position = respawnPosition;
         CmdRespawn(respawnPosition);
     }

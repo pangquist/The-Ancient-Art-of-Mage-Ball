@@ -43,6 +43,7 @@ public class ScoreArea : NetworkBehaviour
             gmManager.BlueScore += 1;
         }
         //gmManager.OnGoal();
+        Debug.Log("TRIGGERING CLIENT ON GOAL");
         ClientOnGoal?.Invoke();
     }
     

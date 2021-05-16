@@ -46,7 +46,7 @@ public class GamestateManager : NetworkBehaviour
     {
         myNetworkManager = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<MyNetworkManager>();
         DontDestroyOnLoad(this.gameObject);
-        ScoreArea.ClientOnGoal += OnGoal;
+        //ScoreArea.ClientOnGoal += OnGoal;
     }
 
     private void Update()
@@ -123,9 +123,11 @@ public class GamestateManager : NetworkBehaviour
         Debug.Log("Red score has been changed!");
         HandleScoreChanged?.Invoke();
     }
-
+    
     public void StartGame()
     {
+        Debug.Log("START GAME IS CALLED");
+
         for (int i = 0; i < 6; i++)
         {
             spawnpointPositions.Add(GameObject.Find("Spawnpoints").transform.GetChild(i));
@@ -150,36 +152,72 @@ public class GamestateManager : NetworkBehaviour
         }
     }
 
-    public void OnGoal()
+    //public void OnGoal()
+    //{
+    //    Debug.Log("ON GOAL GSMANAGER");
+
+    //    List<MyNetworkPlayer> players = ((MyNetworkManager)NetworkManager.singleton).Players;
+
+    //    foreach (MyNetworkPlayer player in players)
+    //    {
+    //        if (player.TeamName == "Red Team")
+    //        {
+    //            for (int i = 0; i < redTeam.Count; i++)
+    //            {
+    //                if (player.GetDisplayName() == redTeam[i])
+    //                {
+    //                    player.Respawn(spawnpointPositions[i].transform.position);
+    //                    break;
+    //                }
+    //            }
+    //        }
+    //        else if (player.TeamName == "Blue Team")
+    //        {
+    //            for (int i = 0; i < blueTeam.Count; i++)
+    //            {
+    //                if (player.GetDisplayName() == blueTeam[i])
+    //                {
+    //                    player.Respawn(spawnpointPositions[i + 3].transform.position);
+    //                    break;
+    //                }
+    //            }
+    //        }
+    //    }
+    //}
+    public Vector3 GetRespawnPosition(string name)
     {
         List<MyNetworkPlayer> players = ((MyNetworkManager)NetworkManager.singleton).Players;
 
         foreach (MyNetworkPlayer player in players)
         {
-            if (player.TeamName == "Red Team")
+            if (player.GetDisplayName() == name)
             {
-                for (int i = 0; i < redTeam.Count; i++)
+                if (player.TeamName == "Red Team")
                 {
-                    if (player.GetDisplayName() == redTeam[i])
+                    for (int i = 0; i < redTeam.Count; i++)
                     {
-                        player.Respawn(spawnpointPositions[i].transform.position);
-                        break;
+                        if (player.GetDisplayName() == redTeam[i])
+                        {
+                            return(spawnpointPositions[i].transform.position);
+                        }
                     }
                 }
-            }
-            else if (player.TeamName == "Blue Team")
-            {
-                for (int i = 0; i < blueTeam.Count; i++)
+                else if (player.TeamName == "Blue Team")
                 {
-                    if (player.GetDisplayName() == blueTeam[i])
+                    for (int i = 0; i < blueTeam.Count; i++)
                     {
-                        player.Respawn(spawnpointPositions[i + 3].transform.position);
-                        break;
+                        if (player.GetDisplayName() == blueTeam[i])
+                        {
+                            return(spawnpointPositions[i + 3].transform.position);
+                        }
                     }
                 }
             }
         }
+
+        return new Vector3(0, 0, 0);
     }
+
 }
 
  
