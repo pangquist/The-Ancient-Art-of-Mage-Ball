@@ -38,10 +38,15 @@ public class GamestateManager : NetworkBehaviour
 
     public override void OnStartServer()
     {
-        myNetworkManager = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<MyNetworkManager>();
         time = startTime;
         ResetScore();
+    }
+
+    private void Start()
+    {
+        myNetworkManager = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<MyNetworkManager>();
         DontDestroyOnLoad(this.gameObject);
+        ScoreArea.ClientOnGoal += OnGoal;
     }
 
     private void Update()
@@ -157,7 +162,7 @@ public class GamestateManager : NetworkBehaviour
                 {
                     if (player.GetDisplayName() == redTeam[i])
                     {
-                        player.gameObject.transform.position = spawnpointPositions[i].transform.position;
+                        player.Respawn(spawnpointPositions[i].transform.position);
                         break;
                     }
                 }
@@ -168,7 +173,7 @@ public class GamestateManager : NetworkBehaviour
                 {
                     if (player.GetDisplayName() == blueTeam[i])
                     {
-                        player.gameObject.transform.position = spawnpointPositions[i + 3].transform.position;
+                        player.Respawn(spawnpointPositions[i + 3].transform.position);
                         break;
                     }
                 }

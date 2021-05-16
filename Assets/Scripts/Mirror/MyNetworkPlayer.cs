@@ -196,6 +196,23 @@ public class MyNetworkPlayer : NetworkBehaviour
         teamName = characterInfoList[playerIndex].GetValue(2).ToString();
         chosenCharacter = Convert.ToInt32(characterInfoList[playerIndex].GetValue(3));
     }
+
+    [Client]
+    public void Respawn(Vector3 respawnPosition)
+    {
+        if (!hasAuthority)
+        {
+            return;
+        }
+        //gameObject.transform.position = respawnPosition;
+        CmdRespawn(respawnPosition);
+    }
+
+    [Command]
+    void CmdRespawn(Vector3 respawnPosition)
+    {
+        gameObject.transform.position = respawnPosition;
+    }
     #endregion
 
 }
