@@ -1047,6 +1047,7 @@ MonoBehaviour:
   ability3Text: {fileID: 3128295170139756049}
   ability4Icon: {fileID: 8833966265796846032}
   ability4Text: {fileID: 2652103638419260313}
+  matchStarted: 0
 --- !u!1 &1615283569051389610
 GameObject:
   m_ObjectHideFlags: 0
@@ -2543,6 +2544,7 @@ MonoBehaviour:
   jumpPower: 6
   gravity: -9.81
   speed: 12
+  matchStarted: 0
   velocity: {x: 0, y: 0, z: 0}
   isGrounded: 1
 --- !u!114 &5025287790405866831
@@ -2575,7 +2577,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 0
-  syncInterval: 0.001
+  syncInterval: 0.1
   clientAuthority: 1
   localPositionSensitivity: 0.01
   localRotationSensitivity: 0.01
@@ -2738,6 +2740,7 @@ MonoBehaviour:
   castAbility3Button: 49
   cooldownAbility3: 10
   ability3Name: {fileID: 7400000, guid: 350cadcee6930b6448a626195465363b, type: 2}
+  matchStarted: 0
 --- !u!95 &6004741204329823607
 Animator:
   serializedVersion: 3

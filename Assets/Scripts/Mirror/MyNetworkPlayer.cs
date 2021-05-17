@@ -92,6 +92,9 @@ public class MyNetworkPlayer : NetworkBehaviour
 
     public override void OnStartAuthority()
     {
+        Debug.Log("The client has authority!");
+        base.OnStartAuthority();
+
         settingsCanvas.SetActive(true);
         gameObject.GetComponent<AudioListener>().enabled = true;
         controller = gameObject.GetComponent<CharacterController>();
@@ -100,10 +103,8 @@ public class MyNetworkPlayer : NetworkBehaviour
         gamestateManager = GameObject.Find("GamestateManager").GetComponent<GamestateManager>();
         GamestateManager.HandleTimeChanged += SetTimerText;
         GamestateManager.HandleScoreChanged += SetScoreText;
-        GamestateManager.HandleScoreChanged += Respawn;
-        GamestateManager.HandleMatchStarted += StartGameSpawn;
-
-        base.OnStartAuthority();
+        GamestateManager.HandleScoreChanged += CmdRespawn;
+        GamestateManager.HandleMatchStarted += StartRespawn;
     }
 
     public override void OnStartClient()
@@ -121,8 +122,8 @@ public class MyNetworkPlayer : NetworkBehaviour
 
         GamestateManager.HandleTimeChanged -= SetTimerText;
         GamestateManager.HandleScoreChanged -= SetScoreText;
-        GamestateManager.HandleScoreChanged -= Respawn;
-        GamestateManager.HandleMatchStarted -= StartGameSpawn;
+        GamestateManager.HandleScoreChanged -= CmdRespawn;
+        GamestateManager.HandleMatchStarted -= StartRespawn;
         ((MyNetworkManager)NetworkManager.singleton).Players.Remove(this);
     }
 
@@ -204,9 +205,23 @@ public class MyNetworkPlayer : NetworkBehaviour
         chosenCharacter = Convert.ToInt32(characterInfoList[playerIndex].GetValue(3));
     }
 
-    [Client]
-    public void Respawn()
+    [Command]
+    public void CmdRespawn()
     {
+        Debug.Log($"Checking for authority: {hasAuthority}");
+        
+        Vector3 respawnPosition = gamestateManager.GetRespawnPosition(GetDisplayName());
+
+        Debug.Log($"RESPAWNING! Respawn position: {respawnPosition}");
+        //gameObject.transform.position = respawnPosition;
+        ServerRespawn(respawnPosition);
+    }
+
+    [Client]
+    public void StartRespawn()
+    {
+        Debug.Log($"Checking for authority: {hasAuthority}");
+
         if (!hasAuthority)
         {
             return;
@@ -215,27 +230,14 @@ public class MyNetworkPlayer : NetworkBehaviour
         Vector3 respawnPosition = gamestateManager.GetRespawnPosition(GetDisplayName());
 
         Debug.Log($"RESPAWNING! Respawn position: {respawnPosition}");
-        CmdRespawn(respawnPosition);
-    }
-
-    [Client]
-    void StartGameSpawn()
-    {
-        if (!hasAuthority)
-        {
-            return;
-        }
-
-        Debug.Log("START GAME SPAWN");
-        Respawn();
-    }
-
-    [Command]
-    void CmdRespawn(Vector3 respawnPosition)
-    {
-        Debug.Log($"COMMAND RESPAWNING! Respawn position: {respawnPosition}");
         gameObject.transform.position = respawnPosition;
-        Debug.Log($"the charcters position should now be: {respawnPosition}, AND IT IS: {gameObject.transform.position}");
+        //ServerRespawn(respawnPosition);
+    }
+
+    [Server]
+    void ServerRespawn(Vector3 position)
+    {
+        gameObject.transform.position = position;
     }
     #endregion
 

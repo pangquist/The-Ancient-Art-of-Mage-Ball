@@ -412,6 +412,7 @@ MonoBehaviour:
   jumpPower: 6
   gravity: -9.81
   speed: 12
+  matchStarted: 0
   velocity: {x: 0, y: 0, z: 0}
   isGrounded: 0
 --- !u!114 &7130249670396189663
@@ -444,7 +445,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 0
-  syncInterval: 0.001
+  syncInterval: 0.01
   clientAuthority: 1
   localPositionSensitivity: 0.01
   localRotationSensitivity: 0.01
@@ -630,6 +631,7 @@ MonoBehaviour:
   castAbility3Button: 49
   cooldownAbility3: 5
   ability3Name: {fileID: 7400000, guid: 40b2eff336eb3cd459714aebda6afcc3, type: 2}
+  matchStarted: 0
 --- !u!81 &4269192981277659496
 AudioListener:
   m_ObjectHideFlags: 0

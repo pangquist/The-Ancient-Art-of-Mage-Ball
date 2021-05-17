@@ -68,6 +68,7 @@ public class GamestateManager : NetworkBehaviour
                 matchHasStarted = true;
                 time = matchStartTime;
             }
+            return;
         }
 
         if (matchIsOver) return;
@@ -130,19 +131,19 @@ public class GamestateManager : NetworkBehaviour
     {
         HandleTimeChanged?.Invoke();
     }
-
+    
     public void HandleBlueScore(int oldScore, int newScore)
     {
         Debug.Log("Blue score has been changed!");
         HandleScoreChanged?.Invoke();
     }
-
+    
     public void HandleRedScore(int oldScore, int newScore)
     {
         Debug.Log("Red score has been changed!");
         HandleScoreChanged?.Invoke();
     }
-
+    
     [ClientRpc]
     public void HandleMatchStart(bool oldBool, bool newBool)
     {
