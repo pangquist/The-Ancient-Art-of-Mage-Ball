@@ -20,6 +20,8 @@ public class MyNetworkPlayer : NetworkBehaviour
     [SerializeField] Color playerColor = Color.white;
 
     [SerializeField] int chosenCharacter;
+    
+    [SerializeField] CharacterController controller;
 
     [SerializeField] GameObject inGameUI;
     [SerializeField] TMP_Text displayNameText = null;
@@ -28,6 +30,8 @@ public class MyNetworkPlayer : NetworkBehaviour
     [SerializeField] TMP_Text timeText;
     [SerializeField] GameObject nameCanvas;
     [SerializeField] GameObject settingsCanvas;
+    [SerializeField] GameObject countdownCanvas;
+    [SerializeField] TMP_Text CountdownText;
 
 
     [SerializeField] GamestateManager gamestateManager;
@@ -90,15 +94,20 @@ public class MyNetworkPlayer : NetworkBehaviour
 
     public override void OnStartAuthority()
     {
+        Debug.Log("The client has authority!");
+        base.OnStartAuthority();
+
         settingsCanvas.SetActive(true);
         gameObject.GetComponent<AudioListener>().enabled = true;
+        controller = gameObject.GetComponent<CharacterController>();
         inGameUI.SetActive(true);
         nameCanvas.SetActive(false);
         gamestateManager = GameObject.Find("GamestateManager").GetComponent<GamestateManager>();
         GamestateManager.HandleTimeChanged += SetTimerText;
         GamestateManager.HandleScoreChanged += SetScoreText;
-
-        base.OnStartAuthority();
+        GamestateManager.HandleScoreChanged += Respawn;
+        GamestateManager.HandleMatchStarted += Respawn;
+        GamestateManager.HandlePausTimeChanged += Countdown;
     }
 
     public override void OnStartClient()
@@ -116,6 +125,9 @@ public class MyNetworkPlayer : NetworkBehaviour
 
         GamestateManager.HandleTimeChanged -= SetTimerText;
         GamestateManager.HandleScoreChanged -= SetScoreText;
+        GamestateManager.HandleScoreChanged -= Respawn;
+        GamestateManager.HandleMatchStarted -= StartRespawn;
+        GamestateManager.HandlePausTimeChanged -= Countdown;
         ((MyNetworkManager)NetworkManager.singleton).Players.Remove(this);
     }
 
@@ -184,7 +196,7 @@ public class MyNetworkPlayer : NetworkBehaviour
         displayNameText.color = playerColor;
     }
     
-    [Server]
+    [Client]
     public void AssignNameInGame(int playerIndex)
     {
         Debug.Log("ASSIGNING NAMES AND TEAMS");
@@ -192,9 +204,52 @@ public class MyNetworkPlayer : NetworkBehaviour
         List<MyNetworkPlayer> players = ((MyNetworkManager)NetworkManager.singleton).Players;
         List<string[]> characterInfoList = ((MyNetworkManager)NetworkManager.singleton).CharacterInfoList;
 
-        displayName = characterInfoList[playerIndex].GetValue(0).ToString();
-        teamName = characterInfoList[playerIndex].GetValue(1).ToString();
-        chosenCharacter = Convert.ToInt32(characterInfoList[playerIndex].GetValue(2));
+        displayName = characterInfoList[playerIndex].GetValue(1).ToString();
+        teamName = characterInfoList[playerIndex].GetValue(2).ToString();
+        chosenCharacter = Convert.ToInt32(characterInfoList[playerIndex].GetValue(3));
+    }
+    
+    public void Respawn()
+    {
+        Vector3 respawnPosition = gamestateManager.GetRespawnPosition(GetDisplayName());
+        Debug.Log($"RESPAWNING! Respawn position: {respawnPosition}");
+        gameObject.transform.position = respawnPosition;
+    }
+
+    [Command]
+    void CmdRespawn(Vector3 position)
+    {
+    }
+
+    [Client]
+    public void StartRespawn()
+    {
+        Vector3 respawnPosition = gamestateManager.GetRespawnPosition(GetDisplayName());
+
+        Debug.Log($"RESPAWNING! Respawn position: {respawnPosition}");
+        gameObject.transform.position = respawnPosition;
+    }
+
+    [Server]
+    void ServerRespawn(Vector3 position)
+    {
+        gameObject.transform.position = position;
+    }
+
+    void Countdown()
+    {
+        Debug.Log($"Counting down! Time: {gamestateManager.PausTimer}");
+        if (!countdownCanvas.activeSelf)
+        {
+            countdownCanvas.SetActive(true);
+        }
+
+        CountdownText.text = Convert.ToInt32(gamestateManager.PausTimer).ToString();
+
+        if (gamestateManager.PausTimer <= 0)
+        {
+            countdownCanvas.SetActive(false);
+        }
     }
     #endregion
 

@@ -1,4 +1,5 @@
 using Mirror;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -14,6 +15,7 @@ public class ScoreArea : NetworkBehaviour
     private void Start()
     {
         ballStartPos = GameObject.Find("BallSpawnPosition");
+        gmManager = GameObject.Find("GamestateManager").GetComponent<GamestateManager>();
     }
 
     //Triggers an effect when the ball hits the goal, and resets the ball to start position
@@ -27,8 +29,7 @@ public class ScoreArea : NetworkBehaviour
             ResetBallPosition(other.gameObject);
         }     
     }
-
-    [Server]
+    
     private void AddScore()
     {
         if (teamOwnership == "Blue")
@@ -39,7 +40,7 @@ public class ScoreArea : NetworkBehaviour
         {
             gmManager.BlueScore += 1;
         }
-        
+        Debug.Log("TRIGGERING CLIENT ON GOAL");
     }
     
     private void ResetBallPosition(GameObject ball)

@@ -4,19 +4,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using UnityEngine.SceneManagement;
 
 public class GamestateManager : NetworkBehaviour
 {
-    public static bool gameIsOver = false;
+    public bool matchIsOver = false;
 
-    List<MyNetworkPlayer> blueTeam = new List<MyNetworkPlayer>();
-    List<MyNetworkPlayer> redTeam = new List<MyNetworkPlayer>();
+    [SyncVar (hook = nameof(HandleMatchStart))]
+    public bool matchIsPaused = true;
+
+    [SerializeField] List<string> redTeam = new List<string>();
+    [SerializeField] List<string> blueTeam = new List<string>();
+    [SerializeField] List<Transform> spawnpointPositions = new List<Transform>();
 
     [SerializeField] MyNetworkManager myNetworkManager;
 
     [SyncVar (hook = nameof(HandleTimeChange))]
     [SerializeField] float time;
-    [SerializeField] float startTime = 180f;
+    [SerializeField] float matchStartTime = 180f;
+
+    [SyncVar(hook = nameof(HandlePausTimeChange))]
+    [SerializeField] float pausTimer;
+    [SerializeField] float pausStartTime = 5f;
 
     int startScore = 0;
     [SyncVar (hook = nameof(HandleRedScore))]
@@ -27,24 +36,46 @@ public class GamestateManager : NetworkBehaviour
     public int BlueScore { get { return blueScore; } set { blueScore = value; } }
     public int RedScore { get { return redScore; } set { redScore = value; } }
     public float Timer { get { return time; } set { time = value; } }
+    public float PausTimer { get { return pausTimer; } set { PausTimer = value; } }
 
     [SerializeField] TMP_Text postGameRedScoreDisplay;
     [SerializeField] TMP_Text postGameBlueScoreDisplay;
     [SerializeField] TMP_Text winningTeamText;
 
-    public static event Action HandleTimeChanged, HandleScoreChanged;
+    public static event Action HandleTimeChanged, HandleScoreChanged, HandleMatchStarted, HandlePausTimeChanged;
 
     public override void OnStartServer()
     {
-        myNetworkManager = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<MyNetworkManager>();
-        time = startTime;
+        time = matchStartTime;
+        pausTimer = pausStartTime;
         ResetScore();
+    }
+
+    private void Start()
+    {
+        myNetworkManager = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<MyNetworkManager>();
         DontDestroyOnLoad(this.gameObject);
     }
 
     private void Update()
     {
-        if (gameIsOver) return;
+        if (SceneManager.GetActiveScene().name == "MainMenu")
+        {
+            return;
+        }
+
+        if (matchIsPaused)
+        {
+            pausTimer -= Time.deltaTime;
+
+            if (pausTimer <= 0)
+            {
+                matchIsPaused = false;
+            }
+            return;
+        }
+
+        if (matchIsOver) return;
 
         if (time <= 0)
         {
@@ -62,7 +93,7 @@ public class GamestateManager : NetworkBehaviour
         }
         else
         {
-            gameIsOver = true;
+            matchIsOver = true;
             myNetworkManager.EndGame();
         }
     }
@@ -102,21 +133,101 @@ public class GamestateManager : NetworkBehaviour
     
     public void HandleTimeChange(float oldTime, float newTime)
     {
-        
         HandleTimeChanged?.Invoke();
     }
 
+    public void HandlePausTimeChange(float oldTime, float newTime)
+    {
+        HandlePausTimeChanged?.Invoke();
+    }
+    
     public void HandleBlueScore(int oldScore, int newScore)
     {
         Debug.Log("Blue score has been changed!");
         HandleScoreChanged?.Invoke();
+        matchIsPaused = true;
+        pausTimer = pausStartTime;
     }
-
+    
     public void HandleRedScore(int oldScore, int newScore)
     {
         Debug.Log("Red score has been changed!");
         HandleScoreChanged?.Invoke();
+        matchIsPaused = true;
+        pausTimer = pausStartTime;
     }
+    
+    [ClientRpc]
+    public void HandleMatchStart(bool oldBool, bool newBool)
+    {
+        Debug.Log($"Match has started!");
+        HandleMatchStarted?.Invoke();
+    }
+    
+    public void FillSpawnpointList()
+    {
+        Debug.Log("START GAME IS CALLED");
+
+        for (int i = 0; i < 6; i++)
+        {
+            spawnpointPositions.Add(GameObject.Find("Spawnpoints").transform.GetChild(i));
+        }
+    }
+
+    public void ClearPlayerList()
+    {
+        redTeam.Clear();
+        blueTeam.Clear();
+    }
+
+    public void AddPlayerToTeam(MyNetworkMenuPlayer player, string team)
+    {
+        if (team == "Red")
+        {
+            redTeam.Add(player.GetDisplayName());
+        }
+        else
+        {
+            blueTeam.Add(player.GetDisplayName());
+        }
+    }
+
+    public Vector3 GetRespawnPosition(string name)
+    {
+        List<MyNetworkPlayer> players = ((MyNetworkManager)NetworkManager.singleton).Players;
+
+        Debug.Log($"NUMBER OF PLAYERS IN LIST: {players.Count}, NAME GIVEN: {name}");
+
+        foreach (MyNetworkPlayer player in players)
+        {
+            if (player.GetDisplayName() == name)
+            {
+                if (player.TeamName == "Red Team")
+                {
+                    for (int i = 0; i < redTeam.Count; i++)
+                    {
+                        if (player.GetDisplayName() == redTeam[i])
+                        {
+                            return(spawnpointPositions[i].transform.position);
+                        }
+                    }
+                }
+                else if (player.TeamName == "Blue Team")
+                {
+                    for (int i = 0; i < blueTeam.Count; i++)
+                    {
+                        if (player.GetDisplayName() == blueTeam[i])
+                        {
+                            return(spawnpointPositions[i + 3].transform.position);
+                        }
+                    }
+                }
+            }
+        }
+
+        return new Vector3(0, 0, 0);
+    }
+
 }
 
  
