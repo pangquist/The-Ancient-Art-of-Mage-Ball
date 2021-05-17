@@ -106,7 +106,7 @@ public class MyNetworkPlayer : NetworkBehaviour
         GamestateManager.HandleTimeChanged += SetTimerText;
         GamestateManager.HandleScoreChanged += SetScoreText;
         GamestateManager.HandleScoreChanged += Respawn;
-        GamestateManager.HandleMatchStarted += StartRespawn;
+        GamestateManager.HandleMatchStarted += Respawn;
         GamestateManager.HandlePausTimeChanged += Countdown;
     }
 
@@ -208,28 +208,22 @@ public class MyNetworkPlayer : NetworkBehaviour
         teamName = characterInfoList[playerIndex].GetValue(2).ToString();
         chosenCharacter = Convert.ToInt32(characterInfoList[playerIndex].GetValue(3));
     }
-
-    [Client]
+    
     public void Respawn()
     {
-        Debug.Log($"Checking for authority: {hasAuthority}");
-        
         Vector3 respawnPosition = gamestateManager.GetRespawnPosition(GetDisplayName());
-
         Debug.Log($"RESPAWNING! Respawn position: {respawnPosition}");
         gameObject.transform.position = respawnPosition;
+    }
+
+    [Command]
+    void CmdRespawn(Vector3 position)
+    {
     }
 
     [Client]
     public void StartRespawn()
     {
-        Debug.Log($"Checking for authority: {hasAuthority}");
-
-        if (!hasAuthority)
-        {
-            return;
-        }
-
         Vector3 respawnPosition = gamestateManager.GetRespawnPosition(GetDisplayName());
 
         Debug.Log($"RESPAWNING! Respawn position: {respawnPosition}");
