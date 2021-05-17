@@ -4,21 +4,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using UnityEngine.SceneManagement;
 
 public class GamestateManager : NetworkBehaviour
 {
-    public bool gameIsOver = false;
+    public bool matchIsOver = false;
+
+    [SyncVar (hook = nameof(HandleMatchStart))]
+    public bool matchHasStarted = false;
 
     [SerializeField] List<string> redTeam = new List<string>();
     [SerializeField] List<string> blueTeam = new List<string>();
     [SerializeField] List<Transform> spawnpointPositions = new List<Transform>();
-    //[SerializeField] Transform[] spawnpointPositions = new Transform[6];
 
     [SerializeField] MyNetworkManager myNetworkManager;
 
     [SyncVar (hook = nameof(HandleTimeChange))]
     [SerializeField] float time;
-    [SerializeField] float startTime = 180f;
+    [SerializeField] float matchStartTime = 180f;
+    [SerializeField] float startTime = 5f;
 
     int startScore = 0;
     [SyncVar (hook = nameof(HandleRedScore))]
@@ -34,7 +38,7 @@ public class GamestateManager : NetworkBehaviour
     [SerializeField] TMP_Text postGameBlueScoreDisplay;
     [SerializeField] TMP_Text winningTeamText;
 
-    public static event Action HandleTimeChanged, HandleScoreChanged;
+    public static event Action HandleTimeChanged, HandleScoreChanged, HandleMatchStarted;
 
     public override void OnStartServer()
     {
@@ -46,12 +50,27 @@ public class GamestateManager : NetworkBehaviour
     {
         myNetworkManager = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<MyNetworkManager>();
         DontDestroyOnLoad(this.gameObject);
-        //ScoreArea.ClientOnGoal += OnGoal;
     }
 
     private void Update()
     {
-        if (gameIsOver) return;
+        if (SceneManager.GetActiveScene().name == "MainMenu")
+        {
+            return;
+        }
+
+        if (!matchHasStarted)
+        {
+            time -= Time.deltaTime;
+
+            if (time <= 0)
+            {
+                matchHasStarted = true;
+                time = matchStartTime;
+            }
+        }
+
+        if (matchIsOver) return;
 
         if (time <= 0)
         {
@@ -69,7 +88,7 @@ public class GamestateManager : NetworkBehaviour
         }
         else
         {
-            gameIsOver = true;
+            matchIsOver = true;
             myNetworkManager.EndGame();
         }
     }
@@ -123,8 +142,14 @@ public class GamestateManager : NetworkBehaviour
         Debug.Log("Red score has been changed!");
         HandleScoreChanged?.Invoke();
     }
+
+    public void HandleMatchStart(bool oldBool, bool newBool)
+    {
+        Debug.Log($"Match has started!");
+        HandleMatchStarted?.Invoke();
+    }
     
-    public void StartGame()
+    public void FillSpawnpointList()
     {
         Debug.Log("START GAME IS CALLED");
 

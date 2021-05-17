@@ -58,7 +58,7 @@ public class MyNetworkManager : NetworkManager
 
         isGameInProgress = false;
     }
-    
+
     // Checks if the requirements to start the game are fullfilled. If they are, the scene is switched to the currently selected scene.
     // For every player in the menu, it also stores that player information regarding name, team and character to be used when spawned in the game.
     [Server]
@@ -77,7 +77,6 @@ public class MyNetworkManager : NetworkManager
 
             CharacterInfoList.Add(characterInfo);
         }
-        
 
         isGameInProgress = true;
 
@@ -152,8 +151,6 @@ public class MyNetworkManager : NetworkManager
         if (sceneName == SelectedScene)
         {
             playerPrefab = Characters[0]; //Here is where it is decided what character the player will spawn in as. Make it work with character select in lobby!
-            //gamestateManager.gameIsOver = false;
-            //gamestateManager.StartGame();
             ballStartPos = GameObject.Find("BallSpawnPosition");
 
             GameObject instantiatedBall;
@@ -173,8 +170,9 @@ public class MyNetworkManager : NetworkManager
 
     public override void OnClientSceneChanged(NetworkConnection conn)
     {
-        gamestateManager.gameIsOver = false;
-        gamestateManager.StartGame();
+        gamestateManager.matchIsOver = false;
+        gamestateManager.matchHasStarted = false;
+        gamestateManager.FillSpawnpointList();
         base.OnClientSceneChanged(conn);
     }
 

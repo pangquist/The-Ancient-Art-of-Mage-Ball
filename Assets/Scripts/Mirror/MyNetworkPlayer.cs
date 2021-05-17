@@ -21,6 +21,8 @@ public class MyNetworkPlayer : NetworkBehaviour
 
     [SerializeField] int chosenCharacter;
 
+    [SerializeField] PlayerMovement playerMovement;
+    [SerializeField] CharacterController controller;
     [SerializeField] GameObject inGameUI;
     [SerializeField] TMP_Text displayNameText = null;
     [SerializeField] TMP_Text redScoreText;
@@ -92,12 +94,15 @@ public class MyNetworkPlayer : NetworkBehaviour
     {
         settingsCanvas.SetActive(true);
         gameObject.GetComponent<AudioListener>().enabled = true;
+        playerMovement = gameObject.GetComponent<PlayerMovement>();
+        controller = gameObject.GetComponent<CharacterController>();
         inGameUI.SetActive(true);
         nameCanvas.SetActive(false);
         gamestateManager = GameObject.Find("GamestateManager").GetComponent<GamestateManager>();
         GamestateManager.HandleTimeChanged += SetTimerText;
         GamestateManager.HandleScoreChanged += SetScoreText;
         GamestateManager.HandleScoreChanged += Respawn;
+        GamestateManager.HandleMatchStarted += StartGameSpawn;
 
         base.OnStartAuthority();
     }
@@ -117,6 +122,8 @@ public class MyNetworkPlayer : NetworkBehaviour
 
         GamestateManager.HandleTimeChanged -= SetTimerText;
         GamestateManager.HandleScoreChanged -= SetScoreText;
+        GamestateManager.HandleScoreChanged -= Respawn;
+        GamestateManager.HandleMatchStarted -= StartGameSpawn;
         ((MyNetworkManager)NetworkManager.singleton).Players.Remove(this);
     }
 
@@ -185,7 +192,7 @@ public class MyNetworkPlayer : NetworkBehaviour
         displayNameText.color = playerColor;
     }
     
-    [Server]
+    [Client]
     public void AssignNameInGame(int playerIndex)
     {
         Debug.Log("ASSIGNING NAMES AND TEAMS");
@@ -211,6 +218,16 @@ public class MyNetworkPlayer : NetworkBehaviour
         Debug.Log($"RESPAWNING! Respawn position: {respawnPosition}");
         gameObject.transform.position = respawnPosition;
         CmdRespawn(respawnPosition);
+
+    }
+
+    [Client]
+    void StartGameSpawn()
+    {
+        Debug.Log("START GAME SPAWN");
+        Respawn();
+        playerMovement.enabled = true;
+        controller.enabled = true;
     }
 
     [Command]
