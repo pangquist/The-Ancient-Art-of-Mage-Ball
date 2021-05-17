@@ -103,7 +103,7 @@ public class MyNetworkPlayer : NetworkBehaviour
         gamestateManager = GameObject.Find("GamestateManager").GetComponent<GamestateManager>();
         GamestateManager.HandleTimeChanged += SetTimerText;
         GamestateManager.HandleScoreChanged += SetScoreText;
-        GamestateManager.HandleScoreChanged += CmdRespawn;
+        GamestateManager.HandleScoreChanged += Respawn;
         GamestateManager.HandleMatchStarted += StartRespawn;
     }
 
@@ -122,7 +122,7 @@ public class MyNetworkPlayer : NetworkBehaviour
 
         GamestateManager.HandleTimeChanged -= SetTimerText;
         GamestateManager.HandleScoreChanged -= SetScoreText;
-        GamestateManager.HandleScoreChanged -= CmdRespawn;
+        GamestateManager.HandleScoreChanged -= Respawn;
         GamestateManager.HandleMatchStarted -= StartRespawn;
         ((MyNetworkManager)NetworkManager.singleton).Players.Remove(this);
     }
@@ -205,16 +205,15 @@ public class MyNetworkPlayer : NetworkBehaviour
         chosenCharacter = Convert.ToInt32(characterInfoList[playerIndex].GetValue(3));
     }
 
-    [Command]
-    public void CmdRespawn()
+    [Client]
+    public void Respawn()
     {
         Debug.Log($"Checking for authority: {hasAuthority}");
         
         Vector3 respawnPosition = gamestateManager.GetRespawnPosition(GetDisplayName());
 
         Debug.Log($"RESPAWNING! Respawn position: {respawnPosition}");
-        //gameObject.transform.position = respawnPosition;
-        ServerRespawn(respawnPosition);
+        gameObject.transform.position = respawnPosition;
     }
 
     [Client]
