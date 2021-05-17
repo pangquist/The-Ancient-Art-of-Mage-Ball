@@ -157,7 +157,6 @@ public class GamestateManager : NetworkBehaviour
         pausTimer = pausStartTime;
     }
     
-    [ClientRpc]
     public void HandleMatchStart(bool oldBool, bool newBool)
     {
         Debug.Log($"Match has started!");
