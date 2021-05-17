@@ -171,7 +171,7 @@ public class MyNetworkManager : NetworkManager
     public override void OnClientSceneChanged(NetworkConnection conn)
     {
         gamestateManager.matchIsOver = false;
-        gamestateManager.matchHasStarted = false;
+        gamestateManager.matchIsPaused = true;
         gamestateManager.FillSpawnpointList();
         base.OnClientSceneChanged(conn);
     }

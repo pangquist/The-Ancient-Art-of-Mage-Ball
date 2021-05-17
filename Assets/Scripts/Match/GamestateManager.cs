@@ -11,7 +11,7 @@ public class GamestateManager : NetworkBehaviour
     public bool matchIsOver = false;
 
     [SyncVar (hook = nameof(HandleMatchStart))]
-    public bool matchHasStarted = false;
+    public bool matchIsPaused = true;
 
     [SerializeField] List<string> redTeam = new List<string>();
     [SerializeField] List<string> blueTeam = new List<string>();
@@ -22,7 +22,10 @@ public class GamestateManager : NetworkBehaviour
     [SyncVar (hook = nameof(HandleTimeChange))]
     [SerializeField] float time;
     [SerializeField] float matchStartTime = 180f;
-    [SerializeField] float startTime = 5f;
+
+    [SyncVar(hook = nameof(HandlePausTimeChange))]
+    [SerializeField] float pausTimer;
+    [SerializeField] float pausStartTime = 5f;
 
     int startScore = 0;
     [SyncVar (hook = nameof(HandleRedScore))]
@@ -33,16 +36,18 @@ public class GamestateManager : NetworkBehaviour
     public int BlueScore { get { return blueScore; } set { blueScore = value; } }
     public int RedScore { get { return redScore; } set { redScore = value; } }
     public float Timer { get { return time; } set { time = value; } }
+    public float PausTimer { get { return pausTimer; } set { PausTimer = value; } }
 
     [SerializeField] TMP_Text postGameRedScoreDisplay;
     [SerializeField] TMP_Text postGameBlueScoreDisplay;
     [SerializeField] TMP_Text winningTeamText;
 
-    public static event Action HandleTimeChanged, HandleScoreChanged, HandleMatchStarted;
+    public static event Action HandleTimeChanged, HandleScoreChanged, HandleMatchStarted, HandlePausTimeChanged;
 
     public override void OnStartServer()
     {
-        time = startTime;
+        time = matchStartTime;
+        pausTimer = pausStartTime;
         ResetScore();
     }
 
@@ -59,14 +64,13 @@ public class GamestateManager : NetworkBehaviour
             return;
         }
 
-        if (!matchHasStarted)
+        if (matchIsPaused)
         {
-            time -= Time.deltaTime;
+            pausTimer -= Time.deltaTime;
 
-            if (time <= 0)
+            if (pausTimer <= 0)
             {
-                matchHasStarted = true;
-                time = matchStartTime;
+                matchIsPaused = false;
             }
             return;
         }
@@ -131,17 +135,26 @@ public class GamestateManager : NetworkBehaviour
     {
         HandleTimeChanged?.Invoke();
     }
+
+    public void HandlePausTimeChange(float oldTime, float newTime)
+    {
+        HandlePausTimeChanged?.Invoke();
+    }
     
     public void HandleBlueScore(int oldScore, int newScore)
     {
         Debug.Log("Blue score has been changed!");
         HandleScoreChanged?.Invoke();
+        matchIsPaused = true;
+        pausTimer = pausStartTime;
     }
     
     public void HandleRedScore(int oldScore, int newScore)
     {
         Debug.Log("Red score has been changed!");
         HandleScoreChanged?.Invoke();
+        matchIsPaused = true;
+        pausTimer = pausStartTime;
     }
     
     [ClientRpc]

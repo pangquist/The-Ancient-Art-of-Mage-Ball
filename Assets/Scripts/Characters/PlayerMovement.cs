@@ -18,7 +18,7 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] float gravity = -9.81f;
     [SerializeField] float speed = 8;
 
-    [SerializeField] bool matchStarted = false;
+    [SerializeField] bool matchIsPaused = true;
     float directionX;
     float directionZ;
     float groundDistance = 0.6f;
@@ -28,12 +28,19 @@ public class PlayerMovement : NetworkBehaviour
 
     private void Start()
     {
-        GamestateManager.HandleMatchStarted += Enable;
+        GamestateManager.HandleMatchStarted += TogglePause;
     }
 
-    void Enable()
+    void TogglePause()
     {
-        matchStarted = true;
+        if (matchIsPaused)
+        {
+           matchIsPaused = false;
+        }
+        else if (!matchIsPaused)
+        {
+            matchIsPaused = true;
+        }
     }
 
     #region Server
@@ -51,7 +58,7 @@ public class PlayerMovement : NetworkBehaviour
     [ClientCallback]
     void Update()
     {
-        if (!hasAuthority || !matchStarted)
+        if (!hasAuthority || matchIsPaused)
         {
             return;
         }

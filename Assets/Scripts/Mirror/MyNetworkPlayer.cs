@@ -30,6 +30,8 @@ public class MyNetworkPlayer : NetworkBehaviour
     [SerializeField] TMP_Text timeText;
     [SerializeField] GameObject nameCanvas;
     [SerializeField] GameObject settingsCanvas;
+    [SerializeField] GameObject countdownCanvas;
+    [SerializeField] TMP_Text CountdownText;
 
 
     [SerializeField] GamestateManager gamestateManager;
@@ -105,6 +107,7 @@ public class MyNetworkPlayer : NetworkBehaviour
         GamestateManager.HandleScoreChanged += SetScoreText;
         GamestateManager.HandleScoreChanged += Respawn;
         GamestateManager.HandleMatchStarted += StartRespawn;
+        GamestateManager.HandlePausTimeChanged += Countdown;
     }
 
     public override void OnStartClient()
@@ -124,6 +127,7 @@ public class MyNetworkPlayer : NetworkBehaviour
         GamestateManager.HandleScoreChanged -= SetScoreText;
         GamestateManager.HandleScoreChanged -= Respawn;
         GamestateManager.HandleMatchStarted -= StartRespawn;
+        GamestateManager.HandlePausTimeChanged -= Countdown;
         ((MyNetworkManager)NetworkManager.singleton).Players.Remove(this);
     }
 
@@ -230,13 +234,28 @@ public class MyNetworkPlayer : NetworkBehaviour
 
         Debug.Log($"RESPAWNING! Respawn position: {respawnPosition}");
         gameObject.transform.position = respawnPosition;
-        //ServerRespawn(respawnPosition);
     }
 
     [Server]
     void ServerRespawn(Vector3 position)
     {
         gameObject.transform.position = position;
+    }
+
+    void Countdown()
+    {
+        Debug.Log($"Counting down! Time: {gamestateManager.PausTimer}");
+        if (!countdownCanvas.activeSelf)
+        {
+            countdownCanvas.SetActive(true);
+        }
+
+        CountdownText.text = Convert.ToInt32(gamestateManager.PausTimer).ToString();
+
+        if (gamestateManager.PausTimer <= 0)
+        {
+            countdownCanvas.SetActive(false);
+        }
     }
     #endregion
 
