@@ -18,12 +18,23 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] float gravity = -9.81f;
     [SerializeField] float speed = 8;
 
+    [SerializeField] bool matchStarted = false;
     float directionX;
     float directionZ;
     float groundDistance = 0.6f;
     Vector3 move;
     public Vector3 velocity;
     public bool isGrounded;
+
+    private void Start()
+    {
+        GamestateManager.HandleMatchStarted += Enable;
+    }
+
+    void Enable()
+    {
+        matchStarted = true;
+    }
 
     #region Server
     // The command send information from the client to the server that the character should move with the parameters that determines movement for X,Y and Z.
@@ -40,7 +51,7 @@ public class PlayerMovement : NetworkBehaviour
     [ClientCallback]
     void Update()
     {
-        if (!hasAuthority)
+        if (!hasAuthority || !matchStarted)
         {
             return;
         }

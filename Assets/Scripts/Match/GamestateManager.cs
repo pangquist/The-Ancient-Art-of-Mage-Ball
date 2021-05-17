@@ -143,6 +143,7 @@ public class GamestateManager : NetworkBehaviour
         HandleScoreChanged?.Invoke();
     }
 
+    [ClientRpc]
     public void HandleMatchStart(bool oldBool, bool newBool)
     {
         Debug.Log($"Match has started!");

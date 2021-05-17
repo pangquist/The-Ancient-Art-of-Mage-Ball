@@ -38,6 +38,7 @@ public class UseAbilities : NetworkBehaviour
     #endregion
 
     float[] currentCooldowns;
+    [SerializeField] bool matchStarted = false;
 
     // Getter for the Cooldown UI to retrieve the current cooldowns to correctly display on the UI.
     public float GetCooldown(int cooldownIndex) 
@@ -55,16 +56,23 @@ public class UseAbilities : NetworkBehaviour
             Debug.Log("Setting the cooldowns to 0");
             currentCooldowns[i] = 0f;
         }
+
     }
 
     public override void OnStartAuthority()
     {
-        enabled = true;
+        base.OnStartAuthority();
+        GamestateManager.HandleMatchStarted += Enable;
+    }
+
+    void Enable()
+    {
+        matchStarted = true;
     }
 
     private void Update()
     {
-        if (!hasAuthority)
+        if (!hasAuthority || !matchStarted)
         {
             return;
         }

@@ -20,9 +20,9 @@ public class MyNetworkPlayer : NetworkBehaviour
     [SerializeField] Color playerColor = Color.white;
 
     [SerializeField] int chosenCharacter;
-
-    [SerializeField] PlayerMovement playerMovement;
+    
     [SerializeField] CharacterController controller;
+
     [SerializeField] GameObject inGameUI;
     [SerializeField] TMP_Text displayNameText = null;
     [SerializeField] TMP_Text redScoreText;
@@ -94,7 +94,6 @@ public class MyNetworkPlayer : NetworkBehaviour
     {
         settingsCanvas.SetActive(true);
         gameObject.GetComponent<AudioListener>().enabled = true;
-        playerMovement = gameObject.GetComponent<PlayerMovement>();
         controller = gameObject.GetComponent<CharacterController>();
         inGameUI.SetActive(true);
         nameCanvas.SetActive(false);
@@ -216,24 +215,27 @@ public class MyNetworkPlayer : NetworkBehaviour
         Vector3 respawnPosition = gamestateManager.GetRespawnPosition(GetDisplayName());
 
         Debug.Log($"RESPAWNING! Respawn position: {respawnPosition}");
-        gameObject.transform.position = respawnPosition;
         CmdRespawn(respawnPosition);
-
     }
 
     [Client]
     void StartGameSpawn()
     {
+        if (!hasAuthority)
+        {
+            return;
+        }
+
         Debug.Log("START GAME SPAWN");
         Respawn();
-        playerMovement.enabled = true;
-        controller.enabled = true;
     }
 
     [Command]
     void CmdRespawn(Vector3 respawnPosition)
     {
+        Debug.Log($"COMMAND RESPAWNING! Respawn position: {respawnPosition}");
         gameObject.transform.position = respawnPosition;
+        Debug.Log($"the charcters position should now be: {respawnPosition}, AND IT IS: {gameObject.transform.position}");
     }
     #endregion
 

@@ -29,10 +29,27 @@ public class CooldownUI : MonoBehaviour
     [Header("Ability 4")]
     [SerializeField] Image ability4Icon;
     [SerializeField] TMP_Text ability4Text;
-    
+
+    [SerializeField] bool matchStarted = false;
+
+    private void Start()
+    {
+        GamestateManager.HandleMatchStarted += Enable;
+    }
+
+    void Enable()
+    {
+        matchStarted = true;
+    }
+
     // During the update, callculations are performed to make the UI accurately display the current cooldown of the given ability.
     void Update()
     {
+        if (!matchStarted)
+        {
+            return;
+        }
+
         #region Ability1
         if (abilities.GetCooldown(0) <= 0)
         {

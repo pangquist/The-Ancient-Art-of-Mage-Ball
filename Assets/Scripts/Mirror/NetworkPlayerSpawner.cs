@@ -46,27 +46,20 @@ public class NetworkPlayerSpawner : NetworkBehaviour
 
     //    CmdSpawnCharacter(chosenCharacter);
     //}
-    
-    public void AssignCharacterPrefab()
+
+    [Server]
+    public void AssignCharacterPrefab(int playerIndex)
     {
         List<string[]> characterInfoList = ((MyNetworkManager)NetworkManager.singleton).CharacterInfoList;
 
-        foreach (string[] infoArray in characterInfoList)
-        {
-            Debug.Log($"COMPARING USER NAME: {name} TO: {infoArray.GetValue(1).ToString()}");
-            if (name == infoArray.GetValue(1).ToString())
-            {
-                chosenCharacter = Convert.ToInt32(infoArray.GetValue(3));
-                break;
-            }
-        }
+        chosenCharacter = Convert.ToInt32(characterInfoList[playerIndex].GetValue(3));
 
-        CmdSpawnCharacter(chosenCharacter);
+        SpawnCharacter(chosenCharacter);
     }
 
     // Take in the parameter of what character the player has chosen, and spawns a prefab from the array of available characters to play as.
-    [Command]
-    void CmdSpawnCharacter(int characterIndex)
+   
+    void SpawnCharacter(int characterIndex)
     {
         GameObject[] characters = ((MyNetworkManager)NetworkManager.singleton).Characters;
 
