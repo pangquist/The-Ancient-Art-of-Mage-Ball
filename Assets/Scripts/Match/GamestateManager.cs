@@ -42,7 +42,9 @@ public class GamestateManager : NetworkBehaviour
     [SerializeField] TMP_Text postGameBlueScoreDisplay;
     [SerializeField] TMP_Text winningTeamText;
 
-    public static event Action HandleTimeChanged, HandleScoreChanged, HandleMatchStarted, HandlePausTimeChanged;
+    [SerializeField] AudioSource overtimeSoundSource;
+
+    public static event Action HandleTimeChanged, HandleRedScoreChanged, HandleBlueScoreChanged, HandleMatchStarted, HandlePausTimeChanged;
 
     public override void OnStartServer()
     {
@@ -59,7 +61,7 @@ public class GamestateManager : NetworkBehaviour
 
     private void Update()
     {
-        if (SceneManager.GetActiveScene().name == "MainMenu")
+        if (SceneManager.GetActiveScene().name == "MainMenu" || SceneManager.GetActiveScene().name == "PostMatch")
         {
             return;
         }
@@ -89,6 +91,7 @@ public class GamestateManager : NetworkBehaviour
     {
         if(blueScore == redScore)
         {
+            overtimeSoundSource.Play();
             time = 60f;
         }
         else
@@ -143,16 +146,14 @@ public class GamestateManager : NetworkBehaviour
     
     public void HandleBlueScore(int oldScore, int newScore)
     {
-        Debug.Log("Blue score has been changed!");
-        HandleScoreChanged?.Invoke();
+        HandleBlueScoreChanged?.Invoke();
         matchIsPaused = true;
         pausTimer = pausStartTime;
     }
     
     public void HandleRedScore(int oldScore, int newScore)
     {
-        Debug.Log("Red score has been changed!");
-        HandleScoreChanged?.Invoke();
+        HandleRedScoreChanged?.Invoke();
         matchIsPaused = true;
         pausTimer = pausStartTime;
     }
@@ -160,13 +161,15 @@ public class GamestateManager : NetworkBehaviour
     [ClientRpc]
     public void HandleMatchStart(bool oldBool, bool newBool)
     {
-        Debug.Log($"Match has started!");
         HandleMatchStarted?.Invoke();
     }
     
     public void FillSpawnpointList()
     {
-        Debug.Log("START GAME IS CALLED");
+        if (SceneManager.GetActiveScene().name == "PostMatch")
+        {
+            return;
+        }
 
         for (int i = 0; i < 6; i++)
         {

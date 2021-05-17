@@ -31,6 +31,12 @@ public class PlayerMovement : NetworkBehaviour
         GamestateManager.HandleMatchStarted += TogglePause;
     }
 
+    public override void OnStartAuthority()
+    {
+        base.OnStartAuthority();
+        enabled = true;
+    }
+
     void TogglePause()
     {
         if (matchIsPaused)
@@ -81,6 +87,7 @@ public class PlayerMovement : NetworkBehaviour
         }
 
         move = transform.right * directionX + transform.forward * directionZ;
+
         if (InGameMenu.gameIsPaused)
         {
             move = new Vector3(0, 0, 0);

@@ -10,8 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4061234012056248}
   - component: {fileID: 95501080525686940}
-  - component: {fileID: 205295806830167992}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TRUNK1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1791542308224472}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.76175, z: 1}
   m_Children:
   - {fileID: 4799296964675734}
   m_Father: {fileID: 0}
@@ -52,29 +51,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!205 &205295806830167992
-LODGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1791542308224472}
-  serializedVersion: 2
-  m_LocalReferencePoint: {x: 0.02752626, y: 0.6482781, z: 0.018260479}
-  m_Size: 2.4878979
-  m_FadeMode: 0
-  m_AnimateCrossFading: 0
-  m_LastLODIsBillboard: 0
-  m_LODs:
-  - screenRelativeHeight: 0.5149691
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 0}
-  - screenRelativeHeight: 0.01
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 23947541034367720}
-  m_Enabled: 1
 --- !u!1 &1924715771773664
 GameObject:
   m_ObjectHideFlags: 0
@@ -87,7 +63,7 @@ GameObject:
   - component: {fileID: 33598128728763834}
   - component: {fileID: 23947541034367720}
   - component: {fileID: 6427835640900195778}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: trunk1_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -32,7 +32,8 @@ public class MyNetworkPlayer : NetworkBehaviour
     [SerializeField] GameObject settingsCanvas;
     [SerializeField] GameObject countdownCanvas;
     [SerializeField] TMP_Text CountdownText;
-
+    [SerializeField] TMP_Text scoringTeamText;
+    [SerializeField] Image teamIcon;
 
     [SerializeField] GamestateManager gamestateManager;
 
@@ -53,10 +54,18 @@ public class MyNetworkPlayer : NetworkBehaviour
         timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
-    void SetScoreText()
+    void SetRedScoreText()
     {
         redScoreText.text = "Red: " + gamestateManager.RedScore.ToString();
+        scoringTeamText.text = "Red Team Scored!";
+        scoringTeamText.color = Color.red;
+    }
+
+    void SetBlueScoreText()
+    {
         blueScoreText.text = "Blue: " + gamestateManager.BlueScore.ToString();
+        scoringTeamText.text = "Blue Team Scored!";
+        scoringTeamText.color = Color.blue;
     }
 
     [Server]
@@ -104,8 +113,10 @@ public class MyNetworkPlayer : NetworkBehaviour
         nameCanvas.SetActive(false);
         gamestateManager = GameObject.Find("GamestateManager").GetComponent<GamestateManager>();
         GamestateManager.HandleTimeChanged += SetTimerText;
-        GamestateManager.HandleScoreChanged += SetScoreText;
-        GamestateManager.HandleScoreChanged += Respawn;
+        GamestateManager.HandleRedScoreChanged += SetRedScoreText;
+        GamestateManager.HandleBlueScoreChanged += SetBlueScoreText;
+        GamestateManager.HandleRedScoreChanged += Respawn;
+        GamestateManager.HandleBlueScoreChanged += Respawn;
         GamestateManager.HandleMatchStarted += Respawn;
         GamestateManager.HandlePausTimeChanged += Countdown;
     }
@@ -124,8 +135,10 @@ public class MyNetworkPlayer : NetworkBehaviour
             return;
 
         GamestateManager.HandleTimeChanged -= SetTimerText;
-        GamestateManager.HandleScoreChanged -= SetScoreText;
-        GamestateManager.HandleScoreChanged -= Respawn;
+        GamestateManager.HandleRedScoreChanged -= SetRedScoreText;
+        GamestateManager.HandleBlueScoreChanged -= SetBlueScoreText;
+        GamestateManager.HandleRedScoreChanged -= Respawn;
+        GamestateManager.HandleBlueScoreChanged -= Respawn;
         GamestateManager.HandleMatchStarted -= StartRespawn;
         GamestateManager.HandlePausTimeChanged -= Countdown;
         ((MyNetworkManager)NetworkManager.singleton).Players.Remove(this);
@@ -177,6 +190,7 @@ public class MyNetworkPlayer : NetworkBehaviour
         Debug.Log("The color has been updated for the client!");
 
         displayNameText.color = playerColor;
+        teamIcon.color = playerColor;
 
         if (hasAuthority)
         {

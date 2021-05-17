@@ -8267,10 +8267,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: GamestateManager
       objectReference: {fileID: 0}
+    - target: {fileID: 3718856610359258601, guid: 946dac0630fca4d45ad1a2d4a2c6e700,
+        type: 3}
+      propertyPath: matchStartTime
+      value: 180
+      objectReference: {fileID: 0}
     - target: {fileID: 3718856610359258602, guid: 946dac0630fca4d45ad1a2d4a2c6e700,
         type: 3}
       propertyPath: sceneId
       value: 3368849188
+      objectReference: {fileID: 0}
+    - target: {fileID: 3718856610359258602, guid: 946dac0630fca4d45ad1a2d4a2c6e700,
+        type: 3}
+      propertyPath: m_AssetId
+      value: 946dac0630fca4d45ad1a2d4a2c6e700
       objectReference: {fileID: 0}
     - target: {fileID: 3718856610359258603, guid: 946dac0630fca4d45ad1a2d4a2c6e700,
         type: 3}
