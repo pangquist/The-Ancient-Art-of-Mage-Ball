@@ -72,7 +72,7 @@ public class GamestateManager : NetworkBehaviour
 
             if (pausTimer <= 0)
             {
-                matchIsPaused = false;
+                UnpauseMatch();
             }
             return;
         }
@@ -85,6 +85,12 @@ public class GamestateManager : NetworkBehaviour
         }
             
         time -= Time.deltaTime;
+    }
+
+    [Server]
+    void UnpauseMatch()
+    {
+        matchIsPaused = false;
     }
 
     void EndGame()
