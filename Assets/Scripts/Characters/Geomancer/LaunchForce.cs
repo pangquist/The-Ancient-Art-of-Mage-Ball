@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class LaunchForce : NetworkBehaviour
 {
-    [SerializeField] float ForceUpwards;
+    [SerializeField] float forceUpwards;
 
     [SerializeField] GameObject hitEffect;
 
@@ -46,10 +46,11 @@ public class LaunchForce : NetworkBehaviour
         if (!hasPlayedAnime)
         {
             CmdSpawnHitEffect();
+            hasPlayedAnime = true;
         }
         if (gameObject.transform.position.y < originposition.y + heightOfPillar)
         {
-            CmdMovePillar();
+            transform.Translate(Vector3.up * forceUpwards * Time.deltaTime, Space.World);
         }
         Collider[] colliders = Physics.OverlapSphere(topPartPillar.transform.position, collideBallRadius);
         foreach (Collider pushedObject in colliders)
@@ -59,6 +60,7 @@ public class LaunchForce : NetworkBehaviour
                 if (!hasCollided)
                 {
                     CmdPushBall(pushedObject.gameObject);
+                    hasCollided = true;
                 }                
             }
         }
@@ -66,11 +68,11 @@ public class LaunchForce : NetworkBehaviour
     [Command]
     void CmdPushBall(GameObject ball)
     {
-        ball.GetComponent<Rigidbody>().transform.Translate(0, Time.deltaTime * ForceUpwards, 0, Space.World);
+        ball.GetComponent<Rigidbody>().transform.Translate(Vector3.up * forceUpwards * Time.deltaTime);
 
-            ball.GetComponent<Rigidbody>().AddForce(new Vector3(0,1,0) * ballForce, ForceMode.Force);
-            hasCollided = true;
+        ball.GetComponent<Rigidbody>().AddForce(Vector3.up * ballForce, ForceMode.Force);           
     }
+
     [Command]
     void CmdSpawnHitEffect()
     {
@@ -88,13 +90,5 @@ public class LaunchForce : NetworkBehaviour
         NetworkServer.Spawn(magicExplosionRight);
         NetworkServer.Spawn(magicExplosionAbove);
         NetworkServer.Spawn(magicExplosionBelow);
-
-        hasPlayedAnime = true;
-    }
-
-    [Command]
-    void CmdMovePillar()
-    {
-        transform.Translate(0, Time.deltaTime * ForceUpwards, 0, Space.World);
     }
 }

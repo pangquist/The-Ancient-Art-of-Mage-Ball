@@ -1606,6 +1606,7 @@ GameObject:
   - component: {fileID: 1106491956633752253}
   - component: {fileID: 2106470732702085849}
   - component: {fileID: 3596875746671384777}
+  - component: {fileID: 8631956499028919714}
   m_Layer: 0
   m_Name: Geomancer
   m_TagString: Player
@@ -1893,12 +1894,12 @@ MonoBehaviour:
   castAbility1Button: 323
   cooldownAbility1: 1
   ability1Name: {fileID: 7400000, guid: 10530bb4f36826b4fb8700f3fd2e21e0, type: 2}
-  castAbility2Button: 0
-  cooldownAbility2: 1
-  ability2Name: {fileID: 0}
-  castAbility3Button: 0
+  castAbility2Button: 101
+  cooldownAbility2: 5
+  ability2Name: {fileID: 7400000, guid: d10693a90854a244d85f40eb4661f7a6, type: 2}
+  castAbility3Button: 49
   cooldownAbility3: 5
-  ability3Name: {fileID: 0}
+  ability3Name: {fileID: 7400000, guid: 91a7aa5e20ee43d4bb6f2132b52025ed, type: 2}
   castAbility4Button: 0
   cooldownAbility4: 0
   ability4Name: {fileID: 0}
@@ -1916,13 +1917,71 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  pillarBridgePrefab: {fileID: 0}
+  pillarBridgePrefab: {fileID: 100000, guid: 633fe62a85a30ad4a9506e1704f472c5, type: 3}
   abilityDuration: 5
   pillarSpawnInterval: 0.3
   forceUpwards: 3
-  hitEffect: {fileID: 0}
+  hitEffect: {fileID: 1295856588731438336, guid: adfe2ec0ca790154db6c00c640ca4f6d,
+    type: 3}
   ballForce: 200
   offSetPillarSpawnMultiplier: 2
+--- !u!114 &8631956499028919714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2502805589157441407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad225009ad414e1428332cab226f38fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  interpolationBackTime: 0.1
+  extrapolationMode: 1
+  useExtrapolationTimeLimit: 1
+  extrapolationTimeLimit: 5
+  useExtrapolationDistanceLimit: 0
+  extrapolationDistanceLimit: 20
+  sendPositionThreshold: 0
+  sendRotationThreshold: 0
+  sendScaleThreshold: 0
+  sendVelocityThreshold: 0
+  sendAngularVelocityThreshold: 0
+  receivedPositionThreshold: 0
+  receivedRotationThreshold: 0
+  snapPositionThreshold: 0
+  snapRotationThreshold: 0
+  snapScaleThreshold: 0
+  positionLerpSpeed: 0.85
+  rotationLerpSpeed: 0.85
+  scaleLerpSpeed: 0.85
+  timeCorrectionSpeed: 0.1
+  snapTimeThreshold: 3
+  syncPosition: 0
+  syncRotation: 0
+  syncScale: 0
+  syncVelocity: 0
+  syncAngularVelocity: 0
+  isPositionCompressed: 0
+  isRotationCompressed: 0
+  isScaleCompressed: 0
+  isVelocityCompressed: 0
+  isAngularVelocityCompressed: 0
+  automaticallyResetTime: 1
+  isSmoothingAuthorityChanges: 0
+  transformSource: 0
+  whenToUpdateTransform: 0
+  sendRate: 60
+  networkChannel: 1
+  childObjectToSync: {fileID: 0}
+  setVelocityInsteadOfPositionOnNonOwners: 0
+  maxPositionDifferenceForVelocitySyncing: 10
+  useLocalTransformOnly: 0
+  ownerChangeIndicator: 1
+  receivedStatesCounter: 0
 --- !u!1 &2504937733938519409
 GameObject:
   m_ObjectHideFlags: 0

@@ -46,16 +46,16 @@ public class PillarBridge : NetworkBehaviour
     private void Start()
     {
         groundTransform = GameObject.FindGameObjectsWithTag("Ground");
+        playerMovement = GetComponent<PlayerMovement>();
         hasSpawnedPillar = false;
     }
 
     [Client]
     void DoPillarBridge()
     {
-        pillarTop = pillarBridgePrefab.transform.GetChild(0);
         timer = 0;
-        playerMovement = GetComponent<PlayerMovement>();
-        CmdSpawnPillarBridge(gameObject);
+        groundPositionUnderPlayer = new Vector3(gameObject.transform.position.x, groundTransform[0].transform.position.y, gameObject.transform.position.z);
+        CmdSpawnPillarBridge(gameObject, groundPositionUnderPlayer);
         hasSpawnedPillar = true;
         CmdSpawnHitEffect();
     }
@@ -75,7 +75,7 @@ public class PillarBridge : NetworkBehaviour
             }
             else
             {
-                CmdMovePillar(forceUpwards);
+                //CmdMovePillar(forceUpwards, pillarSpawn);
                 CmdMoveHitEffect();
             }
 
@@ -89,6 +89,7 @@ public class PillarBridge : NetworkBehaviour
                     if (!hasCollided)
                     {
                         CmdPushBall(pushedObject.gameObject);
+                        hasCollided = true;
                     }
                 }
             }
@@ -96,29 +97,28 @@ public class PillarBridge : NetworkBehaviour
     }
 
     [Command]
-    void CmdSpawnPillarBridge(GameObject player)//Spawns pillar at groundlevel under player
+    void CmdSpawnPillarBridge(GameObject player, Vector3 position)//Spawns pillar at groundlevel under player
     {
+        pillarTop = pillarBridgePrefab.transform.GetChild(0);
         playerFuturePosition = player.transform.forward;
-        groundPositionUnderPlayer = new Vector3(player.transform.position.x, groundTransform[0].transform.position.y, player.transform.position.z);
-
+        groundPositionUnderPlayer = position;
+        
         pillarSpawn = Instantiate(pillarBridgePrefab, groundPositionUnderPlayer - pillarTop.position, Quaternion.identity);
 
         NetworkServer.Spawn(pillarSpawn, connectionToClient);
-
-        hasSpawnedPillar = true;
     }
 
-    [Command]
-    void CmdMovePillar(float forceUpwards)
-    {
-        pillarSpawn.transform.Translate(playerMovement.move * playerMovement.speed * Time.deltaTime);
-        pillarSpawn.transform.Translate(Vector3.up * forceUpwards * Time.deltaTime);
-    }
+    //[Command]
+    //void CmdMovePillar(float forceUpwards, GameObject _pillarSpawn)
+    //{
+    //    //_pillarSpawn.transform.Translate(playerMovement.move * playerMovement.speed * Time.deltaTime);
+    //    _pillarSpawn.transform.Translate(Vector3.up * forceUpwards * Time.deltaTime);
+    //}
 
     [Command]
     void CmdDestroyPillar()
     {
-        Destroy(pillarSpawn);
+        NetworkServer.Destroy(pillarSpawn);
     }
 
     [Command]
@@ -126,24 +126,20 @@ public class PillarBridge : NetworkBehaviour
     {
         pillarSmoke = Instantiate(hitEffect, groundPositionUnderPlayer, Quaternion.identity) as GameObject;
         NetworkServer.Spawn(pillarSmoke);
-
     }
 
-    [Command]
-    void CmdMoveHitEffect()
-    {
-        Vector3 playerMove = playerMovement.move * playerMovement.speed * Time.deltaTime;
+    //[Command]
+    //void CmdMoveHitEffect()
+    //{
+    //    Vector3 playerMove = playerMovement.move * playerMovement.speed * Time.deltaTime;
 
-        pillarSmoke.transform.Translate(playerMove, Space.World);
-
-    }
+    //    pillarSmoke.transform.Translate(playerMove, Space.World);
+    //}
     [Command]
     void CmdPushBall(GameObject ball)
     {
         ball.GetComponent<Rigidbody>().transform.Translate(0, Time.deltaTime * forceUpwards, 0, Space.World);
         ball.GetComponent<Rigidbody>().AddForce(new Vector3(0, 1, 0) * ballForce, ForceMode.Force);
-
-        hasCollided = true;
     }
 
 

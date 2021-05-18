@@ -84,7 +84,6 @@ public class CollisionExplosion : NetworkBehaviour
         ball.GetComponent<Rigidbody>().AddExplosionForce(explosionForceForward, gameObject.transform.position, explosionRadius);
         RpcDoExplosion(ball);
         NetworkServer.Destroy(gameObject);
-        //ServerDoExplosion(ball);        
     }
 
     //[Server]
@@ -99,6 +98,7 @@ public class CollisionExplosion : NetworkBehaviour
         Debug.Log("Server is moving the ball for the clients!");
         ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
         ball.GetComponent<Rigidbody>().AddExplosionForce(explosionForceForward, gameObject.transform.position, explosionRadius, explosionForceUpwards);
+        NetworkServer.Destroy(gameObject);
     }
 
 
