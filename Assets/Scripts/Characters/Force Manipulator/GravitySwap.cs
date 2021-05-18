@@ -44,6 +44,11 @@ public class GravitySwap : NetworkBehaviour
     [Command]
     void CmdDoSpell(GameObject ballObject)
     {
+        if (ballObject == null)
+        {
+            return;
+        }
+
         ballObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
         ballObject.GetComponent<Rigidbody>().AddForce(appliedForce);
 

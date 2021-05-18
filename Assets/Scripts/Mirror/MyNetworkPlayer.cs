@@ -139,7 +139,7 @@ public class MyNetworkPlayer : NetworkBehaviour
         GamestateManager.HandleBlueScoreChanged -= SetBlueScoreText;
         GamestateManager.HandleRedScoreChanged -= Respawn;
         GamestateManager.HandleBlueScoreChanged -= Respawn;
-        GamestateManager.HandleMatchStarted -= StartRespawn;
+        GamestateManager.HandleMatchStarted -= Respawn;
         GamestateManager.HandlePausTimeChanged -= Countdown;
         ((MyNetworkManager)NetworkManager.singleton).Players.Remove(this);
     }
@@ -223,30 +223,25 @@ public class MyNetworkPlayer : NetworkBehaviour
         chosenCharacter = Convert.ToInt32(characterInfoList[playerIndex].GetValue(3));
     }
     
-    public void Respawn()
+    [Client]
+    void Respawn()
     {
         Vector3 respawnPosition = gamestateManager.GetRespawnPosition(GetDisplayName());
-        Debug.Log($"RESPAWNING! Respawn position: {respawnPosition}");
         gameObject.transform.position = respawnPosition;
+        CmdRespawn(respawnPosition);
     }
 
     [Command]
-    void CmdRespawn(Vector3 position)
+    public void CmdRespawn(Vector3 position)
     {
+        gameObject.transform.position = position;
+        RpcRespawn(position);
     }
 
-    [Client]
-    public void StartRespawn()
+    [ClientRpc]
+    void RpcRespawn(Vector3 position)
     {
-        Vector3 respawnPosition = gamestateManager.GetRespawnPosition(GetDisplayName());
-
-        Debug.Log($"RESPAWNING! Respawn position: {respawnPosition}");
-        gameObject.transform.position = respawnPosition;
-    }
-
-    [Server]
-    void ServerRespawn(Vector3 position)
-    {
+        Debug.Log($"RESPAWNING! Respawn position: {position}");
         gameObject.transform.position = position;
     }
 
