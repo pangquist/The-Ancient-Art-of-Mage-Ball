@@ -34,7 +34,7 @@ public class CooldownUI : MonoBehaviour
 
     private void Start()
     {
-        GamestateManager.HandleMatchStarted += TogglePause;
+        GamestateManager.HandleMatchPaused += TogglePause;
     }
 
     void TogglePause()

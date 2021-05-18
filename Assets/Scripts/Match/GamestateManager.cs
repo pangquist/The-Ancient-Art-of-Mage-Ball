@@ -10,7 +10,7 @@ public class GamestateManager : NetworkBehaviour
 {
     public bool matchIsOver = false;
 
-    [SyncVar (hook = nameof(HandleMatchStart))]
+    [SyncVar (hook = nameof(HandleMatchPause))]
     public bool matchIsPaused = true;
 
     [SerializeField] List<string> redTeam = new List<string>();
@@ -44,7 +44,7 @@ public class GamestateManager : NetworkBehaviour
 
     [SerializeField] AudioSource overtimeSoundSource;
 
-    public static event Action HandleTimeChanged, HandleRedScoreChanged, HandleBlueScoreChanged, HandleMatchStarted, HandlePausTimeChanged;
+    public static event Action HandleTimeChanged, HandleRedScoreChanged, HandleBlueScoreChanged, HandleMatchPaused, HandlePausTimeChanged;
 
     public override void OnStartServer()
     {
@@ -158,10 +158,10 @@ public class GamestateManager : NetworkBehaviour
         pausTimer = pausStartTime;
     }
     
-    public void HandleMatchStart(bool oldBool, bool newBool)
+    public void HandleMatchPause(bool oldBool, bool newBool)
     {
         Debug.Log("HANDLE MATCH START IS CALLED!");
-        HandleMatchStarted?.Invoke();
+        HandleMatchPaused?.Invoke();
     }
     
     public void FillSpawnpointList()

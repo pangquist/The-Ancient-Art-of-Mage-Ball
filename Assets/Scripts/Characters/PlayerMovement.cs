@@ -28,7 +28,7 @@ public class PlayerMovement : NetworkBehaviour
 
     private void Start()
     {
-        GamestateManager.HandleMatchStarted += TogglePause;
+        GamestateManager.HandleMatchPaused += TogglePause;
     }
 
     public override void OnStartAuthority()
