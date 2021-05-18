@@ -227,22 +227,8 @@ public class MyNetworkPlayer : NetworkBehaviour
     void Respawn()
     {
         Vector3 respawnPosition = gamestateManager.GetRespawnPosition(GetDisplayName());
+        Debug.Log($"RESPAWNING! Respawn position: {respawnPosition}");
         gameObject.transform.position = respawnPosition;
-        CmdRespawn(respawnPosition);
-    }
-
-    [Command]
-    public void CmdRespawn(Vector3 position)
-    {
-        gameObject.transform.position = position;
-        RpcRespawn(position);
-    }
-
-    [ClientRpc]
-    void RpcRespawn(Vector3 position)
-    {
-        Debug.Log($"RESPAWNING! Respawn position: {position}");
-        gameObject.transform.position = position;
     }
 
     void Countdown()
