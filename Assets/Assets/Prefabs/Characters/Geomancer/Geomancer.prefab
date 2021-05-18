@@ -1631,6 +1631,7 @@ Transform:
   - {fileID: 441384180949702159}
   - {fileID: 441384181115929202}
   - {fileID: 7275183300368150349}
+  - {fileID: 5782624506027649041}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1921,8 +1922,6 @@ MonoBehaviour:
   abilityDuration: 5
   pillarSpawnInterval: 0.3
   forceUpwards: 3
-  hitEffect: {fileID: 1295856588731438336, guid: adfe2ec0ca790154db6c00c640ca4f6d,
-    type: 3}
   ballForce: 200
   offSetPillarSpawnMultiplier: 2
 --- !u!114 &8631956499028919714
@@ -3582,4 +3581,34 @@ Transform:
   - {fileID: 5900076058681572809}
   m_Father: {fileID: 2327862519875233336}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &9171573963135420679
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5782624506027649041}
+  m_Layer: 0
+  m_Name: PillarSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5782624506027649041
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9171573963135420679}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.008, y: -0.108, z: -0.034}
+  m_LocalScale: {x: 1, y: 0.9380957, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3021933770428593605}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -223,7 +223,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  pillarSmoke: {fileID: 1295856588731438336, guid: 7b57febdf0b12d44aa2774edf5f22912,
+  pillarSmoke: {fileID: 1295856588731438336, guid: adfe2ec0ca790154db6c00c640ca4f6d,
     type: 3}
   pillarTop: {fileID: 4347461318120124393}
 --- !u!1001 &1450657994874901779

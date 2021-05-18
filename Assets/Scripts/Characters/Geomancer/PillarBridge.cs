@@ -104,7 +104,7 @@ public class PillarBridge : NetworkBehaviour
         groundPositionUnderPlayer = position;
         
         pillarSpawn = Instantiate(pillarBridgePrefab, groundPositionUnderPlayer - pillarTop.position, Quaternion.identity);
-        pillarSpawn.GetComponent<PillarMovement>().Player = gameObject;
+        //pillarSpawn.GetComponent<PillarMovement>().Player = gameObject;
 
         NetworkServer.Spawn(pillarSpawn, connectionToClient);
     }
