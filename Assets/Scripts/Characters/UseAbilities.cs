@@ -63,6 +63,7 @@ public class UseAbilities : NetworkBehaviour
     {
         base.OnStartAuthority();
         GamestateManager.HandleMatchPaused += TogglePause;
+        Debug.Log("ABILITIES ARE SUBSCRIBED!");
     }
 
     void TogglePause()

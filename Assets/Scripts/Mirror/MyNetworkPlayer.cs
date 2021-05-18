@@ -247,7 +247,6 @@ public class MyNetworkPlayer : NetworkBehaviour
 
     void Countdown()
     {
-        Debug.Log($"Counting down! Time: {gamestateManager.PausTimer}");
         if (!countdownCanvas.activeSelf)
         {
             countdownCanvas.SetActive(true);
