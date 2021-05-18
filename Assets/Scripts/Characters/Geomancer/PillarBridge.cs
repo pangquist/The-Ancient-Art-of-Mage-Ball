@@ -13,7 +13,7 @@ public class PillarBridge : NetworkBehaviour
 
     [SerializeField] float forceUpwards;
 
-    [SerializeField] GameObject hitEffect;
+    //[SerializeField] GameObject hitEffect;
 
     [SerializeField] float ballForce = 100f;
 
@@ -57,7 +57,7 @@ public class PillarBridge : NetworkBehaviour
         groundPositionUnderPlayer = new Vector3(gameObject.transform.position.x, groundTransform[0].transform.position.y, gameObject.transform.position.z);
         CmdSpawnPillarBridge(gameObject, groundPositionUnderPlayer);
         hasSpawnedPillar = true;
-        CmdSpawnHitEffect();
+        //CmdSpawnHitEffect();
     }
 
     [Client]
@@ -76,7 +76,7 @@ public class PillarBridge : NetworkBehaviour
             else
             {
                 //CmdMovePillar(forceUpwards, pillarSpawn);
-                CmdMoveHitEffect();
+                //CmdMoveHitEffect();
             }
 
             Collider[] colliders = Physics.OverlapSphere(pillarTop.transform.position, 5f);
@@ -104,6 +104,7 @@ public class PillarBridge : NetworkBehaviour
         groundPositionUnderPlayer = position;
         
         pillarSpawn = Instantiate(pillarBridgePrefab, groundPositionUnderPlayer - pillarTop.position, Quaternion.identity);
+        pillarSpawn.GetComponent<PillarMovement>().Player = gameObject;
 
         NetworkServer.Spawn(pillarSpawn, connectionToClient);
     }
@@ -121,12 +122,12 @@ public class PillarBridge : NetworkBehaviour
         NetworkServer.Destroy(pillarSpawn);
     }
 
-    [Command]
-    void CmdSpawnHitEffect()
-    {
-        pillarSmoke = Instantiate(hitEffect, groundPositionUnderPlayer, Quaternion.identity) as GameObject;
-        NetworkServer.Spawn(pillarSmoke);
-    }
+    //[Command]
+    //void CmdSpawnHitEffect()
+    //{
+    //    pillarSmoke = Instantiate(hitEffect, groundPositionUnderPlayer, Quaternion.identity) as GameObject;
+    //    NetworkServer.Spawn(pillarSmoke);
+    //}
 
     //[Command]
     //void CmdMoveHitEffect()
