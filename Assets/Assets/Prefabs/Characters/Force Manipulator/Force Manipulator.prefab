@@ -1805,6 +1805,7 @@ MonoBehaviour:
   jumpButton: 32
   jumpPower: 6
   gravity: -9.81
+  move: {x: 0, y: 0, z: 0}
   velocity: {x: 0, y: 0, z: 0}
 --- !u!114 &5025287790405866831
 MonoBehaviour:
@@ -1859,7 +1860,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.01
   clientAuthority: 0
-  animator: {fileID: 0}
+  animator: {fileID: 6004741204329823607}
 --- !u!114 &1808665335354181965
 MonoBehaviour:
   m_ObjectHideFlags: 0

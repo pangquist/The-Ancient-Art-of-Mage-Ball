@@ -42,7 +42,7 @@ public class BoulderTrail : NetworkBehaviour
     {        
         timer += Time.deltaTime;
 
-        Debug.Log(timer + "for" + gameObject.transform.position);
+        //Debug.Log(timer + "for" + gameObject.transform.position);
         if (timer % 0.4 > 0 && timer % 0.4 < 0.1) // 0.1 sec window to set a new dropPosition. every 0.7 sec
         {
             dropPosition = stoneSpawnPosition.transform.position;

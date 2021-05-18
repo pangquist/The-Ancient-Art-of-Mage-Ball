@@ -28,19 +28,23 @@ public class ThrowBoulder : NetworkBehaviour
         enabled = true;
     }
 
-    [Client]
-    void Update()
-    {
-        foreach(LayerMask hitableLayer in hitableLayers)
-        {
-            Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, hitableLayer);
-        }
+    //[Client]
+    //void Update()
+    //{
+    //    foreach(LayerMask hitableLayer in hitableLayers)
+    //    {
+    //        Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, hitableLayer);
+    //    }
         
-    }
+    //}
 
     [Client]
     void DoBoulderThrow()
     {
+        foreach (LayerMask hitableLayer in hitableLayers)
+        {
+            Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, hitableLayer);
+        }
         Vector3 directionOfBoulder;
         if(hit.collider != null)
         {
@@ -51,18 +55,47 @@ public class ThrowBoulder : NetworkBehaviour
             directionOfBoulder =  mainCamera.transform.forward;
         }
         Vector3 forceDirection = mainCamera.transform.forward;
-        projectileInstance = Instantiate(boulderPrefab, boulderStartPoint.position, Quaternion.identity);
 
-        CmdBoulderThrow(directionOfBoulder, forceDirection, projectileInstance); //calls command to spawn and add force to the instantiated object
+       
+            CmdBoulderThrow(directionOfBoulder, boulderStartPoint.position,forceDirection); //calls command to spawn and add force to the instantiated object
+        
     }
 
     #endregion
 
     #region Server
     [Command]
-    void CmdBoulderThrow(Vector3 directionOfBoulder, Vector3 direction, GameObject projectileServerSpawn)
+    void CmdBoulderThrow(Vector3 directionOfBoulder, Vector3 startPos, Vector3 direction)
     {
-        NetworkServer.Spawn(projectileServerSpawn);
+        //if (NetworkServer.active)
+        //{
+        //    projectileInstance = Instantiate(boulderPrefab, startPos, Quaternion.identity);
+
+        //    NetworkServer.Spawn(projectileInstance, connectionToClient);
+        //projectileInstance.GetComponent<Rigidbody>().AddForce(directionOfBoulder.normalized * throwForceForward, ForceMode.Force);
+        //projectileInstance.GetComponent<Rigidbody>().AddForce(direction * throwForceUpward, ForceMode.Force);
+        ClientRpcBoulderThrow(directionOfBoulder, direction);
+        //}
+        //else
+        //{
+        //    Debug.Log("Server is not active");
+        //}
+
+
+    }
+
+    [Server]
+    void ServerBoulderThrow(Vector3 directionOfBoulder, Vector3 direction)
+    {
+        ClientRpcBoulderThrow(directionOfBoulder, direction);
+    }
+
+    [ClientRpc]
+    void ClientRpcBoulderThrow(Vector3 directionOfBoulder, Vector3 direction)
+    {
+        projectileInstance = Instantiate(boulderPrefab, boulderStartPoint.position, Quaternion.identity);
+
+        NetworkServer.Spawn(projectileInstance, connectionToClient);
         projectileInstance.GetComponent<Rigidbody>().AddForce(directionOfBoulder.normalized * throwForceForward, ForceMode.Force);
         projectileInstance.GetComponent<Rigidbody>().AddForce(direction * throwForceUpward, ForceMode.Force);
     }

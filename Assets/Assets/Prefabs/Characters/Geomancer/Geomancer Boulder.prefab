@@ -105,13 +105,13 @@ GameObject:
   - component: {fileID: 5085287005237877433}
   - component: {fileID: 5085287005236779129}
   - component: {fileID: 5085287005240979129}
-  - component: {fileID: -2936287922937313764}
   - component: {fileID: -3561964614475239580}
-  - component: {fileID: 1884305465601061932}
   - component: {fileID: 6017555179743287199}
   - component: {fileID: -6550418963540670104}
   - component: {fileID: -3076989269468755863}
   - component: {fileID: 7307511762237968779}
+  - component: {fileID: -2135906563267963036}
+  - component: {fileID: 6375336045244869574}
   m_Layer: 0
   m_Name: Geomancer Boulder
   m_TagString: Untagged
@@ -197,19 +197,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.15, y: 1.55, z: 2.3}
   m_Center: {x: 0.009681463, y: 0.021104664, z: -0.30547738}
---- !u!114 &-2936287922937313764
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5085287005239035577}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7729d64f5f9dd264584c3a5669f2043e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  time: 6
 --- !u!54 &-3561964614475239580
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -226,28 +213,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1884305465601061932
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5085287005239035577}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65f13a128999a8f45a5589a2cf0bb45d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  rotateX: 2
-  rotateY: 3
-  rotateZ: 2
-  explosionForceForward: 500
-  explosionForceUpwards: 200
-  explosionRadius: 20
-  hitEffect: {fileID: 3712248344953752656, guid: f96e1aee39b2c444bb13b1c14307edb3,
-    type: 3}
 --- !u!114 &6017555179743287199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,7 +226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneId: 0
-  serverOnly: 0
+  serverOnly: 1
   visible: 0
   m_AssetId: 
   hasSpawned: 0
@@ -365,6 +330,41 @@ MonoBehaviour:
   useLocalTransformOnly: 0
   ownerChangeIndicator: 1
   receivedStatesCounter: 0
+--- !u!114 &-2135906563267963036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5085287005239035577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65f13a128999a8f45a5589a2cf0bb45d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  rotateX: 2
+  rotateY: 2
+  rotateZ: 2
+  explosionForceForward: 600
+  explosionForceUpwards: 300
+  explosionRadius: 5
+  hitEffect: {fileID: 3712248344953752656, guid: f96e1aee39b2c444bb13b1c14307edb3,
+    type: 3}
+--- !u!114 &6375336045244869574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5085287005239035577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7729d64f5f9dd264584c3a5669f2043e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 5
 --- !u!1 &5999162128883586431
 GameObject:
   m_ObjectHideFlags: 0

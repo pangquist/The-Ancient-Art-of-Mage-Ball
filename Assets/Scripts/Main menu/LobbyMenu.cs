@@ -103,15 +103,18 @@ public class LobbyMenu : MonoBehaviour
             }
         }
 
-
-        if(redPlayers >= 3 && bluePlayers < 3)
+        if (NetworkClient.ready)
         {
-            newPlayer.CmdSetTeamName("Blue Team");
+            if (redPlayers >= 3 && bluePlayers < 3)
+            {
+                newPlayer.CmdSetTeamName("Blue Team");
+            }
+            else
+            {
+                newPlayer.CmdSetTeamName("Red Team");
+            }
         }
-        else
-        {
-            newPlayer.CmdSetTeamName("Red Team");
-        }
+        
 
         startGameButton.interactable = menuPlayers.Count >= MyNetworkManager.playersRequiredToStart; 
     }
