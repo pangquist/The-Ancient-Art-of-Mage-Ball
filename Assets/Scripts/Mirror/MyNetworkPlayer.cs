@@ -233,6 +233,11 @@ public class MyNetworkPlayer : NetworkBehaviour
 
     void Countdown()
     {
+        if (!hasAuthority)
+        {
+            return;
+        }
+
         if (!countdownCanvas.activeSelf)
         {
             countdownCanvas.SetActive(true);
