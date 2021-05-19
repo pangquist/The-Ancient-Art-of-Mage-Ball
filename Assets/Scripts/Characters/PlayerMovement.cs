@@ -25,16 +25,13 @@ public class PlayerMovement : NetworkBehaviour
     Vector3 move;
     public Vector3 velocity;
     public bool isGrounded;
-
-    private void Start()
-    {
-        GamestateManager.HandleMatchStarted += TogglePause;
-    }
-
+    
     public override void OnStartAuthority()
     {
         base.OnStartAuthority();
         enabled = true;
+        GamestateManager.HandleMatchPaused += TogglePause;
+        Debug.Log("MOVEMENT IS SUBSCRIBED!");
     }
 
     void TogglePause()

@@ -23,8 +23,11 @@ public class ScoreArea : NetworkBehaviour
     {
         if(other.gameObject.tag == "Enemy")
         {
-            GameObject effect = Instantiate(effectObject, gameObject.transform.position, gameObject.transform.rotation);
-            NetworkServer.Spawn(effect);
+            if (NetworkServer.active)
+            {
+                GameObject effect = Instantiate(effectObject, gameObject.transform.position, gameObject.transform.rotation);
+                NetworkServer.Spawn(effect);
+            }
             AddScore();
             ResetBallPosition(other.gameObject);
         }     

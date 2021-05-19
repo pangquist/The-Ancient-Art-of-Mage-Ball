@@ -62,7 +62,8 @@ public class UseAbilities : NetworkBehaviour
     public override void OnStartAuthority()
     {
         base.OnStartAuthority();
-        GamestateManager.HandleMatchStarted += TogglePause;
+        GamestateManager.HandleMatchPaused += TogglePause;
+        Debug.Log("ABILITIES ARE SUBSCRIBED!");
     }
 
     void TogglePause()

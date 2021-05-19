@@ -34,7 +34,8 @@ public class CooldownUI : MonoBehaviour
 
     private void Start()
     {
-        GamestateManager.HandleMatchStarted += TogglePause;
+        GamestateManager.HandleMatchPaused += TogglePause;
+        Debug.Log("COOLDOWN IS SUBSCRIBED!");
     }
 
     void TogglePause()

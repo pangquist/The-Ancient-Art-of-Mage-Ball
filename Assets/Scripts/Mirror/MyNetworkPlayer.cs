@@ -117,7 +117,7 @@ public class MyNetworkPlayer : NetworkBehaviour
         GamestateManager.HandleBlueScoreChanged += SetBlueScoreText;
         GamestateManager.HandleRedScoreChanged += Respawn;
         GamestateManager.HandleBlueScoreChanged += Respawn;
-        GamestateManager.HandleMatchStarted += Respawn;
+        GamestateManager.HandleMatchPaused += Respawn;
         GamestateManager.HandlePausTimeChanged += Countdown;
     }
 
@@ -139,7 +139,7 @@ public class MyNetworkPlayer : NetworkBehaviour
         GamestateManager.HandleBlueScoreChanged -= SetBlueScoreText;
         GamestateManager.HandleRedScoreChanged -= Respawn;
         GamestateManager.HandleBlueScoreChanged -= Respawn;
-        GamestateManager.HandleMatchStarted -= StartRespawn;
+        GamestateManager.HandleMatchPaused -= Respawn;
         GamestateManager.HandlePausTimeChanged -= Countdown;
         ((MyNetworkManager)NetworkManager.singleton).Players.Remove(this);
     }
@@ -223,36 +223,16 @@ public class MyNetworkPlayer : NetworkBehaviour
         chosenCharacter = Convert.ToInt32(characterInfoList[playerIndex].GetValue(3));
     }
     
-    public void Respawn()
-    {
-        Vector3 respawnPosition = gamestateManager.GetRespawnPosition(GetDisplayName());
-        Debug.Log($"RESPAWNING! Respawn position: {respawnPosition}");
-        gameObject.transform.position = respawnPosition;
-    }
-
-    [Command]
-    void CmdRespawn(Vector3 position)
-    {
-    }
-
     [Client]
-    public void StartRespawn()
+    void Respawn()
     {
         Vector3 respawnPosition = gamestateManager.GetRespawnPosition(GetDisplayName());
-
         Debug.Log($"RESPAWNING! Respawn position: {respawnPosition}");
         gameObject.transform.position = respawnPosition;
-    }
-
-    [Server]
-    void ServerRespawn(Vector3 position)
-    {
-        gameObject.transform.position = position;
     }
 
     void Countdown()
     {
-        Debug.Log($"Counting down! Time: {gamestateManager.PausTimer}");
         if (!countdownCanvas.activeSelf)
         {
             countdownCanvas.SetActive(true);
