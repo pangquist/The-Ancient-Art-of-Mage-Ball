@@ -71,9 +71,10 @@ MonoBehaviour:
   spawnpointPositions: []
   myNetworkManager: {fileID: 0}
   time: 0
-  matchStartTime: 20
-  pausTimer: 0
-  pausStartTime: 5
+  matchStartTime: 180
+  pauseTimer: 0
+  startPauseTime: 12
+  goalPauseTime: 5
   redScore: 0
   blueScore: 0
   postGameRedScoreDisplay: {fileID: 0}

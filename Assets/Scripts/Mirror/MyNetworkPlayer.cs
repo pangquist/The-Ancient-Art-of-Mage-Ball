@@ -243,10 +243,10 @@ public class MyNetworkPlayer : NetworkBehaviour
             countdownCanvas.SetActive(true);
         }
 
-        CountdownText.text = Convert.ToInt32(gamestateManager.PausTimer).ToString();
+        CountdownText.text = Convert.ToInt32(gamestateManager.PauseTimer).ToString();
         countdownCanvas.GetComponent<Animator>().Play("Pulse");
 
-        if (gamestateManager.PausTimer <= 0)
+        if (gamestateManager.PauseTimer <= 0)
         {
             countdownCanvas.SetActive(false);
         }

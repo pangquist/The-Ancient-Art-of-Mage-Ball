@@ -24,8 +24,9 @@ public class GamestateManager : NetworkBehaviour
     [SerializeField] float matchStartTime = 180f;
 
     [SyncVar(hook = nameof(HandlePausTimeChange))]
-    [SerializeField] float pausTimer;
-    [SerializeField] float pausStartTime = 5f;
+    [SerializeField] float pauseTimer;
+    [SerializeField] float startPauseTime = 12f;
+    [SerializeField] float goalPauseTime = 5f;
 
     int startScore = 0;
     [SyncVar (hook = nameof(HandleRedScore))]
@@ -36,7 +37,7 @@ public class GamestateManager : NetworkBehaviour
     public int BlueScore { get { return blueScore; } set { blueScore = value; } }
     public int RedScore { get { return redScore; } set { redScore = value; } }
     public float Timer { get { return time; } set { time = value; } }
-    public float PausTimer { get { return pausTimer; } set { PausTimer = value; } }
+    public float PauseTimer { get { return pauseTimer; } set { PauseTimer = value; } }
 
     [SerializeField] TMP_Text postGameRedScoreDisplay;
     [SerializeField] TMP_Text postGameBlueScoreDisplay;
@@ -49,7 +50,7 @@ public class GamestateManager : NetworkBehaviour
     public override void OnStartServer()
     {
         time = matchStartTime;
-        pausTimer = pausStartTime;
+        pauseTimer = startPauseTime;
         ResetScore();
     }
 
@@ -68,9 +69,9 @@ public class GamestateManager : NetworkBehaviour
 
         if (matchIsPaused)
         {
-            pausTimer -= Time.deltaTime;
+            pauseTimer -= Time.deltaTime;
 
-            if (pausTimer <= 0)
+            if (pauseTimer <= 0)
             {
                 UnpauseMatch();
             }
@@ -154,14 +155,14 @@ public class GamestateManager : NetworkBehaviour
     {
         HandleBlueScoreChanged?.Invoke();
         matchIsPaused = true;
-        pausTimer = pausStartTime;
+        pauseTimer = goalPauseTime;
     }
     
     public void HandleRedScore(int oldScore, int newScore)
     {
         HandleRedScoreChanged?.Invoke();
         matchIsPaused = true;
-        pausTimer = pausStartTime;
+        pauseTimer = goalPauseTime;
     }
     
     public void HandleMatchPause(bool oldBool, bool newBool)
