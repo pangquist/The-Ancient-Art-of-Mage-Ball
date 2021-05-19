@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class RestrictCasting : NetworkBehaviour
 {
+    [SerializeField] LayerMask grappleable;
+    [SerializeField] Transform castPoint, camera, player;
+    [SerializeField] private float maxRange = 25f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,5 +19,19 @@ public class RestrictCasting : NetworkBehaviour
     void Update()
     {
         
+    }
+
+    void Cast()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(camera.position, camera.forward, out hit, maxRange))
+        {
+            if(hit.transform.gameObject.tag == "Player")
+            {
+                UseAbilities targetAbilities = hit.transform.gameObject.GetComponent<UseAbilities>();
+
+                //targetAbilities.StartAllCooldowns();
+            }
+        }
     }
 }

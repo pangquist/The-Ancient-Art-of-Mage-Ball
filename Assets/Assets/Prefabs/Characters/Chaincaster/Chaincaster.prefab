@@ -478,6 +478,7 @@ GameObject:
   - component: {fileID: -3599253830600747055}
   - component: {fileID: 6569366051808079934}
   - component: {fileID: -6952741555833348994}
+  - component: {fileID: 8333611319720115501}
   - component: {fileID: 1398020548929700590}
   - component: {fileID: 1398020548929700585}
   - component: {fileID: 1398020548929700584}
@@ -590,6 +591,27 @@ MonoBehaviour:
   duration: 10
   currentDuration: 0
   lockActive: 0
+--- !u!114 &8333611319720115501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1398020548929700587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e42753e88f1cea049a45153fac437e15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  grappleable:
+    serializedVersion: 2
+    m_Bits: 0
+  castPoint: {fileID: 1299691982749212937}
+  camera: {fileID: 1398020549020263659}
+  player: {fileID: 1398020548929700589}
+  maxRange: 25
 --- !u!136 &1398020548929700590
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -756,7 +778,7 @@ MonoBehaviour:
   castAbility2Button: 324
   cooldownAbility2: 0
   ability2Name: {fileID: 7400000, guid: b0ac5d7e0c0a11940a38e7b3033b5634, type: 2}
-  castAbility3Button: 0
+  castAbility3Button: 49
   cooldownAbility3: 0
   ability3Name: {fileID: 0}
   castAbility4Button: 0

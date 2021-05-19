@@ -78,6 +78,11 @@ public class Lockdown : NetworkBehaviour
         {
             target = hit.transform.gameObject;
 
+            if(!(target.tag == "Player" || target.tag == "Enemy"))
+            {
+                return;
+            }
+
             anchor1 = Instantiate(chain, target.transform.position + Random.insideUnitSphere * 5, transform.rotation) as GameObject;
             anchor2 = Instantiate(chain, target.transform.position + Random.insideUnitSphere * 5, transform.rotation) as GameObject;
             anchor3 = Instantiate(chain, target.transform.position + Random.insideUnitSphere * 5, transform.rotation) as GameObject;
