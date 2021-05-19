@@ -16,23 +16,23 @@ public class Amplify : NetworkBehaviour
     RaycastHit hit;
     GameObject ball;
 
-    [Client]
-    public void DoAmplifySpell()
-    {
-        if (!hasAuthority)
-        {
-            return;
-        }
+    //[Client]
+    //public void DoAmplifySpell()
+    //{
+    //    if (!hasAuthority)
+    //    {
+    //        return;
+    //    }
 
-        CmdSpawnBeam();
+    //    CmdSpawnBeam();
 
-        useAbilities.SetOnCooldownAbility1();
-    }
+    //}
 
     [Command]
     void CmdSpawnBeam()
     {
         RpcActivateBeam();
+        useAbilities.SetOnCooldownAbility1();
     }
 
     [ClientRpc]
