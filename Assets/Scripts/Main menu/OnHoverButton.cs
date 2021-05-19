@@ -10,8 +10,6 @@ public class OnHoverButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     float scaleAmount = 1.2f;
 
-    [SerializeField] AudioSource sound;
-
     void Start()
     {
         scale = transform.localScale;
@@ -21,11 +19,6 @@ public class OnHoverButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public void OnPointerEnter(PointerEventData eventData)
     {
         transform.localScale = enlargedScale;
-
-        if (sound != null)
-        {
-            sound.Play();
-        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
