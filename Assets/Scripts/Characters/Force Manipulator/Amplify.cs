@@ -7,9 +7,8 @@ public class Amplify : NetworkBehaviour
 {
     [SerializeField] Camera mainCamera;
     [SerializeField] GameObject amplifyBeam;
-    [SerializeField] float range;
     [SerializeField] float duration;
-    [SerializeField] Vector3 force;
+    [SerializeField] float force;
     float currentDuration;
 
     RaycastHit hit;
@@ -28,13 +27,6 @@ public class Amplify : NetworkBehaviour
 
     [Command]
     void CmdSpawnBeam()
-    {
-        //ServerActivateBeam();
-        RpcActivateBeam();
-    }
-
-    [Server]
-    void ServerActivateBeam()
     {
         RpcActivateBeam();
     }

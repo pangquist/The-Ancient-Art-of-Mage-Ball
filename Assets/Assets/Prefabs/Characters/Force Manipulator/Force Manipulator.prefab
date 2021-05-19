@@ -443,8 +443,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 3758272145470057082}
-  force: {x: 0, y: 4.5, z: 0}
   amplify: {fileID: 8404522335574230688}
+  force: 0
 --- !u!1 &1044814289403977746
 GameObject:
   m_ObjectHideFlags: 0
@@ -2699,8 +2699,8 @@ MonoBehaviour:
     m_Bits: 128
   attackEffect: {fileID: 0}
   range: 20
-  appliedForce: {x: 0, y: 150, z: 0}
-  duration: 2
+  appliedForce: {x: 0, y: 225, z: 0}
+  duration: 2.5
 --- !u!114 &6838466485475351199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2738,10 +2738,10 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   castAbility1Button: 323
-  cooldownAbility1: 5
+  cooldownAbility1: 4
   ability1Name: {fileID: 7400000, guid: fcc6fdc4c6b6bd84b980a2f5e6b4c97f, type: 2}
   castAbility2Button: 324
-  cooldownAbility2: 5
+  cooldownAbility2: 6
   ability2Name: {fileID: 7400000, guid: 834ecba741c56ca47867786c278d087c, type: 2}
   castAbility3Button: 49
   cooldownAbility3: 10
@@ -2784,7 +2784,7 @@ MonoBehaviour:
   amplifyBeam: {fileID: 907603169916725692}
   range: 0
   duration: 4.5
-  force: {x: 0, y: 4.5, z: 0}
+  force: 20
 --- !u!81 &7825197277653462414
 AudioListener:
   m_ObjectHideFlags: 0

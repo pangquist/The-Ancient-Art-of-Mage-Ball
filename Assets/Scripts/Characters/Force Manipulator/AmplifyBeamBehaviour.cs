@@ -6,8 +6,8 @@ using UnityEngine;
 public class AmplifyBeamBehaviour : MonoBehaviour
 {
     [SerializeField] Camera mainCamera;
-    [SerializeField] Vector3 force;
     [SerializeField] Amplify amplify;
+    [SerializeField] float force;
     float lifetime;
     float currentTime;
 
@@ -34,7 +34,7 @@ public class AmplifyBeamBehaviour : MonoBehaviour
 
         if (ball.tag == "Enemy")
         {
-            amplify.MoveBall(ball, mainCamera.transform.forward * 5);
+            amplify.MoveBall(ball, mainCamera.transform.forward * force);
         }
     }
 
@@ -43,7 +43,7 @@ public class AmplifyBeamBehaviour : MonoBehaviour
         lifetime = time;
     }
 
-    public void SetForce(Vector3 _force)
+    public void SetForce(float _force)
     {
         force = _force;
     }

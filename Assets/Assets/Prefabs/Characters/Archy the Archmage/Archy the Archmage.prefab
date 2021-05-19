@@ -512,9 +512,9 @@ MonoBehaviour:
     m_Bits: 128
   - serializedVersion: 2
     m_Bits: 64
-  range: 40
-  pushAmount: 400
-  pushRadius: 5
+  range: 30
+  pushAmount: 550
+  pushRadius: 6
   hitEffect: {fileID: 8027473195609965283, guid: e06bdea1510a3e547a2ed554aac7f5f9,
     type: 3}
 --- !u!114 &8890351901005270611
@@ -533,10 +533,10 @@ MonoBehaviour:
   syncInterval: 0.1
   playerCamera: {fileID: 1398020549020263658}
   controller: {fileID: 1398020548929700585}
-  dashSpeed: 30
-  dashDuration: 0.35
-  pushAmount: 500
-  pushRadius: 7
+  dashSpeed: 25
+  dashDuration: 0.4
+  pushAmount: 650
+  pushRadius: 8
   playerMovement: {fileID: 1398020548929700584}
   hitEffect: {fileID: 8027473195609965283, guid: e06bdea1510a3e547a2ed554aac7f5f9,
     type: 3}
@@ -659,7 +659,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   playerMovement: {fileID: 1398020548929700584}
-  forceJumpHeight: 20
+  forceJumpHeight: 15
 --- !u!1 &1398020549020263655
 GameObject:
   m_ObjectHideFlags: 0
