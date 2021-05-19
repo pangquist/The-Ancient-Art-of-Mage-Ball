@@ -133,4 +133,12 @@ public class UseAbilities : NetworkBehaviour
         anim.Play(ability3Name.name);
         currentCooldowns[2] = cooldownAbility3;
     }
+
+    public void StartAllCooldowns()
+    {
+        //to be balanced
+        currentCooldowns[0] = cooldownAbility1;
+        currentCooldowns[1] = cooldownAbility2;
+        currentCooldowns[2] = cooldownAbility3;
+    }
 }

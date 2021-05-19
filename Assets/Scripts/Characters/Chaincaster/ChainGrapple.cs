@@ -10,8 +10,8 @@ public class ChainGrapple : NetworkBehaviour
     private Vector2 offsetSpeed = new Vector2(15, 0);
     private RaycastHit raycastHit;
     private Vector3 grapplePoint;
-    private PlayerMovement playerMovement;
 
+    [SerializeField] CharacterController controller;
     [SerializeField] LayerMask grappleable;
     [SerializeField] Transform castPoint, camera, player;
     [SerializeField] private float maxRange = 25f;
@@ -21,7 +21,7 @@ public class ChainGrapple : NetworkBehaviour
 
     void Start()
     {
-        playerMovement = GetComponent<PlayerMovement>();
+       
     }
 
     private void Awake()
@@ -78,7 +78,7 @@ public class ChainGrapple : NetworkBehaviour
         {
             Vector3 grappleVector = grapplePoint - player.position;
 
-            playerMovement.controller.Move(grappleVector * grappleSpeed * Time.deltaTime);
+            controller.Move(grappleVector * grappleSpeed * Time.deltaTime);
         }
         
     }

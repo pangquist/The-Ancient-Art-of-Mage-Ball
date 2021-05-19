@@ -12146,6 +12146,29 @@ PrefabInstance:
       propertyPath: gamestateManager
       value: 
       objectReference: {fileID: 1462487361}
+    - target: {fileID: 7027079361099392649, guid: f9f2dd1600203254eabef20669d45d98,
+        type: 3}
+      propertyPath: spawnPrefabs.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7027079361099392649, guid: f9f2dd1600203254eabef20669d45d98,
+        type: 3}
+      propertyPath: characters.Array.data[1]
+      value: 
+      objectReference: {fileID: 1398020548929700587, guid: ffc49a7d56283624083e984f973003a4,
+        type: 3}
+    - target: {fileID: 7027079361099392649, guid: f9f2dd1600203254eabef20669d45d98,
+        type: 3}
+      propertyPath: spawnPrefabs.Array.data[8]
+      value: 
+      objectReference: {fileID: 1398020548929700587, guid: ffc49a7d56283624083e984f973003a4,
+        type: 3}
+    - target: {fileID: 7027079361099392649, guid: f9f2dd1600203254eabef20669d45d98,
+        type: 3}
+      propertyPath: spawnPrefabs.Array.data[9]
+      value: 
+      objectReference: {fileID: 9212652852658391536, guid: b7c1cb04b8ffb9b46aada444c93cc38b,
+        type: 3}
     - target: {fileID: 7027079361099392651, guid: f9f2dd1600203254eabef20669d45d98,
         type: 3}
       propertyPath: m_Name

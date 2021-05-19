@@ -21,7 +21,7 @@ public class RestrictCasting : NetworkBehaviour
         
     }
 
-    void Cast()
+    void CastRestrict()
     {
         RaycastHit hit;
         if (Physics.Raycast(camera.position, camera.forward, out hit, maxRange))
@@ -30,7 +30,7 @@ public class RestrictCasting : NetworkBehaviour
             {
                 UseAbilities targetAbilities = hit.transform.gameObject.GetComponent<UseAbilities>();
 
-                //targetAbilities.StartAllCooldowns();
+                targetAbilities.StartAllCooldowns();
             }
         }
     }
