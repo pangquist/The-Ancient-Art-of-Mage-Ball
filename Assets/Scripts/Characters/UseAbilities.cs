@@ -11,7 +11,7 @@ public class UseAbilities : NetworkBehaviour
     // When the appropriate key is pressed, the current cooldown will be set to max and the animation will be player.
     // Author: Valter Lindecrantz
     
-    Animator anim;
+    [SerializeField] Animator anim;
 
     #region Ability1
     [Header("Ability 1")]
@@ -49,7 +49,6 @@ public class UseAbilities : NetworkBehaviour
     // During start the character retrieves its own animator component to be able to reference the animation clips.
     void Start()
     {
-        anim = GetComponent<Animator>();
         currentCooldowns = new float[3];
         for (int i = 0; i< currentCooldowns.Length; i++)
         {

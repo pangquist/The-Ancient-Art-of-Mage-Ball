@@ -341,9 +341,9 @@ MonoBehaviour:
   tooltipBackground: {fileID: 69312783}
   headers:
   - Arcane Explosion
-  - Force Jump
+  - Enhanced Jump
   - Mage Dash
-  - Combo magic
+  - Intuitive Practitioner
   contents:
   - Creates a magical explosion which pushes the ball from the center of the explosion
   - Archy does an enhanced jump, launching him high into the air

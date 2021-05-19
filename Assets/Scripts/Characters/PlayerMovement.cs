@@ -11,6 +11,7 @@ public class PlayerMovement : NetworkBehaviour
     // Author: Valter Lindecrantz
 
     [SerializeField] CharacterController controller;
+    [SerializeField] Animator animator;
     [SerializeField] Transform groundCheck;
     [SerializeField] LayerMask groundMask;
     [SerializeField] KeyCode jumpButton;
@@ -90,7 +91,14 @@ public class PlayerMovement : NetworkBehaviour
             move = new Vector3(0, 0, 0);
         }
 
-
+        if (move != Vector3.zero)
+        {
+            animator.SetBool("isWalking", true);
+        }
+        else
+        {
+            animator.SetBool("isWalking", false);
+        }
         CmdMove(move, velocity);
     }
 

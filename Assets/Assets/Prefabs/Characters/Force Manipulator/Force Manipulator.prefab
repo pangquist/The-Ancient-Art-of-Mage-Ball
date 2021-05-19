@@ -2542,6 +2542,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   controller: {fileID: 3758272146365123705}
+  animator: {fileID: 6004741204329823607}
   groundCheck: {fileID: 3758272145769701866}
   groundMask:
     serializedVersion: 2
@@ -2739,6 +2740,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  anim: {fileID: 6004741204329823607}
   castAbility1Button: 323
   cooldownAbility1: 4
   ability1Name: {fileID: 7400000, guid: fcc6fdc4c6b6bd84b980a2f5e6b4c97f, type: 2}
