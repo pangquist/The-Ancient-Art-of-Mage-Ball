@@ -2693,6 +2693,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  useAbilities: {fileID: 8625832493932510498}
   mainCamera: {fileID: 3758272145470057082}
   hitableLayer:
     serializedVersion: 2
@@ -2715,6 +2716,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  useAbilities: {fileID: 8625832493932510498}
   mainCamera: {fileID: 3758272145470057082}
   hitableLayer:
     serializedVersion: 2
@@ -2746,6 +2748,7 @@ MonoBehaviour:
   castAbility3Button: 49
   cooldownAbility3: 10
   ability3Name: {fileID: 7400000, guid: 350cadcee6930b6448a626195465363b, type: 2}
+  currentCooldowns: []
   matchIsPaused: 1
 --- !u!95 &6004741204329823607
 Animator:
@@ -2780,6 +2783,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  useAbilities: {fileID: 8625832493932510498}
   mainCamera: {fileID: 3758272145470057082}
   amplifyBeam: {fileID: 907603169916725692}
   duration: 4.5

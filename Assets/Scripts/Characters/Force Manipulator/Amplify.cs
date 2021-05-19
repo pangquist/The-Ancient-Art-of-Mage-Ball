@@ -5,10 +5,12 @@ using UnityEngine;
 
 public class Amplify : NetworkBehaviour
 {
+    [SerializeField] UseAbilities useAbilities;
     [SerializeField] Camera mainCamera;
     [SerializeField] GameObject amplifyBeam;
     [SerializeField] float duration;
     [SerializeField] float force;
+
     float currentDuration;
 
     RaycastHit hit;
@@ -23,6 +25,8 @@ public class Amplify : NetworkBehaviour
         }
 
         CmdSpawnBeam();
+
+        useAbilities.SetOnCooldownAbility1();
     }
 
     [Command]

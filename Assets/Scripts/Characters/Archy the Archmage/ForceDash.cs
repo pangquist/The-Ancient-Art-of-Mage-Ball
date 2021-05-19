@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class ForceDash : NetworkBehaviour
 {
+    [SerializeField] UseAbilities useAbilities;
     [SerializeField] Camera playerCamera;
     [SerializeField] CharacterController controller;
     [SerializeField] float dashSpeed;
@@ -26,6 +27,7 @@ public class ForceDash : NetworkBehaviour
     
     IEnumerator Dash()
     {
+        useAbilities.SetOnCooldownAbility3();
         float startTime = Time.time;
 
         while(Time.time <startTime + dashDuration)

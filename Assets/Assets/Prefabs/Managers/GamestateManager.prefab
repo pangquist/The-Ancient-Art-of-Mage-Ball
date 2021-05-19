@@ -73,7 +73,7 @@ MonoBehaviour:
   time: 0
   matchStartTime: 180
   pauseTimer: 0
-  startPauseTime: 12
+  startPauseTime: 5
   goalPauseTime: 5
   redScore: 0
   blueScore: 0

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class ForceJump : NetworkBehaviour
 {
+    [SerializeField] UseAbilities useAbilities;
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] float forceJumpHeight;
 
@@ -12,5 +13,7 @@ public class ForceJump : NetworkBehaviour
     void DoForceJump()
     {
         playerMovement.velocity.y += forceJumpHeight;
+
+        useAbilities.SetOnCooldownAbility2();
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class ForceWall : NetworkBehaviour
 {
+    [SerializeField] UseAbilities useAbilities;
     [SerializeField] Camera mainCamera;
     [SerializeField] LayerMask hitableLayer;
     [SerializeField] GameObject forceWall;
@@ -12,8 +13,7 @@ public class ForceWall : NetworkBehaviour
     [SerializeField] float duration;
     
     RaycastHit hit;
-
-
+    
     [Client]
     public void DoForceWallSpell()
     {
@@ -33,6 +33,7 @@ public class ForceWall : NetworkBehaviour
         }
 
         CmdDoSpell(hit.point);
+        useAbilities.SetOnCooldownAbility3();
     }
 
     [Command]

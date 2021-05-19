@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class ForcePush : NetworkBehaviour
 {
+    [SerializeField] UseAbilities useAbilities;
     [SerializeField] Camera mainCamera;
     [SerializeField] LayerMask[] hitableLayers;
     
@@ -64,6 +65,8 @@ public class ForcePush : NetworkBehaviour
                 CmdMoveBall(pushedObject.gameObject, hit.point);
             }
         }
+
+        useAbilities.SetOnCooldownAbility1();
     }
 
     #endregion

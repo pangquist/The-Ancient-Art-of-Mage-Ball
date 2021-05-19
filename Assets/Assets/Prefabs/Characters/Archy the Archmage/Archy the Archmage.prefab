@@ -506,6 +506,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  useAbilities: {fileID: 7626238677252518089}
   mainCamera: {fileID: 1398020549020263658}
   hitableLayers:
   - serializedVersion: 2
@@ -531,6 +532,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  useAbilities: {fileID: 7626238677252518089}
   playerCamera: {fileID: 1398020549020263658}
   controller: {fileID: 1398020548929700585}
   dashSpeed: 25
@@ -635,6 +637,7 @@ MonoBehaviour:
   castAbility3Button: 49
   cooldownAbility3: 7
   ability3Name: {fileID: 7400000, guid: 40b2eff336eb3cd459714aebda6afcc3, type: 2}
+  currentCooldowns: []
   matchIsPaused: 1
 --- !u!81 &4269192981277659496
 AudioListener:
@@ -658,6 +661,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  useAbilities: {fileID: 7626238677252518089}
   playerMovement: {fileID: 1398020548929700584}
   forceJumpHeight: 15
 --- !u!1 &1398020549020263655
