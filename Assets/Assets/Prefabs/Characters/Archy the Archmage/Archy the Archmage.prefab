@@ -408,6 +408,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   controller: {fileID: 1398020548929700585}
+  animator: {fileID: 282141968}
   groundCheck: {fileID: 1398020549391249274}
   groundMask:
     serializedVersion: 2
@@ -628,6 +629,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  anim: {fileID: 282141968}
   castAbility1Button: 323
   cooldownAbility1: 1
   ability1Name: {fileID: 7400000, guid: 485d67863fd61984f941cc4d7a352986, type: 2}
@@ -2428,7 +2430,7 @@ Transform:
   m_GameObject: {fileID: 4814790772547277118}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.2420001, y: -0.2449998, z: 0.8800001}
-  m_LocalScale: {x: 0.11523215, y: 0.11523215, z: 0.11523215}
+  m_LocalScale: {x: 0.07957471, y: 0.07957471, z: 0.07957471}
   m_Children:
   - {fileID: 333678291566601256}
   - {fileID: 2773727659837306675}
