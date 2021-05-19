@@ -75,6 +75,14 @@ public class LobbyMenu : MonoBehaviour
     void AuthorityHandlePartyOwnerStateUpdated(bool state)
     {
         startGameButton.gameObject.SetActive(state);
+        startGameButton.enabled = state;
+        startGameButton.interactable = state;
+        startGameButton.gameObject.GetComponent<OnHoverButton>().enabled = state;
+        ColorBlock cb = startGameButton.colors;
+
+        cb.normalColor = Color.white;
+
+        startGameButton.colors = cb;
         foreach (GameObject mapButton in mapButtons)
         {
             mapButton.GetComponent<Button>().enabled = true;
