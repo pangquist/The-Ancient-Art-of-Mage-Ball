@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class GravitySwap : NetworkBehaviour
 {
+    [SerializeField] UseAbilities useAbilities;
     [SerializeField] Camera mainCamera;
     [SerializeField] LayerMask hitableLayer;
     [SerializeField] GameObject attackEffect;
@@ -13,7 +14,6 @@ public class GravitySwap : NetworkBehaviour
 
     [SerializeField] float duration;
     
-
     RaycastHit hit;
 
     GameObject ball;
@@ -31,6 +31,7 @@ public class GravitySwap : NetworkBehaviour
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         Physics.Raycast(ray, out hit, range, hitableLayer);
 
+        useAbilities.SetOnCooldownAbility2();
         if (hit.collider == null)
         {
             return;

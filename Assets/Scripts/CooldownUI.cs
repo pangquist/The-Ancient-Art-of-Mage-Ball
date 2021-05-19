@@ -66,7 +66,7 @@ public class CooldownUI : MonoBehaviour
         }
         else
         {
-            ability1Icon.fillAmount = (abilities.GetCooldown(0) / abilities.CooldownAbility1());
+            ability1Icon.fillAmount = abilities.GetCooldown(0) / abilities.CooldownAbility1();
             ability1Text.text = (abilities.GetCooldown(0)).ToString(".#");
         }
         #endregion

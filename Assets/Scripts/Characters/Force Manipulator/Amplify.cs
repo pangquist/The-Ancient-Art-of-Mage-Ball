@@ -5,30 +5,34 @@ using UnityEngine;
 
 public class Amplify : NetworkBehaviour
 {
+    [SerializeField] UseAbilities useAbilities;
     [SerializeField] Camera mainCamera;
     [SerializeField] GameObject amplifyBeam;
     [SerializeField] float duration;
     [SerializeField] float force;
+
     float currentDuration;
 
     RaycastHit hit;
     GameObject ball;
 
-    [Client]
-    public void DoAmplifySpell()
-    {
-        if (!hasAuthority)
-        {
-            return;
-        }
+    //[Client]
+    //public void DoAmplifySpell()
+    //{
+    //    if (!hasAuthority)
+    //    {
+    //        return;
+    //    }
 
-        CmdSpawnBeam();
-    }
+    //    CmdSpawnBeam();
+
+    //}
 
     [Command]
     void CmdSpawnBeam()
     {
         RpcActivateBeam();
+        useAbilities.SetOnCooldownAbility1();
     }
 
     [ClientRpc]

@@ -37,7 +37,7 @@ public class UseAbilities : NetworkBehaviour
     public float CooldownAbility3() { return cooldownAbility3; }
     #endregion
 
-    float[] currentCooldowns;
+    public float[] currentCooldowns;
     [SerializeField] bool matchIsPaused = true;
 
     // Getter for the Cooldown UI to retrieve the current cooldowns to correctly display on the UI.
@@ -56,7 +56,6 @@ public class UseAbilities : NetworkBehaviour
             Debug.Log("Setting the cooldowns to 0");
             currentCooldowns[i] = 0f;
         }
-
     }
 
     public override void OnStartAuthority()
@@ -112,25 +111,36 @@ public class UseAbilities : NetworkBehaviour
                 StartAbility3Animation();
             }
         }
-        
     }
 
     // Plays the appropriate animation (which contains the method for the ability) and sets the cooldown to max.
     void StartAbility1Animation()
     {
         anim.Play(ability1Name.name);
-        currentCooldowns[0] = cooldownAbility1;
     }
 
     void StartAbility2Animation()
     {
         anim.Play(ability2Name.name);
-        currentCooldowns[1] = cooldownAbility2;
     }
 
     void StartAbility3Animation()
     {
         anim.Play(ability3Name.name);
+    }
+
+    public void SetOnCooldownAbility1()
+    {
+        currentCooldowns[0] = cooldownAbility1;
+    }
+
+    public void SetOnCooldownAbility2()
+    {
+        currentCooldowns[1] = cooldownAbility2;
+    }
+
+    public void SetOnCooldownAbility3()
+    {
         currentCooldowns[2] = cooldownAbility3;
     }
 }
