@@ -23,7 +23,7 @@ public class MyNetworkManager : NetworkManager
     [SerializeField] GameObject ballStartPos;
     [SerializeField] GameObject lobby;
     [SerializeField] GameObject[] characters;
-    [SerializeField] string selectedScene = "Playground";
+    [SerializeField] string selectedScene = "UnderwaterRuin";
 
     public static event Action ClientOnConnected;
     public static event Action ClientOnDisconnected;
@@ -164,7 +164,7 @@ public class MyNetworkManager : NetworkManager
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
 
-            selectedScene = "Playground";
+            selectedScene = "UnderwaterRuin";
         }
     }
 
