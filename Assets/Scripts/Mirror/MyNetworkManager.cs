@@ -8,29 +8,28 @@ using UnityEngine.SceneManagement;
 
 public class MyNetworkManager : NetworkManager
 {
+    // This script controls what happens on the server and the client when a client connects.
+    // It also functions as a general tool to relay information regarding map-selectiona and character-selection.
+    // The script also describes what happens when a client or host disconnects from the server.
+    // Authors: Pär Ängqvist & Valter Lindecrantz
+
     public static int playersRequiredToStart = 1;
 
     [SerializeField] TeamManager teamManager;
     [SerializeField] GamestateManager gamestateManager;
-
-    //bool ballIsSpawned = false;
+    
     [SerializeField] GameObject mainMenuPlayer;
     [SerializeField] GameObject ball;
     [SerializeField] GameObject ballStartPos;
     [SerializeField] GameObject lobby;
     [SerializeField] GameObject[] characters;
-    [SerializeField] string selectedScene = "Playground";
+    [SerializeField] string selectedScene = "UnderwaterRuin";
 
     public static event Action ClientOnConnected;
     public static event Action ClientOnDisconnected;
 
     bool isGameInProgress;
-    public static bool timeIsStarted = false; //ÄNDRA
     public static MyNetworkPlayer connectedPlayer;
-
-    //public List<string[]> menuPlayers = new List<string[]>();
-
-    //public List<string[]> MenuPlayers { get { return menuPlayers; } set { menuPlayers = value; } }
 
     public GameObject[] Characters { get { return characters; } }
 
@@ -59,8 +58,9 @@ public class MyNetworkManager : NetworkManager
 
         isGameInProgress = false;
     }
-    
-    //Checks if the requirements to start the game are fullfilled.
+
+    // Checks if the requirements to start the game are fullfilled. If they are, the scene is switched to the currently selected scene.
+    // For every player in the menu, it also stores that player information regarding name, team and character to be used when spawned in the game.
     [Server]
     public void StartGame()
     {
@@ -69,14 +69,14 @@ public class MyNetworkManager : NetworkManager
 
         foreach (MyNetworkMenuPlayer menuPlayer in MenuPlayers)
         {
-            string[] characterInfo = new string[3];
-            characterInfo[0] = menuPlayer.GetDisplayName();
-            characterInfo[1] = menuPlayer.TeamName;
-            characterInfo[2] = menuPlayer.ChosenCharacter.ToString();
+            string[] characterInfo = new string[4];
+            characterInfo[0] = menuPlayer.SteamId.ToString();
+            characterInfo[1] = menuPlayer.GetDisplayName();
+            characterInfo[2] = menuPlayer.TeamName;
+            characterInfo[3] = menuPlayer.ChosenCharacter.ToString();
 
             CharacterInfoList.Add(characterInfo);
         }
-        
 
         isGameInProgress = true;
 
@@ -91,7 +91,6 @@ public class MyNetworkManager : NetworkManager
     
     public override void OnClientConnect(NetworkConnection conn)
     {
-        //Debug.Log("A client has connected to the server!");
         base.OnClientConnect(conn);
 
         ClientOnConnected?.Invoke();
@@ -142,11 +141,7 @@ public class MyNetworkManager : NetworkManager
         {
             NetworkPlayerSpawner spawner = conn.identity.GetComponent<NetworkPlayerSpawner>();
             Spawners.Add(spawner);
-            spawner.AssignCharacterPrefab(Spawners.Count - 1);
-            //Players.Add(player);
-            
-            //player.Assi
-            //player.AssignNameInGame(Players.Count - 1);
+            spawner.AssignCharacterPrefab(Spawners.Count-1);
         }
     }
 
@@ -156,7 +151,6 @@ public class MyNetworkManager : NetworkManager
         if (sceneName == SelectedScene)
         {
             playerPrefab = Characters[0]; //Here is where it is decided what character the player will spawn in as. Make it work with character select in lobby!
-            GamestateManager.gameIsOver = false;
             ballStartPos = GameObject.Find("BallSpawnPosition");
 
             GameObject instantiatedBall;
@@ -166,16 +160,20 @@ public class MyNetworkManager : NetworkManager
         else if (sceneName == "PostMatch")
         {
             playerPrefab = mainMenuPlayer;
-            gamestateManager = GameObject.Find("GamestateManager").GetComponent<GamestateManager>();
             gamestateManager.AssignScoreAtPostScreen();
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
 
-            selectedScene = "Playground";
-            //Players.Clear();
-            //MenuPlayers.Clear();
-            //CharacterInfoList.Clear();
+            selectedScene = "UnderwaterRuin";
         }
+    }
+
+    public override void OnClientSceneChanged(NetworkConnection conn)
+    {
+        gamestateManager.matchIsOver = false;
+        gamestateManager.matchIsPaused = true;
+        gamestateManager.FillSpawnpointList();
+        base.OnClientSceneChanged(conn);
     }
 
     public override void OnStopClient()

@@ -20,6 +20,8 @@ public class MyNetworkPlayer : NetworkBehaviour
     [SerializeField] Color playerColor = Color.white;
 
     [SerializeField] int chosenCharacter;
+    
+    [SerializeField] CharacterController controller;
 
     [SerializeField] GameObject inGameUI;
     [SerializeField] TMP_Text displayNameText = null;
@@ -27,7 +29,11 @@ public class MyNetworkPlayer : NetworkBehaviour
     [SerializeField] TMP_Text blueScoreText;
     [SerializeField] TMP_Text timeText;
     [SerializeField] GameObject nameCanvas;
-
+    [SerializeField] GameObject settingsCanvas;
+    [SerializeField] GameObject countdownCanvas;
+    [SerializeField] TMP_Text CountdownText;
+    [SerializeField] TMP_Text scoringTeamText;
+    [SerializeField] Image teamIcon;
 
     [SerializeField] GamestateManager gamestateManager;
 
@@ -48,10 +54,18 @@ public class MyNetworkPlayer : NetworkBehaviour
         timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
-    void SetScoreText()
+    void SetRedScoreText()
     {
         redScoreText.text = "Red: " + gamestateManager.RedScore.ToString();
+        scoringTeamText.text = "Red Team Scored!";
+        scoringTeamText.color = Color.red;
+    }
+
+    void SetBlueScoreText()
+    {
         blueScoreText.text = "Blue: " + gamestateManager.BlueScore.ToString();
+        scoringTeamText.text = "Blue Team Scored!";
+        scoringTeamText.color = Color.blue;
     }
 
     [Server]
@@ -89,13 +103,22 @@ public class MyNetworkPlayer : NetworkBehaviour
 
     public override void OnStartAuthority()
     {
+        Debug.Log("The client has authority!");
+        base.OnStartAuthority();
+
+        settingsCanvas.SetActive(true);
+        gameObject.GetComponent<AudioListener>().enabled = true;
+        controller = gameObject.GetComponent<CharacterController>();
         inGameUI.SetActive(true);
         nameCanvas.SetActive(false);
         gamestateManager = GameObject.Find("GamestateManager").GetComponent<GamestateManager>();
         GamestateManager.HandleTimeChanged += SetTimerText;
-        GamestateManager.HandleScoreChanged += SetScoreText;
-
-        base.OnStartAuthority();
+        GamestateManager.HandleRedScoreChanged += SetRedScoreText;
+        GamestateManager.HandleBlueScoreChanged += SetBlueScoreText;
+        GamestateManager.HandleRedScoreChanged += Respawn;
+        GamestateManager.HandleBlueScoreChanged += Respawn;
+        GamestateManager.HandleMatchPaused += Respawn;
+        GamestateManager.HandlePausTimeChanged += Countdown;
     }
 
     public override void OnStartClient()
@@ -112,7 +135,12 @@ public class MyNetworkPlayer : NetworkBehaviour
             return;
 
         GamestateManager.HandleTimeChanged -= SetTimerText;
-        GamestateManager.HandleScoreChanged -= SetScoreText;
+        GamestateManager.HandleRedScoreChanged -= SetRedScoreText;
+        GamestateManager.HandleBlueScoreChanged -= SetBlueScoreText;
+        GamestateManager.HandleRedScoreChanged -= Respawn;
+        GamestateManager.HandleBlueScoreChanged -= Respawn;
+        GamestateManager.HandleMatchPaused -= Respawn;
+        GamestateManager.HandlePausTimeChanged -= Countdown;
         ((MyNetworkManager)NetworkManager.singleton).Players.Remove(this);
     }
 
@@ -162,6 +190,7 @@ public class MyNetworkPlayer : NetworkBehaviour
         Debug.Log("The color has been updated for the client!");
 
         displayNameText.color = playerColor;
+        teamIcon.color = playerColor;
 
         if (hasAuthority)
         {
@@ -181,7 +210,7 @@ public class MyNetworkPlayer : NetworkBehaviour
         displayNameText.color = playerColor;
     }
     
-    [Server]
+    [Client]
     public void AssignNameInGame(int playerIndex)
     {
         Debug.Log("ASSIGNING NAMES AND TEAMS");
@@ -189,9 +218,38 @@ public class MyNetworkPlayer : NetworkBehaviour
         List<MyNetworkPlayer> players = ((MyNetworkManager)NetworkManager.singleton).Players;
         List<string[]> characterInfoList = ((MyNetworkManager)NetworkManager.singleton).CharacterInfoList;
 
-        displayName = characterInfoList[playerIndex].GetValue(0).ToString();
-        teamName = characterInfoList[playerIndex].GetValue(1).ToString();
-        chosenCharacter = Convert.ToInt32(characterInfoList[playerIndex].GetValue(2));
+        displayName = characterInfoList[playerIndex].GetValue(1).ToString();
+        teamName = characterInfoList[playerIndex].GetValue(2).ToString();
+        chosenCharacter = Convert.ToInt32(characterInfoList[playerIndex].GetValue(3));
+    }
+    
+    [Client]
+    void Respawn()
+    {
+        Vector3 respawnPosition = gamestateManager.GetRespawnPosition(GetDisplayName());
+        Debug.Log($"RESPAWNING! Respawn position: {respawnPosition}");
+        gameObject.transform.position = respawnPosition;
+    }
+
+    void Countdown()
+    {
+        if (!hasAuthority)
+        {
+            return;
+        }
+
+        if (!countdownCanvas.activeSelf)
+        {
+            countdownCanvas.SetActive(true);
+        }
+
+        CountdownText.text = Convert.ToInt32(gamestateManager.PauseTimer).ToString();
+        countdownCanvas.GetComponent<Animator>().Play("Pulse");
+
+        if (gamestateManager.PauseTimer <= 0)
+        {
+            countdownCanvas.SetActive(false);
+        }
     }
     #endregion
 

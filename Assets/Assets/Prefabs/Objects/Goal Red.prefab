@@ -281,6 +281,11 @@ PrefabInstance:
       propertyPath: parentName
       value: 
       objectReference: {fileID: 4181507993175177970}
+    - target: {fileID: 1466839511944973917, guid: 7ec4fa95735c4384b8c5689b415f8582,
+        type: 3}
+      propertyPath: teamOwnership
+      value: Red
+      objectReference: {fileID: 0}
     - target: {fileID: 1466839511944973919, guid: 7ec4fa95735c4384b8c5689b415f8582,
         type: 3}
       propertyPath: m_Name

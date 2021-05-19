@@ -61,7 +61,7 @@ Material:
     - _Metallic: 0
     - _OpacityThreshold: 0
     - _Shininess: 0.078125
-    - _UseColorMap: 0
+    - _UseColorMap: 1
     - _UseEmissiveMap: 0
     - _UseMetallicMap: 0
     - _UseNormalMap: 0
