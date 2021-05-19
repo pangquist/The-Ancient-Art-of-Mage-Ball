@@ -143,4 +143,15 @@ public class UseAbilities : NetworkBehaviour
     {
         currentCooldowns[2] = cooldownAbility3;
     }
+
+    public void ReduceAllCooldowns(float reduceAmount, int attackIndex)
+    {
+        for (int i = 0; i < currentCooldowns.Length; i++)
+        {
+            if (currentCooldowns[i] > 0 && i != attackIndex)
+            {
+                currentCooldowns[i] -= reduceAmount;
+            }
+        }
+    }
 }

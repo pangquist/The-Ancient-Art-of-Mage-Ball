@@ -28,6 +28,7 @@ public class ForceDash : NetworkBehaviour
     IEnumerator Dash()
     {
         useAbilities.SetOnCooldownAbility3();
+        useAbilities.ReduceAllCooldowns(1, 2);
         float startTime = Time.time;
 
         while(Time.time <startTime + dashDuration)

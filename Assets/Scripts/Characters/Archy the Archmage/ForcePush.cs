@@ -49,6 +49,8 @@ public class ForcePush : NetworkBehaviour
             }
         }
 
+        useAbilities.ReduceAllCooldowns(1, 0);
+
         if (hit.collider == null)
         {
             return;
