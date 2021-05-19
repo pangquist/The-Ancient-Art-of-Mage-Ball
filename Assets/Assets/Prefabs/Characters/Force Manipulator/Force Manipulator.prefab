@@ -2782,9 +2782,8 @@ MonoBehaviour:
   syncInterval: 0.1
   mainCamera: {fileID: 3758272145470057082}
   amplifyBeam: {fileID: 907603169916725692}
-  range: 0
   duration: 4.5
-  force: 20
+  force: 17
 --- !u!81 &7825197277653462414
 AudioListener:
   m_ObjectHideFlags: 0
