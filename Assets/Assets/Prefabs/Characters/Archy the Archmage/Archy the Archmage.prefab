@@ -634,7 +634,7 @@ MonoBehaviour:
   castAbility2Button: 324
   cooldownAbility2: 5
   ability2Name: {fileID: 7400000, guid: 7259bfe6441871e4c8849ad2211fc81d, type: 2}
-  castAbility3Button: 49
+  castAbility3Button: 101
   cooldownAbility3: 7
   ability3Name: {fileID: 7400000, guid: 40b2eff336eb3cd459714aebda6afcc3, type: 2}
   currentCooldowns: []
