@@ -23,7 +23,7 @@ public class MyNetworkManager : NetworkManager
     [SerializeField] GameObject ballStartPos;
     [SerializeField] GameObject lobby;
     [SerializeField] GameObject[] characters;
-    [SerializeField] string selectedScene = "UnderwaterRuin";
+    [SerializeField] string selectedScene = "Underwater Ruins";
 
     public static event Action ClientOnConnected;
     public static event Action ClientOnDisconnected;
