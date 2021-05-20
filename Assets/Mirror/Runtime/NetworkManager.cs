@@ -182,7 +182,7 @@ namespace Mirror
             // Don't allow collision-destroyed second instance to continue.
             if (!InitializeSingleton()) return;
 
-            Debug.Log("Mirror | mirror-networking.com | discord.gg/N9QVxbM");
+            //Debug.Log("Mirror | mirror-networking.com | discord.gg/N9QVxbM");
 
             // Set the networkSceneName to prevent a scene reload
             // if client connection to server fails.
@@ -668,7 +668,7 @@ namespace Mirror
                     // Return false to not allow collision-destroyed second instance to continue.
                     return false;
                 }
-                Debug.Log("NetworkManager created singleton (DontDestroyOnLoad)");
+                //Debug.Log("NetworkManager created singleton (DontDestroyOnLoad)");
                 singleton = this;
                 if (Application.isPlaying) DontDestroyOnLoad(gameObject);
             }
@@ -930,7 +930,7 @@ namespace Mirror
         {
             // debug message is very important. if we ever break anything then
             // it's very obvious to notice.
-            Debug.Log("Finished loading scene in host mode.");
+            //Debug.Log("Finished loading scene in host mode.");
 
             if (clientReadyConnection != null)
             {

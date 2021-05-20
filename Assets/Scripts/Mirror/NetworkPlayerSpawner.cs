@@ -11,8 +11,8 @@ public class NetworkPlayerSpawner : NetworkBehaviour
     // Author: Valter Lindecrantz.
 
     [SerializeField] int chosenCharacter;
-    [SerializeField] string team;
-    [SerializeField] string name;
+    [SerializeField] string playerTeam;
+    [SerializeField] string playerName;
     [SerializeField] CSteamID steamID;
     [SerializeField] GamestateManager gamestateManager;
     [SerializeField] Vector3 spawnPosition;
@@ -39,16 +39,15 @@ public class NetworkPlayerSpawner : NetworkBehaviour
             Debug.Log($"Comparing user steamID: {steamID} to ID in the list: {info.GetValue(0)}");
             if(info.GetValue(0).ToString() == steamID.ToString())
             {
-                name = info.GetValue(1).ToString();
-                team = info.GetValue(2).ToString();
+                playerName = info.GetValue(1).ToString();
+                playerTeam = info.GetValue(2).ToString();
                 chosenCharacter = Convert.ToInt32(info.GetValue(3));
 
-                Debug.Log($"Name: {name}, Team: {team}, Chosen Character: {chosenCharacter}");
+                Debug.Log($"Name: {playerName}, Team: { playerTeam}, Chosen Character: {chosenCharacter}");
             }
         }
 
         spawnPosition = gamestateManager.GetRespawnPosition(name);
-        Debug.Log($"Respawn Position: {spawnPosition}");
         SpawnCharacter(chosenCharacter, spawnPosition);
     }
 

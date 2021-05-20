@@ -167,7 +167,6 @@ public class GamestateManager : NetworkBehaviour
     
     public void HandleMatchPause(bool oldBool, bool newBool)
     {
-        Debug.Log("HANDLE MATCH PAUSE IS CALLED!");
         HandleMatchPaused?.Invoke();
     }
     

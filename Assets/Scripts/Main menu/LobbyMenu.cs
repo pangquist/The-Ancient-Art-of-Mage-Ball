@@ -30,7 +30,6 @@ public class LobbyMenu : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("Lobbymenu started! Subscribing to events!");
         MyNetworkManager.ClientOnConnected += HandleClientConnected;
         MyNetworkMenuPlayer.AuthorityOnPartyOwnerStateUpdated += AuthorityHandlePartyOwnerStateUpdated;
         MyNetworkMenuPlayer.ClientOnInfoUpdated += ClientHandleInfoUpdated;
@@ -148,8 +147,6 @@ public class LobbyMenu : MonoBehaviour
     
     public void ChangeTeam(string team)
     {
-        Debug.Log("-------------------------------------------------------------------");
-
         MyNetworkMenuPlayer localMenuPlayer = NetworkClient.localPlayer.gameObject.GetComponent<MyNetworkMenuPlayer>();
 
         List<MyNetworkMenuPlayer> menuPlayers = ((MyNetworkManager)NetworkManager.singleton).MenuPlayers;
