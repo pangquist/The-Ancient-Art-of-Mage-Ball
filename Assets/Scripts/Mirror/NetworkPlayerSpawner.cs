@@ -20,6 +20,7 @@ public class NetworkPlayerSpawner : NetworkBehaviour
     public override void OnStartAuthority()
     {
         base.OnStartAuthority();
+        AssignCharacterPrefab();
     }
 
     public void SetGamestateManager(GamestateManager _gamestateManager)
