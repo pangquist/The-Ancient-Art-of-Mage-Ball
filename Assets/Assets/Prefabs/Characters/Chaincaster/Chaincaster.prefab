@@ -763,7 +763,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   chain: {fileID: 9212652852658391536, guid: b7c1cb04b8ffb9b46aada444c93cc38b, type: 3}
-  material: {fileID: 2100000, guid: 3d4cac00257dd324b802f9b0042fc06d, type: 2}
   grappleable:
     serializedVersion: 2
     m_Bits: 128
@@ -771,9 +770,6 @@ MonoBehaviour:
   camera: {fileID: 5561234001153099423}
   player: {fileID: 1398020548929700589}
   maxRange: 25
-  duration: 10
-  currentDuration: 0
-  lockActive: 0
 --- !u!114 &8333611319720115501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -961,7 +957,7 @@ MonoBehaviour:
   castAbility2Button: 324
   cooldownAbility2: 6
   ability2Name: {fileID: 7400000, guid: b0ac5d7e0c0a11940a38e7b3033b5634, type: 2}
-  castAbility3Button: 49
+  castAbility3Button: 101
   cooldownAbility3: 10
   ability3Name: {fileID: 7400000, guid: 376c7c44fb9b5944990dddd7c8155cfc, type: 2}
   matchIsPaused: 1

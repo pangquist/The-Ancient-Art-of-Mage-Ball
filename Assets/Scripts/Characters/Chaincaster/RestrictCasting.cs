@@ -9,29 +9,40 @@ public class RestrictCasting : NetworkBehaviour
     [SerializeField] Transform castPoint, camera, player;
     [SerializeField] private float maxRange = 25f;
 
-    // Start is called before the first frame update
-    void Start()
+    public override void OnStartAuthority()
     {
-        
+        enabled = true;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    [Client]
     void CastRestrict()
     {
+        if (!hasAuthority)
+        {
+            return;
+        }
+
         RaycastHit hit;
         if (Physics.Raycast(camera.position, camera.forward, out hit, maxRange))
         {
             if(hit.transform.gameObject.tag == "Player")
             {
-                UseAbilities targetAbilities = hit.transform.gameObject.GetComponent<UseAbilities>();
-
-                targetAbilities.StartAllCooldowns();
+                CmdCastRestrict(hit.transform.gameObject);
             }
         }
+    }
+
+    [Command]
+    void CmdCastRestrict(GameObject target)
+    {
+        RpcCastRestrict(target);
+    }
+
+    [ClientRpc]
+    void RpcCastRestrict(GameObject target)
+    {
+        UseAbilities targetAbilities = target.GetComponent<UseAbilities>();
+
+        targetAbilities.StartAllCooldowns();
     }
 }

@@ -19,9 +19,9 @@ public class ChainGrapple : NetworkBehaviour
     [SerializeField] float duration;
     [SerializeField] float currentDuration;
 
-    void Start()
+    public override void OnStartAuthority()
     {
-       
+        enabled = true;
     }
 
     private void Awake()
@@ -37,42 +37,25 @@ public class ChainGrapple : NetworkBehaviour
 
     private void Update()
     {
-        //if (!hasAuthority)
-        //{
-        //    return;
-        //}
-
         material.mainTextureOffset += offsetSpeed * Time.deltaTime;
 
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    StartGrapple();
-        //}
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButton(0) == false && currentDuration <= 0)
         {
             StopGrapple();
         }
 
         if (lr.positionCount == 0) return;
 
-        if(raycastHit.transform.gameObject.tag == "Enemy")
-        {
-            currentDuration -= Time.deltaTime;
+        currentDuration -= Time.deltaTime;
 
+        if (raycastHit.transform.gameObject.tag == "Enemy")
+        {
             if(currentDuration <= 0)
             {
                 StopGrapple();
             }
 
-            grapplePoint = raycastHit.transform.position;
-
-            Vector3 grappleVector = player.position - grapplePoint;
-
-            Rigidbody ball = raycastHit.transform.gameObject.GetComponent<Rigidbody>();
-
-            ball.AddForce(grappleVector * grappleSpeed * 10 * Time.deltaTime);
-
-            //CmdDragBall();
+            DragBall(raycastHit.transform.gameObject);
         }
         else
         {
@@ -116,15 +99,26 @@ public class ChainGrapple : NetworkBehaviour
         lr.positionCount = 0;
     }
 
-    [Command]
-    void CmdDragBall()
+    [Client]
+    void DragBall(GameObject target)
     {
-        grapplePoint = raycastHit.transform.position;
+        if (!hasAuthority)
+        {
+            return;
+        }
+
+        grapplePoint = target.transform.position;
 
         Vector3 grappleVector = player.position - grapplePoint;
 
-        Rigidbody ball = raycastHit.transform.gameObject.GetComponent<Rigidbody>();
+        CmdDragBall(target, grappleVector);
+    }
 
-        ball.AddForce(grappleVector * grappleSpeed * 10 * Time.deltaTime);
+    [Command]
+    void CmdDragBall(GameObject target, Vector3 vector)
+    {
+        Rigidbody ball = target.GetComponent<Rigidbody>();
+
+        ball.AddForce(vector * grappleSpeed * 10 * Time.deltaTime);
     }
 }
