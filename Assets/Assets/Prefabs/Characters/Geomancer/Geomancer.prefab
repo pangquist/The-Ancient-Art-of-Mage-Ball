@@ -1818,7 +1818,7 @@ MonoBehaviour:
   range: 40
   hitableLayers:
   - serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 1088
 --- !u!114 &8612802140423036942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1896,7 +1896,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2502805589157441407}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e02350a964ee556459b11c4f9e0a7d07, type: 3}
   m_Name: 
@@ -1907,12 +1907,12 @@ MonoBehaviour:
   castAbility1Button: 323
   cooldownAbility1: 2
   ability1Name: {fileID: 7400000, guid: 10530bb4f36826b4fb8700f3fd2e21e0, type: 2}
-  castAbility2Button: 101
+  castAbility2Button: 324
   cooldownAbility2: 5
-  ability2Name: {fileID: 7400000, guid: d10693a90854a244d85f40eb4661f7a6, type: 2}
-  castAbility3Button: 49
+  ability2Name: {fileID: 7400000, guid: 91a7aa5e20ee43d4bb6f2132b52025ed, type: 2}
+  castAbility3Button: 101
   cooldownAbility3: 5
-  ability3Name: {fileID: 7400000, guid: 91a7aa5e20ee43d4bb6f2132b52025ed, type: 2}
+  ability3Name: {fileID: 7400000, guid: d10693a90854a244d85f40eb4661f7a6, type: 2}
   currentCooldowns: []
   matchIsPaused: 1
 --- !u!114 &3596875746671384777
