@@ -20,7 +20,8 @@ public class NetworkPlayerSpawner : NetworkBehaviour
     public override void OnStartAuthority()
     {
         base.OnStartAuthority();
-        AssignCharacterPrefab();
+        steamID = SteamUser.GetSteamID();
+        AssignCharacterPrefab(steamID);
     }
 
     public void SetGamestateManager(GamestateManager _gamestateManager)
@@ -29,16 +30,14 @@ public class NetworkPlayerSpawner : NetworkBehaviour
     }
 
     [Command]
-    public void AssignCharacterPrefab()
+    public void AssignCharacterPrefab(CSteamID _steamID)
     {
         List<string[]> characterInfoList = ((MyNetworkManager)NetworkManager.singleton).CharacterInfoList;
 
-        steamID = SteamUser.GetSteamID();
-
         foreach (string[] info in characterInfoList)
         {
-            Debug.Log($"Comparing user steamID: {steamID} to ID in the list: {info.GetValue(0)}");
-            if(info.GetValue(0).ToString() == steamID.ToString())
+            Debug.Log($"Comparing user steamID: {_steamID} to ID in the list: {info.GetValue(0)}");
+            if(info.GetValue(0).ToString() == _steamID.ToString())
             {
                 playerName = info.GetValue(1).ToString();
                 playerTeam = info.GetValue(2).ToString();
