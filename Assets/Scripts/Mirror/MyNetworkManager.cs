@@ -31,7 +31,7 @@ public class MyNetworkManager : NetworkManager
     [Header("Characters")]
     [SerializeField] GameObject[] characters;
 
-    [SerializeField] string selectedScene;
+    [SerializeField] string selectedScene = "Underwater Ruins";
     bool isGameInProgress;
 
     public List<MyNetworkMenuPlayer> MenuPlayers { get; } = new List<MyNetworkMenuPlayer>();
