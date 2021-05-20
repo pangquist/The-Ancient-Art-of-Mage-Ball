@@ -13,6 +13,7 @@ public class NetworkPlayerSpawner : NetworkBehaviour
     [SerializeField] int chosenCharacter;
     [SerializeField] string team;
     [SerializeField] string name;
+    [SerializeField] CSteamID steamID;
     [SerializeField] GamestateManager gamestateManager;
     [SerializeField] Vector3 spawnPosition;
 
@@ -27,14 +28,24 @@ public class NetworkPlayerSpawner : NetworkBehaviour
     }
 
     [Server]
-    public void AssignCharacterPrefab(int playerIndex)
+    public void AssignCharacterPrefab()
     {
         List<string[]> characterInfoList = ((MyNetworkManager)NetworkManager.singleton).CharacterInfoList;
-        string[] characterInfo = characterInfoList[playerIndex];
 
-        name = characterInfo.GetValue(1).ToString();
-        team = characterInfo.GetValue(2).ToString();
-        chosenCharacter = Convert.ToInt32(characterInfo.GetValue(3));
+        steamID = SteamUser.GetSteamID();
+
+        foreach (string[] info in characterInfoList)
+        {
+            Debug.Log($"Comparing user steamID: {steamID} to ID in the list: {info.GetValue(0)}");
+            if(info.GetValue(0).ToString() == steamID.ToString())
+            {
+                name = info.GetValue(1).ToString();
+                team = info.GetValue(2).ToString();
+                chosenCharacter = Convert.ToInt32(info.GetValue(3));
+
+                Debug.Log($"Name: {name}, Team: {team}, Chosen Character: {chosenCharacter}");
+            }
+        }
 
         spawnPosition = gamestateManager.GetRespawnPosition(name);
         Debug.Log($"Respawn Position: {spawnPosition}");
