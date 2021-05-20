@@ -226,6 +226,7 @@ MonoBehaviour:
   pillarSmoke: {fileID: 1295856588731438336, guid: adfe2ec0ca790154db6c00c640ca4f6d,
     type: 3}
   pillarTop: {fileID: 4347461318120124393}
+  forceUpwards: 40
 --- !u!1001 &1450657994874901779
 PrefabInstance:
   m_ObjectHideFlags: 0

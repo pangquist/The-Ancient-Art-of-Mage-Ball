@@ -48,6 +48,7 @@ public class PillarBridge : NetworkBehaviour
         groundTransform = GameObject.FindGameObjectsWithTag("Ground");
         playerMovement = GetComponent<PlayerMovement>();
         hasSpawnedPillar = false;
+        pillarTop = pillarBridgePrefab.transform.GetChild(0);
     }
 
     [Client]
