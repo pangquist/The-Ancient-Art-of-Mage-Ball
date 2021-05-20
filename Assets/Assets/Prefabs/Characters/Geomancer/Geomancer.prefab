@@ -1610,6 +1610,7 @@ GameObject:
   - component: {fileID: 3596875746671384777}
   - component: {fileID: 8631956499028919714}
   - component: {fileID: 6283038737083532691}
+  - component: {fileID: 4562241116313397843}
   m_Layer: 0
   m_Name: Geomancer
   m_TagString: Player
@@ -1947,6 +1948,27 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2502805589157441407}
   m_Enabled: 0
+--- !u!114 &4562241116313397843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2502805589157441407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fae44c6a7c29f449a55db5696035446, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  stonePrefab: {fileID: 0}
+  stoneSpawnPosition: {fileID: 0}
+  timeBetweenStones: 1
+  scaleMin: 0
+  scaleMax: 0
+  hitEffect: {fileID: 0}
+  dropPositionMarginalToPlayer: 2
 --- !u!1 &2504937733938519409
 GameObject:
   m_ObjectHideFlags: 0
