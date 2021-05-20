@@ -18,6 +18,7 @@ public class GamestateManager : NetworkBehaviour
     [SerializeField] List<Transform> spawnpointPositions = new List<Transform>();
 
     [SerializeField] MyNetworkManager myNetworkManager;
+    [SerializeField] PostMatch postMatch;
 
     [SyncVar (hook = nameof(HandleTimeChange))]
     [SerializeField] float time;
@@ -38,6 +39,8 @@ public class GamestateManager : NetworkBehaviour
     public int RedScore { get { return redScore; } set { redScore = value; } }
     public float Timer { get { return time; } set { time = value; } }
     public float PauseTimer { get { return pauseTimer; } set { PauseTimer = value; } }
+    public List<string> RedTeam { get { return redTeam; } set { redTeam = value; } }
+    public List<string> BlueTeam { get { return blueTeam; } set { blueTeam = value; } }
 
     [SerializeField] TMP_Text postGameRedScoreDisplay;
     [SerializeField] TMP_Text postGameBlueScoreDisplay;
@@ -108,31 +111,19 @@ public class GamestateManager : NetworkBehaviour
         }
     }
 
+    [Client]
     public void AssignScoreAtPostScreen()
     {
-        Debug.Log("Trying to find texts!");
-
-        //postGameRedScoreDisplay = 
-        //    GameObject.Find("Canvas").
-        //    gameObject.transform.Find("BackgroundRedTeam").
-        //    gameObject.transform.Find("RedTeamScoreText").gameObject.GetComponent<TMP_Text>();
-
-        //postGameBlueScoreDisplay =
-        //    GameObject.Find("Canvas").
-        //    gameObject.transform.Find("BackgroundBlueTeam").
-        //    gameObject.transform.Find("BlueTeamScoreText").gameObject.GetComponent<TMP_Text>();
-
-        //winningTeamText = GameObject.Find("Canvas").gameObject.transform.Find("WinningTeamText").gameObject.GetComponent<TMP_Text>();
-
-        //Debug.Log("Red: " + redScore + " and Blue: " + blueScore);
-
-        //postGameRedScoreDisplay.text = "Red Team score: " + redScore;
-        //postGameBlueScoreDisplay.text = "Blue Team score: " + blueScore;
-
-        //if (redScore > blueScore)
-        //    winningTeamText.text = "Red Team Wins!";
-        //else
-        //    winningTeamText.text = "Blue Team Wins!";
+        postMatch = GameObject.Find("Main Camera").transform.Find("ScoreBoard").GetComponent<PostMatch>();
+        postMatch.SetGamestateManager(this);
+        if (redScore > blueScore)
+        {
+            postMatch.SetTexts("Red");
+        }
+        else
+        {
+            postMatch.SetTexts("Blue");
+        }
     }
 
     public void ResetScore()

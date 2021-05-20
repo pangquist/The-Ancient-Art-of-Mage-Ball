@@ -52,7 +52,6 @@ public class NetworkPlayerSpawner : NetworkBehaviour
     }
 
     // Take in the parameter of what character the player has chosen, and spawns a prefab from the array of available characters to play as.
-   
     void SpawnCharacter(int characterIndex, Vector3 spawnPosition)
     {
         GameObject[] characters = ((MyNetworkManager)NetworkManager.singleton).Characters;

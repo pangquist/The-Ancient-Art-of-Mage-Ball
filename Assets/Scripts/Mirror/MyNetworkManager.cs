@@ -160,10 +160,6 @@ public class MyNetworkManager : NetworkManager
         else if (sceneName == "PostMatch")
         {
             playerPrefab = mainMenuPlayer;
-            gamestateManager.AssignScoreAtPostScreen();
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-
             selectedScene = "UnderwaterRuin";
         }
     }
@@ -174,6 +170,13 @@ public class MyNetworkManager : NetworkManager
         gamestateManager.matchIsPaused = true;
         gamestateManager.FillSpawnpointList();
         base.OnClientSceneChanged(conn);
+
+        if (SceneManager.GetActiveScene().name== "PostMatch")
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            gamestateManager.AssignScoreAtPostScreen();
+        }
     }
 
     public override void OnStopClient()

@@ -308,8 +308,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -2977,8 +2977,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -3500,7 +3500,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!114 &1951624200
 MonoBehaviour:
@@ -3549,22 +3549,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89c0a31f911d9854f9e0e493c2757010, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  winPlayer1: 
-  winPlayer2: 
-  winPlayer3: 
-  losePlayer1: 
-  losePlayer2: 
-  losePlayer3: 
   winnerTeamText: {fileID: 30364405}
   losingTeamText: {fileID: 1832037354}
+  winText: {fileID: 480181013}
+  loseText: {fileID: 1875750395}
   winGoalText: {fileID: 630324708}
   loseGoalText: {fileID: 1087445104}
-  winPlayer1Text: {fileID: 610690093}
-  winPlayer2Text: {fileID: 1036524889}
-  winPlayer3Text: {fileID: 1291166596}
-  losePlayer1Text: {fileID: 880024379}
-  losePlayer2Text: {fileID: 1721524560}
-  losePlayer3Text: {fileID: 559419861}
+  winPlayerTexts:
+  - {fileID: 610690093}
+  - {fileID: 1036524889}
+  - {fileID: 1291166596}
+  losePlayerTexts:
+  - {fileID: 880024379}
+  - {fileID: 1721524560}
+  - {fileID: 559419861}
 --- !u!1 &1958384937
 GameObject:
   m_ObjectHideFlags: 0
