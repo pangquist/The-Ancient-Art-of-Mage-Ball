@@ -1989,9 +1989,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD:Assets/Scenes/Playground/Playground.unity
-  m_Name: pb_Mesh83108
-=======
   serializedVersion: 6
   m_Component:
   - component: {fileID: 688157454}
@@ -6730,10 +6727,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4582918613553027019, guid: b82478b7da3e3324d98b55e066fcbe1f,
         type: 3}
-<<<<<<< HEAD:Assets/Scenes/Playground/Playground.unity
-      propertyPath: startTime
-      value: 180
-=======
       propertyPath: m_RootOrder
       value: 10
 >>>>>>> main:Assets/Scenes/Underwater Ruins/Underwater Ruins.unity
