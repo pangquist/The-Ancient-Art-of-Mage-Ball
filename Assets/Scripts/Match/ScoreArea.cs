@@ -43,7 +43,6 @@ public class ScoreArea : NetworkBehaviour
         {
             gmManager.BlueScore += 1;
         }
-        Debug.Log("TRIGGERING CLIENT ON GOAL");
     }
     
     private void ResetBallPosition(GameObject ball)
