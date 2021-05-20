@@ -5,9 +5,14 @@ using UnityEngine;
 
 public class Amplify : NetworkBehaviour
 {
+    [Header("Script Dependencies")]
     [SerializeField] UseAbilities useAbilities;
+
+    [Header("Settings")]
     [SerializeField] Camera mainCamera;
     [SerializeField] GameObject amplifyBeam;
+
+    [Header("Values")]
     [SerializeField] float duration;
     [SerializeField] float force;
 

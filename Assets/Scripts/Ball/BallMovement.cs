@@ -11,6 +11,7 @@ public class BallMovement : NetworkBehaviour
     // Author: Valter Lindecrantz
 
     Rigidbody rb;
+    [Tooltip("The effect that will be displayed while the ball is affected by Force Manipulators Gravity Warp.")]
     [SerializeField] GameObject FXEffect;
 
     float revertedGravityDuration = 0;

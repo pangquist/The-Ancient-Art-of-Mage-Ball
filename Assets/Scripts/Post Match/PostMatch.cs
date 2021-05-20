@@ -7,24 +7,26 @@ using UnityEngine.UI;
 public class PostMatch : MonoBehaviour
 {
     GamestateManager gamestateManager;
-    
-    [SerializeField] public TMP_Text winnerTeamText;
-    [SerializeField] private TMP_Text losingTeamText;
 
+    [Header("Team texts")]
+    [SerializeField] TMP_Text winnerTeamText;
+    [SerializeField] TMP_Text losingTeamText;
+
+    [Header("Victory status texts")]
     [SerializeField] TMP_Text winText;
     [SerializeField] TMP_Text loseText;
 
-    [SerializeField] private TMP_Text winGoalText;
-    [SerializeField] private TMP_Text loseGoalText;
+    [Header("Score count texts")]
+    [SerializeField] TMP_Text winGoalText;
+    [SerializeField] TMP_Text loseGoalText;
 
+    [Header("Winning player lists")]
     [SerializeField] List<Image> winningBackgrounds = new List<Image>(); 
     [SerializeField] List<TMP_Text> winPlayerTexts = new List<TMP_Text>();
 
+    [Header("Losing player lists")]
     [SerializeField] List<Image> losingBackgrounds = new List<Image>();
     [SerializeField] List<TMP_Text> losePlayerTexts = new List<TMP_Text>();
-
-    //Color redColor = new Color(190, 85, 85);
-    //Color blueColor = new Color(77, 86, 197);
     
     public void SetGamestateManager(GamestateManager _gamestateManager)
     {

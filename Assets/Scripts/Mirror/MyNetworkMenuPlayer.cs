@@ -19,6 +19,10 @@ public class MyNetworkMenuPlayer : NetworkBehaviour
     public static event Action ClientOnInfoUpdated;
     public static event Action ClientOnCharacterUpdated;
 
+    [Header("Script Dependencies")]
+    [SerializeField] GamestateManager gamestateManager;
+
+    [Header("Synced Player Information")]
     [SyncVar(hook = nameof(HandlePlayerTeamAssigned))]
     [SerializeField] string teamName;
 
@@ -37,13 +41,12 @@ public class MyNetworkMenuPlayer : NetworkBehaviour
     [SyncVar(hook = nameof(HandlePlayerCharacterUpdated))]
     [SerializeField] int chosenCharacter;
 
+    [Header("UI Elements")]
     [SerializeField] TMP_Text displayNameText = null;
     [SerializeField] TMP_Text redScoreText;
     [SerializeField] TMP_Text blueScoreText;
     [SerializeField] TMP_Text timeText;
-
-    [SerializeField] GamestateManager gamestateManager;
-
+    
     public TMP_Text BlueScore { get { return blueScoreText; } set { blueScoreText = value; } }
     public TMP_Text RedScore { get { return redScoreText; } set { redScoreText = value; } }
     public TMP_Text TimeText { get { return timeText; } set { timeText = value; } }
@@ -51,8 +54,7 @@ public class MyNetworkMenuPlayer : NetworkBehaviour
     public bool IsPartyOwner { get { return isPartyOwner; } }
     public int ChosenCharacter { get { return chosenCharacter; } set { chosenCharacter = value; } }
     public ulong SteamId { get { return steamId; } }
-
-
+    
     public bool GetIsPartyOwner()
     {
         return isPartyOwner;

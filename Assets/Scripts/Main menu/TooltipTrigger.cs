@@ -5,8 +5,10 @@ using UnityEngine.EventSystems;
 
 public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-
+    [Header("References")]
     [SerializeField] GameObject tooltipBackground;
+
+    [Header("Lists")]
     [SerializeField] List<string> headers;
     [SerializeField] List<string> contents;
     [SerializeField] List<Tooltip> tooltips;

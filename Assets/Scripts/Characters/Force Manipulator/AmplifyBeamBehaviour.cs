@@ -5,9 +5,15 @@ using UnityEngine;
 
 public class AmplifyBeamBehaviour : MonoBehaviour
 {
-    [SerializeField] Camera mainCamera;
+    [Header("Script Dependencies")]
     [SerializeField] Amplify amplify;
+
+    [Header("Settings")]
+    [SerializeField] Camera mainCamera;
+
+    [Header("Values")]
     [SerializeField] float force;
+
     float lifetime;
     float currentTime;
 

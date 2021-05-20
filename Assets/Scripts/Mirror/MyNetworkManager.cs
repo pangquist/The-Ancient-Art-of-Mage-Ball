@@ -14,32 +14,32 @@ public class MyNetworkManager : NetworkManager
     // Authors: Pär Ängqvist & Valter Lindecrantz
 
     public static int playersRequiredToStart = 1;
+    public static MyNetworkPlayer connectedPlayer;
+    public static event Action ClientOnConnected;
+    public static event Action ClientOnDisconnected;
 
+    [Header("Script Dependencies")]
     [SerializeField] TeamManager teamManager;
     [SerializeField] GamestateManager gamestateManager;
-    
+
+    [Header("References")]
     [SerializeField] GameObject mainMenuPlayer;
     [SerializeField] GameObject ball;
     [SerializeField] GameObject ballStartPos;
     [SerializeField] GameObject lobby;
+
+    [Header("Characters")]
     [SerializeField] GameObject[] characters;
-    [SerializeField] string selectedScene = "Underwater Ruins";
-
-    public static event Action ClientOnConnected;
-    public static event Action ClientOnDisconnected;
-
+    
     bool isGameInProgress;
-    public static MyNetworkPlayer connectedPlayer;
-
-    public GameObject[] Characters { get { return characters; } }
 
     public List<MyNetworkMenuPlayer> MenuPlayers { get; } = new List<MyNetworkMenuPlayer>();
     public List<string[]> CharacterInfoList = new List<string[]>();
-
+    public GameObject[] Characters { get { return characters; } }
     public List<MyNetworkPlayer> Players { get; } = new List<MyNetworkPlayer>();
     public List<NetworkPlayerSpawner> Spawners { get; } = new List<NetworkPlayerSpawner>();
+    public string SelectedScene { get { return SelectedScene; } set { SelectedScene = value; } }
 
-    public string SelectedScene { get { return selectedScene; } set { selectedScene = value; } }
 
     public void ClearMenuPlayers()
     {
@@ -80,7 +80,7 @@ public class MyNetworkManager : NetworkManager
 
         isGameInProgress = true;
 
-        ServerChangeScene(selectedScene);
+        ServerChangeScene(SelectedScene);
     }
     
     [Server]
@@ -160,7 +160,7 @@ public class MyNetworkManager : NetworkManager
         else if (sceneName == "PostMatch")
         {
             playerPrefab = mainMenuPlayer;
-            selectedScene = "UnderwaterRuin";
+            SelectedScene = "UnderwaterRuin";
         }
     }
 

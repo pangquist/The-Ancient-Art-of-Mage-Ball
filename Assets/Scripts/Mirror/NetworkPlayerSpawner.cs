@@ -10,12 +10,16 @@ public class NetworkPlayerSpawner : NetworkBehaviour
     // This script assign the correct character to each player when they enter the game.
     // Author: Valter Lindecrantz.
 
+    [Header("Script Dependencies")]
+    [SerializeField] GamestateManager gamestateManager;
+
+    [Header("´Player Information")]
     [SerializeField] int chosenCharacter;
     [SerializeField] string playerTeam;
     [SerializeField] string playerName;
     [SerializeField] CSteamID steamID;
-    [SerializeField] GamestateManager gamestateManager;
-    [SerializeField] Vector3 spawnPosition;
+    
+    Vector3 spawnPosition;
 
     public override void OnStartAuthority()
     {

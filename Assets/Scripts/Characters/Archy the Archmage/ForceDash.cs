@@ -5,14 +5,19 @@ using UnityEngine;
 
 public class ForceDash : NetworkBehaviour
 {
-    [SerializeField] UseAbilities useAbilities;
-    [SerializeField] Camera playerCamera;
+    [Header("Script Dependencies")]
     [SerializeField] CharacterController controller;
+    [SerializeField] Camera playerCamera;
+    [SerializeField] PlayerMovement playerMovement;
+    [SerializeField] UseAbilities useAbilities;
+
+    [Header("Values")]
     [SerializeField] float dashSpeed;
     [SerializeField] float dashDuration;
     [SerializeField] float pushAmount;
     [SerializeField] float pushRadius;
-    [SerializeField] PlayerMovement playerMovement;
+
+    [Header("Visual Effect")]
     [SerializeField] GameObject hitEffect;
 
     void Start()

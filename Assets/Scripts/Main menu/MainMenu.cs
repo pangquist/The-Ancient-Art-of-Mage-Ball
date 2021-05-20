@@ -11,8 +11,8 @@ public class MainMenu : MonoBehaviour
     // Author: Valter Lindecrantz (Reference: "How To Connect Using Steam - Unity Multiplayer Tutorial" - Dapper Dino on youtube)
 
     [SerializeField] GameObject landingPagePanel;
-    [SerializeField] bool useSteam = false;
     [SerializeField] MyNetworkManager myNetworkManager;
+    [SerializeField] bool useSteam = false;
 
     protected Callback<LobbyCreated_t> lobbyCreated;
     protected Callback<GameLobbyJoinRequested_t> gameLobbyJoinRequested;

@@ -5,9 +5,13 @@ using UnityEngine;
 
 public class InGameMenu : MonoBehaviour
 {
+    [Header("Script Dependencies")]
+    [SerializeField] CharacterController controller;
+
+    [Header("UI Elements")]
     [SerializeField] GameObject pauseMenuUI;
     [SerializeField] GameObject settingsMenuUI;
-    [SerializeField] CharacterController controller;
+
     public static bool gameIsPaused = false;
 
     void Update()

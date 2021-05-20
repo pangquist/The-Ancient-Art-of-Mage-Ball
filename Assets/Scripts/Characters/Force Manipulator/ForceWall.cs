@@ -5,10 +5,15 @@ using UnityEngine;
 
 public class ForceWall : NetworkBehaviour
 {
+    [Header("Script Dependencies")]
     [SerializeField] UseAbilities useAbilities;
+
+    [Header("Settings")]
     [SerializeField] Camera mainCamera;
     [SerializeField] LayerMask hitableLayer;
     [SerializeField] GameObject forceWall;
+
+    [Header("Values")]
     [SerializeField] float range;
     [SerializeField] float duration;
     

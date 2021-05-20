@@ -8,25 +8,27 @@ using UnityEngine.UI;
 
 public class LobbyMenu : MonoBehaviour
 {
+    [Header("Script Dependencies")]
+    [SerializeField] GamestateManager gamestateManager;
+
+    [Header("References")]
     [SerializeField] GameObject lobbyUI;
     [SerializeField] Button startGameButton;
     [SerializeField] Button changeSceneButton;
 
-    [SerializeField] GamestateManager gamestateManager;
-
+    [Header("Player Names")]
     [SerializeField] TMP_Text[] redTeamNames = new TMP_Text[3];
     [SerializeField] TMP_Text[] blueTeamNames = new TMP_Text[3];
-    
-    private List<string[]> menuPlayers = new List<string[]>();
 
-
-    [SerializeField] int redPlayers = 0;
-    [SerializeField] int bluePlayers = 0;
-
+    [Header("Arrays")]
     [SerializeField] GameObject[] mapButtons;
     [SerializeField] Sprite[] characterSprites;
     [SerializeField] Image[] redTeamImage = new Image[3];
     [SerializeField] Image[] blueTeamImage = new Image[3];
+
+    private List<string[]> menuPlayers = new List<string[]>();
+    int redPlayers = 0;
+    int bluePlayers = 0;
 
     private void Start()
     {

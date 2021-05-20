@@ -7,12 +7,16 @@ using UnityEngine.UI;
 
 public class ChangeMenuBackground : NetworkBehaviour
 {
-    MyNetworkManager networkManager;
+    [Header("Sync Variables")]
+    [SyncVar(hook= nameof(HandleMapChange))]
+    [SerializeField] string chosenMapName;
+
+    [Header("Settings")]
     [SerializeField] Sprite[] backgrounds = new Sprite[0];
     [SerializeField] GameObject sceneSelectCanvas;
     [SerializeField] TMP_Text sceneNameText;
-    [SyncVar(hook= nameof(HandleMapChange))]
-    [SerializeField] string chosenMapName;
+
+    MyNetworkManager networkManager;
 
     public void SetMapName(string name)
     {

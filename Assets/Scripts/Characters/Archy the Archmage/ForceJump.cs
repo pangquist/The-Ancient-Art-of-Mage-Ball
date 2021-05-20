@@ -5,8 +5,11 @@ using UnityEngine;
 
 public class ForceJump : NetworkBehaviour
 {
+    [Header("Script Dependencies")]
     [SerializeField] UseAbilities useAbilities;
     [SerializeField] PlayerMovement playerMovement;
+
+    [Header("Values")]
     [SerializeField] float forceJumpHeight;
 
     [Client]

@@ -5,17 +5,20 @@ using UnityEngine;
 
 public class GravitySwap : NetworkBehaviour
 {
+    [Header("Script Dependencies")]
     [SerializeField] UseAbilities useAbilities;
+
+    [Header("Settings")]
     [SerializeField] Camera mainCamera;
     [SerializeField] LayerMask hitableLayer;
     [SerializeField] GameObject attackEffect;
+
+    [Header("Values")]
     [SerializeField] float range;
     [SerializeField] Vector3 appliedForce;
-
     [SerializeField] float duration;
     
     RaycastHit hit;
-
     GameObject ball;
 
     [Client]

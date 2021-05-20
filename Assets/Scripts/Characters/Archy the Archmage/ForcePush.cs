@@ -5,17 +5,21 @@ using UnityEngine;
 
 public class ForcePush : NetworkBehaviour
 {
+    [Header("Script Dependencies")]
     [SerializeField] UseAbilities useAbilities;
+
+    [Header("Settings")]
     [SerializeField] Camera mainCamera;
     [SerializeField] LayerMask[] hitableLayers;
+    [SerializeField] GameObject hitEffect;
     
-    RaycastHit hit;
-
+    [Header("Values")]
     [SerializeField] float range;
     [SerializeField] float pushAmount;
     [SerializeField] float pushRadius;
-    [SerializeField] GameObject hitEffect;
+
     Rigidbody pushedBody;
+    RaycastHit hit;
 
     #region Client
 

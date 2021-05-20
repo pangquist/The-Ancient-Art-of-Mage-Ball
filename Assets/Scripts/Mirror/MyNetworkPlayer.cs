@@ -10,6 +10,11 @@ using UnityEngine.UI;
 
 public class MyNetworkPlayer : NetworkBehaviour
 {
+    [Header("Script Dependencies")]
+    [SerializeField] CharacterController controller;
+    [SerializeField] GamestateManager gamestateManager;
+
+    [Header("Sync Variables")]
     [SyncVar(hook = nameof(HandlePlayerTeamAssigned))]
     [SerializeField] string teamName;
 
@@ -19,24 +24,27 @@ public class MyNetworkPlayer : NetworkBehaviour
     [SyncVar(hook = nameof(HandlePlayerColorUpdated))]
     [SerializeField] Color playerColor = Color.white;
 
-    [SerializeField] int chosenCharacter;
-    
-    [SerializeField] CharacterController controller;
-
+    [Header("In Game UI")]
     [SerializeField] GameObject inGameUI;
-    [SerializeField] TMP_Text displayNameText = null;
     [SerializeField] TMP_Text redScoreText;
     [SerializeField] TMP_Text blueScoreText;
     [SerializeField] TMP_Text timeText;
+    [SerializeField] Image teamIcon;
+
+    [Header("Name Canvas")]
     [SerializeField] GameObject nameCanvas;
+    [SerializeField] TMP_Text displayNameText = null;
+
+    [Header("Settings Canvas")]
     [SerializeField] GameObject settingsCanvas;
+
+    [Header("Countdown Canvas")]
     [SerializeField] GameObject countdownCanvas;
     [SerializeField] TMP_Text CountdownText;
     [SerializeField] TMP_Text scoringTeamText;
-    [SerializeField] Image teamIcon;
 
-    [SerializeField] GamestateManager gamestateManager;
 
+    int chosenCharacter;
     public TMP_Text BlueScore { get { return blueScoreText; } set { blueScoreText = value; } }
     public TMP_Text RedScore { get { return redScoreText; } set { redScoreText = value; } }
     public TMP_Text TimeText { get { return timeText; } set { timeText = value; } }

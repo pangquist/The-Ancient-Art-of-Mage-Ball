@@ -10,7 +10,8 @@ public class UseAbilities : NetworkBehaviour
     // During the update, the cooldowns will gradually decrease if they are above 0, and the script checks for keycode input from the player.
     // When the appropriate key is pressed, the current cooldown will be set to max and the animation will be player.
     // Author: Valter Lindecrantz
-    
+
+    [Header("Settings")]
     [SerializeField] Animator anim;
 
     #region Ability1
@@ -37,8 +38,8 @@ public class UseAbilities : NetworkBehaviour
     public float CooldownAbility3() { return cooldownAbility3; }
     #endregion
 
-    public float[] currentCooldowns;
-    [SerializeField] bool matchIsPaused = true;
+    float[] currentCooldowns;
+    bool matchIsPaused = true;
 
     // Getter for the Cooldown UI to retrieve the current cooldowns to correctly display on the UI.
     public float GetCooldown(int cooldownIndex) 

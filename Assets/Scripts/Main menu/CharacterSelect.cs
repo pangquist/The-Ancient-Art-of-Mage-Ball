@@ -6,11 +6,15 @@ using UnityEngine.UI;
 
 public class CharacterSelect : MonoBehaviour
 {
+    [Header("Script Dependencies")]
     [SerializeField] MyNetworkManager myNetworkManager;
     [SerializeField] MyNetworkMenuPlayer myNetworkMenuPlayer;
+
+    [Header("Settings")]
     [SerializeField] Image characterImage;
     [SerializeField] AudioSource selectSound;
 
+    [Header("Images")]
     [SerializeField] Sprite[] characterImages;
     
     private void Start()

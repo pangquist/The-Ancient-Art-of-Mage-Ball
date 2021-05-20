@@ -2430,11 +2430,11 @@ GameObject:
   - component: {fileID: 6736409272605229166}
   - component: {fileID: 1808665335354181965}
   - component: {fileID: 5012954450347326743}
+  - component: {fileID: 8404522335574230688}
   - component: {fileID: 6397668700042612202}
   - component: {fileID: 6838466485475351199}
   - component: {fileID: 8625832493932510498}
   - component: {fileID: 6004741204329823607}
-  - component: {fileID: 8404522335574230688}
   - component: {fileID: 7825197277653462414}
   m_Layer: 9
   m_Name: Force Manipulator
@@ -2478,23 +2478,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.001
+  controller: {fileID: 0}
+  gamestateManager: {fileID: 0}
   teamName: 
   displayName: Missing Name
   playerColor: {r: 1, g: 1, b: 1, a: 1}
-  chosenCharacter: 0
-  controller: {fileID: 0}
   inGameUI: {fileID: 1316869747305105989}
-  displayNameText: {fileID: 130855991369183406}
   redScoreText: {fileID: 4086740821808707350}
   blueScoreText: {fileID: 8125929851197043906}
   timeText: {fileID: 2956713848170468877}
+  teamIcon: {fileID: 4011642150124227469}
   nameCanvas: {fileID: 2125650449804872296}
+  displayNameText: {fileID: 130855991369183406}
   settingsCanvas: {fileID: 5645776363944970007}
   countdownCanvas: {fileID: 6445435804365615547}
   CountdownText: {fileID: 5596187986329139151}
   scoringTeamText: {fileID: 4013735155581893800}
-  teamIcon: {fileID: 4011642150124227469}
-  gamestateManager: {fileID: 0}
 --- !u!136 &3758272146365123710
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2551,7 +2550,6 @@ MonoBehaviour:
   jumpPower: 10
   gravity: -9.81
   speed: 16
-  matchIsPaused: 1
   velocity: {x: 0, y: 0, z: 0}
   isGrounded: 1
 --- !u!114 &5025287790405866831
@@ -2680,6 +2678,25 @@ MonoBehaviour:
   useLocalTransformOnly: 0
   ownerChangeIndicator: 1
   receivedStatesCounter: 0
+--- !u!114 &8404522335574230688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3758272146365123707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d2fdb46a27bf7446ad5c838b5153a0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  useAbilities: {fileID: 8625832493932510498}
+  mainCamera: {fileID: 3758272145470057082}
+  amplifyBeam: {fileID: 907603169916725692}
+  duration: 4.5
+  force: 17
 --- !u!114 &6397668700042612202
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2750,8 +2767,6 @@ MonoBehaviour:
   castAbility3Button: 101
   cooldownAbility3: 10
   ability3Name: {fileID: 7400000, guid: 350cadcee6930b6448a626195465363b, type: 2}
-  currentCooldowns: []
-  matchIsPaused: 1
 --- !u!95 &6004741204329823607
 Animator:
   serializedVersion: 3
@@ -2771,25 +2786,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8404522335574230688
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3758272146365123707}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d2fdb46a27bf7446ad5c838b5153a0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  useAbilities: {fileID: 8625832493932510498}
-  mainCamera: {fileID: 3758272145470057082}
-  amplifyBeam: {fileID: 907603169916725692}
-  duration: 4.5
-  force: 17
 --- !u!81 &7825197277653462414
 AudioListener:
   m_ObjectHideFlags: 0

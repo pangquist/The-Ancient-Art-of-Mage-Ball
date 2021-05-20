@@ -8,6 +8,7 @@ using System;
 
 public class Settings : MonoBehaviour
 {
+    [Header("References")]
     public AudioMixer audioMixer;
     [SerializeField] Dropdown resDropDown;
     [SerializeField] Dropdown qualityDropDown;

@@ -8,32 +8,50 @@ using UnityEngine.SceneManagement;
 
 public class GamestateManager : NetworkBehaviour
 {
-    public bool matchIsOver = false;
 
-    [SyncVar (hook = nameof(HandleMatchPause))]
-    public bool matchIsPaused = true;
-
-    [SerializeField] List<string> redTeam = new List<string>();
-    [SerializeField] List<string> blueTeam = new List<string>();
-    [SerializeField] List<Transform> spawnpointPositions = new List<Transform>();
-
+    [Header("Script Dependencies")]
     [SerializeField] MyNetworkManager myNetworkManager;
     [SerializeField] PostMatch postMatch;
 
+
+    [Header("Lists")]
+    [SerializeField] List<string> redTeam = new List<string>();
+    [SerializeField] List<string> blueTeam = new List<string>();
+    [SerializeField] List<Transform> spawnpointPositions = new List<Transform>();
+    
+    [Header("Match Timers")]
     [SyncVar (hook = nameof(HandleTimeChange))]
     [SerializeField] float time;
+    [Tooltip("The duration of each game in seconds")]
     [SerializeField] float matchStartTime = 180f;
 
+    [Header("Pause Timers")]
     [SyncVar(hook = nameof(HandlePausTimeChange))]
     [SerializeField] float pauseTimer;
+    [Tooltip("The amount of seconds the game will wait before starting when first entering the match")]
     [SerializeField] float startPauseTime = 12f;
+    [Tooltip("The amount of seconds the game will wait before starting when a goal is made")]
     [SerializeField] float goalPauseTime = 5f;
 
-    int startScore = 0;
+    [Header("Team Scores")]
     [SyncVar (hook = nameof(HandleRedScore))]
     [SerializeField] int redScore;
     [SyncVar(hook = nameof(HandleBlueScore))]
     [SerializeField] int blueScore;
+
+    [Header("Settings")]
+    [SerializeField] TMP_Text postGameRedScoreDisplay;
+    [SerializeField] TMP_Text postGameBlueScoreDisplay;
+    [SerializeField] TMP_Text winningTeamText;
+    [SerializeField] AudioSource overtimeSoundSource;
+
+    [HideInInspector]
+    [SyncVar (hook = nameof(HandleMatchPause))]
+    public bool matchIsPaused = true;
+
+    [HideInInspector]
+    public bool matchIsOver = false;
+    int startScore = 0;
 
     public int BlueScore { get { return blueScore; } set { blueScore = value; } }
     public int RedScore { get { return redScore; } set { redScore = value; } }
@@ -41,13 +59,7 @@ public class GamestateManager : NetworkBehaviour
     public float PauseTimer { get { return pauseTimer; } set { PauseTimer = value; } }
     public List<string> RedTeam { get { return redTeam; } set { redTeam = value; } }
     public List<string> BlueTeam { get { return blueTeam; } set { blueTeam = value; } }
-
-    [SerializeField] TMP_Text postGameRedScoreDisplay;
-    [SerializeField] TMP_Text postGameBlueScoreDisplay;
-    [SerializeField] TMP_Text winningTeamText;
-
-    [SerializeField] AudioSource overtimeSoundSource;
-
+    
     public static event Action HandleTimeChanged, HandleRedScoreChanged, HandleBlueScoreChanged, HandleMatchPaused, HandlePausTimeChanged;
 
     public override void OnStartServer()

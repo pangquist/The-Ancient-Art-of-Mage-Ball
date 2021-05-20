@@ -10,16 +10,21 @@ public class PlayerMovement : NetworkBehaviour
     // A networking part of this script is responsible for making sure that the movement that happens are happening for all clients.
     // Author: Valter Lindecrantz
 
+    [Header("Script Dependencies")]
     [SerializeField] CharacterController controller;
     [SerializeField] Animator animator;
+
+    [Header("Settings")]
     [SerializeField] Transform groundCheck;
     [SerializeField] LayerMask groundMask;
     [SerializeField] KeyCode jumpButton;
+
+    [Header("Values")]
     [SerializeField] float jumpPower;
     [SerializeField] float gravity = -9.81f;
     [SerializeField] float speed = 8;
 
-    [SerializeField] bool matchIsPaused = true;
+    bool matchIsPaused = true;
     float directionX;
     float directionZ;
     float groundDistance = 0.6f;
