@@ -27,7 +27,7 @@ public class NetworkPlayerSpawner : NetworkBehaviour
         gamestateManager = _gamestateManager;
     }
 
-    [Server]
+    [Command]
     public void AssignCharacterPrefab()
     {
         List<string[]> characterInfoList = ((MyNetworkManager)NetworkManager.singleton).CharacterInfoList;
@@ -47,7 +47,7 @@ public class NetworkPlayerSpawner : NetworkBehaviour
             }
         }
 
-        spawnPosition = gamestateManager.GetRespawnPosition(name);
+        spawnPosition = gamestateManager.GetRespawnPosition(playerName);
         SpawnCharacter(chosenCharacter, spawnPosition);
     }
 

@@ -206,28 +206,32 @@ public class GamestateManager : NetworkBehaviour
         List<MyNetworkPlayer> players = ((MyNetworkManager)NetworkManager.singleton).Players;
 
         //Debug.Log($"NUMBER OF PLAYERS IN LIST: {players.Count}, NAME GIVEN: {name}");
-        //for(int i = 0; i < redTeam.Count; i++)
-        //{
-        //    Debug.Log($"Red team member {i}: {redTeam[i]}");
-        //}
+        for (int i = 0; i < redTeam.Count; i++)
+        {
+            Debug.Log($"Red team member {i}: {redTeam[i]}");
+        }
 
-        //for (int i = 0; i < blueTeam.Count; i++)
-        //{
-        //    Debug.Log($"Blue team member {i}: {blueTeam[i]}");
-        //}
+        for (int i = 0; i < blueTeam.Count; i++)
+        {
+            Debug.Log($"Blue team member {i}: {blueTeam[i]}");
+        }
 
         for (int i = 0; i < redTeam.Count; i++)
         {
+            Debug.Log($"Comparing user name: {name} to Name in the list: {redTeam[i]}");
             if (name == redTeam[i])
             {
+                Debug.Log($"Returning red position: {spawnpointPositions[i].transform.position}");
                 return (spawnpointPositions[i].transform.position);
             }
         }
 
         for (int i = 0; i < blueTeam.Count; i++)
         {
+            Debug.Log($"Comparing user name: {name} to Name in the list: {blueTeam[i]}");
             if (name == blueTeam[i])
             {
+                Debug.Log($"Returning blue position: {spawnpointPositions[i+3].transform.position}");
                 return (spawnpointPositions[i + 3].transform.position);
             }
         }
