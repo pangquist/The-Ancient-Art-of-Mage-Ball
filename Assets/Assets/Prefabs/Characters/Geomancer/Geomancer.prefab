@@ -1969,9 +1969,9 @@ MonoBehaviour:
   timeBetweenStones: 1
   scaleMin: 0.2
   scaleMax: 1
-  hitEffect: {fileID: 7071215757399754216, guid: 81a3252bb33bfe646877702ab802a6c6,
+  hitEffect: {fileID: 1295856588731438336, guid: ebc43cfaa13d3a3429ca01e6b97e5e4a,
     type: 3}
-  dropPositionMarginalToPlayer: 2
+  dropPositionMarginalToPlayer: 3
 --- !u!114 &8310891137082437123
 MonoBehaviour:
   m_ObjectHideFlags: 0
