@@ -136,13 +136,11 @@ public class LobbyMenu : MonoBehaviour
             {
                 newPlayer.CmdSetTeamName("Red Team");
             }
-<<<<<<< HEAD
-=======
+
         }
         else
         {
             Debug.Log("NetworkClient is not ready (LobbyMenu)!");
->>>>>>> main
         }
         
 

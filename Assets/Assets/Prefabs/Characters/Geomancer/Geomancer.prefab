@@ -942,7 +942,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &441384180949702159
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1653,12 +1653,18 @@ MonoBehaviour:
   displayName: Missing Name
   playerColor: {r: 1, g: 1, b: 1, a: 1}
   chosenCharacter: 0
+  controller: {fileID: 0}
   inGameUI: {fileID: 441384179828623688}
   displayNameText: {fileID: 441384179978255247}
   redScoreText: {fileID: 441384180924577096}
   blueScoreText: {fileID: 441384179451071495}
   timeText: {fileID: 441384179359953882}
   nameCanvas: {fileID: 441384180949702156}
+  settingsCanvas: {fileID: 0}
+  countdownCanvas: {fileID: 0}
+  CountdownText: {fileID: 0}
+  scoringTeamText: {fileID: 0}
+  teamIcon: {fileID: 0}
   gamestateManager: {fileID: 0}
 --- !u!114 &441384180641011008
 MonoBehaviour:
@@ -1761,17 +1767,18 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   controller: {fileID: 441384180641011022}
-  speed: 12
+  animator: {fileID: 1106491956633752253}
   groundCheck: {fileID: 441384181115929202}
   groundMask:
     serializedVersion: 2
     m_Bits: 1088
-  isGrounded: 0
   jumpButton: 32
   jumpPower: 6
   gravity: -9.81
-  move: {x: 0, y: 0, z: 0}
+  speed: 12
+  matchIsPaused: 1
   velocity: {x: 0, y: 0, z: 0}
+  isGrounded: 0
 --- !u!114 &441384180641011010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1786,7 +1793,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  mouseSensitivity: 300
   playerCamera: {fileID: 441384181137064641}
 --- !u!114 &5600849304467265354
 MonoBehaviour:
@@ -1892,6 +1898,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  anim: {fileID: 1106491956633752253}
   castAbility1Button: 323
   cooldownAbility1: 1
   ability1Name: {fileID: 7400000, guid: 10530bb4f36826b4fb8700f3fd2e21e0, type: 2}
@@ -1901,9 +1908,8 @@ MonoBehaviour:
   castAbility3Button: 49
   cooldownAbility3: 5
   ability3Name: {fileID: 7400000, guid: 91a7aa5e20ee43d4bb6f2132b52025ed, type: 2}
-  castAbility4Button: 0
-  cooldownAbility4: 0
-  ability4Name: {fileID: 0}
+  currentCooldowns: []
+  matchIsPaused: 1
 --- !u!114 &3596875746671384777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1911,7 +1917,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2502805589157441407}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c335ff1cc46bcbe49a372a8e61d66424, type: 3}
   m_Name: 

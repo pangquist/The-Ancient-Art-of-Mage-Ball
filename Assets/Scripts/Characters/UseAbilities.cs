@@ -46,15 +46,7 @@ public class UseAbilities : NetworkBehaviour
         return currentCooldowns[cooldownIndex];
     }
 
-<<<<<<< HEAD
-    public float CooldownAbility1 { get { return cooldownAbility1; } private set { cooldownAbility1 = value; } }
-    public float CooldownAbility2 { get { return cooldownAbility2; } private set { cooldownAbility2 = value; } }
-    public float CooldownAbility3 { get { return cooldownAbility3; } private set { cooldownAbility3 = value; } }
-    public float CooldownAbility4 { get { return cooldownAbility4; } private set { cooldownAbility4 = value; } }
-
-=======
     // During start the character retrieves its own animator component to be able to reference the animation clips.
->>>>>>> main
     void Start()
     {
         currentCooldowns = new float[3];
@@ -82,14 +74,7 @@ public class UseAbilities : NetworkBehaviour
         {
             matchIsPaused = true;
         }
-<<<<<<< HEAD
-        if (currentAbility3Cooldown > 0)
-        {
-            currentAbility3Cooldown -= Time.deltaTime;
-        }
-=======
     }
->>>>>>> main
 
     private void Update()
     {

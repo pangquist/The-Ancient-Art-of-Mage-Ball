@@ -3,42 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement1 : NetworkBehaviour
+public class PlayerMovement : NetworkBehaviour
 {
-<<<<<<< HEAD
-    
-    public CharacterController controller;
-    [SerializeField]
-    public float speed = 8;
-    [SerializeField]
-    Transform groundCheck;
-    float groundDistance = 0.2f;
-    [SerializeField]
-    LayerMask groundMask;
 
-    float timer;
-
-    public bool isGrounded;
-
-    bool playingAnim = false;
-
-    [SerializeField]
-    KeyCode jumpButton;
-    [SerializeField]
-    float jumpPower;
-    Animator anim;
-    float x;
-    float z;
-    [SerializeField]
-    float gravity = -9.81f;
-
-    public Vector3 move;
-    public Vector3 velocity;
-
-    private void Start()
-    {
-        anim = GetComponent<Animator>();
-=======
     // This script handles player input for movement and limitations to that movement.
     // During the update, Input is checked for X and Z, and the appropriate movement is calculated.
     // A networking part of this script is responsible for making sure that the movement that happens are happening for all clients.
@@ -79,7 +46,6 @@ public class PlayerMovement1 : NetworkBehaviour
         {
             matchIsPaused = true;
         }
->>>>>>> main
     }
 
     #region Server
@@ -100,12 +66,9 @@ public class PlayerMovement1 : NetworkBehaviour
         if (!hasAuthority || matchIsPaused)
         {
             return;
-<<<<<<< HEAD
-        
-=======
         }
 
->>>>>>> main
+
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         if (isGrounded && Input.GetKeyDown(jumpButton) && !InGameMenu.gameIsPaused)
@@ -123,33 +86,7 @@ public class PlayerMovement1 : NetworkBehaviour
             velocity.y = -2;
         }
 
-<<<<<<< HEAD
-        //timer += Time.deltaTime;
 
-        //if (move.x != 0 || move.z != 0)
-        //{
-        //    Debug.Log("Inside");
-        //    if (timer> runningAnimation.length)
-        //    {
-        //        anim.Play(runningAnimation.name);
-        //        timer = 0;                
-        //    }            
-        //}
-
-        move = transform.right * x + transform.forward * z;
-
-        if (move.x != 0 || move.z != 0)
-        {
-            Running();
-        }
-        else
-        {
-            Idle();
-        }
-
-
-            CmdMove(move, velocity);
-=======
         move = transform.right * directionX + transform.forward * directionZ;
 
         if (InGameMenu.gameIsPaused)
@@ -166,7 +103,7 @@ public class PlayerMovement1 : NetworkBehaviour
             animator.SetBool("isWalking", false);
         }
         CmdMove(move, velocity);
->>>>>>> main
+
     }
 
     // The ClientRpc sends out the appropriate information to all active clients, telling them to move the character in the given direction.
@@ -176,16 +113,6 @@ public class PlayerMovement1 : NetworkBehaviour
         controller.Move(_move * speed * Time.deltaTime); //X and Z
         controller.Move(_velocity * Time.deltaTime); //Y
     }
-    [Client]
-    void Idle()
-    {
-        anim.SetFloat("Speed", 0);
-    }
-
-    [Client]
-    void Running()
-    {
-        anim.SetFloat("Speed", 1f, 0.1f, Time.deltaTime);
-    }
+    
     #endregion
 }
