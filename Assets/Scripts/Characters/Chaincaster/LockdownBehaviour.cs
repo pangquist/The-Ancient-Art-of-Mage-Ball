@@ -8,13 +8,19 @@ public class LockdownBehaviour : NetworkBehaviour
     private LineRenderer chain;
     private Material material;
     private Vector2 offsetSpeed = new Vector2(15, 0);
-    GameObject target;
 
+    [SerializeField] GameObject target;
     [SerializeField] float duration;
+
+    public override void OnStartAuthority()
+    {
+        enabled = true;
+    }
 
     void Start()
     {
         Debug.Log("Chain created");
+        target = GameObject.FindGameObjectWithTag("Enemy");
         chain = gameObject.GetComponent<LineRenderer>();
         material = chain.material;
         StopLockdown();
@@ -31,12 +37,7 @@ public class LockdownBehaviour : NetworkBehaviour
 
     void LateUpdate()
     {
-        DrawChain(target);
-    }
-
-    public void SetTarget(GameObject _target)
-    {
-        target = _target;
+        DrawChain();
     }
 
     [Client]
@@ -47,13 +48,17 @@ public class LockdownBehaviour : NetworkBehaviour
             return;
         }
 
-        Rigidbody ball = _target.gameObject.GetComponent<Rigidbody>();
-
         gameObject.transform.LookAt(_target.transform);
 
         Vector3 vector = gameObject.transform.position - _target.transform.position;
 
-        ball.AddForce(vector * 20 * Time.deltaTime);
+        CmdMoveTarget(_target, vector);
+    }
+
+    [Command]
+    void CmdMoveTarget(GameObject _target, Vector3 _vector)
+    {
+        _target.gameObject.GetComponent<Rigidbody>().AddForce(_vector * 20 * Time.deltaTime);
     }
 
     void StopLockdown()
@@ -61,29 +66,12 @@ public class LockdownBehaviour : NetworkBehaviour
         Destroy(gameObject, duration);
     }
 
-    //[Command]
-    //void CmdStopLockdown()
-    //{
-    //    RpcStopLockdown();
-    //}
-
-    //[ClientRpc]
-    //void RpcStopLockdown()
-    //{
-    //    Destroy(this);
-    //}
-
-    void DrawChain(GameObject _target)
+    void DrawChain()
     {
-        //if (!hasAuthority || !lockActive)
-        //{
-        //    return;
-        //}
-
         chain = gameObject.GetComponent<LineRenderer>();
         chain.positionCount = 2;
 
         chain.SetPosition(0, gameObject.transform.position);
-        chain.SetPosition(1, _target.transform.position);
+        chain.SetPosition(1, target.transform.position);
     }
 }
