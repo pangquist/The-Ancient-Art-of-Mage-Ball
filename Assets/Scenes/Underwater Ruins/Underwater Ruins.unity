@@ -2519,7 +2519,6 @@ Mesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: pb_Mesh39658
->>>>>>> main:Assets/Scenes/Underwater Ruins/Underwater Ruins.unity
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -6729,7 +6728,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 10
->>>>>>> main:Assets/Scenes/Underwater Ruins/Underwater Ruins.unity
       objectReference: {fileID: 0}
     - target: {fileID: 4582918613553027019, guid: b82478b7da3e3324d98b55e066fcbe1f,
         type: 3}
