@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoulderTrail : NetworkBehaviour
+public class StoneTrail : NetworkBehaviour
 {   
     [SerializeField] GameObject stonePrefab;
 

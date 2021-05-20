@@ -50,9 +50,9 @@ public class PillarMovement : NetworkBehaviour
         //{
         //    CmdMovePillar(pillarPosition.transform.position, pillarTop.transform.position);
         //}
-        if(gameObject.transform.position.y< heightOfPillar)
-        {
-            gameObject.transform.Translate(pillarPosition.transform.position - pillarTop.transform.position);
+        gameObject.transform.Translate(pillarPosition.transform.position - pillarTop.transform.position);
+        if (gameObject.transform.position.y< heightOfPillar)
+        {           
             gameObject.transform.Translate(Vector3.up * forceUpwards * Time.deltaTime, Space.World);
         }       
 

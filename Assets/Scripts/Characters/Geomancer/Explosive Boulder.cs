@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ThrowBoulder : NetworkBehaviour
+public class ExplosiveBoulder : NetworkBehaviour
 {
     [SerializeField] Camera mainCamera;
 
@@ -69,7 +69,7 @@ public class ThrowBoulder : NetworkBehaviour
 
         NetworkServer.Spawn(projectileInstance);
         projectileInstance.GetComponent<Rigidbody>().AddForce(directionOfBoulder.normalized * throwForceForward, ForceMode.Force);
-        projectileInstance.GetComponent<Rigidbody>().AddForce(direction * throwForceUpward, ForceMode.Force);
+        projectileInstance.GetComponent<Rigidbody>().AddForce(Vector3.up * throwForceUpward, ForceMode.Force);
 
         //ClientRpcBoulderThrow(directionOfBoulder, startPos, direction);
     }

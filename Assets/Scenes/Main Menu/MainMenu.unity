@@ -6992,16 +6992,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tooltipBackground: {fileID: 69312783}
   headers:
-  - Amplifying Beam
-  - Gravity Warp
-  - Force        Wall
-  - Perfected control
+  - Explosive Boulder
+  - Pillar Launch
+  - Earth Levitate
+  - Stone Trail
   contents:
-  - Creates a beam for 5 seconds that pushes the ball forward
-  - Warps the gravity of the ball and launches it into the air
-  - Creates a force wall that stops the ball in its path, but allow players to walk
-    through
-  - Force Manipulator passively gains increased movement speed and jump height
+  - Throws a boulder towards your target. Explodes upon impact with the ball.
+  - Summons a pillar from the ground. The pillar disapears after 2 seconds.
+  - Summons a pillar underneath the casters feets, enabling levitation for 5 seconds.
+  - Geomancer leaves a destructive trail of stones behind upon movement.
   tooltips:
   - {fileID: 1757956810}
   - {fileID: 223509488}

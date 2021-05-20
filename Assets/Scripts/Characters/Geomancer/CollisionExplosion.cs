@@ -7,7 +7,7 @@ public class CollisionExplosion : NetworkBehaviour
 {
     [SerializeField] float rotateX, rotateY, rotateZ;
 
-    [SerializeField] float explosionForceForward, explosionForceUpwards;
+    [SerializeField] float explosionForceHorizontal, explotionForceVertical;
 
     [SerializeField] float explosionRadius;
 
@@ -93,8 +93,8 @@ public class CollisionExplosion : NetworkBehaviour
     {
         Debug.Log("Server is moving the ball for the clients!");
         ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        ball.GetComponent<Rigidbody>().AddExplosionForce(explosionForceForward, gameObject.transform.position, explosionRadius, explosionForceUpwards);
-        ball.GetComponent<Rigidbody>().AddExplosionForce(explosionForceForward, gameObject.transform.position, explosionRadius);
+        ball.GetComponent<Rigidbody>().AddExplosionForce(explosionForceHorizontal, gameObject.transform.position, explosionRadius, explotionForceVertical);
+        ball.GetComponent<Rigidbody>().AddExplosionForce(explosionForceHorizontal, gameObject.transform.position, explosionRadius);
         //RpcDoExplosion(ball);
         Destroy(gameObject);
     }
@@ -110,7 +110,7 @@ public class CollisionExplosion : NetworkBehaviour
     {
         Debug.Log("Server is moving the ball for the clients!");
         ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        ball.GetComponent<Rigidbody>().AddExplosionForce(explosionForceForward, gameObject.transform.position, explosionRadius, explosionForceUpwards);
+        ball.GetComponent<Rigidbody>().AddExplosionForce(explosionForceHorizontal, gameObject.transform.position, explosionRadius, explotionForceVertical);
         Destroy(gameObject);
     }
 

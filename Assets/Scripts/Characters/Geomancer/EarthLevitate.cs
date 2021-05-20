@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PillarBridge : NetworkBehaviour
+public class EarthLevitate : NetworkBehaviour
 {
     [SerializeField] GameObject pillarBridgePrefab;
 
