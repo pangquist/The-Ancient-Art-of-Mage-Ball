@@ -2,11 +2,16 @@ using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterSelect : MonoBehaviour
 {
     [SerializeField] MyNetworkManager myNetworkManager;
     [SerializeField] MyNetworkMenuPlayer myNetworkMenuPlayer;
+    [SerializeField] Image characterImage;
+    [SerializeField] AudioSource selectSound;
+
+    [SerializeField] Sprite[] characterImages;
     
     private void Start()
     {
@@ -23,5 +28,8 @@ public class CharacterSelect : MonoBehaviour
                 menuPlayer.CmdUpdateChosenCharacter(characterIndex);
             }
         }
+        selectSound.Play();
+        characterImage.sprite = characterImages[characterIndex];
+        //Get the players current position, the image and give the image the sprite of the character
     }
 }

@@ -5,17 +5,23 @@ using UnityEngine;
 
 public class BallMovement : NetworkBehaviour
 {
+    // This script handles special movement for the ball, like defying gravity.
+    // During the update, a bool is checked for whether the ball is affected by gravity or not.
+    // A networking part of this script is responsible for making sure that the balls gravity is synced between all the clients.
+    // Author: Valter Lindecrantz
+
     Rigidbody rb;
     [SerializeField] GameObject FXEffect;
 
     float revertedGravityDuration = 0;
-    // Start is called before the first frame update
+
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
     }
-
-    // Update is called once per frame
+    
+    // During the update, the gravity-bool is checked. If it is turned off, a timer begins that measures how long the ball will be airborne for.
+    // When the counter has reached the limit, the bool is turned on, and the ball in turn starts to be affected by gravity again.
     void Update()
     {
         if (rb.useGravity == true)

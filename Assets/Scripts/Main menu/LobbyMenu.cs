@@ -12,7 +12,7 @@ public class LobbyMenu : MonoBehaviour
     [SerializeField] Button startGameButton;
     [SerializeField] Button changeSceneButton;
 
-    [SerializeField] TeamManager teamManager;
+    [SerializeField] GamestateManager gamestateManager;
 
     [SerializeField] TMP_Text[] redTeamNames = new TMP_Text[3];
     [SerializeField] TMP_Text[] blueTeamNames = new TMP_Text[3];
@@ -20,13 +20,22 @@ public class LobbyMenu : MonoBehaviour
     private List<string[]> menuPlayers = new List<string[]>();
 
 
+    [SerializeField] int redPlayers = 0;
+    [SerializeField] int bluePlayers = 0;
+
+    [SerializeField] GameObject[] mapButtons;
+    [SerializeField] Sprite[] characterSprites;
+    [SerializeField] Image[] redTeamImage = new Image[3];
+    [SerializeField] Image[] blueTeamImage = new Image[3];
+
     private void Start()
     {
         Debug.Log("Lobbymenu started! Subscribing to events!");
         MyNetworkManager.ClientOnConnected += HandleClientConnected;
         MyNetworkMenuPlayer.AuthorityOnPartyOwnerStateUpdated += AuthorityHandlePartyOwnerStateUpdated;
         MyNetworkMenuPlayer.ClientOnInfoUpdated += ClientHandleInfoUpdated;
-        MyNetworkMenuPlayer.OnClientTeamUpdated += ClientHandleTeamUpdated;
+        MyNetworkMenuPlayer.OnClientTeamUpdated += UpdateNameLists;
+        MyNetworkMenuPlayer.ClientOnCharacterUpdated += UpdateNameLists;
     }
 
     private void OnDestroy()
@@ -34,7 +43,8 @@ public class LobbyMenu : MonoBehaviour
         MyNetworkManager.ClientOnConnected -= HandleClientConnected;
         MyNetworkMenuPlayer.AuthorityOnPartyOwnerStateUpdated -= AuthorityHandlePartyOwnerStateUpdated;
         MyNetworkMenuPlayer.ClientOnInfoUpdated -= ClientHandleInfoUpdated;
-        MyNetworkMenuPlayer.OnClientTeamUpdated -= ClientHandleTeamUpdated;
+        MyNetworkMenuPlayer.OnClientTeamUpdated -= UpdateNameLists;
+        MyNetworkMenuPlayer.ClientOnCharacterUpdated -= UpdateNameLists;
     }
     
     // When a client connects to the server, they set the Lobby UI to be active.
@@ -65,6 +75,19 @@ public class LobbyMenu : MonoBehaviour
     void AuthorityHandlePartyOwnerStateUpdated(bool state)
     {
         startGameButton.gameObject.SetActive(state);
+        startGameButton.enabled = state;
+        startGameButton.interactable = state;
+        startGameButton.gameObject.GetComponent<OnHoverButton>().enabled = state;
+        ColorBlock cb = startGameButton.colors;
+
+        cb.normalColor = Color.white;
+
+        startGameButton.colors = cb;
+        foreach (GameObject mapButton in mapButtons)
+        {
+            mapButton.GetComponent<Button>().enabled = true;
+            mapButton.GetComponent<OnHoverButton>().enabled = true;
+        }
     }
 
     
@@ -113,6 +136,13 @@ public class LobbyMenu : MonoBehaviour
             {
                 newPlayer.CmdSetTeamName("Red Team");
             }
+<<<<<<< HEAD
+=======
+        }
+        else
+        {
+            Debug.Log("NetworkClient is not ready (LobbyMenu)!");
+>>>>>>> main
         }
         
 
@@ -132,8 +162,6 @@ public class LobbyMenu : MonoBehaviour
             return;
         }
 
-        int redPlayers = 0;
-        int bluePlayers = 0;
         
         if (team == "Red Team")
         {
@@ -154,49 +182,58 @@ public class LobbyMenu : MonoBehaviour
 
             localMenuPlayer.CmdSetTeamName("Blue Team");
         }
-
-        foreach (MyNetworkMenuPlayer player in menuPlayers)
-        {
-            if (player.TeamName == "Red Team")
-            {
-                redPlayers++;
-            }
-
-            else if (player.TeamName == "Blue Team")
-            {
-                bluePlayers++;
-            }
-        }
-    }
-    
-    void ClientHandleTeamUpdated()
-    {
-        UpdateNameLists();
     }
     
     public void UpdateNameLists()
     {
         List<MyNetworkMenuPlayer> menuPlayers = ((MyNetworkManager)NetworkManager.singleton).MenuPlayers;
-        
+
+        gamestateManager.ClearPlayerList();
+
+        int numberOfRedPlayer = 0;
+        int numberOfBluePlayer = 0;
+
+        foreach (MyNetworkMenuPlayer player in menuPlayers)
+        {
+            if (player.TeamName == "Red Team")
+            {
+                numberOfRedPlayer++;
+            }
+
+            else if (player.TeamName == "Blue Team")
+            {
+                numberOfBluePlayer++;
+            }
+        }
+
+        redPlayers = numberOfRedPlayer;
+        bluePlayers = numberOfBluePlayer;
+
+
         for (int i = 0; i < redTeamNames.Length; i++)
         {
             redTeamNames[i].text = "Waiting For Player...";
+            redTeamImage[i].enabled = false;
         }
 
         for (int i = 0; i < blueTeamNames.Length; i++)
         {
             blueTeamNames[i].text = "Waiting For Player...";
+            blueTeamImage[i].enabled = false;
         }
 
         for (int i = 0; i < menuPlayers.Count; i++)
         {
             if (menuPlayers[i].TeamName == "Red Team")
             {
+                gamestateManager.AddPlayerToTeam(menuPlayers[i], "Red");
                 for (int j = 0; j < redTeamNames.Length; j++)
                 {
                     if (redTeamNames[j].text == "Waiting For Player...")
                     {
                         redTeamNames[j].text = menuPlayers[i].GetDisplayName();
+                        redTeamImage[j].enabled = true;
+                        redTeamImage[j].sprite = characterSprites[menuPlayers[i].ChosenCharacter];
                         break;
                     }
                 }
@@ -204,11 +241,14 @@ public class LobbyMenu : MonoBehaviour
             }
             else if (menuPlayers[i].TeamName == "Blue Team")
             {
+                gamestateManager.AddPlayerToTeam(menuPlayers[i], "Blue");
                 for (int j = 0; j < blueTeamNames.Length; j++)
                 {
                     if (blueTeamNames[j].text == "Waiting For Player...")
                     {
                         blueTeamNames[j].text = menuPlayers[i].GetDisplayName();
+                        blueTeamImage[j].enabled = true;
+                        blueTeamImage[j].sprite = characterSprites[menuPlayers[i].ChosenCharacter];
                         break;
                     }
                 }
