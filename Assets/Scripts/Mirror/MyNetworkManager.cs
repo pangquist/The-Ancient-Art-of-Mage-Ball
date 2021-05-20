@@ -141,6 +141,7 @@ public class MyNetworkManager : NetworkManager
         {
             NetworkPlayerSpawner spawner = conn.identity.GetComponent<NetworkPlayerSpawner>();
             Spawners.Add(spawner);
+            spawner.SetGamestateManager(gamestateManager);
             spawner.AssignCharacterPrefab(Spawners.Count-1);
         }
     }

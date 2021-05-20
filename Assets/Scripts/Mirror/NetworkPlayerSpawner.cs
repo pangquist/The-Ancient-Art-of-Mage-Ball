@@ -11,59 +11,43 @@ public class NetworkPlayerSpawner : NetworkBehaviour
     // Author: Valter Lindecrantz.
 
     [SerializeField] int chosenCharacter;
+    [SerializeField] string team;
+    [SerializeField] string name;
+    [SerializeField] GamestateManager gamestateManager;
+    [SerializeField] Vector3 spawnPosition;
 
     public override void OnStartAuthority()
     {
         base.OnStartAuthority();
     }
 
-    //private void Start()
-    //{
-    //    Debug.Log("attempting to call a command!");
-    //    AssignCharacterPrefab();
-    //}
-
-
-    // Called on the client from the network Manager to assign each player their chosen player prefab (character).
-    //[Client]
-    //public void AssignCharacterPrefab()
-    //{
-    //    Debug.Log("ASSIGN HAS BEEN TRIGGERED");
-    //    List<string[]> characterInfoList = ((MyNetworkManager)NetworkManager.singleton).CharacterInfoList;
-    //    Debug.Log($"CHARACTER INFO LIST: {characterInfoList.Count}");
-    //    CSteamID steamId = SteamUser.GetSteamID();
-
-    //    foreach (string[] infoArray in characterInfoList)
-    //    {
-    //        Debug.Log($"COMPARING USER STEAM ID: {steamId} TO: {infoArray.GetValue(0).ToString()}");
-    //        if (steamId.ToString() == infoArray.GetValue(0).ToString())
-    //        {
-    //            Debug.Log("Found steam ID in the list!");
-    //            chosenCharacter = Convert.ToInt32(infoArray.GetValue(3));
-    //            break;
-    //        }
-    //    }
-
-    //    CmdSpawnCharacter(chosenCharacter);
-    //}
+    public void SetGamestateManager(GamestateManager _gamestateManager)
+    {
+        gamestateManager = _gamestateManager;
+    }
 
     [Server]
     public void AssignCharacterPrefab(int playerIndex)
     {
         List<string[]> characterInfoList = ((MyNetworkManager)NetworkManager.singleton).CharacterInfoList;
+        string[] characterInfo = characterInfoList[playerIndex];
 
-        chosenCharacter = Convert.ToInt32(characterInfoList[playerIndex].GetValue(3));
+        name = characterInfo.GetValue(1).ToString();
+        team = characterInfo.GetValue(2).ToString();
+        chosenCharacter = Convert.ToInt32(characterInfo.GetValue(3));
 
-        SpawnCharacter(chosenCharacter);
+        spawnPosition = gamestateManager.GetRespawnPosition(name);
+        Debug.Log($"Respawn Position: {spawnPosition}");
+        SpawnCharacter(chosenCharacter, spawnPosition);
     }
 
     // Take in the parameter of what character the player has chosen, and spawns a prefab from the array of available characters to play as.
    
-    void SpawnCharacter(int characterIndex)
+    void SpawnCharacter(int characterIndex, Vector3 spawnPosition)
     {
         GameObject[] characters = ((MyNetworkManager)NetworkManager.singleton).Characters;
 
-        GameObject instantiatedCharacter = Instantiate(characters[characterIndex + 1], gameObject.transform.position, gameObject.transform.rotation);
+        GameObject instantiatedCharacter = Instantiate(characters[characterIndex + 1], spawnPosition, gameObject.transform.rotation);
         
         NetworkServer.Spawn(instantiatedCharacter, connectionToClient);
         ((MyNetworkManager)NetworkManager.singleton).Players.Add(instantiatedCharacter.GetComponent<MyNetworkPlayer>());

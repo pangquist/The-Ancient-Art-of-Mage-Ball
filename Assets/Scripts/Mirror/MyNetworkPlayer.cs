@@ -117,7 +117,6 @@ public class MyNetworkPlayer : NetworkBehaviour
         GamestateManager.HandleBlueScoreChanged += SetBlueScoreText;
         GamestateManager.HandleRedScoreChanged += Respawn;
         GamestateManager.HandleBlueScoreChanged += Respawn;
-        GamestateManager.HandleMatchPaused += Respawn;
         GamestateManager.HandlePausTimeChanged += Countdown;
     }
 
@@ -139,7 +138,6 @@ public class MyNetworkPlayer : NetworkBehaviour
         GamestateManager.HandleBlueScoreChanged -= SetBlueScoreText;
         GamestateManager.HandleRedScoreChanged -= Respawn;
         GamestateManager.HandleBlueScoreChanged -= Respawn;
-        GamestateManager.HandleMatchPaused -= Respawn;
         GamestateManager.HandlePausTimeChanged -= Countdown;
         ((MyNetworkManager)NetworkManager.singleton).Players.Remove(this);
     }
