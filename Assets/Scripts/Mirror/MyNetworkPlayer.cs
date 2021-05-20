@@ -103,7 +103,6 @@ public class MyNetworkPlayer : NetworkBehaviour
 
     public override void OnStartAuthority()
     {
-        Debug.Log("The client has authority!");
         base.OnStartAuthority();
 
         settingsCanvas.SetActive(true);
@@ -185,8 +184,6 @@ public class MyNetworkPlayer : NetworkBehaviour
     [Client]
     void HandlePlayerColorUpdated(Color oldColor, Color newColor)
     {
-        Debug.Log("The color has been updated for the client!");
-
         displayNameText.color = playerColor;
         teamIcon.color = playerColor;
 
@@ -211,8 +208,6 @@ public class MyNetworkPlayer : NetworkBehaviour
     [Client]
     public void AssignNameInGame(int playerIndex)
     {
-        Debug.Log("ASSIGNING NAMES AND TEAMS");
-
         List<MyNetworkPlayer> players = ((MyNetworkManager)NetworkManager.singleton).Players;
         List<string[]> characterInfoList = ((MyNetworkManager)NetworkManager.singleton).CharacterInfoList;
 

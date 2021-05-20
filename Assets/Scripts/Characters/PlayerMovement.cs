@@ -33,7 +33,6 @@ public class PlayerMovement : NetworkBehaviour
         base.OnStartAuthority();
         enabled = true;
         GamestateManager.HandleMatchPaused += TogglePause;
-        Debug.Log("MOVEMENT IS SUBSCRIBED!");
     }
 
     void TogglePause()

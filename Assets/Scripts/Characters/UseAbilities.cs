@@ -52,7 +52,6 @@ public class UseAbilities : NetworkBehaviour
         currentCooldowns = new float[3];
         for (int i = 0; i< currentCooldowns.Length; i++)
         {
-            Debug.Log("Setting the cooldowns to 0");
             currentCooldowns[i] = 0f;
         }
     }
@@ -61,7 +60,6 @@ public class UseAbilities : NetworkBehaviour
     {
         base.OnStartAuthority();
         GamestateManager.HandleMatchPaused += TogglePause;
-        Debug.Log("ABILITIES ARE SUBSCRIBED!");
     }
 
     void TogglePause()
