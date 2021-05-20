@@ -30,7 +30,8 @@ public class MyNetworkManager : NetworkManager
 
     [Header("Characters")]
     [SerializeField] GameObject[] characters;
-    
+
+    [SerializeField] string selectedScene;
     bool isGameInProgress;
 
     public List<MyNetworkMenuPlayer> MenuPlayers { get; } = new List<MyNetworkMenuPlayer>();
@@ -38,7 +39,7 @@ public class MyNetworkManager : NetworkManager
     public GameObject[] Characters { get { return characters; } }
     public List<MyNetworkPlayer> Players { get; } = new List<MyNetworkPlayer>();
     public List<NetworkPlayerSpawner> Spawners { get; } = new List<NetworkPlayerSpawner>();
-    public string SelectedScene { get { return SelectedScene; } set { SelectedScene = value; } }
+    public string SelectedScene { get { return selectedScene; } set { selectedScene = value; } }
 
 
     public void ClearMenuPlayers()
@@ -80,7 +81,7 @@ public class MyNetworkManager : NetworkManager
 
         isGameInProgress = true;
 
-        ServerChangeScene(SelectedScene);
+        ServerChangeScene(selectedScene);
     }
     
     [Server]
@@ -148,7 +149,7 @@ public class MyNetworkManager : NetworkManager
     //Called whenever a scene is changed. The players spawns a player prefabs that is decided in the character select. If the scene is an arena map, the ball is spawned and the game begins.
     public override void OnServerSceneChanged(string sceneName)
     {
-        if (sceneName == SelectedScene)
+        if (sceneName == selectedScene)
         {
             playerPrefab = Characters[0]; //Here is where it is decided what character the player will spawn in as. Make it work with character select in lobby!
             ballStartPos = GameObject.Find("BallSpawnPosition");
@@ -160,7 +161,7 @@ public class MyNetworkManager : NetworkManager
         else if (sceneName == "PostMatch")
         {
             playerPrefab = mainMenuPlayer;
-            SelectedScene = "UnderwaterRuin";
+            selectedScene = "UnderwaterRuin";
         }
     }
 
