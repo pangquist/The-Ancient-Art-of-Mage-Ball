@@ -11,14 +11,17 @@ public class NetworkPlayerSpawner : NetworkBehaviour
     // Author: Valter Lindecrantz.
 
     [SerializeField] int chosenCharacter;
-    [SerializeField] string team;
-    [SerializeField] string name;
+    [SerializeField] string playerTeam;
+    [SerializeField] string playerName;
+    [SerializeField] CSteamID steamID;
     [SerializeField] GamestateManager gamestateManager;
     [SerializeField] Vector3 spawnPosition;
 
     public override void OnStartAuthority()
     {
         base.OnStartAuthority();
+        steamID = SteamUser.GetSteamID();
+        AssignCharacterPrefab(steamID);
     }
 
     public void SetGamestateManager(GamestateManager _gamestateManager)
@@ -26,18 +29,25 @@ public class NetworkPlayerSpawner : NetworkBehaviour
         gamestateManager = _gamestateManager;
     }
 
-    [Server]
-    public void AssignCharacterPrefab(int playerIndex)
+    [Command]
+    public void AssignCharacterPrefab(CSteamID _steamID)
     {
         List<string[]> characterInfoList = ((MyNetworkManager)NetworkManager.singleton).CharacterInfoList;
-        string[] characterInfo = characterInfoList[playerIndex];
 
-        name = characterInfo.GetValue(1).ToString();
-        team = characterInfo.GetValue(2).ToString();
-        chosenCharacter = Convert.ToInt32(characterInfo.GetValue(3));
+        foreach (string[] info in characterInfoList)
+        {
+            Debug.Log($"Comparing user steamID: {_steamID} to ID in the list: {info.GetValue(0)}");
+            if(info.GetValue(0).ToString() == _steamID.ToString())
+            {
+                playerName = info.GetValue(1).ToString();
+                playerTeam = info.GetValue(2).ToString();
+                chosenCharacter = Convert.ToInt32(info.GetValue(3));
 
-        spawnPosition = gamestateManager.GetRespawnPosition(name);
-        Debug.Log($"Respawn Position: {spawnPosition}");
+                Debug.Log($"Name: {playerName}, Team: { playerTeam}, Chosen Character: {chosenCharacter}");
+            }
+        }
+
+        spawnPosition = gamestateManager.GetRespawnPosition(playerName);
         SpawnCharacter(chosenCharacter, spawnPosition);
     }
 
