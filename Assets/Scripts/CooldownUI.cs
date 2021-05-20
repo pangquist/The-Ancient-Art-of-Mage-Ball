@@ -29,10 +29,34 @@ public class CooldownUI : MonoBehaviour
     [Header("Ability 4")]
     [SerializeField] Image ability4Icon;
     [SerializeField] TMP_Text ability4Text;
-    
+
+    [SerializeField] bool matchIsPaused = true;
+
+    private void Start()
+    {
+        GamestateManager.HandleMatchPaused += TogglePause;
+    }
+
+    void TogglePause()
+    {
+        if (matchIsPaused)
+        {
+            matchIsPaused = false;
+        }
+        else if (!matchIsPaused)
+        {
+            matchIsPaused = true;
+        }
+    }
+
     // During the update, callculations are performed to make the UI accurately display the current cooldown of the given ability.
     void Update()
     {
+        if (matchIsPaused)
+        {
+            return;
+        }
+
         #region Ability1
         if (abilities.GetCooldown(0) <= 0)
         {
@@ -41,7 +65,7 @@ public class CooldownUI : MonoBehaviour
         }
         else
         {
-            ability1Icon.fillAmount = (abilities.GetCooldown(0) / abilities.CooldownAbility1());
+            ability1Icon.fillAmount = abilities.GetCooldown(0) / abilities.CooldownAbility1();
             ability1Text.text = (abilities.GetCooldown(0)).ToString(".#");
         }
         #endregion

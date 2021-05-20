@@ -5,7 +5,7 @@ using UnityEngine;
 public class RandomBackground : MonoBehaviour
 {
     public Material[] skyboxes;
-    [SerializeField] GameObject light;
+    [SerializeField] GameObject gameObjectLight;
 
     // Use this for initialization
     void Start()
@@ -25,22 +25,22 @@ public class RandomBackground : MonoBehaviour
 
         if (x == 0)
         {
-            light.transform.localEulerAngles = new Vector3(transform.localEulerAngles.x + 31f, transform.localEulerAngles.y + 124f, transform.localEulerAngles.z);
+            gameObjectLight.transform.localEulerAngles = new Vector3(transform.localEulerAngles.x + 31f, transform.localEulerAngles.y + 124f, transform.localEulerAngles.z);
         }
 
         if (x == 1)
         {
-            light.transform.localEulerAngles = new Vector3(transform.localEulerAngles.x + 25f, transform.localEulerAngles.y + 185f, transform.localEulerAngles.z + 3f);
+            gameObjectLight.transform.localEulerAngles = new Vector3(transform.localEulerAngles.x + 25f, transform.localEulerAngles.y + 185f, transform.localEulerAngles.z + 3f);
         }
 
         if (x == 2)
         {
-            light.transform.localEulerAngles = new Vector3(transform.localEulerAngles.x + 25f, transform.localEulerAngles.y + 185f, transform.localEulerAngles.z + 3f);
+            gameObjectLight.transform.localEulerAngles = new Vector3(transform.localEulerAngles.x + 25f, transform.localEulerAngles.y + 185f, transform.localEulerAngles.z + 3f);
         }
 
         if (x == 3)
         {
-            light.transform.localEulerAngles = new Vector3(transform.localEulerAngles.x + 30f, transform.localEulerAngles.y + 175.5f, transform.localEulerAngles.z + (-9f));
+            gameObjectLight.transform.localEulerAngles = new Vector3(transform.localEulerAngles.x + 30f, transform.localEulerAngles.y + 175.5f, transform.localEulerAngles.z + (-9f));
         }
     }
 }

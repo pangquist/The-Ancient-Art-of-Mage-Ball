@@ -12,7 +12,7 @@ public class LobbyMenu : MonoBehaviour
     [SerializeField] Button startGameButton;
     [SerializeField] Button changeSceneButton;
 
-    [SerializeField] TeamManager teamManager;
+    [SerializeField] GamestateManager gamestateManager;
 
     [SerializeField] TMP_Text[] redTeamNames = new TMP_Text[3];
     [SerializeField] TMP_Text[] blueTeamNames = new TMP_Text[3];
@@ -30,7 +30,6 @@ public class LobbyMenu : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("Lobbymenu started! Subscribing to events!");
         MyNetworkManager.ClientOnConnected += HandleClientConnected;
         MyNetworkMenuPlayer.AuthorityOnPartyOwnerStateUpdated += AuthorityHandlePartyOwnerStateUpdated;
         MyNetworkMenuPlayer.ClientOnInfoUpdated += ClientHandleInfoUpdated;
@@ -75,6 +74,14 @@ public class LobbyMenu : MonoBehaviour
     void AuthorityHandlePartyOwnerStateUpdated(bool state)
     {
         startGameButton.gameObject.SetActive(state);
+        startGameButton.enabled = state;
+        startGameButton.interactable = state;
+        startGameButton.gameObject.GetComponent<OnHoverButton>().enabled = state;
+        ColorBlock cb = startGameButton.colors;
+
+        cb.normalColor = Color.white;
+
+        startGameButton.colors = cb;
         foreach (GameObject mapButton in mapButtons)
         {
             mapButton.GetComponent<Button>().enabled = true;
@@ -118,23 +125,28 @@ public class LobbyMenu : MonoBehaviour
             }
         }
 
-
-        if(redPlayers >= 3 && bluePlayers < 3)
+        if (NetworkClient.ready)
         {
-            newPlayer.CmdSetTeamName("Blue Team");
+            if (redPlayers >= 3 && bluePlayers < 3)
+            {
+                newPlayer.CmdSetTeamName("Blue Team");
+            }
+            else
+            {
+                newPlayer.CmdSetTeamName("Red Team");
+            }
         }
         else
         {
-            newPlayer.CmdSetTeamName("Red Team");
+            Debug.Log("NetworkClient is not ready (LobbyMenu)!");
         }
+        
 
         startGameButton.interactable = menuPlayers.Count >= MyNetworkManager.playersRequiredToStart; 
     }
     
     public void ChangeTeam(string team)
     {
-        Debug.Log("-------------------------------------------------------------------");
-
         MyNetworkMenuPlayer localMenuPlayer = NetworkClient.localPlayer.gameObject.GetComponent<MyNetworkMenuPlayer>();
 
         List<MyNetworkMenuPlayer> menuPlayers = ((MyNetworkManager)NetworkManager.singleton).MenuPlayers;
@@ -169,6 +181,8 @@ public class LobbyMenu : MonoBehaviour
     public void UpdateNameLists()
     {
         List<MyNetworkMenuPlayer> menuPlayers = ((MyNetworkManager)NetworkManager.singleton).MenuPlayers;
+
+        gamestateManager.ClearPlayerList();
 
         int numberOfRedPlayer = 0;
         int numberOfBluePlayer = 0;
@@ -206,6 +220,7 @@ public class LobbyMenu : MonoBehaviour
         {
             if (menuPlayers[i].TeamName == "Red Team")
             {
+                gamestateManager.AddPlayerToTeam(menuPlayers[i], "Red");
                 for (int j = 0; j < redTeamNames.Length; j++)
                 {
                     if (redTeamNames[j].text == "Waiting For Player...")
@@ -220,6 +235,7 @@ public class LobbyMenu : MonoBehaviour
             }
             else if (menuPlayers[i].TeamName == "Blue Team")
             {
+                gamestateManager.AddPlayerToTeam(menuPlayers[i], "Blue");
                 for (int j = 0; j < blueTeamNames.Length; j++)
                 {
                     if (blueTeamNames[j].text == "Waiting For Player...")

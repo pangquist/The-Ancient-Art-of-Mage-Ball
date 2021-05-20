@@ -179,7 +179,7 @@ namespace Mirror.FizzySteam
         }
         else
         {
-          Debug.Log($"Starting server [DEPRECATED SteamNetworking]. Relay enabled: {AllowSteamRelay}");
+          //Debug.Log($"Starting server [DEPRECATED SteamNetworking]. Relay enabled: {AllowSteamRelay}");
           SteamNetworking.AllowP2PPacketRelay(AllowSteamRelay);
           server = LegacyServer.CreateServer(this, NetworkManager.singleton.maxConnections);
         }

@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Menu/MainMenu.unity
     guid: 532cbf6f0138d824cb0dbd05351a64cd
   - enabled: 1
-    path: Assets/Scenes/Playground/Playground.unity
+    path: Assets/Scenes/Underwater Ruins/Underwater Ruins.unity
     guid: 63d3cb5bd82234e4184c99180ea1ff3e
   - enabled: 1
     path: Assets/Scenes/Castle/Castle.unity

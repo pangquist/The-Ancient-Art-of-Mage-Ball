@@ -11,7 +11,7 @@ public class UseAbilities : NetworkBehaviour
     // When the appropriate key is pressed, the current cooldown will be set to max and the animation will be player.
     // Author: Valter Lindecrantz
     
-    Animator anim;
+    [SerializeField] Animator anim;
 
     #region Ability1
     [Header("Ability 1")]
@@ -37,7 +37,8 @@ public class UseAbilities : NetworkBehaviour
     public float CooldownAbility3() { return cooldownAbility3; }
     #endregion
 
-    float[] currentCooldowns;
+    public float[] currentCooldowns;
+    [SerializeField] bool matchIsPaused = true;
 
     // Getter for the Cooldown UI to retrieve the current cooldowns to correctly display on the UI.
     public float GetCooldown(int cooldownIndex) 
@@ -48,23 +49,34 @@ public class UseAbilities : NetworkBehaviour
     // During start the character retrieves its own animator component to be able to reference the animation clips.
     void Start()
     {
-        anim = GetComponent<Animator>();
         currentCooldowns = new float[3];
         for (int i = 0; i< currentCooldowns.Length; i++)
         {
-            Debug.Log("Setting the cooldowns to 0");
             currentCooldowns[i] = 0f;
         }
     }
 
     public override void OnStartAuthority()
     {
-        enabled = true;
+        base.OnStartAuthority();
+        GamestateManager.HandleMatchPaused += TogglePause;
+    }
+
+    void TogglePause()
+    {
+        if (matchIsPaused)
+        {
+            matchIsPaused = false;
+        }
+        else if (!matchIsPaused)
+        {
+            matchIsPaused = true;
+        }
     }
 
     private void Update()
     {
-        if (!hasAuthority)
+        if (!hasAuthority || matchIsPaused)
         {
             return;
         }
@@ -96,25 +108,47 @@ public class UseAbilities : NetworkBehaviour
                 StartAbility3Animation();
             }
         }
-        
     }
 
     // Plays the appropriate animation (which contains the method for the ability) and sets the cooldown to max.
     void StartAbility1Animation()
     {
         anim.Play(ability1Name.name);
-        currentCooldowns[0] = cooldownAbility1;
     }
 
     void StartAbility2Animation()
     {
         anim.Play(ability2Name.name);
-        currentCooldowns[1] = cooldownAbility2;
     }
 
     void StartAbility3Animation()
     {
         anim.Play(ability3Name.name);
+    }
+
+    public void SetOnCooldownAbility1()
+    {
+        currentCooldowns[0] = cooldownAbility1;
+    }
+
+    public void SetOnCooldownAbility2()
+    {
+        currentCooldowns[1] = cooldownAbility2;
+    }
+
+    public void SetOnCooldownAbility3()
+    {
         currentCooldowns[2] = cooldownAbility3;
+    }
+
+    public void ReduceAllCooldowns(float reduceAmount, int attackIndex)
+    {
+        for (int i = 0; i < currentCooldowns.Length; i++)
+        {
+            if (currentCooldowns[i] > 0 && i != attackIndex)
+            {
+                currentCooldowns[i] -= reduceAmount;
+            }
+        }
     }
 }

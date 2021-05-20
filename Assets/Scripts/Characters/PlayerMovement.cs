@@ -11,6 +11,7 @@ public class PlayerMovement : NetworkBehaviour
     // Author: Valter Lindecrantz
 
     [SerializeField] CharacterController controller;
+    [SerializeField] Animator animator;
     [SerializeField] Transform groundCheck;
     [SerializeField] LayerMask groundMask;
     [SerializeField] KeyCode jumpButton;
@@ -18,12 +19,32 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] float gravity = -9.81f;
     [SerializeField] float speed = 8;
 
+    [SerializeField] bool matchIsPaused = true;
     float directionX;
     float directionZ;
     float groundDistance = 0.6f;
     Vector3 move;
     public Vector3 velocity;
     public bool isGrounded;
+    
+    public override void OnStartAuthority()
+    {
+        base.OnStartAuthority();
+        enabled = true;
+        GamestateManager.HandleMatchPaused += TogglePause;
+    }
+
+    void TogglePause()
+    {
+        if (matchIsPaused)
+        {
+           matchIsPaused = false;
+        }
+        else if (!matchIsPaused)
+        {
+            matchIsPaused = true;
+        }
+    }
 
     #region Server
     // The command send information from the client to the server that the character should move with the parameters that determines movement for X,Y and Z.
@@ -40,7 +61,7 @@ public class PlayerMovement : NetworkBehaviour
     [ClientCallback]
     void Update()
     {
-        if (!hasAuthority)
+        if (!hasAuthority || matchIsPaused)
         {
             return;
         }
@@ -63,12 +84,20 @@ public class PlayerMovement : NetworkBehaviour
         }
 
         move = transform.right * directionX + transform.forward * directionZ;
+
         if (InGameMenu.gameIsPaused)
         {
             move = new Vector3(0, 0, 0);
         }
 
-
+        if (move != Vector3.zero)
+        {
+            animator.SetBool("isWalking", true);
+        }
+        else
+        {
+            animator.SetBool("isWalking", false);
+        }
         CmdMove(move, velocity);
     }
 

@@ -237,7 +237,7 @@ MonoBehaviour:
     descendantCount: 0
   - name: Color
     path: Color
-    tooltip: 
+    tooltip: Sets the color of the effect
     sheetType: m_Vector4f
     realType: Color
     defaultValue:
@@ -11690,7 +11690,7 @@ MonoBehaviour:
   m_IsOutput: 0
   m_EnumValues: []
   m_ValueFilter: 0
-  m_Tooltip: 
+  m_Tooltip: Sets the color of the effect
   m_Nodes:
   - m_Id: 0
     linkedSlots:

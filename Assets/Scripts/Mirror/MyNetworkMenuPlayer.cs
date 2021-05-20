@@ -50,6 +50,7 @@ public class MyNetworkMenuPlayer : NetworkBehaviour
     public string TeamName { get { return teamName; } }
     public bool IsPartyOwner { get { return isPartyOwner; } }
     public int ChosenCharacter { get { return chosenCharacter; } set { chosenCharacter = value; } }
+    public ulong SteamId { get { return steamId; } }
 
 
     public bool GetIsPartyOwner()
@@ -245,7 +246,6 @@ public class MyNetworkMenuPlayer : NetworkBehaviour
     [Server]
     void ServerSetTextColor()
     {
-        Debug.Log($"Updating {displayName}'s team color to: {playerColor}!");
         displayNameText.color = playerColor;
     }
 
