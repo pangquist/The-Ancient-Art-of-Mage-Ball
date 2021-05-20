@@ -1244,7 +1244,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 85cf0b004bc4a654b9e501efcce47902, type: 2}
   - {fileID: 2100000, guid: d9dca9ae1786c394f9e79c637aa9a7bf, type: 2}
   - {fileID: 2100000, guid: d4454f71d85928744be7771e2143dab7, type: 2}
-  gameObjectLight: {fileID: 0}
+  gameObjectLight: {fileID: 616732880}
 --- !u!4 &151768725
 Transform:
   m_ObjectHideFlags: 0

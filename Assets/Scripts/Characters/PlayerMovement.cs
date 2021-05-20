@@ -106,7 +106,11 @@ public class PlayerMovement : NetworkBehaviour
         {
             animator.SetBool("isWalking", false);
         }
-        CmdMove(move, velocity);
+        if (NetworkClient.ready)
+        {
+            CmdMove(move, velocity);
+        }
+        
 
     }
 
