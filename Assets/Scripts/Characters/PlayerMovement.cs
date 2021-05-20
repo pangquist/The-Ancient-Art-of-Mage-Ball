@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerMovement : NetworkBehaviour
 {
+
     // This script handles player input for movement and limitations to that movement.
     // During the update, Input is checked for X and Z, and the appropriate movement is calculated.
     // A networking part of this script is responsible for making sure that the movement that happens are happening for all clients.
@@ -71,6 +72,7 @@ public class PlayerMovement : NetworkBehaviour
             return;
         }
 
+
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         if (isGrounded && Input.GetKeyDown(jumpButton) && !InGameMenu.gameIsPaused)
@@ -88,6 +90,7 @@ public class PlayerMovement : NetworkBehaviour
             velocity.y = -2;
         }
 
+
         move = transform.right * directionX + transform.forward * directionZ;
 
         if (InGameMenu.gameIsPaused)
@@ -104,6 +107,7 @@ public class PlayerMovement : NetworkBehaviour
             animator.SetBool("isWalking", false);
         }
         CmdMove(move, velocity);
+
     }
 
     // The ClientRpc sends out the appropriate information to all active clients, telling them to move the character in the given direction.
@@ -113,5 +117,6 @@ public class PlayerMovement : NetworkBehaviour
         controller.Move(_move * speed * Time.deltaTime); //X and Z
         controller.Move(_velocity * Time.deltaTime); //Y
     }
+    
     #endregion
 }

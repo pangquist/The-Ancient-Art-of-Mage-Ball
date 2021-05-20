@@ -137,6 +137,7 @@ public class LobbyMenu : MonoBehaviour
             {
                 newPlayer.CmdSetTeamName("Red Team");
             }
+
         }
         else
         {
