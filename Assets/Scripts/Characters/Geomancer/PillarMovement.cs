@@ -13,6 +13,7 @@ public class PillarMovement : NetworkBehaviour
     bool hasSpawnedEffect = false;
     float heightOfPillar;
     int i=0;
+    bool goingUp = true;
 
 
     
@@ -22,7 +23,7 @@ public class PillarMovement : NetworkBehaviour
         List<MyNetworkPlayer> players = ((MyNetworkManager)NetworkManager.singleton).Players;
 
         //Debug.Log("SEARCHING FOR A POSITION. Player count: " + players.Count);
-
+        CalculatePillarHeight();
         foreach (MyNetworkPlayer player in players)
         {
             if (player.hasAuthority)
@@ -52,13 +53,22 @@ public class PillarMovement : NetworkBehaviour
         }
         //pillar X/Z Movement
         gameObject.transform.Translate(pillarPosition.transform.position - pillarTop.transform.position);
-        
+
+
+        if (gameObject.transform.position.y > 0)
+        {
+            goingUp = false;
+
+        }
 
         //pillar Y movement
-        if (gameObject.transform.position.y< heightOfPillar)
+        if (goingUp)
         {           
             gameObject.transform.Translate(Vector3.up * forceUpwards * Time.deltaTime, Space.World);
-        }       
+            playerObject.transform.Translate(Vector3.up * (forceUpwards + 2) * Time.deltaTime, Space.World);
+        }
+        playerObject.GetComponent<PlayerMovement>().velocity.y = 0;
+
 
         Vector3 effectPosition = new Vector3(gameObject.transform.position.x, 0, gameObject.transform.position.z);
         CmdMoveHitEffect(effectPosition);
