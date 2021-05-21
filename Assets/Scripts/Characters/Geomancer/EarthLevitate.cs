@@ -11,6 +11,7 @@ public class EarthLevitate : NetworkBehaviour
     [SerializeField] float forceUpwards;
     [SerializeField] float ballForce = 100f;
     [SerializeField] UseAbilities useAbilities;
+    [SerializeField] Animator animator;
 
     GameObject pillarSpawn;
     GameObject[] groundTransform;
@@ -44,6 +45,7 @@ public class EarthLevitate : NetworkBehaviour
     [Client]
     void DoPillarBridge()
     {
+        animator.SetBool("isPose", true);
         timer = 0;
         groundPositionUnderPlayer = new Vector3(gameObject.transform.position.x, groundTransform[0].transform.position.y, gameObject.transform.position.z);
         CmdSpawnPillarBridge(gameObject, groundPositionUnderPlayer);
@@ -62,8 +64,11 @@ public class EarthLevitate : NetworkBehaviour
             if (timer > abilityDuration)//Handles the duration of the ability
             {
                 CmdDestroyPillar();
+                animator.SetBool("isPose", false);
                 hasSpawnedPillar = false;
             }            
+
+            
 
             Collider[] colliders = Physics.OverlapSphere(pillarTop.transform.position, 5f);
 
