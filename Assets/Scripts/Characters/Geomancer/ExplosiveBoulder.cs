@@ -6,15 +6,12 @@ using UnityEngine;
 public class ExplosiveBoulder : NetworkBehaviour
 {
     [SerializeField] Camera mainCamera;
-
     [SerializeField] Transform boulderStartPoint;
-
     [SerializeField] LayerMask [] hitableLayers;    
-
     [SerializeField] GameObject boulderPrefab;
-
     [SerializeField] GameObject hitableObject;
-    
+    [SerializeField] UseAbilities useAbilities;
+
     RaycastHit hit;
 
     public float throwForceForward;
@@ -47,9 +44,7 @@ public class ExplosiveBoulder : NetworkBehaviour
         //if (NetworkServer.active)
         //{
         CmdBoulderThrow(directionOfBoulder, boulderStartPoint.position, forceDirection, throwForceForward); //calls command to spawn and add force to the instantiated object
-                                                                                         //}
-
-
+        useAbilities.SetOnCooldownAbility1();
     }
 
     #endregion

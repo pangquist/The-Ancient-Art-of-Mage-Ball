@@ -6,36 +6,29 @@ using UnityEngine;
 public class EarthLevitate : NetworkBehaviour
 {
     [SerializeField] GameObject pillarBridgePrefab;
-
     [SerializeField] float abilityDuration;
-
     [SerializeField] float pillarSpawnInterval;
-
     [SerializeField] float forceUpwards;
-
-    //[SerializeField] GameObject hitEffect;
-
     [SerializeField] float ballForce = 100f;
+    [SerializeField] UseAbilities useAbilities;
 
     GameObject pillarSpawn;
-
-    bool hasCollided;
-
-    [Header("Multiply with player direction")]
-    [SerializeField] float offSetPillarSpawnMultiplier = 2;
-
+    GameObject[] groundTransform;
+    GameObject pillarSmoke;
     Transform pillarTop;
 
-    GameObject[] groundTransform;
-
     Vector3 groundPositionUnderPlayer;
-
     Vector3 playerFuturePosition;
-
-    GameObject pillarSmoke;
 
     float timer;
     bool hasSpawnedPillar = false;
+    bool hasCollided;
+
+
+    [Header("Offset")]
+    [Tooltip("Multiply with player direction")]
+    [SerializeField] float offSetPillarSpawnMultiplier = 2;
+
 
     public override void OnStartAuthority()
     {
@@ -55,6 +48,7 @@ public class EarthLevitate : NetworkBehaviour
         groundPositionUnderPlayer = new Vector3(gameObject.transform.position.x, groundTransform[0].transform.position.y, gameObject.transform.position.z);
         CmdSpawnPillarBridge(gameObject, groundPositionUnderPlayer);
         hasSpawnedPillar = true;
+        useAbilities.SetOnCooldownAbility3();
     }
 
     [Client]
