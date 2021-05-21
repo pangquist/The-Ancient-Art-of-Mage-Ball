@@ -43,7 +43,7 @@ public class MyNetworkPlayer : NetworkBehaviour
     [SerializeField] TMP_Text CountdownText;
     [SerializeField] TMP_Text scoringTeamText;
 
-    [Header("The audio play when the match starts (countdown is 0)")]
+    [Tooltip("The audio play when the match starts (countdown is 0)")]
     [SerializeField] AudioSource trialStartSound;
     bool trialSoundHasPlayed;
 
@@ -254,11 +254,11 @@ public class MyNetworkPlayer : NetworkBehaviour
         if (gamestateManager.PauseTimer <= 0)
         {
             countdownCanvas.SetActive(false);
-            if (!trialSoundHasPlayed)
-            {
-                trialStartSound.Play();
-                trialSoundHasPlayed = true;
-            }
+            //if (!trialSoundHasPlayed)
+            //{
+            //    trialStartSound.Play();
+            //    trialSoundHasPlayed = true;
+            //}
 
         }
     }
