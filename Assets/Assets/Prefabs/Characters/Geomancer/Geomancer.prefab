@@ -1856,7 +1856,7 @@ MonoBehaviour:
   cooldownAbility1: 2
   ability1Name: {fileID: 7400000, guid: 10530bb4f36826b4fb8700f3fd2e21e0, type: 2}
   castAbility2Button: 324
-  cooldownAbility2: 8
+  cooldownAbility2: 5
   ability2Name: {fileID: 7400000, guid: 91a7aa5e20ee43d4bb6f2132b52025ed, type: 2}
   castAbility3Button: 101
   cooldownAbility3: 10
