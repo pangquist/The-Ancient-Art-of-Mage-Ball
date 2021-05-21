@@ -37,6 +37,11 @@ public class ChainGrapple : NetworkBehaviour
 
     private void Update()
     {
+        if (!hasAuthority)
+        {
+            return;
+        }
+
         material.mainTextureOffset += offsetSpeed * Time.deltaTime;
 
         if (Input.GetMouseButton(0) == false && currentDuration <= 0)

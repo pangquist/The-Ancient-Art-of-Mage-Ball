@@ -28,6 +28,10 @@ public class LockdownBehaviour : NetworkBehaviour
 
     void Update()
     {
+        if (!hasAuthority)
+        {
+            return;
+        }
         Debug.Log("Chain update");
 
         MoveTarget(target);
