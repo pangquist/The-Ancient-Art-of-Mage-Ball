@@ -28,8 +28,6 @@ public class EarthLevitate : NetworkBehaviour
 
     GameObject[] groundTransform;
 
-    PlayerMovement playerMovement;
-
     Vector3 groundPositionUnderPlayer;
 
     Vector3 playerFuturePosition;
@@ -46,7 +44,6 @@ public class EarthLevitate : NetworkBehaviour
     private void Start()
     {
         groundTransform = GameObject.FindGameObjectsWithTag("Ground");
-        playerMovement = GetComponent<PlayerMovement>();
         hasSpawnedPillar = false;
         pillarTop = pillarBridgePrefab.transform.GetChild(0);
     }
@@ -101,7 +98,7 @@ public class EarthLevitate : NetworkBehaviour
         
         pillarSpawn = Instantiate(pillarBridgePrefab, groundPositionUnderPlayer - pillarTop.position, Quaternion.identity);
 
-        NetworkServer.Spawn(pillarSpawn, connectionToServer);
+        NetworkServer.Spawn(pillarSpawn, connectionToClient);
     }
 
     [Command]

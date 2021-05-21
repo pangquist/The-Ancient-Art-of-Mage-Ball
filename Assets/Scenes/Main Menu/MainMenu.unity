@@ -3109,8 +3109,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   landingPagePanel: {fileID: 965061994}
-  useSteam: 1
   myNetworkManager: {fileID: 763365371}
+  useSteam: 1
 --- !u!4 &534423677
 Transform:
   m_ObjectHideFlags: 0
@@ -10829,10 +10829,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cd74729db748d34f9f8d63a4d051845, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gamestateManager: {fileID: 1462487361}
   lobbyUI: {fileID: 2064029740}
   startGameButton: {fileID: 206773571}
   changeSceneButton: {fileID: 0}
-  gamestateManager: {fileID: 1462487361}
   redTeamNames:
   - {fileID: 881825510}
   - {fileID: 1404969086}
@@ -10841,8 +10841,6 @@ MonoBehaviour:
   - {fileID: 1104336519}
   - {fileID: 233761489}
   - {fileID: 801817982}
-  redPlayers: 0
-  bluePlayers: 0
   mapButtons:
   - {fileID: 1304837421}
   - {fileID: 1118702434}
@@ -12486,13 +12484,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  chosenMapName: UnderwaterRuinsMap
   backgrounds:
   - {fileID: 21300000, guid: 4fdb959dac727744aa039266d00e5d31, type: 3}
   - {fileID: 21300000, guid: a91eba80be9e502428fa723191ba0609, type: 3}
   - {fileID: 21300000, guid: 20e6814c9a091be429a56c7f83bd1b99, type: 3}
   sceneSelectCanvas: {fileID: 432759722}
   sceneNameText: {fileID: 1655216728}
-  chosenMapName: UnderwaterRuinsMap
 --- !u!114 &2051290249
 MonoBehaviour:
   m_ObjectHideFlags: 0

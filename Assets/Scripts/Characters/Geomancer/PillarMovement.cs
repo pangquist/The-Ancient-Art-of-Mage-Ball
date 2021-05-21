@@ -46,6 +46,10 @@ public class PillarMovement : NetworkBehaviour
     [Client]
     private void Update()
     {
+        if (!hasAuthority)
+        {
+            return;
+        }
         //pillar X/Z Movement
         gameObject.transform.Translate(pillarPosition.transform.position - pillarTop.transform.position);
         

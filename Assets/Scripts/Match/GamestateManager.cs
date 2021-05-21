@@ -29,7 +29,7 @@ public class GamestateManager : NetworkBehaviour
     [SyncVar(hook = nameof(HandlePausTimeChange))]
     [SerializeField] float pauseTimer;
     [Tooltip("The amount of seconds the game will wait before starting when first entering the match")]
-    [SerializeField] float startPauseTime = 12f;
+    [SerializeField]  public float startPauseTime = 12f;
     [Tooltip("The amount of seconds the game will wait before starting when a goal is made")]
     [SerializeField] float goalPauseTime = 5f;
 

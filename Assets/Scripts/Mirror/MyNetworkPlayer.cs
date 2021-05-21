@@ -43,6 +43,9 @@ public class MyNetworkPlayer : NetworkBehaviour
     [SerializeField] TMP_Text CountdownText;
     [SerializeField] TMP_Text scoringTeamText;
 
+    [Header("The audio play when the match starts (countdown is 0)")]
+    [SerializeField] AudioSource trialStartSound;
+    bool trialSoundHasPlayed;
 
     int chosenCharacter;
     public TMP_Text BlueScore { get { return blueScoreText; } set { blueScoreText = value; } }
@@ -113,6 +116,7 @@ public class MyNetworkPlayer : NetworkBehaviour
     {
         base.OnStartAuthority();
 
+        trialSoundHasPlayed = false;
         settingsCanvas.SetActive(true);
         gameObject.GetComponent<AudioListener>().enabled = true;
         controller = gameObject.GetComponent<CharacterController>();
@@ -250,6 +254,12 @@ public class MyNetworkPlayer : NetworkBehaviour
         if (gamestateManager.PauseTimer <= 0)
         {
             countdownCanvas.SetActive(false);
+            if (!trialSoundHasPlayed)
+            {
+                trialStartSound.Play();
+                trialSoundHasPlayed = true;
+            }
+
         }
     }
     #endregion

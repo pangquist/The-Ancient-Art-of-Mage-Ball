@@ -28,11 +28,16 @@ public class CollisionExplosion : NetworkBehaviour
     private void Start()
     {
         rotateAxis = new Vector3(rotateX, rotateY, rotateZ);// point of boulder-rotation in air.
-    }  
+    }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        hasCollided = true;
+    }
     [Server]
     private void Update()
     {
+        
         
         Collider[] colliders = Physics.OverlapSphere(gameObject.transform.position, radius);
         try {
@@ -43,34 +48,23 @@ public class CollisionExplosion : NetworkBehaviour
                     ServerDoPush(pushedObject.gameObject);
                     ServerSpawnHitEffect(gameObject.transform.position);
                     hasPushed = true;
-                }
-                hasCollided = true;
+                }                
             }
+            Debug.Log("Collising:" + hasCollided.ToString());
         }
         catch
         {
             Debug.Log("No ball existing");
         }
-        
+      
+
         if (!hasCollided) //The boulder will only be forced to rotate during the initial airtime.
         {
             transform.Rotate(rotateAxis, 3f);
         }
 
     }
-    //[Server]
-    //void OnCollisionEnter(Collision col)
-    //{
-    //    hasCollided = true;
-        
-    //    if (col.gameObject.CompareTag("Enemy"))//if the ball is the object being collided with.
-    //        {
-    //            CmdSpawnHitEffect(transform.position);
-    //            Debug.Log("Collided with ball");
-    //            CmdDoPush(col.gameObject);
-    //            Destroy(gameObject);//Destroy boulder when it explodes. this can be changed to splitting stones in later itteration.
-    //        }
-    //}
+
 
     [Server]
     void ServerSpawnHitEffect(Vector3 hitLocation)
@@ -81,12 +75,6 @@ public class CollisionExplosion : NetworkBehaviour
         //RpcSpawnHitEffect(hitLocation);
     }
 
-    //[ClientRpc]
-    //void RpcSpawnHitEffect(Vector3 hitLocation)
-    //{
-    //    GameObject magicExplosion = Instantiate(hitEffect, hitLocation, Quaternion.identity) as GameObject;
-    //    NetworkServer.Spawn(magicExplosion);
-    //}
 
     [Server]
     void ServerDoPush(GameObject ball)
@@ -98,12 +86,6 @@ public class CollisionExplosion : NetworkBehaviour
         //RpcDoExplosion(ball);
         Destroy(gameObject);
     }
-
-    //[Server]
-    //void ServerDoExplosion(GameObject ball)
-    //{
-    //    RpcDoExplosion(ball);
-    //}
 
     [ClientRpc]
     void RpcDoExplosion(GameObject ball)
