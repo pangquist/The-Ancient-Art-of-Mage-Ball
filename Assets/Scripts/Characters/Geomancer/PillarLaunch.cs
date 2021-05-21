@@ -6,15 +6,12 @@ using UnityEngine;
 public class PillarLaunch : NetworkBehaviour
 {
     [SerializeField] GameObject pillarPrefab;
-
     [SerializeField] Camera mainCamera;
-
     [SerializeField] float range;
-
     [SerializeField] LayerMask[] hitableLayers;
+    [SerializeField] UseAbilities useAbilities;
 
     Transform pillarTop;
-
     RaycastHit hit;
     
     public override void OnStartAuthority()
@@ -43,6 +40,7 @@ public class PillarLaunch : NetworkBehaviour
         }
         
         CmdDoPillar(hit.point);
+        useAbilities.SetOnCooldownAbility2();
     }
 
     [Command]
