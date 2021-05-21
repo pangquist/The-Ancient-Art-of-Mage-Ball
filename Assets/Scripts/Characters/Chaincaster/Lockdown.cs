@@ -17,6 +17,11 @@ public class Lockdown : NetworkBehaviour
         enabled = true;
     }
 
+    private void Start()
+    {
+
+    }
+
     [Client]
     void CastLockdown()
     {

@@ -9,6 +9,8 @@ public class LockdownBehaviour : NetworkBehaviour
     private Material material;
     private Vector2 offsetSpeed = new Vector2(15, 0);
 
+    [SerializeField] int count1, count2;
+
     [SerializeField] GameObject target;
     [SerializeField] float duration;
 
@@ -19,6 +21,8 @@ public class LockdownBehaviour : NetworkBehaviour
 
     void Start()
     {
+        count1 = 0;
+        count2 = 0;
         Debug.Log("Chain created");
         target = GameObject.FindGameObjectWithTag("Enemy");
         chain = gameObject.GetComponent<LineRenderer>();
@@ -26,17 +30,21 @@ public class LockdownBehaviour : NetworkBehaviour
         StopLockdown();
     }
 
+    [Client]
     void Update()
     {
         if (!hasAuthority)
         {
             return;
         }
+
+        count1++;
+
+        Debug.Log("Lock " + count1);
+
         Debug.Log("Chain update");
 
         MoveTarget(target);
-
-        material.mainTextureOffset += offsetSpeed * Time.deltaTime;
     }
 
     void LateUpdate()
@@ -62,20 +70,48 @@ public class LockdownBehaviour : NetworkBehaviour
     [Command]
     void CmdMoveTarget(GameObject _target, Vector3 _vector)
     {
+        count2++;
+
+        Debug.Log("Lock Cmd" + count2);
+
         _target.gameObject.GetComponent<Rigidbody>().AddForce(_vector * 20 * Time.deltaTime);
     }
 
+    [Client]
     void StopLockdown()
     {
-        Destroy(gameObject, duration);
+        CmdStopLockdown(gameObject);
     }
 
+    [Command]
+    void CmdStopLockdown(GameObject _object)
+    {
+        Destroy(_object, duration);
+    }
+
+    [Client]
     void DrawChain()
     {
-        chain = gameObject.GetComponent<LineRenderer>();
+        CmdDrawChain(target, gameObject, offsetSpeed);
+    }
+
+    [Command]
+    void CmdDrawChain(GameObject _target, GameObject _object, Vector2 vector)
+    {
+        RpcDrawChain(_target, _object, vector);
+    }
+
+    [ClientRpc]
+    void RpcDrawChain(GameObject _target, GameObject _object, Vector2 vector)
+    {
+        chain = _object.GetComponent<LineRenderer>();
         chain.positionCount = 2;
 
-        chain.SetPosition(0, gameObject.transform.position);
-        chain.SetPosition(1, target.transform.position);
+        material = chain.material;
+
+        material.mainTextureOffset += vector * Time.deltaTime;
+
+        chain.SetPosition(0, _object.transform.position);
+        chain.SetPosition(1, _target.transform.position);
     }
 }

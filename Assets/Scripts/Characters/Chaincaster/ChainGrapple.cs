@@ -11,6 +11,8 @@ public class ChainGrapple : NetworkBehaviour
     private RaycastHit raycastHit;
     private Vector3 grapplePoint;
 
+    [SerializeField] int count1, count2;
+
     [SerializeField] CharacterController controller;
     [SerializeField] LayerMask grappleable;
     [SerializeField] Transform castPoint, camera, player;
@@ -26,6 +28,10 @@ public class ChainGrapple : NetworkBehaviour
 
     private void Awake()
     {
+        count1 = 0;
+
+        count2 = 0;
+
         lr = GetComponent<LineRenderer>();
 
         lr.positionCount = 0;
@@ -35,14 +41,13 @@ public class ChainGrapple : NetworkBehaviour
         currentDuration = duration;
     }
 
+    [Client]
     private void Update()
     {
         if (!hasAuthority)
         {
             return;
         }
-
-        material.mainTextureOffset += offsetSpeed * Time.deltaTime;
 
         if (Input.GetMouseButton(0) == false && currentDuration <= 0)
         {
@@ -61,6 +66,10 @@ public class ChainGrapple : NetworkBehaviour
             }
 
             DragBall(raycastHit.transform.gameObject);
+
+            count1++;
+
+            Debug.Log("Grapple " + count1);
         }
         else
         {
@@ -73,34 +82,82 @@ public class ChainGrapple : NetworkBehaviour
 
     private void LateUpdate()
     {
+        if (lr.positionCount == 0) return;
+
         DrawChain();
     }
 
+    [Client]
     void StartGrapple()
     {
+        count1 = 0;
+        count2 = 0;
         RaycastHit hit;
         if(Physics.Raycast(camera.position, camera.forward, out hit, maxRange))
         {
             grapplePoint = hit.point;
 
-            lr.positionCount = 2;
-
             raycastHit = hit;
+
+            CmdStartGrapple(gameObject);
         }
     }
 
-    void DrawChain()
+    [Command]
+    void CmdStartGrapple(GameObject caster)
     {
-        if (lr.positionCount == 0) return;
-
-        lr.SetPosition(0, castPoint.position);
-        lr.SetPosition(1, grapplePoint);
+        RpcStartGrapple(caster);
     }
 
+    [ClientRpc]
+    void RpcStartGrapple(GameObject caster)
+    {
+        lr = caster.GetComponent<LineRenderer>();
+        lr.positionCount = 2;
+    }
 
+    [Client]
+    void DrawChain()
+    {
+        CmdDrawChain(gameObject, castPoint.position, grapplePoint, offsetSpeed);
+    }
+
+    [Command]
+    void CmdDrawChain(GameObject caster, Vector3 _cast, Vector3 _target, Vector2 vector)
+    {
+        RpcDrawChain(caster, _cast, _target, vector);
+    }
+
+    [ClientRpc]
+    void RpcDrawChain(GameObject caster, Vector3 _cast, Vector3 _target, Vector2 vector)
+    {
+        lr = caster.GetComponent<LineRenderer>();
+
+        material = lr.material;
+
+        material.mainTextureOffset += vector * Time.deltaTime;
+
+        lr.SetPosition(0, _cast);
+        lr.SetPosition(1, _target);
+    }
+
+    [Client]
     void StopGrapple()
     {
         currentDuration = duration;
+        CmdStopGrapple(gameObject);
+    }
+
+    [Command]
+    void CmdStopGrapple(GameObject caster)
+    {
+        RpcStopGrapple(caster);
+    }
+
+    [ClientRpc]
+    void RpcStopGrapple(GameObject caster)
+    {
+        lr = caster.GetComponent<LineRenderer>();
         lr.positionCount = 0;
     }
 
@@ -116,14 +173,18 @@ public class ChainGrapple : NetworkBehaviour
 
         Vector3 grappleVector = player.position - grapplePoint;
 
-        CmdDragBall(target, grappleVector);
+        CmdDragBall(target, grappleVector, Time.deltaTime);
     }
 
     [Command]
-    void CmdDragBall(GameObject target, Vector3 vector)
+    void CmdDragBall(GameObject target, Vector3 vector, float time)
     {
+        count2++;
+
+        Debug.Log("Cmd Grapple " + count2);
+
         Rigidbody ball = target.GetComponent<Rigidbody>();
 
-        ball.AddForce(vector * grappleSpeed * 10 * Time.deltaTime);
+        ball.AddForce(vector * grappleSpeed * 10 * time);
     }
 }

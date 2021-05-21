@@ -14,6 +14,11 @@ public class RestrictCasting : NetworkBehaviour
         enabled = true;
     }
 
+    private void Start()
+    {
+
+    }
+
     [Client]
     void CastRestrict()
     {
