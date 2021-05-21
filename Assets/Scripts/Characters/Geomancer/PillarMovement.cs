@@ -12,6 +12,7 @@ public class PillarMovement : NetworkBehaviour
     Transform pillarPosition;
     bool hasSpawnedEffect = false;
     float heightOfPillar;
+    int i=0;
 
 
     
@@ -26,6 +27,7 @@ public class PillarMovement : NetworkBehaviour
         {
             if (player.hasAuthority)
             {
+
                 //Debug.Log("FOUND A POSITION");
                 playerObject = player.gameObject;
             }
@@ -44,13 +46,15 @@ public class PillarMovement : NetworkBehaviour
     [Client]
     private void Update()
     {
-        //gameObject.transform.position = pillarPosition.transform.position - pillarTop.transform.position;
-        //gameObject.transform.position = Vector3.zero;
-        //if (NetworkServer.active)
-        //{
-        //    CmdMovePillar(pillarPosition.transform.position, pillarTop.transform.position);
-        //}
+        if (!hasAuthority)
+        {
+            return;
+        }
+        //pillar X/Z Movement
         gameObject.transform.Translate(pillarPosition.transform.position - pillarTop.transform.position);
+        
+
+        //pillar Y movement
         if (gameObject.transform.position.y< heightOfPillar)
         {           
             gameObject.transform.Translate(Vector3.up * forceUpwards * Time.deltaTime, Space.World);
