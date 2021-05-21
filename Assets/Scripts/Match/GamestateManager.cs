@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 
 public class GamestateManager : NetworkBehaviour
 {
-
     [Header("Script Dependencies")]
     [SerializeField] MyNetworkManager myNetworkManager;
     [SerializeField] PostMatch postMatch;
