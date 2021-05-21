@@ -58,7 +58,6 @@ public class EarthLevitate : NetworkBehaviour
         groundPositionUnderPlayer = new Vector3(gameObject.transform.position.x, groundTransform[0].transform.position.y, gameObject.transform.position.z);
         CmdSpawnPillarBridge(gameObject, groundPositionUnderPlayer);
         hasSpawnedPillar = true;
-        //CmdSpawnHitEffect();
     }
 
     [Client]
@@ -73,14 +72,10 @@ public class EarthLevitate : NetworkBehaviour
             {
                 CmdDestroyPillar();
                 hasSpawnedPillar = false;
-            }
-            else
-            {
-                //CmdMovePillar(forceUpwards, pillarSpawn);
-                //CmdMoveHitEffect();
-            }
+            }            
 
             Collider[] colliders = Physics.OverlapSphere(pillarTop.transform.position, 5f);
+
             //takes care of collisions with the player and the ball
             foreach (Collider pushedObject in colliders)
             {
@@ -105,17 +100,9 @@ public class EarthLevitate : NetworkBehaviour
         groundPositionUnderPlayer = position;
         
         pillarSpawn = Instantiate(pillarBridgePrefab, groundPositionUnderPlayer - pillarTop.position, Quaternion.identity);
-        //pillarSpawn.GetComponent<PillarMovement>().Player = gameObject;
 
-        NetworkServer.Spawn(pillarSpawn, connectionToClient);
+        NetworkServer.Spawn(pillarSpawn, connectionToServer);
     }
-
-    //[Command]
-    //void CmdMovePillar(float forceUpwards, GameObject _pillarSpawn)
-    //{
-    //    //_pillarSpawn.transform.Translate(playerMovement.move * playerMovement.speed * Time.deltaTime);
-    //    _pillarSpawn.transform.Translate(Vector3.up * forceUpwards * Time.deltaTime);
-    //}
 
     [Command]
     void CmdDestroyPillar()
@@ -123,20 +110,6 @@ public class EarthLevitate : NetworkBehaviour
         NetworkServer.Destroy(pillarSpawn);
     }
 
-    //[Command]
-    //void CmdSpawnHitEffect()
-    //{
-    //    pillarSmoke = Instantiate(hitEffect, groundPositionUnderPlayer, Quaternion.identity) as GameObject;
-    //    NetworkServer.Spawn(pillarSmoke);
-    //}
-
-    //[Command]
-    //void CmdMoveHitEffect()
-    //{
-    //    Vector3 playerMove = playerMovement.move * playerMovement.speed * Time.deltaTime;
-
-    //    pillarSmoke.transform.Translate(playerMove, Space.World);
-    //}
     [Command]
     void CmdPushBall(GameObject ball)
     {
