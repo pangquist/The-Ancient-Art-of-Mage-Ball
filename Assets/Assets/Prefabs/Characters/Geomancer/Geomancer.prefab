@@ -1946,6 +1946,7 @@ MonoBehaviour:
   forceUpwards: 3
   ballForce: 200
   useAbilities: {fileID: 2106470732702085849}
+  animator: {fileID: 1106491956633752253}
   offSetPillarSpawnMultiplier: 2
 --- !u!114 &4562241116313397843
 MonoBehaviour:
