@@ -2207,36 +2207,6 @@ Transform:
   m_Father: {fileID: 6865014798593864205}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &4551451531657762752
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 738319874836368678}
-  m_Layer: 0
-  m_Name: CastPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &738319874836368678
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4551451531657762752}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: -0, z: 0.811}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8360119148662495225}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4570400011131066934
 GameObject:
   m_ObjectHideFlags: 0
@@ -3660,8 +3630,7 @@ Transform:
   m_LocalRotation: {x: -0.61299586, y: -0.4539032, z: -0.46970135, w: -0.44450957}
   m_LocalPosition: {x: 0.29669908, y: 0.338482, z: 0.08438583}
   m_LocalScale: {x: 1.765114, y: 1.7651129, z: 1.7651132}
-  m_Children:
-  - {fileID: 738319874836368678}
+  m_Children: []
   m_Father: {fileID: 5666621178390585521}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: -11.698764, y: -231.47534, z: 49.279552}
