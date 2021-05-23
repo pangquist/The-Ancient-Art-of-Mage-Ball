@@ -119,23 +119,23 @@ public class ChainGrapple : NetworkBehaviour
     [Client]
     void DrawChain()
     {
-        CmdDrawChain(gameObject, castPoint.position, grapplePoint, offsetSpeed);
+        CmdDrawChain(gameObject, castPoint.position, grapplePoint, offsetSpeed, Time.deltaTime);
     }
 
     [Command]
-    void CmdDrawChain(GameObject caster, Vector3 _cast, Vector3 _target, Vector2 vector)
+    void CmdDrawChain(GameObject caster, Vector3 _cast, Vector3 _target, Vector2 vector, float time)
     {
-        RpcDrawChain(caster, _cast, _target, vector);
+        RpcDrawChain(caster, _cast, _target, vector, time);
     }
 
     [ClientRpc]
-    void RpcDrawChain(GameObject caster, Vector3 _cast, Vector3 _target, Vector2 vector)
+    void RpcDrawChain(GameObject caster, Vector3 _cast, Vector3 _target, Vector2 vector, float time)
     {
         lr = caster.GetComponent<LineRenderer>();
 
         material = lr.material;
 
-        material.mainTextureOffset += vector * Time.deltaTime;
+        material.mainTextureOffset += vector * time;
 
         lr.SetPosition(0, _cast);
         lr.SetPosition(1, _target);

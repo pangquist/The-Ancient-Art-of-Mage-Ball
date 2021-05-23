@@ -92,24 +92,24 @@ public class LockdownBehaviour : NetworkBehaviour
     [Client]
     void DrawChain()
     {
-        CmdDrawChain(target, gameObject, offsetSpeed);
+        CmdDrawChain(target, gameObject, offsetSpeed, Time.deltaTime);
     }
 
     [Command]
-    void CmdDrawChain(GameObject _target, GameObject _object, Vector2 vector)
+    void CmdDrawChain(GameObject _target, GameObject _object, Vector2 vector, float time)
     {
-        RpcDrawChain(_target, _object, vector);
+        RpcDrawChain(_target, _object, vector, time);
     }
 
     [ClientRpc]
-    void RpcDrawChain(GameObject _target, GameObject _object, Vector2 vector)
+    void RpcDrawChain(GameObject _target, GameObject _object, Vector2 vector, float time)
     {
         chain = _object.GetComponent<LineRenderer>();
         chain.positionCount = 2;
 
         material = chain.material;
 
-        material.mainTextureOffset += vector * Time.deltaTime;
+        material.mainTextureOffset += vector * time;
 
         chain.SetPosition(0, _object.transform.position);
         chain.SetPosition(1, _target.transform.position);
