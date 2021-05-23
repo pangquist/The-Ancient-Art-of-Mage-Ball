@@ -279,6 +279,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52c75e9889331934dbf6dccc52f7a327, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   FXEffect: {fileID: 1860389352054586038}
 --- !u!1 &7510897164302336416
 GameObject:
@@ -322,9 +324,9 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0.7053801, g: 1, b: 0.27058828, a: 1}
-  m_Intensity: 1
-  m_Range: 0.88
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 20
+  m_Range: 100
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -525,6 +527,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6091641462948931941}
     m_Modifications:
+    - target: {fileID: -4378778332943661210, guid: 81a3252bb33bfe646877702ab802a6c6,
+        type: 3}
+      propertyPath: m_AssetId
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7071215757399754216, guid: 81a3252bb33bfe646877702ab802a6c6,
         type: 3}
       propertyPath: m_Name
