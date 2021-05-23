@@ -28,7 +28,7 @@ public class PlayerMovement : NetworkBehaviour
     bool matchIsPaused = true;
     float directionX;
     float directionZ;
-    float groundDistance = 0.6f;
+    float groundDistance = 0.2f;
     Vector3 move;
     public Vector3 velocity;
     public bool isGrounded;
