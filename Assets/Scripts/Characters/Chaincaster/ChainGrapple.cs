@@ -11,8 +11,6 @@ public class ChainGrapple : NetworkBehaviour
     private RaycastHit raycastHit;
     private Vector3 grapplePoint;
 
-    [SerializeField] int count1, count2;
-
     [SerializeField] CharacterController controller;
     [SerializeField] LayerMask grappleable;
     [SerializeField] Transform castPoint, camera, player;
@@ -28,10 +26,6 @@ public class ChainGrapple : NetworkBehaviour
 
     private void Awake()
     {
-        count1 = 0;
-
-        count2 = 0;
-
         lr = GetComponent<LineRenderer>();
 
         lr.positionCount = 0;
@@ -66,10 +60,6 @@ public class ChainGrapple : NetworkBehaviour
             }
 
             DragBall(raycastHit.transform.gameObject);
-
-            count1++;
-
-            Debug.Log("Grapple " + count1);
         }
         else
         {
@@ -90,8 +80,6 @@ public class ChainGrapple : NetworkBehaviour
     [Client]
     void StartGrapple()
     {
-        count1 = 0;
-        count2 = 0;
         RaycastHit hit;
         if(Physics.Raycast(camera.position, camera.forward, out hit, maxRange))
         {
@@ -179,10 +167,6 @@ public class ChainGrapple : NetworkBehaviour
     [Command]
     void CmdDragBall(GameObject target, Vector3 vector, float time)
     {
-        count2++;
-
-        Debug.Log("Cmd Grapple " + count2);
-
         Rigidbody ball = target.GetComponent<Rigidbody>();
 
         ball.AddForce(vector * grappleSpeed * 10 * time);

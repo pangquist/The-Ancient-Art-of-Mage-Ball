@@ -9,8 +9,6 @@ public class LockdownBehaviour : NetworkBehaviour
     private Material material;
     private Vector2 offsetSpeed = new Vector2(15, 0);
 
-    [SerializeField] int count1, count2;
-
     [SerializeField] GameObject target;
     [SerializeField] float duration;
 
@@ -21,8 +19,6 @@ public class LockdownBehaviour : NetworkBehaviour
 
     void Start()
     {
-        count1 = 0;
-        count2 = 0;
         Debug.Log("Chain created");
         target = GameObject.FindGameObjectWithTag("Enemy");
         chain = gameObject.GetComponent<LineRenderer>();
@@ -37,10 +33,6 @@ public class LockdownBehaviour : NetworkBehaviour
         {
             return;
         }
-
-        count1++;
-
-        Debug.Log("Lock " + count1);
 
         Debug.Log("Chain update");
 
@@ -70,10 +62,6 @@ public class LockdownBehaviour : NetworkBehaviour
     [Command]
     void CmdMoveTarget(GameObject _target, Vector3 _vector)
     {
-        count2++;
-
-        Debug.Log("Lock Cmd" + count2);
-
         _target.gameObject.GetComponent<Rigidbody>().AddForce(_vector * 20 * Time.deltaTime);
     }
 

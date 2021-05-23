@@ -152,4 +152,12 @@ public class UseAbilities : NetworkBehaviour
             }
         }
     }
+
+    public void StartAllCooldowns()
+    {
+        //to be balanced
+        currentCooldowns[0] = cooldownAbility1;
+        currentCooldowns[1] = cooldownAbility2;
+        currentCooldowns[2] = cooldownAbility3;
+    }
 }
