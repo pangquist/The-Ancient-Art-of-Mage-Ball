@@ -737,6 +737,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  useAbilities: {fileID: 1255805223110542875}
   controller: {fileID: 1398020548929700585}
   grappleable:
     serializedVersion: 2
@@ -762,6 +763,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  useAbilities: {fileID: 1255805223110542875}
   chain: {fileID: 9212652852658391536, guid: b7c1cb04b8ffb9b46aada444c93cc38b, type: 3}
   grappleable:
     serializedVersion: 2
@@ -784,9 +786,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  grappleable:
-    serializedVersion: 2
-    m_Bits: 0
+  useAbilities: {fileID: 1255805223110542875}
   castPoint: {fileID: 1299691982749212937}
   camera: {fileID: 5561234001153099423}
   player: {fileID: 1398020548929700589}

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class RestrictCasting : NetworkBehaviour
 {
-    [SerializeField] LayerMask grappleable;
+    [SerializeField] UseAbilities useAbilities;
     [SerializeField] Transform castPoint, camera, player;
     [SerializeField] private float maxRange = 25f;
 
@@ -32,6 +32,8 @@ public class RestrictCasting : NetworkBehaviour
         {
             if(hit.transform.gameObject.tag == "Player")
             {
+                useAbilities.SetOnCooldownAbility3();
+
                 CmdCastRestrict(hit.transform.gameObject);
             }
         }

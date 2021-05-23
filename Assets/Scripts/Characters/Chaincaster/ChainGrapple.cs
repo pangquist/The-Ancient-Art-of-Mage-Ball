@@ -11,6 +11,7 @@ public class ChainGrapple : NetworkBehaviour
     private RaycastHit raycastHit;
     private Vector3 grapplePoint;
 
+    [SerializeField] UseAbilities useAbilities;
     [SerializeField] CharacterController controller;
     [SerializeField] LayerMask grappleable;
     [SerializeField] Transform castPoint, camera, player;
@@ -83,6 +84,8 @@ public class ChainGrapple : NetworkBehaviour
         RaycastHit hit;
         if(Physics.Raycast(camera.position, camera.forward, out hit, maxRange))
         {
+            useAbilities.SetOnCooldownAbility1();
+
             grapplePoint = hit.point;
 
             raycastHit = hit;

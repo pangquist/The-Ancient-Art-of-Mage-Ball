@@ -7,6 +7,7 @@ public class Lockdown : NetworkBehaviour
 {
     private GameObject anchor1, anchor2, anchor3;
 
+    [SerializeField] UseAbilities useAbilities;
     [SerializeField] GameObject chain;
     [SerializeField] LayerMask grappleable;
     [SerializeField] Transform castPoint, camera, player;
@@ -39,6 +40,8 @@ public class Lockdown : NetworkBehaviour
             {
                 return;
             }
+
+            useAbilities.SetOnCooldownAbility2();
            
             CmdCastSpell(hit.transform.gameObject);
         }
