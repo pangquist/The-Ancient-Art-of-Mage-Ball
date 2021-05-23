@@ -11,7 +11,7 @@ public class GravitySwap : NetworkBehaviour
     [Header("Settings")]
     [SerializeField] Camera mainCamera;
     [SerializeField] LayerMask hitableLayer;
-    [SerializeField] GameObject attackEffect;
+    [SerializeField] AudioSource soundEffect;
 
     [Header("Values")]
     [SerializeField] float range;
@@ -53,6 +53,7 @@ public class GravitySwap : NetworkBehaviour
             return;
         }
 
+        soundEffect.Play();
         ballObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
         ballObject.GetComponent<Rigidbody>().AddForce(appliedForce);
 

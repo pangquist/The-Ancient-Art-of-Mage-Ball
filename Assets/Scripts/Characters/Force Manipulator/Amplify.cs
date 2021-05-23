@@ -11,6 +11,7 @@ public class Amplify : NetworkBehaviour
     [Header("Settings")]
     [SerializeField] Camera mainCamera;
     [SerializeField] GameObject amplifyBeam;
+    [SerializeField] AudioSource soundEffect;
 
     [Header("Values")]
     [SerializeField] float duration;
@@ -38,6 +39,7 @@ public class Amplify : NetworkBehaviour
     {
         RpcActivateBeam();
         useAbilities.SetOnCooldownAbility1();
+        soundEffect.Play();
     }
 
     [ClientRpc]
