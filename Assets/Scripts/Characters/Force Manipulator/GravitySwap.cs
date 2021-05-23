@@ -53,10 +53,17 @@ public class GravitySwap : NetworkBehaviour
             return;
         }
 
-        soundEffect.Play();
         ballObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
         ballObject.GetComponent<Rigidbody>().AddForce(appliedForce);
 
         ballObject.GetComponent<BallMovement>().RevertGravity(duration);
+
+        RpcPlaySoundEffect();
+    }
+
+    [ClientRpc]
+    void RpcPlaySoundEffect()
+    {
+        soundEffect.Play();
     }
 }

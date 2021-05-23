@@ -39,12 +39,12 @@ public class Amplify : NetworkBehaviour
     {
         RpcActivateBeam();
         useAbilities.SetOnCooldownAbility1();
-        soundEffect.Play();
     }
 
     [ClientRpc]
     void RpcActivateBeam()
     {
+        soundEffect.Play();
         amplifyBeam.SetActive(true);
         amplifyBeam.GetComponent<AmplifyBeamBehaviour>().SetLifeTime(duration);
         amplifyBeam.GetComponent<AmplifyBeamBehaviour>().SetForce(force);

@@ -40,7 +40,6 @@ public class ForceWall : NetworkBehaviour
 
         CmdDoSpell(hit.point);
         useAbilities.SetOnCooldownAbility3();
-        soundEffect.Play();
     }
 
     [Command]
@@ -52,6 +51,7 @@ public class ForceWall : NetworkBehaviour
     [ClientRpc]
     void RpcDoSpell(Vector3 hitLocation)
     {
+        soundEffect.Play();
         if (NetworkServer.active)
         {
             GameObject instantiatedForceWall = Instantiate(forceWall, hitLocation + new Vector3(0, 2, 0), gameObject.GetComponent<Transform>().transform.rotation) as GameObject;
