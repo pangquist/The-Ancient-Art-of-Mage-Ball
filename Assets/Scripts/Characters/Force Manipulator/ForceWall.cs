@@ -12,6 +12,7 @@ public class ForceWall : NetworkBehaviour
     [SerializeField] Camera mainCamera;
     [SerializeField] LayerMask hitableLayer;
     [SerializeField] GameObject forceWall;
+    [SerializeField] AudioSource soundEffect;
 
     [Header("Values")]
     [SerializeField] float range;
@@ -39,6 +40,7 @@ public class ForceWall : NetworkBehaviour
 
         CmdDoSpell(hit.point);
         useAbilities.SetOnCooldownAbility3();
+        soundEffect.Play();
     }
 
     [Command]
