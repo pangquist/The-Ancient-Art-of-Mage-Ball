@@ -25,7 +25,7 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] float gravity = -9.81f;
     [SerializeField] float speed = 8;
 
-    bool matchIsPaused = true;
+    [SerializeField] bool matchIsPaused = true;
     float directionX;
     float directionZ;
     float groundDistance = 0.2f;

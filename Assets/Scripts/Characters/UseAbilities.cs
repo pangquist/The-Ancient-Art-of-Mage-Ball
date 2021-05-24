@@ -39,7 +39,7 @@ public class UseAbilities : NetworkBehaviour
     #endregion
 
     float[] currentCooldowns;
-    bool matchIsPaused = true;
+    [SerializeField] bool matchIsPaused = true;
 
     // Getter for the Cooldown UI to retrieve the current cooldowns to correctly display on the UI.
     public float GetCooldown(int cooldownIndex) 
