@@ -517,7 +517,7 @@ MonoBehaviour:
   hitEffect: {fileID: 8027473195609965283, guid: e06bdea1510a3e547a2ed554aac7f5f9,
     type: 3}
   range: 30
-  pushAmount: 550
+  pushAmount: 650
   pushRadius: 6
 --- !u!114 &8890351901005270611
 MonoBehaviour:
@@ -631,7 +631,7 @@ MonoBehaviour:
   syncInterval: 0.1
   anim: {fileID: 282141968}
   castAbility1Button: 323
-  cooldownAbility1: 1.5
+  cooldownAbility1: 1.25
   ability1Name: {fileID: 7400000, guid: 485d67863fd61984f941cc4d7a352986, type: 2}
   castAbility2Button: 324
   cooldownAbility2: 7
