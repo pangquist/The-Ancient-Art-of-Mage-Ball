@@ -1529,7 +1529,7 @@ MonoBehaviour:
   migrationFrequency: 0.03
   posChangeFrequency: 0.7
   smoothChFrequency: 15
-  birdPref: {fileID: 3866908435750393346, guid: e77b7e344112b5f4c8d708dc75ad5c16,
+  birdPref: {fileID: 1534700291726900181, guid: 4245ff9a4dd9cd24d8b511911616bf71,
     type: 3}
   birdsNum: 250
   birdSpeed: 1
@@ -2232,7 +2232,7 @@ PrefabInstance:
     - target: {fileID: 5227544591974118142, guid: 9c1b8449c570bc34eb3d9f9bd41f13bd,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5227544591974118142, guid: 9c1b8449c570bc34eb3d9f9bd41f13bd,
         type: 3}
@@ -4210,14 +4210,14 @@ MonoBehaviour:
   migrationFrequency: 0.03
   posChangeFrequency: 0.7
   smoothChFrequency: 15
-  birdPref: {fileID: 3749213457490053405, guid: 164abfb7de0eb2440a88935c1d0c9d70,
+  birdPref: {fileID: 1107527287512709390, guid: e7ba69f747a8a164e95d43ecb6c089a8,
     type: 3}
-  birdsNum: 250
+  birdsNum: 25
   birdSpeed: 1
   fragmentedBirds: 15
   fragmentedBirdsYLimit: 0.5
   soaring: 0.6
-  verticalWawe: 17
+  verticalWawe: 9
   rotationClamp: 0
   rotationClampValue: 50
   scaleRandom: {x: 1.5, y: 2}
