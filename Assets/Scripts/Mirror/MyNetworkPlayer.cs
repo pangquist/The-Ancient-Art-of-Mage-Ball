@@ -231,9 +231,11 @@ public class MyNetworkPlayer : NetworkBehaviour
     [Client]
     void Respawn()
     {
-        Vector3 respawnPosition = gamestateManager.GetRespawnPosition(GetDisplayName());
+        Vector3 respawnPosition = gamestateManager.GetRespawnPositionObject(GetDisplayName()).transform.position;
+        Quaternion respawnRotation = gamestateManager.GetRespawnPositionObject(GetDisplayName()).transform.rotation;
         Debug.Log($"RESPAWNING! Respawn position: {respawnPosition}");
         gameObject.transform.position = respawnPosition;
+        gameObject.transform.rotation = respawnRotation;
     }
 
     void Countdown()

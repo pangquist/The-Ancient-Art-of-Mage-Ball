@@ -217,7 +217,7 @@ public class GamestateManager : NetworkBehaviour
         }
     }
 
-    public Vector3 GetRespawnPosition(string name)
+    public GameObject GetRespawnPositionObject(string name)
     {
         List<MyNetworkPlayer> players = ((MyNetworkManager)NetworkManager.singleton).Players;
 
@@ -238,7 +238,7 @@ public class GamestateManager : NetworkBehaviour
             if (name == redTeam[i])
             {
                 Debug.Log($"Returning red position: {spawnpointPositions[i].transform.position}");
-                return (spawnpointPositions[i].transform.position);
+                return (spawnpointPositions[i].gameObject);
             }
         }
 
@@ -248,11 +248,11 @@ public class GamestateManager : NetworkBehaviour
             if (name == blueTeam[i])
             {
                 Debug.Log($"Returning blue position: {spawnpointPositions[i+3].transform.position}");
-                return (spawnpointPositions[i + 3].transform.position);
+                return (spawnpointPositions[i + 3].gameObject);
             }
         }
 
-        return new Vector3(0, 0, 0);
+        return spawnpointPositions[6].gameObject;
     }
 
 }

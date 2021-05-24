@@ -19,7 +19,7 @@ public class NetworkPlayerSpawner : NetworkBehaviour
     [SerializeField] string playerName;
     [SerializeField] CSteamID steamID;
     
-    Vector3 spawnPosition;
+    GameObject spawnPositionObject;
 
     public override void OnStartAuthority()
     {
@@ -51,16 +51,16 @@ public class NetworkPlayerSpawner : NetworkBehaviour
             }
         }
 
-        spawnPosition = gamestateManager.GetRespawnPosition(playerName);
-        SpawnCharacter(chosenCharacter, spawnPosition);
+        spawnPositionObject = gamestateManager.GetRespawnPositionObject(playerName);
+        SpawnCharacter(chosenCharacter, spawnPositionObject);
     }
 
     // Take in the parameter of what character the player has chosen, and spawns a prefab from the array of available characters to play as.
-    void SpawnCharacter(int characterIndex, Vector3 spawnPosition)
+    void SpawnCharacter(int characterIndex, GameObject _spawnPositionObject)
     {
         GameObject[] characters = ((MyNetworkManager)NetworkManager.singleton).Characters;
 
-        GameObject instantiatedCharacter = Instantiate(characters[characterIndex + 1], spawnPosition, gameObject.transform.rotation);
+        GameObject instantiatedCharacter = Instantiate(characters[characterIndex + 1], _spawnPositionObject.transform.position, _spawnPositionObject.transform.rotation);
         
         NetworkServer.Spawn(instantiatedCharacter, connectionToClient);
         ((MyNetworkManager)NetworkManager.singleton).Players.Add(instantiatedCharacter.GetComponent<MyNetworkPlayer>());
