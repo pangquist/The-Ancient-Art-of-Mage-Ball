@@ -1777,9 +1777,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1088
   jumpButton: 32
-  jumpPower: 6
+  jumpPower: 5
   gravity: -9.81
-  speed: 12
+  speed: 10
+  matchIsPaused: 1
   velocity: {x: 0, y: 0, z: 0}
   isGrounded: 0
 --- !u!114 &441384180641011010
@@ -1861,6 +1862,7 @@ MonoBehaviour:
   castAbility3Button: 101
   cooldownAbility3: 10
   ability3Name: {fileID: 7400000, guid: d10693a90854a244d85f40eb4661f7a6, type: 2}
+  matchIsPaused: 1
 --- !u!114 &8631956499028919714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4028,6 +4030,11 @@ PrefabInstance:
     - target: {fileID: 4512633023800761505, guid: 17a19f53f8cd3f941b790329e3507401,
         type: 3}
       propertyPath: ability4Icon
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6303391952782078731, guid: 17a19f53f8cd3f941b790329e3507401,
+        type: 3}
+      propertyPath: m_AssetId
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6725104718748145962, guid: 17a19f53f8cd3f941b790329e3507401,
