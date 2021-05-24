@@ -2215,13 +2215,13 @@ GameObject:
   - component: {fileID: 5025287790405866831}
   - component: {fileID: 5549055056223993923}
   - component: {fileID: 6736409272605229166}
+  - component: {fileID: 6004741204329823607}
   - component: {fileID: 1808665335354181965}
   - component: {fileID: 5012954450347326743}
   - component: {fileID: 8404522335574230688}
   - component: {fileID: 6397668700042612202}
   - component: {fileID: 6838466485475351199}
   - component: {fileID: 8625832493932510498}
-  - component: {fileID: 6004741204329823607}
   - component: {fileID: 7825197277653462414}
   m_Layer: 9
   m_Name: Force Manipulator
@@ -2393,8 +2393,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.01
-  clientAuthority: 0
+  clientAuthority: 1
   animator: {fileID: 6004741204329823607}
+--- !u!95 &6004741204329823607
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3758272146365123707}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 201939b9adf541b4aa1674e061263d8f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &1808665335354181965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2558,25 +2577,6 @@ MonoBehaviour:
   castAbility3Button: 101
   cooldownAbility3: 10
   ability3Name: {fileID: 7400000, guid: 350cadcee6930b6448a626195465363b, type: 2}
---- !u!95 &6004741204329823607
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3758272146365123707}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 201939b9adf541b4aa1674e061263d8f, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!81 &7825197277653462414
 AudioListener:
   m_ObjectHideFlags: 0

@@ -901,7 +901,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.01
-  clientAuthority: 0
+  clientAuthority: 1
   animator: {fileID: 282141968}
 --- !u!95 &282141968
 Animator:
