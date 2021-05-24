@@ -19,10 +19,7 @@ public class CharacterSelect : MonoBehaviour
     
     private void Start()
     {
-<<<<<<< Updated upstream
-=======
         myNetworkManager = GameObject.Find("MenuNetworkManager").GetComponent<MyNetworkManager>();
->>>>>>> Stashed changes
         myNetworkMenuPlayer = myNetworkManager.MenuPlayers[myNetworkManager.MenuPlayers.Count - 1];
     }
 
