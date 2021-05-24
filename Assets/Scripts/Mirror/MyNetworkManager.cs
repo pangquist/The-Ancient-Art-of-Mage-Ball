@@ -19,7 +19,6 @@ public class MyNetworkManager : NetworkManager
     public static event Action ClientOnDisconnected;
 
     [Header("Script Dependencies")]
-    [SerializeField] TeamManager teamManager;
     [SerializeField] GamestateManager gamestateManager;
 
     [Header("References")]
@@ -116,9 +115,8 @@ public class MyNetworkManager : NetworkManager
     //Removes the player from the list of active players so they wont be included in future code-interactions
     public override void OnServerDisconnect(NetworkConnection conn)
     {
-        Players.Remove(conn.identity.GetComponent<MyNetworkPlayer>());
-        MenuPlayers.Remove(conn.identity.GetComponent<MyNetworkMenuPlayer>());
-        OnServerSceneChanged("MainMenu");
+        //MenuPlayers.Remove(conn.identity.GetComponent<MyNetworkMenuPlayer>());
+        //OnServerSceneChanged("MainMenu");
 
         base.OnServerDisconnect(conn);
     }
@@ -167,6 +165,8 @@ public class MyNetworkManager : NetworkManager
 
     public override void OnClientSceneChanged(NetworkConnection conn)
     {
+        gamestateManager = GameObject.Find("GamestateManager").GetComponent<GamestateManager>();
+
         gamestateManager.matchIsOver = false;
         gamestateManager.matchIsPaused = true;
         gamestateManager.FillSpawnpointList();
@@ -177,6 +177,17 @@ public class MyNetworkManager : NetworkManager
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             gamestateManager.AssignScoreAtPostScreen();
+        }
+        if(SceneManager.GetActiveScene().name == "MainMenu")
+        {
+            if (NetworkServer.active && NetworkClient.isConnected)
+            {
+                singleton.StopHost();
+            }
+            else
+            {
+                singleton.StopClient();
+            }
         }
     }
 
