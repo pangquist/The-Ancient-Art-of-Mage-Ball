@@ -63,6 +63,7 @@ public class UseAbilities : NetworkBehaviour
         GamestateManager.HandleMatchPaused += TogglePause;
     }
 
+    [Client]
     void TogglePause()
     {
         if (matchIsPaused)

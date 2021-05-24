@@ -1,3 +1,4 @@
+using Mirror;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -5,7 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CooldownUI : MonoBehaviour
+public class CooldownUI : NetworkBehaviour
 {
     // This script handles all the graphical components of the cooldown UI system.
     // During the update, the GUI will update to show the current cooldown of the ability which it is connected to.
@@ -37,6 +38,7 @@ public class CooldownUI : MonoBehaviour
         GamestateManager.HandleMatchPaused += TogglePause;
     }
 
+    [Client]
     void TogglePause()
     {
         if (matchIsPaused)

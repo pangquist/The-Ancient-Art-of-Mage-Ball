@@ -169,6 +169,7 @@ public class GamestateManager : NetworkBehaviour
     public void HandleMatchPause(bool oldBool, bool newBool)
     {
         Debug.Log("PAUSE EVENT IS CALLED");
+
         HandleMatchPaused?.Invoke();
     }
     

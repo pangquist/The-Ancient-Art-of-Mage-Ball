@@ -40,6 +40,7 @@ public class PlayerMovement : NetworkBehaviour
         GamestateManager.HandleMatchPaused += TogglePause;
     }
 
+    [Client]
     void TogglePause()
     {
         if (matchIsPaused)
