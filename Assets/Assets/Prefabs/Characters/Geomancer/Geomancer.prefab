@@ -1853,7 +1853,7 @@ MonoBehaviour:
   syncInterval: 0.1
   anim: {fileID: 1106491956633752253}
   castAbility1Button: 323
-  cooldownAbility1: 2
+  cooldownAbility1: 1.5
   ability1Name: {fileID: 7400000, guid: 10530bb4f36826b4fb8700f3fd2e21e0, type: 2}
   castAbility2Button: 324
   cooldownAbility2: 5
