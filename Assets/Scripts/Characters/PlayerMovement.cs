@@ -105,27 +105,29 @@ public class PlayerMovement : NetworkBehaviour
         {
             if (directionX < 0)
             {
-                animator.SetBool("StrafingLeft", true);
+                animator.SetBool("isStrafingLeft", true);
                 animator.SetBool("isWalking", false);
-                animator.SetBool("StrafingRight", false);
+                animator.SetBool("isStrafingRight", false);
             }
             else if (directionX > 0)
             {
-                animator.SetBool("StrafingRight", true);
+                animator.SetBool("isStrafingRight", true);
                 animator.SetBool("isWalking", false);
-                animator.SetBool("StrafingLeft", false);
+                animator.SetBool("isStrafingLeft", false);
             }
             else if (directionX == 0)
             {
                 animator.SetBool("isWalking", true);
-                animator.SetBool("StrafingRight", false);
-                animator.SetBool("StrafingLeft", false);
+                animator.SetBool("isStrafingRight", false);
+                animator.SetBool("isStrafingLeft", false);
             }
 
         }
         else
         {
             animator.SetBool("isWalking", false);
+            animator.SetBool("isStrafingLeft", false);
+            animator.SetBool("isStrafingRight", false);
         }
 
         if (NetworkClient.ready)
