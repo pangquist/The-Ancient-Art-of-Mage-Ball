@@ -156,6 +156,14 @@ public class UseAbilities : NetworkBehaviour
         }
     }
 
+    public void ResetAllCooldowns()
+    {
+        for (int i = 0; i < currentCooldowns.Length; i++)
+        {
+           currentCooldowns[i] = 0;
+        }
+    }
+
     public void StartAllCooldowns()
     {
         //to be balanced

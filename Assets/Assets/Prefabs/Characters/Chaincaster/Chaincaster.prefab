@@ -708,6 +708,7 @@ MonoBehaviour:
   syncInterval: 0.001
   controller: {fileID: 1398020548929700585}
   gamestateManager: {fileID: 0}
+  useAbilities: {fileID: 1255805223110542875}
   teamName: 
   displayName: Missing Name
   playerColor: {r: 1, g: 1, b: 1, a: 1}
@@ -847,6 +848,7 @@ MonoBehaviour:
   jumpPower: 9
   gravity: -9.81
   speed: 12
+  matchIsPaused: 1
   velocity: {x: 0, y: 0, z: 0}
   isGrounded: 0
 --- !u!114 &7130249670396189663
@@ -961,6 +963,7 @@ MonoBehaviour:
   castAbility3Button: 101
   cooldownAbility3: 10
   ability3Name: {fileID: 7400000, guid: 376c7c44fb9b5944990dddd7c8155cfc, type: 2}
+  matchIsPaused: 1
 --- !u!120 &4032744186232787454
 LineRenderer:
   m_ObjectHideFlags: 0

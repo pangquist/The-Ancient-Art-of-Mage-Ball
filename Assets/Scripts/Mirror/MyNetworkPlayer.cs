@@ -13,6 +13,7 @@ public class MyNetworkPlayer : NetworkBehaviour
     [Header("Script Dependencies")]
     [SerializeField] CharacterController controller;
     [SerializeField] GamestateManager gamestateManager;
+    [SerializeField] UseAbilities useAbilities;
 
     [Header("Sync Variables")]
     [SyncVar(hook = nameof(HandlePlayerTeamAssigned))]
@@ -236,6 +237,7 @@ public class MyNetworkPlayer : NetworkBehaviour
         Debug.Log($"RESPAWNING! Respawn position: {respawnPosition}");
         gameObject.transform.position = respawnPosition;
         gameObject.transform.rotation = respawnRotation;
+        useAbilities.ResetAllCooldowns();
     }
 
     void Countdown()
