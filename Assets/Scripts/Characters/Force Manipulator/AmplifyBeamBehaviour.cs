@@ -35,7 +35,6 @@ public class AmplifyBeamBehaviour : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log("Trigger Happened!");
         GameObject ball = other.gameObject;
 
         if (ball.tag == "Enemy")

@@ -37,20 +37,22 @@ public class PlayerMovement : NetworkBehaviour
     {
         base.OnStartAuthority();
         enabled = true;
-        GamestateManager.HandleMatchPaused += TogglePause;
+        GamestateManager.HandleMatchPaused += Pause;
+        GamestateManager.HandleMatchUnpaused += Unpause;
     }
 
     [Client]
-    void TogglePause()
+    void Pause()
     {
-        if (matchIsPaused)
-        {
-           matchIsPaused = false;
-        }
-        else if (!matchIsPaused)
-        {
-            matchIsPaused = true;
-        }
+        matchIsPaused = true;
+        Debug.Log("MOVEMENT IS PAUSED");
+    }
+
+    [Client]
+    void Unpause()
+    {
+        matchIsPaused = false;
+        Debug.Log("MOVEMENT IS UNPAUSED");
     }
 
     #region Server

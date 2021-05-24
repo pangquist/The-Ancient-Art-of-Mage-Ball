@@ -35,20 +35,22 @@ public class CooldownUI : NetworkBehaviour
 
     private void Start()
     {
-        GamestateManager.HandleMatchPaused += TogglePause;
+        GamestateManager.HandleMatchPaused += Pause;
+        GamestateManager.HandleMatchUnpaused += Unpause;
     }
 
     [Client]
-    void TogglePause()
+    void Pause()
     {
-        if (matchIsPaused)
-        {
-            matchIsPaused = false;
-        }
-        else if (!matchIsPaused)
-        {
-            matchIsPaused = true;
-        }
+        matchIsPaused = true;
+        Debug.Log("COOLDOWN IS PAUSED");
+    }
+
+    [Client]
+    void Unpause()
+    {
+        matchIsPaused = false;
+        Debug.Log("COOLDOWN IS UNPAUSED");
     }
 
     // During the update, callculations are performed to make the UI accurately display the current cooldown of the given ability.

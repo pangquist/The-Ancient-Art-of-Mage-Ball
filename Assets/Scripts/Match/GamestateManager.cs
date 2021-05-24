@@ -58,7 +58,7 @@ public class GamestateManager : NetworkBehaviour
     public List<string> RedTeam { get { return redTeam; } set { redTeam = value; } }
     public List<string> BlueTeam { get { return blueTeam; } set { blueTeam = value; } }
     
-    public static event Action HandleTimeChanged, HandleRedScoreChanged, HandleBlueScoreChanged, HandleMatchPaused, HandlePausTimeChanged;
+    public static event Action HandleTimeChanged, HandleRedScoreChanged, HandleBlueScoreChanged, HandleMatchPaused, HandleMatchUnpaused, HandlePausTimeChanged;
 
     public override void OnStartServer()
     {
@@ -152,13 +152,15 @@ public class GamestateManager : NetworkBehaviour
         HandlePausTimeChanged?.Invoke();
     }
     
+    [Server]
     public void HandleBlueScore(int oldScore, int newScore)
     {
         HandleBlueScoreChanged?.Invoke();
         matchIsPaused = true;
         pauseTimer = goalPauseTime;
     }
-    
+
+    [Server]
     public void HandleRedScore(int oldScore, int newScore)
     {
         HandleRedScoreChanged?.Invoke();
@@ -169,8 +171,14 @@ public class GamestateManager : NetworkBehaviour
     public void HandleMatchPause(bool oldBool, bool newBool)
     {
         Debug.Log("PAUSE EVENT IS CALLED");
-
-        HandleMatchPaused?.Invoke();
+        if (matchIsPaused)
+        {
+            HandleMatchPaused?.Invoke();
+        }
+        else
+        {
+            HandleMatchUnpaused?.Invoke();
+        }
     }
     
     public void FillSpawnpointList()
