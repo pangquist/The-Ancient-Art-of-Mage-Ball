@@ -99,9 +99,7 @@ public class MyNetworkManager : NetworkManager
     public override void OnClientDisconnect(NetworkConnection conn)
     {
         base.OnClientDisconnect(conn);
-
-        SceneManager.LoadScene("MainMenu");
-
+        
         ClientOnDisconnected?.Invoke();
     }
 
@@ -117,7 +115,8 @@ public class MyNetworkManager : NetworkManager
     //Removes the player from the list of active players so they wont be included in future code-interactions
     public override void OnServerDisconnect(NetworkConnection conn)
     {
-        SceneManager.LoadScene("MainMenu");
+        //MenuPlayers.Remove(conn.identity.GetComponent<MyNetworkMenuPlayer>());
+        //OnServerSceneChanged("MainMenu");
 
         base.OnServerDisconnect(conn);
     }
