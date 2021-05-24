@@ -58,22 +58,24 @@ public class UseAbilities : NetworkBehaviour
     }
 
     public override void OnStartAuthority()
-    {
+    { 
         base.OnStartAuthority();
-        GamestateManager.HandleMatchPaused += TogglePause;
+        GamestateManager.HandleMatchPaused += Pause;
+        GamestateManager.HandleMatchUnpaused += Unpause;
     }
 
     [Client]
-    void TogglePause()
+    void Pause()
     {
-        if (matchIsPaused)
-        {
-            matchIsPaused = false;
-        }
-        else if (!matchIsPaused)
-        {
-            matchIsPaused = true;
-        }
+        matchIsPaused = true;
+        Debug.Log("ABILITIES IS PAUSED");
+    }
+
+    [Client]
+    void Unpause()
+    {
+        matchIsPaused = false;
+        Debug.Log("ABILITIES IS UNPAUSED");
     }
 
     private void Update()
