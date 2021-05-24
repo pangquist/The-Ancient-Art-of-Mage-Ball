@@ -15,15 +15,18 @@ public class ChangeScene : NetworkBehaviour
 
     public void ChangeTheScene(string sceneName)
     {
-        myNetworkManager.ServerChangeScene(sceneName);
-        //if (NetworkServer.active && NetworkClient.isConnected)
-        //{
-        //    NetworkManager.singleton.StopHost();
-        //}
-        //else
-        //{
-        //    NetworkManager.singleton.StopClient();
-        //}
+        if (NetworkServer.active && NetworkClient.isConnected)
+        {
+            NetworkManager.singleton.StopHost();
+            NetworkServer.Shutdown();
+            NetworkClient.Shutdown();
+        }
+        else
+        {
+            NetworkManager.singleton.StopClient();
+            NetworkClient.Shutdown();
+        }
+
         //SceneManager.LoadScene(sceneName);
     }
 }
