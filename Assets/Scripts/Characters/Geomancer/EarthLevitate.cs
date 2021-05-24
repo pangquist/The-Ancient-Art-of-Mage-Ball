@@ -58,7 +58,6 @@ public class EarthLevitate : NetworkBehaviour
     {
         if (hasSpawnedPillar)
         {
-            Debug.Log("Inside Pillarbridge");
             timer += Time.deltaTime;
 
             if (timer > abilityDuration)//Handles the duration of the ability

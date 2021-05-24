@@ -22,18 +22,14 @@ public class PillarMovement : NetworkBehaviour
     {
         List<MyNetworkPlayer> players = ((MyNetworkManager)NetworkManager.singleton).Players;
 
-        //Debug.Log("SEARCHING FOR A POSITION. Player count: " + players.Count);
         CalculatePillarHeight();
         foreach (MyNetworkPlayer player in players)
         {
             if (player.hasAuthority)
             {
-
-                //Debug.Log("FOUND A POSITION");
                 playerObject = player.gameObject;
             }
         }
-        //Debug.Log("Playerposition is: " + playerObject.transform.position);
         pillarPosition = playerObject.transform.Find("PillarSpawnPoint");
         
     }
