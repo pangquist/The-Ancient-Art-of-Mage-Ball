@@ -1994,8 +1994,8 @@ MonoBehaviour:
     type: 3}
   hitableObject: {fileID: 0}
   useAbilities: {fileID: 2106470732702085849}
-  throwForceForward: 1200
-  throwForceUpward: 350
+  throwForceForward: 1500
+  throwForceUpward: 200
 --- !u!1 &2504937733938519409
 GameObject:
   m_ObjectHideFlags: 0
