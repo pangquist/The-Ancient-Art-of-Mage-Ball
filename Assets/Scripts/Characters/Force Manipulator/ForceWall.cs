@@ -12,6 +12,7 @@ public class ForceWall : NetworkBehaviour
     [SerializeField] Camera mainCamera;
     [SerializeField] LayerMask hitableLayer;
     [SerializeField] GameObject forceWall;
+    [SerializeField] AudioSource soundEffect;
 
     [Header("Values")]
     [SerializeField] float range;
@@ -50,6 +51,7 @@ public class ForceWall : NetworkBehaviour
     [ClientRpc]
     void RpcDoSpell(Vector3 hitLocation)
     {
+        soundEffect.Play();
         if (NetworkServer.active)
         {
             GameObject instantiatedForceWall = Instantiate(forceWall, hitLocation + new Vector3(0, 2, 0), gameObject.GetComponent<Transform>().transform.rotation) as GameObject;

@@ -79,7 +79,7 @@ public class MyNetworkManager : NetworkManager
         }
 
         isGameInProgress = true;
-
+        gamestateManager = GameObject.Find("GamestateManager").GetComponent<GamestateManager>();
         ServerChangeScene(selectedScene);
     }
     
@@ -159,7 +159,10 @@ public class MyNetworkManager : NetworkManager
         else if (sceneName == "PostMatch")
         {
             playerPrefab = mainMenuPlayer;
-            selectedScene = "UnderwaterRuin";
+            MenuPlayers.Clear();
+            Players.Clear();
+            Spawners.Clear();
+            selectedScene = "Underwater Ruins";
         }
     }
 
@@ -177,6 +180,7 @@ public class MyNetworkManager : NetworkManager
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             gamestateManager.AssignScoreAtPostScreen();
+            Destroy(gamestateManager.gameObject);
         }
         if(SceneManager.GetActiveScene().name == "MainMenu")
         {

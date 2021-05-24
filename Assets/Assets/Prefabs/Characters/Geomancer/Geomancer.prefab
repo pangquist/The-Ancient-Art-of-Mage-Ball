@@ -1722,7 +1722,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  clientAuthority: 0
+  clientAuthority: 1
   animator: {fileID: 1106491956633752253}
 --- !u!136 &441384180641011017
 CapsuleCollider:
@@ -3993,6 +3993,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Abilities
+      objectReference: {fileID: 0}
+    - target: {fileID: 3142251120365073892, guid: 17a19f53f8cd3f941b790329e3507401,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4335594901277930524, guid: 17a19f53f8cd3f941b790329e3507401,
         type: 3}
