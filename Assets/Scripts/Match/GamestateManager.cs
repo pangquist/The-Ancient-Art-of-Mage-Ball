@@ -188,7 +188,7 @@ public class GamestateManager : NetworkBehaviour
     
     public void FillSpawnpointList()
     {
-        if (SceneManager.GetActiveScene().name == "PostMatch")
+        if (SceneManager.GetActiveScene().name == "PostMatch" || SceneManager.GetActiveScene().name == "MainMenu")
         {
             return;
         }

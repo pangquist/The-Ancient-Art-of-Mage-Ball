@@ -20,7 +20,7 @@ public class CharacterSelect : MonoBehaviour
     private void Start()
     {
         myNetworkManager = GameObject.Find("MenuNetworkManager").GetComponent<MyNetworkManager>();
-        //myNetworkMenuPlayer = myNetworkManager.MenuPlayers[myNetworkManager.MenuPlayers.Count - 1];
+        myNetworkMenuPlayer = myNetworkManager.MenuPlayers[myNetworkManager.MenuPlayers.Count - 1];
     }
 
     //Method that is called through a button click that changes the selected character integer in the manager script
@@ -35,5 +35,6 @@ public class CharacterSelect : MonoBehaviour
         }
         selectSound.Play();
         characterImage.sprite = characterImages[characterIndex];
+        //Get the players current position, the image and give the image the sprite of the character
     }
 }
