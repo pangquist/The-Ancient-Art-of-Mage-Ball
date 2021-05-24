@@ -58,7 +58,7 @@ public class GamestateManager : NetworkBehaviour
     public List<string> RedTeam { get { return redTeam; } set { redTeam = value; } }
     public List<string> BlueTeam { get { return blueTeam; } set { blueTeam = value; } }
     
-    public static event Action HandleTimeChanged, HandleRedScoreChanged, HandleBlueScoreChanged, HandleMatchPaused, HandleMatchUnpaused, HandlePausTimeChanged;
+    public static event Action HandleTimeChanged, HandleRedScoreChanged, HandleBlueScoreChanged, HandleMatchPaused, HandleMatchUnpaused, HandlePauseTimeChanged;
 
     public override void OnStartServer()
     {
@@ -149,7 +149,7 @@ public class GamestateManager : NetworkBehaviour
 
     public void HandlePausTimeChange(float oldTime, float newTime)
     {
-        HandlePausTimeChanged?.Invoke();
+        HandlePauseTimeChanged?.Invoke();
     }
     
     [Server]
