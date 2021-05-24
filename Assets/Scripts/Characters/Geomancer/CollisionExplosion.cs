@@ -50,11 +50,9 @@ public class CollisionExplosion : NetworkBehaviour
                     hasPushed = true;
                 }                
             }
-            Debug.Log("Collising:" + hasCollided.ToString());
         }
         catch
         {
-            Debug.Log("No ball existing");
         }
       
 
