@@ -125,7 +125,7 @@ public class MyNetworkMenuPlayer : NetworkBehaviour
     {
         if (NetworkServer.active)
             return;
-
+        
         SceneSelect.OnMenuBackgroundUpdated += HandleSceneChanged;
 
         ((MyNetworkManager)NetworkManager.singleton).MenuPlayers.Add(this);
@@ -142,6 +142,11 @@ public class MyNetworkMenuPlayer : NetworkBehaviour
         ((MyNetworkManager)NetworkManager.singleton).MenuPlayers.Remove(this);
     }
 
+    [Client]
+    private void Start()
+    {
+        gamestateManager = GameObject.Find("GamestateManager").GetComponent<GamestateManager>();
+    }
 
     //Hook method that is called whenever the steam ID of the client is updated. Starts a method that finds the steam name that is connected to that steam id.
     [Client]
