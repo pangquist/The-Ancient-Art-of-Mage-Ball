@@ -73,8 +73,6 @@ public class ChainGrapple : NetworkBehaviour
 
     private void LateUpdate()
     {
-        if (lr.positionCount == 0) return;
-
         DrawChain();
     }
 
@@ -123,6 +121,8 @@ public class ChainGrapple : NetworkBehaviour
     void RpcDrawChain(GameObject caster, Vector3 _cast, Vector3 _target, Vector2 vector, float time)
     {
         lr = caster.GetComponent<LineRenderer>();
+
+        if (lr.positionCount == 0) return;
 
         material = lr.material;
 
