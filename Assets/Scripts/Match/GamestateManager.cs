@@ -107,6 +107,12 @@ public class GamestateManager : NetworkBehaviour
         matchIsPaused = false;
     }
 
+    [Server]
+    void PauseGame()
+    {
+        matchIsPaused = true;
+    }
+
     void EndGame()
     {
         if(blueScore == redScore)
@@ -152,19 +158,18 @@ public class GamestateManager : NetworkBehaviour
         HandlePauseTimeChanged?.Invoke();
     }
     
-    [Server]
     public void HandleBlueScore(int oldScore, int newScore)
     {
         HandleBlueScoreChanged?.Invoke();
-        matchIsPaused = true;
+        PauseGame();
         pauseTimer = goalPauseTime;
     }
 
-    [Server]
+    
     public void HandleRedScore(int oldScore, int newScore)
     {
         HandleRedScoreChanged?.Invoke();
-        matchIsPaused = true;
+        PauseGame();
         pauseTimer = goalPauseTime;
     }
     
