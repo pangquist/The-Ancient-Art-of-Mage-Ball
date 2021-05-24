@@ -43,8 +43,7 @@ public class GamestateManager : NetworkBehaviour
     [SerializeField] TMP_Text postGameBlueScoreDisplay;
     [SerializeField] TMP_Text winningTeamText;
     [SerializeField] AudioSource overtimeSoundSource;
-
-    [HideInInspector]
+    
     [SyncVar (hook = nameof(HandleMatchPause))]
     public bool matchIsPaused = true;
 
