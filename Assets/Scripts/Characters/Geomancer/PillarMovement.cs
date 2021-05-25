@@ -67,7 +67,8 @@ public class PillarMovement : NetworkBehaviour
 
 
         Vector3 effectPosition = new Vector3(gameObject.transform.position.x, 0, gameObject.transform.position.z);
-        CmdMoveHitEffect(effectPosition);
+        pillarSmoke.transform.Translate(effectPosition, Space.World);
+
         if (!hasSpawnedEffect)
         {
             CmdSpawnHitEffect(gameObject.transform.position);
@@ -83,11 +84,11 @@ public class PillarMovement : NetworkBehaviour
     //    gameObject.transform.Translate(Vector3.up * forceUpwards * Time.deltaTime, Space.World);
     //}
 
-    [Command]
-    void CmdMoveHitEffect(Vector3 effectPosition)
-    {
-        pillarSmoke.transform.Translate(effectPosition, Space.World);
-    }
+    //[Command]
+    //void CmdMoveHitEffect(Vector3 effectPosition)
+    //{
+    //    pillarSmoke.transform.Translate(effectPosition, Space.World);
+    //}
 
     [Command]
     void CmdSpawnHitEffect(Vector3 effectPosition)
