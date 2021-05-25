@@ -279,7 +279,8 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   target: {fileID: 0}
-  duration: 5
+  force: 50
+  duration: 2.5
 --- !u!114 &2370730863913473806
 MonoBehaviour:
   m_ObjectHideFlags: 0

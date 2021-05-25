@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7189900101335661009}
   - component: {fileID: 8516534096446132688}
   - component: {fileID: 1359002697411937063}
+  - component: {fileID: 4566513167845385750}
   m_Layer: 0
   m_Name: RestrictHit
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 6590868245128863341}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -51,8 +52,23 @@ VisualEffect:
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 2.5
+      - m_Value: 2
         m_Name: Spawn Position Size
+        m_Overridden: 0
+      - m_Value: 2
+        m_Name: Lifetime
+        m_Overridden: 1
+      - m_Value: 100000
+        m_Name: Spawn Rate
+        m_Overridden: 1
+      - m_Value: 1.5
+        m_Name: Noise Strength
+        m_Overridden: 1
+      - m_Value: 2
+        m_Name: Noise Drag
+        m_Overridden: 1
+      - m_Value: 6
+        m_Name: Noise Frequency
         m_Overridden: 1
     m_Vector2f:
       m_Array: []
@@ -102,7 +118,10 @@ VisualEffect:
         m_Name: Color
         m_Overridden: 1
     m_NamedObject:
-      m_Array: []
+      m_Array:
+      - m_Value: {fileID: 2800000, guid: 49cb5aa34272b034d8b754c65d9cdbfa, type: 3}
+        m_Name: Texture
+        m_Overridden: 0
     m_Bool:
       m_Array: []
 --- !u!73398921 &7189900101335661009
@@ -158,7 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 094afedfda236ce4a9b23d05100ef1d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTime: 4
+  lifeTime: 5
 --- !u!114 &1359002697411937063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,3 +195,16 @@ MonoBehaviour:
   visible: 0
   m_AssetId: 
   hasSpawned: 0
+--- !u!114 &4566513167845385750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6590868245128863341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf69f0bfac586e4bbf17b8e146fb086, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SimulationTimeScale: 2

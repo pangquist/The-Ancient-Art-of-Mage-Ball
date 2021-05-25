@@ -11,7 +11,8 @@ public class Lockdown : NetworkBehaviour
     [SerializeField] GameObject chain;
     [SerializeField] LayerMask grappleable;
     [SerializeField] Transform castPoint, camera, player;
-    [SerializeField] private float maxRange = 25f;
+    [SerializeField] float maxRange;
+    [SerializeField] float area;
 
     public override void OnStartAuthority()
     {
@@ -36,14 +37,16 @@ public class Lockdown : NetworkBehaviour
         RaycastHit hit;
         if (Physics.Raycast(camera.position, camera.forward, out hit, maxRange))
         {
-            if(hit.transform.gameObject.tag != "Enemy")
+            Collider[] colliders = Physics.OverlapSphere(hit.point, area);
+            foreach (Collider hitObject in colliders)
             {
-                return;
-            }
+                if (hitObject.CompareTag("Enemy"))
+                {
+                    useAbilities.SetOnCooldownAbility2();
 
-            useAbilities.SetOnCooldownAbility2();
-           
-            CmdCastSpell(hit.transform.gameObject);
+                    CmdCastSpell(hitObject.gameObject);
+                }
+            }
         }
     }
 

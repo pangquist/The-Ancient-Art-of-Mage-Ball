@@ -7,8 +7,10 @@ public class RestrictCasting : NetworkBehaviour
 {
     [SerializeField] UseAbilities useAbilities;
     [SerializeField] Transform castPoint, camera, player;
-    [SerializeField] private float maxRange = 25f;
     [SerializeField] GameObject hitEffect;
+
+    [SerializeField] float maxRange;
+    [SerializeField] float area;
 
     public override void OnStartAuthority()
     {
@@ -33,7 +35,7 @@ public class RestrictCasting : NetworkBehaviour
         {
             bool hitPlayer = false;
 
-            Collider[] colliders = Physics.OverlapSphere(hit.point, 2.5f);
+            Collider[] colliders = Physics.OverlapSphere(hit.point, area);
             foreach (Collider hitObject in colliders)
             {
                 if (hitObject.CompareTag("Player"))
