@@ -1671,6 +1671,7 @@ MonoBehaviour:
   CountdownText: {fileID: 4749104731906281708}
   scoringTeamText: {fileID: 4319572299912502155}
   trialStartSound: {fileID: 6412150708805633956}
+  playStartSound: 1
 --- !u!114 &441384180641011008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3992,6 +3993,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 441384179828623691}
     m_Modifications:
+    - target: {fileID: 2409821224520615086, guid: 17a19f53f8cd3f941b790329e3507401,
+        type: 3}
+      propertyPath: m_AssetId
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3023062009644946767, guid: 17a19f53f8cd3f941b790329e3507401,
         type: 3}
       propertyPath: m_Name
@@ -4224,6 +4230,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3021933770428593605}
     m_Modifications:
+    - target: {fileID: 1140613916748726625, guid: 0b0d87631053d144490f2991abe57ba0,
+        type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 3915879806042116583, guid: a2f8cedd03163d74f9e5896a1a093144,
+        type: 2}
     - target: {fileID: 2762112641850218740, guid: 0b0d87631053d144490f2991abe57ba0,
         type: 3}
       propertyPath: m_RootOrder
