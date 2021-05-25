@@ -14,9 +14,12 @@ public class PillarMovement : NetworkBehaviour
     float heightOfPillar;
     int i=0;
     bool goingUp = true;
+    GameObject pillarSmokeEffect;
+    Vector3 effectPosition;
 
 
-    
+
+
 
     void Start()
     {
@@ -47,6 +50,10 @@ public class PillarMovement : NetworkBehaviour
         {
             return;
         }
+
+        effectPosition = new Vector3(gameObject.transform.position.x, 0, gameObject.transform.position.z);
+        Debug.Log(effectPosition);
+
         //pillar X/Z Movement
         gameObject.transform.Translate(pillarPosition.transform.position - pillarTop.transform.position);
 
@@ -66,15 +73,19 @@ public class PillarMovement : NetworkBehaviour
         playerObject.GetComponent<PlayerMovement>().velocity.y = 0;
 
 
-        Vector3 effectPosition = new Vector3(gameObject.transform.position.x, 0, gameObject.transform.position.z);
-        pillarSmoke.transform.Translate(effectPosition, Space.World);
+               
 
         if (!hasSpawnedEffect)
         {
-            CmdSpawnHitEffect(gameObject.transform.position);
+            pillarSmokeEffect = Instantiate(pillarSmoke, effectPosition, Quaternion.identity) as GameObject;
+            NetworkServer.Spawn(pillarSmokeEffect);
             hasSpawnedEffect = true;
         }
-        
+        else
+        {
+            pillarSmokeEffect.transform.position = effectPosition;
+        }
+
     }
 
     //[Command]
@@ -90,8 +101,8 @@ public class PillarMovement : NetworkBehaviour
     //    pillarSmoke.transform.Translate(effectPosition, Space.World);
     //}
 
-    [Command]
-    void CmdSpawnHitEffect(Vector3 effectPosition)
+    [Client]
+    void SpawnHitEffect(Vector3 effectPosition)
     {
         GameObject pillarSmokeEffect = Instantiate(pillarSmoke, effectPosition, Quaternion.identity) as GameObject;
         NetworkServer.Spawn(pillarSmokeEffect);

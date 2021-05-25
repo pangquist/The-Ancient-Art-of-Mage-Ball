@@ -199,7 +199,7 @@ MonoBehaviour:
   stickyNoteInfos: []
   categories:
   - name: Emission
-    collapsed: 0
+    collapsed: 1
   - name: Velocity and Forces
     collapsed: 1
   - name: Color
@@ -4932,7 +4932,7 @@ MonoBehaviour:
     linkedSlots: []
     position: {x: 405, y: 270}
     expandedSlots: []
-    expanded: 0
+    expanded: 1
 --- !u!114 &8926484042661614789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5414,7 +5414,7 @@ MonoBehaviour:
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
   m_UIPosition: {x: 0, y: 0}
-  m_UICollapsed: 0
+  m_UICollapsed: 1
   m_UISuperCollapsed: 0
   m_InputSlots: []
   m_OutputSlots:
@@ -5438,7 +5438,7 @@ MonoBehaviour:
   m_Nodes:
   - m_Id: 0
     linkedSlots: []
-    position: {x: 416, y: 31}
+    position: {x: 297, y: -90}
     expandedSlots:
     - {fileID: 8926484042661614826}
     expanded: 1
