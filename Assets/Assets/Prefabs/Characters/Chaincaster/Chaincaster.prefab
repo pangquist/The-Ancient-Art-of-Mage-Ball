@@ -746,7 +746,7 @@ MonoBehaviour:
   castPoint: {fileID: 1299691982749212937}
   camera: {fileID: 5561234001153099423}
   player: {fileID: 1398020548929700589}
-  maxRange: 25
+  maxRange: 35
   grappleSpeed: 10
   duration: 0.5
   currentDuration: 0
@@ -772,7 +772,7 @@ MonoBehaviour:
   castPoint: {fileID: 1299691982749212937}
   camera: {fileID: 5561234001153099423}
   player: {fileID: 1398020548929700589}
-  maxRange: 25
+  maxRange: 35
 --- !u!114 &8333611319720115501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -791,7 +791,9 @@ MonoBehaviour:
   castPoint: {fileID: 1299691982749212937}
   camera: {fileID: 5561234001153099423}
   player: {fileID: 1398020548929700589}
-  maxRange: 25
+  maxRange: 35
+  hitEffect: {fileID: 6590868245128863341, guid: cee81df5ec5f6f6408a6eda912c4741f,
+    type: 3}
 --- !u!136 &1398020548929700590
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5188,6 +5190,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_enableAutoSizing
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2409821224520615086, guid: 17a19f53f8cd3f941b790329e3507401,
+        type: 3}
+      propertyPath: m_AssetId
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3023062009644946767, guid: 17a19f53f8cd3f941b790329e3507401,
         type: 3}
