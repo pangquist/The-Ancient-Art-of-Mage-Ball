@@ -335,6 +335,7 @@ GameObject:
   - component: {fileID: 6036826513882350547}
   - component: {fileID: 1673251193544832136}
   - component: {fileID: 8376201783191791700}
+  - component: {fileID: 1585408240}
   m_Layer: 6
   m_Name: ExportLeavesDecimated.005
   m_TagString: Untagged
@@ -405,6 +406,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &1585408240
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 795743019262942115}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4488761813091412632, guid: 8b86ac2268d003842b3d33ef6c025a31, type: 3}
 --- !u!1 &897157681354438072
 GameObject:
   m_ObjectHideFlags: 0
@@ -1145,7 +1160,7 @@ GameObject:
   - component: {fileID: 3989381803876312137}
   - component: {fileID: 3989381803872887913}
   - component: {fileID: 3989381803874018985}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 1_trunk_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1228,7 +1243,7 @@ GameObject:
   - component: {fileID: 3989381803872887915}
   - component: {fileID: 3989381803874018987}
   - component: {fileID: 4254248471644972089}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 1_trunk_lod0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1242,14 +1257,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3989381803876284523}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 0.00030474726, z: 0}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0.7071068, w: 0}
+  m_LocalPosition: {x: 0.814, y: -0, z: -0.755}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3989381803876312143}
   m_Father: {fileID: 3989381803876312157}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 180, z: 0}
 --- !u!33 &3989381803872887915
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1324,7 +1339,7 @@ GameObject:
   - component: {fileID: 3989381803876312141}
   - component: {fileID: 3989381803872887917}
   - component: {fileID: 3989381803874018989}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 1_leaves_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1405,7 +1420,7 @@ GameObject:
   - component: {fileID: 3989381803876312143}
   - component: {fileID: 3989381803872887919}
   - component: {fileID: 3989381803874018991}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 1_leaves_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1486,7 +1501,7 @@ GameObject:
   - component: {fileID: 3989381803876312157}
   - component: {fileID: 3989381803883531183}
   - component: {fileID: 3989381803856802031}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TREE1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3100,7 +3115,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7049404809273349780}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tree with shrine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3116,7 +3131,7 @@ Transform:
   m_GameObject: {fileID: 7049404809273349783}
   m_LocalRotation: {x: 0, y: 0.058165357, z: -0, w: -0.998307}
   m_LocalPosition: {x: -34.1, y: 9.200001, z: -39.7}
-  m_LocalScale: {x: 5, y: 6, z: 5}
+  m_LocalScale: {x: 4.7, y: 5.64, z: 4.7}
   m_Children:
   - {fileID: 7049404810596356957}
   - {fileID: 7376400508402197226}
@@ -3133,7 +3148,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7049404810596356957}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Texture Group
   m_TagString: Untagged
   m_Icon: {fileID: 0}
