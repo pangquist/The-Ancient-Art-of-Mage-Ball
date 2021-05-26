@@ -26,10 +26,13 @@ public class PillarLaunch : NetworkBehaviour
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         foreach (LayerMask hitableLayer in hitableLayers)
         {
+            
             Physics.Raycast(ray, out hit, range, hitableLayer);
 
-            if (hit.collider != null)
+            if (hit.collider != null && hit.collider.gameObject.CompareTag("Ground"))
             {
+                CmdDoPillar(hit.point);
+                useAbilities.SetOnCooldownAbility2();
                 break;
             }
         }
@@ -39,8 +42,7 @@ public class PillarLaunch : NetworkBehaviour
             return;
         }
         
-        CmdDoPillar(hit.point);
-        useAbilities.SetOnCooldownAbility2();
+        
     }
 
     [Command]

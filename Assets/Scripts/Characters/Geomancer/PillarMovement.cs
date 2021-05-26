@@ -17,10 +17,6 @@ public class PillarMovement : NetworkBehaviour
     GameObject pillarSmokeEffect;
     Vector3 effectPosition;
 
-
-
-
-
     void Start()
     {
         List<MyNetworkPlayer> players = ((MyNetworkManager)NetworkManager.singleton).Players;
@@ -54,14 +50,15 @@ public class PillarMovement : NetworkBehaviour
         effectPosition = new Vector3(gameObject.transform.position.x, 0, gameObject.transform.position.z);
         Debug.Log(effectPosition);
 
+        Vector3 pillarPos = pillarPosition.transform.position - pillarTop.transform.position;
+
         //pillar X/Z Movement
-        gameObject.transform.Translate(pillarPosition.transform.position - pillarTop.transform.position);
+        gameObject.transform.Translate(pillarPos.x, 0, pillarPos.z);
 
 
         if (gameObject.transform.position.y > 0)
         {
             goingUp = false;
-
         }
 
         //pillar Y movement
@@ -70,10 +67,8 @@ public class PillarMovement : NetworkBehaviour
             gameObject.transform.Translate(Vector3.up * forceUpwards * Time.deltaTime, Space.World);
             playerObject.transform.Translate(Vector3.up * (forceUpwards + 2) * Time.deltaTime, Space.World);
         }
+
         playerObject.GetComponent<PlayerMovement>().velocity.y = 0;
-
-
-               
 
         if (!hasSpawnedEffect)
         {
