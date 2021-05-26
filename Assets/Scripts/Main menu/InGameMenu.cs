@@ -11,6 +11,7 @@ public class InGameMenu : MonoBehaviour
     [Header("UI Elements")]
     [SerializeField] GameObject pauseMenuUI;
     [SerializeField] GameObject settingsMenuUI;
+    [SerializeField] GameObject controlsMenuUI;
 
     public static bool gameIsPaused = false;
 
@@ -46,6 +47,7 @@ public class InGameMenu : MonoBehaviour
     {
         pauseMenuUI.SetActive(false);
         settingsMenuUI.SetActive(false);
+        controlsMenuUI.SetActive(false);
         gameIsPaused = false;
     }
 
