@@ -14,6 +14,8 @@ public class Lockdown : NetworkBehaviour
     [SerializeField] float maxRange;
     [SerializeField] float area;
 
+    [SerializeField] Jailer jailerPassive;
+
     public override void OnStartAuthority()
     {
         enabled = true;
@@ -21,7 +23,7 @@ public class Lockdown : NetworkBehaviour
 
     private void Start()
     {
-
+        jailerPassive = gameObject.GetComponent<Jailer>();
     }
 
     [Client]
@@ -42,6 +44,8 @@ public class Lockdown : NetworkBehaviour
             {
                 if (hitObject.CompareTag("Enemy"))
                 {
+                    jailerPassive.TriggerBuff();
+
                     useAbilities.SetOnCooldownAbility2();
 
                     CmdCastSpell(hitObject.gameObject);

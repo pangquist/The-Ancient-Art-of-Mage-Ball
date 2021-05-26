@@ -12,6 +12,8 @@ public class RestrictCasting : NetworkBehaviour
     [SerializeField] float maxRange;
     [SerializeField] float area;
 
+    [SerializeField] Jailer jailerPassive;
+
     public override void OnStartAuthority()
     {
         enabled = true;
@@ -19,7 +21,7 @@ public class RestrictCasting : NetworkBehaviour
 
     private void Start()
     {
-
+        jailerPassive = gameObject.GetComponent<Jailer>();
     }
 
     [Client]
@@ -40,6 +42,8 @@ public class RestrictCasting : NetworkBehaviour
             {
                 if (hitObject.CompareTag("Player"))
                 {
+                    jailerPassive.TriggerBuff();
+
                     CmdCastRestrict(hitObject.gameObject);
 
                     hitPlayer = true;

@@ -2650,12 +2650,11 @@ MonoBehaviour:
   tooltipBackground: {fileID: 69312783}
   headers:
   - Chain Grapple
-  - Lockdown
+  - Chain Lockdown
   - Restrict Magic
   - Jailer
   contents:
-  - Summons a magic chain that pulls the ball towards you or lets you grapple across
-    the map
+  - Summons a magic chain to drag the ball or propel himself forwards
   - Summons several chains to hold the ball in place for a short duration
   - Locks the magic of the target, putting all their abilities on cooldown.
   - Gains temporary bonuses to speed and jumping power each time a target is locked

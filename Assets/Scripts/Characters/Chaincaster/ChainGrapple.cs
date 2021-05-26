@@ -45,7 +45,7 @@ public class ChainGrapple : NetworkBehaviour
             return;
         }
 
-        if (Input.GetMouseButton(0) == false && currentDuration <= 0)
+        if (Input.GetMouseButton(0) == false && currentDuration <= duration / 2)
         {
             StopGrapple();
         }
