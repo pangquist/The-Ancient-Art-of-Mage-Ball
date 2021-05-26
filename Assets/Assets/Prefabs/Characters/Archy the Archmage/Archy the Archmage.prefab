@@ -363,6 +363,7 @@ MonoBehaviour:
   CountdownText: {fileID: 2133418789}
   scoringTeamText: {fileID: 8798346510357571650}
   trialStartSound: {fileID: 7264714893270437481}
+  playStartSound: 1
 --- !u!136 &1398020548929700590
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3998,6 +3999,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_enableAutoSizing
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2409821224520615086, guid: 17a19f53f8cd3f941b790329e3507401,
+        type: 3}
+      propertyPath: m_AssetId
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3023062009644946767, guid: 17a19f53f8cd3f941b790329e3507401,
         type: 3}

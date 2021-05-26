@@ -2300,6 +2300,7 @@ MonoBehaviour:
   CountdownText: {fileID: 5596187986329139151}
   scoringTeamText: {fileID: 4013735155581893800}
   trialStartSound: {fileID: 8358928896659440853}
+  playStartSound: 1
 --- !u!136 &3758272146365123710
 CapsuleCollider:
   m_ObjectHideFlags: 0
