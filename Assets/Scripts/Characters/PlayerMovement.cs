@@ -25,10 +25,13 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] float gravity = -9.81f;
     [SerializeField] float speed = 8;
 
+    [SerializeField] bool canStrafe;
+
     [SerializeField] bool matchIsPaused = true;
     float directionX;
     float directionZ;
     float groundDistance = 0.2f;
+   
     Vector3 move;
     public Vector3 velocity;
     public bool isGrounded;
@@ -116,23 +119,27 @@ public class PlayerMovement : NetworkBehaviour
 
         if (move != Vector3.zero)
         {
-            if (directionX < 0)
+            if (directionX < 0 && canStrafe)
             {
                 animator.SetBool("isStrafingLeft", true);
                 animator.SetBool("isWalking", false);
                 animator.SetBool("isStrafingRight", false);
             }
-            else if (directionX > 0)
+            else if (directionX > 0 && canStrafe)
             {
                 animator.SetBool("isStrafingRight", true);
                 animator.SetBool("isWalking", false);
                 animator.SetBool("isStrafingLeft", false);
             }
-            else if (directionX == 0)
+            else if (directionX == 0 && canStrafe)
             {
                 animator.SetBool("isWalking", true);
                 animator.SetBool("isStrafingRight", false);
                 animator.SetBool("isStrafingLeft", false);
+            }
+            else
+            {
+                animator.SetBool("isWalking", true);
             }
 
         }

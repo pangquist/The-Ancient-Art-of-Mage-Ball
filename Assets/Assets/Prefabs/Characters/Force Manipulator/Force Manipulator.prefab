@@ -2357,6 +2357,7 @@ MonoBehaviour:
   jumpPower: 10
   gravity: -9.81
   speed: 16
+  canStrafe: 1
   matchIsPaused: 1
   velocity: {x: 0, y: 0, z: 0}
   isGrounded: 1
