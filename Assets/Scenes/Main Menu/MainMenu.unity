@@ -3082,7 +3082,7 @@ GameObject:
   - component: {fileID: 495990713}
   - component: {fileID: 495990714}
   m_Layer: 0
-  m_Name: w
+  m_Name: LeaveLobbyButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
