@@ -10,6 +10,7 @@ public class LockdownBehaviour : NetworkBehaviour
     private Vector2 offsetSpeed = new Vector2(15, 0);
 
     [SerializeField] GameObject target;
+    [SerializeField] float force;
     [SerializeField] float duration;
 
     public override void OnStartAuthority()
@@ -62,7 +63,7 @@ public class LockdownBehaviour : NetworkBehaviour
     [Command]
     void CmdMoveTarget(GameObject _target, Vector3 _vector)
     {
-        _target.gameObject.GetComponent<Rigidbody>().AddForce(_vector * 20 * Time.deltaTime);
+        _target.gameObject.GetComponent<Rigidbody>().AddForce(_vector * force * Time.deltaTime);
     }
 
     [Client]

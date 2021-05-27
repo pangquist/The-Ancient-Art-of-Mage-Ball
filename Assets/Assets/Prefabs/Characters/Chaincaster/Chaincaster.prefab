@@ -666,6 +666,7 @@ GameObject:
   - component: {fileID: 4032744186232787454}
   - component: {fileID: 4309001684256002495}
   - component: {fileID: 3286492939516819308}
+  - component: {fileID: 1250621574692289349}
   m_Layer: 9
   m_Name: Chaincaster
   m_TagString: Player
@@ -748,9 +749,10 @@ MonoBehaviour:
   castPoint: {fileID: 1299691982749212937}
   camera: {fileID: 5561234001153099423}
   player: {fileID: 1398020548929700589}
-  maxRange: 25
-  grappleSpeed: 10
-  duration: 0.5
+  maxRange: 35
+  grappleSpeed: 8
+  dragSpeed: 80
+  duration: 0.75
   currentDuration: 0
 --- !u!114 &-6952741555833348994
 MonoBehaviour:
@@ -774,7 +776,9 @@ MonoBehaviour:
   castPoint: {fileID: 1299691982749212937}
   camera: {fileID: 5561234001153099423}
   player: {fileID: 1398020548929700589}
-  maxRange: 25
+  maxRange: 35
+  area: 4
+  jailerPassive: {fileID: 0}
 --- !u!114 &8333611319720115501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -793,7 +797,11 @@ MonoBehaviour:
   castPoint: {fileID: 1299691982749212937}
   camera: {fileID: 5561234001153099423}
   player: {fileID: 1398020548929700589}
-  maxRange: 25
+  hitEffect: {fileID: 6590868245128863341, guid: cee81df5ec5f6f6408a6eda912c4741f,
+    type: 3}
+  maxRange: 35
+  area: 2.5
+  jailerPassive: {fileID: 0}
 --- !u!136 &1398020548929700590
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -847,9 +855,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   jumpButton: 32
-  jumpPower: 9
+  jumpPower: 6
   gravity: -9.81
-  speed: 12
+  speed: 10
   matchIsPaused: 1
   velocity: {x: 0, y: 0, z: 0}
   isGrounded: 0
@@ -960,7 +968,7 @@ MonoBehaviour:
   cooldownAbility1: 1
   ability1Name: {fileID: 7400000, guid: e71a21f353684ad49a5eb70a0cabf526, type: 2}
   castAbility2Button: 324
-  cooldownAbility2: 6
+  cooldownAbility2: 5
   ability2Name: {fileID: 7400000, guid: b0ac5d7e0c0a11940a38e7b3033b5634, type: 2}
   castAbility3Button: 101
   cooldownAbility3: 10
@@ -1129,6 +1137,27 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1398020548929700587}
   m_Enabled: 0
+--- !u!114 &1250621574692289349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1398020548929700587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a8e5494064d37b48bc962bc22af22cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  baseSpeed: 0
+  maxSpeed: 16
+  speedIncrement: 1
+  baseJump: 0
+  maxJump: 12
+  jumpIncrement: 1
+  buffDuration: 0
+  maxDuration: 10
 --- !u!1 &1398020549391249269
 GameObject:
   m_ObjectHideFlags: 0
