@@ -747,7 +747,7 @@ MonoBehaviour:
   playerCamera: {fileID: 5826631109005300286}
   castPoint: {fileID: 1299691982749212937}
   maxRange: 35
-  grappleSpeed: 8
+  grappleSpeed: 7
   dragSpeed: 80
   duration: 0.75
   currentDuration: 0
