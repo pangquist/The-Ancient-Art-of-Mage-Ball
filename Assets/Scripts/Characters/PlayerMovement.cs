@@ -91,13 +91,23 @@ public class PlayerMovement : NetworkBehaviour
         directionX = Input.GetAxis("Horizontal");
         directionZ = Input.GetAxis("Vertical");
 
+        if(directionX != 0 && directionZ != 0)
+        {
+            move = (transform.right * directionX + transform.forward * directionZ)/ Mathf.Sqrt(2f); // to make strafing work.
+        }
+        else
+        {
+            move = transform.right * directionX + transform.forward * directionZ;
+        }
+
         if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2;
         }
 
 
-        move = transform.right * directionX + transform.forward * directionZ;
+        //move = transform.right * directionX + transform.forward * directionZ;
+        //if(Input.GetKey(KeyCode.W)&& Input.GetKey(KeyCode.A)
 
         if (InGameMenu.gameIsPaused)
         {
