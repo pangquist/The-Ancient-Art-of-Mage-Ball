@@ -5,15 +5,19 @@ using UnityEngine;
 
 public class RestrictCasting : NetworkBehaviour
 {
+    [Header("Dependencies")]
+    [SerializeField] MyNetworkPlayer playerInfo;
     [SerializeField] UseAbilities useAbilities;
-    [SerializeField] Transform castPoint, camera, player;
-    [SerializeField] GameObject hitEffect;
+    [SerializeField] Jailer jailerPassive;
+    [SerializeField] Camera playerCamera;
+    [SerializeField] Transform castPoint;
 
+    [Header("Values")]
     [SerializeField] float maxRange;
     [SerializeField] float area;
 
-    [SerializeField] Jailer jailerPassive;
-    [SerializeField] MyNetworkPlayer playerInfo;
+    [Header("Visual Effect")]
+    [SerializeField] GameObject hitEffect;
 
     public override void OnStartAuthority()
     {
@@ -35,7 +39,7 @@ public class RestrictCasting : NetworkBehaviour
         }
 
         RaycastHit hit;
-        if (Physics.Raycast(camera.position, camera.forward, out hit, maxRange))
+        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, maxRange))
         {
             bool hitPlayer = false;
 

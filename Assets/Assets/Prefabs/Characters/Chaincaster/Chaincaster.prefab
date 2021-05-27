@@ -741,22 +741,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  grapplePrefab: {fileID: 2115999373118364624, guid: 7ec48c5c7efec31469e8a39e497a8396,
-    type: 3}
-  grappleObject: {fileID: 0}
-  grapplePoint: {x: 0, y: 0, z: 0}
-  pointOffset: {x: 0, y: 0, z: 0}
+  playerInfo: {fileID: -3599253830600747055}
   useAbilities: {fileID: 1255805223110542875}
   controller: {fileID: 1398020548929700585}
+  playerCamera: {fileID: 5826631109005300286}
   castPoint: {fileID: 1299691982749212937}
-  camera: {fileID: 5561234001153099423}
-  player: {fileID: 1398020548929700589}
   maxRange: 35
   grappleSpeed: 8
   dragSpeed: 80
   duration: 0.75
   currentDuration: 0
-  playerInfo: {fileID: 0}
 --- !u!114 &-6952741555833348994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -772,16 +766,12 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   useAbilities: {fileID: 1255805223110542875}
+  jailerPassive: {fileID: 1250621574692289349}
   chain: {fileID: 9212652852658391536, guid: b7c1cb04b8ffb9b46aada444c93cc38b, type: 3}
-  grappleable:
-    serializedVersion: 2
-    m_Bits: 128
+  playerCamera: {fileID: 5826631109005300286}
   castPoint: {fileID: 1299691982749212937}
-  camera: {fileID: 5561234001153099423}
-  player: {fileID: 1398020548929700589}
   maxRange: 35
   area: 4
-  jailerPassive: {fileID: 0}
 --- !u!114 &8333611319720115501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -796,16 +786,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  playerInfo: {fileID: -3599253830600747055}
   useAbilities: {fileID: 1255805223110542875}
+  jailerPassive: {fileID: 1250621574692289349}
+  playerCamera: {fileID: 5826631109005300286}
   castPoint: {fileID: 1299691982749212937}
-  camera: {fileID: 5561234001153099423}
-  player: {fileID: 1398020548929700589}
-  hitEffect: {fileID: 6590868245128863341, guid: cee81df5ec5f6f6408a6eda912c4741f,
-    type: 3}
   maxRange: 35
   area: 2.5
-  jailerPassive: {fileID: 0}
-  playerInfo: {fileID: 0}
+  hitEffect: {fileID: 6590868245128863341, guid: cee81df5ec5f6f6408a6eda912c4741f,
+    type: 3}
 --- !u!136 &1398020548929700590
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1153,11 +1142,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a8e5494064d37b48bc962bc22af22cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  baseSpeed: 0
+  player: {fileID: 1398020548929700584}
   maxSpeed: 16
   speedIncrement: 1
-  baseJump: 0
   maxJump: 12
   jumpIncrement: 1
   buffDuration: 0

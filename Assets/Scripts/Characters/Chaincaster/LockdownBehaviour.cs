@@ -9,6 +9,7 @@ public class LockdownBehaviour : NetworkBehaviour
     private Material material;
     private Vector2 offsetSpeed = new Vector2(15, 0);
 
+    [Header("Values")]
     [SerializeField] GameObject target;
     [SerializeField] float force;
     [SerializeField] float duration;
@@ -20,7 +21,6 @@ public class LockdownBehaviour : NetworkBehaviour
 
     void Start()
     {
-        Debug.Log("Chain created");
         target = GameObject.FindGameObjectWithTag("Enemy");
         chain = gameObject.GetComponent<LineRenderer>();
         material = chain.material;
@@ -39,8 +39,6 @@ public class LockdownBehaviour : NetworkBehaviour
         {
             return;
         }
-
-        Debug.Log("Chain update");
 
         MoveTarget(target);
     }
