@@ -31,6 +31,11 @@ public class MyNetworkPlayer : NetworkBehaviour
     [SerializeField] TMP_Text blueScoreText;
     [SerializeField] TMP_Text timeText;
     [SerializeField] Image teamIcon;
+    [SerializeField] Image ability1Border;
+    [SerializeField] Image ability2Border;
+    [SerializeField] Image ability3Border;
+    [SerializeField] Image border;
+    [SerializeField] Image TimerBorder;
 
     [Header("Name Canvas")]
     [SerializeField] GameObject nameCanvas;
@@ -200,6 +205,10 @@ public class MyNetworkPlayer : NetworkBehaviour
     {
         displayNameText.color = playerColor;
         teamIcon.color = playerColor;
+        ability1Border.color = playerColor;
+        ability2Border.color = playerColor;
+        ability3Border.color = playerColor;
+        border.color = playerColor;
 
         if (hasAuthority)
         {
@@ -257,7 +266,8 @@ public class MyNetworkPlayer : NetworkBehaviour
         countdownCanvas.GetComponent<Animator>().Play("Pulse");
 
         if (gamestateManager.PauseTimer <= 0)
-        {
+        {   
+            TimerBorder.transform.localScale = new Vector3(TimerBorder.transform.localScale.x * 0.5f, TimerBorder.transform.localScale.y, TimerBorder.transform.localScale.z);
             countdownCanvas.SetActive(false);
             if (!trialSoundHasPlayed && playStartSound)
             {
