@@ -13,6 +13,7 @@ public class RestrictCasting : NetworkBehaviour
     [SerializeField] float area;
 
     [SerializeField] Jailer jailerPassive;
+    [SerializeField] MyNetworkPlayer playerInfo;
 
     public override void OnStartAuthority()
     {
@@ -22,6 +23,7 @@ public class RestrictCasting : NetworkBehaviour
     private void Start()
     {
         jailerPassive = gameObject.GetComponent<Jailer>();
+        playerInfo = gameObject.GetComponent<MyNetworkPlayer>();
     }
 
     [Client]
@@ -42,11 +44,16 @@ public class RestrictCasting : NetworkBehaviour
             {
                 if (hitObject.CompareTag("Player"))
                 {
-                    jailerPassive.TriggerBuff();
+                    MyNetworkPlayer targetInfo = hitObject.gameObject.GetComponent<MyNetworkPlayer>();
 
-                    CmdCastRestrict(hitObject.gameObject);
+                    if(targetInfo.TeamName != playerInfo.TeamName)
+                    {
+                        jailerPassive.TriggerBuff();
 
-                    hitPlayer = true;
+                        CmdCastRestrict(hitObject.gameObject);
+
+                        hitPlayer = true;
+                    }
                 }
             }
 
