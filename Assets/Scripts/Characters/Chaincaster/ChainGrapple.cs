@@ -9,8 +9,8 @@ public class ChainGrapple : NetworkBehaviour
     private Material material;
     private Vector2 offsetSpeed = new Vector2(15, 0);
     private RaycastHit raycastHit;
-    [SerializeField] GameObject grapplePrefab;
 
+    [SerializeField] GameObject grapplePrefab;
     [SerializeField] GameObject grappleObject;
 
     [SerializeField] Vector3 grapplePoint;
@@ -41,6 +41,8 @@ public class ChainGrapple : NetworkBehaviour
         material = lr.material;
 
         currentDuration = duration;
+
+        grapplePrefab = new GameObject();
     }
 
     [Client]
