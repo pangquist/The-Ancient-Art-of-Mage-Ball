@@ -343,7 +343,7 @@ MonoBehaviour:
   - Arcane Explosion
   - Enhanced Jump
   - Mage Dash
-  - Spell        slinging
+  - Spell        Slinging
   contents:
   - Creates a magical explosion which pushes the ball from the center of the explosion
   - Archy does an enhanced jump, launching him high into the air
@@ -6585,7 +6585,7 @@ MonoBehaviour:
   - Amplifying Beam
   - Gravity Warp
   - Force        Wall
-  - Perfected control
+  - Perfected Control
   contents:
   - Creates a beam for 5 seconds that pushes the ball forward
   - Warps the gravity of the ball and launches it into the air
