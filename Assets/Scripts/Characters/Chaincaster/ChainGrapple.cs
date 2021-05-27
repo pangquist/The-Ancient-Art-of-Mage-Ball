@@ -9,7 +9,7 @@ public class ChainGrapple : NetworkBehaviour
     private Material material;
     private Vector2 offsetSpeed = new Vector2(15, 0);
     private RaycastHit raycastHit;
-    private Vector3 grapplePoint;
+    private Vector3 grapplePoint, pointOffset;
 
     [SerializeField] UseAbilities useAbilities;
     [SerializeField] CharacterController controller;
@@ -20,6 +20,8 @@ public class ChainGrapple : NetworkBehaviour
     [SerializeField] float dragSpeed;
     [SerializeField] float duration;
     [SerializeField] float currentDuration;
+
+    [SerializeField] MyNetworkPlayer playerInfo;
 
     public override void OnStartAuthority()
     {
@@ -40,9 +42,15 @@ public class ChainGrapple : NetworkBehaviour
     [Client]
     private void Update()
     {
+
         if (!hasAuthority)
         {
             return;
+        }
+
+        if (GameObject.Find("GamestateManager").GetComponent<GamestateManager>().matchIsPaused)
+        {
+            StopGrapple();
         }
 
         if (Input.GetMouseButton(0) == false && currentDuration <= duration / 2)
@@ -53,6 +61,8 @@ public class ChainGrapple : NetworkBehaviour
         if (lr.positionCount == 0) return;
 
         currentDuration -= Time.deltaTime;
+
+        grapplePoint = raycastHit.transform.position + pointOffset;
 
         if (raycastHit.transform.gameObject.tag == "Enemy")
         {
@@ -67,14 +77,16 @@ public class ChainGrapple : NetworkBehaviour
         {
             Vector3 grappleVector;
 
-            if (raycastHit.transform.gameObject.GetComponent<Rigidbody>() != null || raycastHit.transform.gameObject.GetComponent<CharacterController>() != null)
-            {
-                grappleVector = raycastHit.transform.position - player.position;
-            }
-            else
-            {
-                grappleVector = grapplePoint - player.position;
-            }
+            //if (raycastHit.transform.gameObject.GetComponent<Rigidbody>() != null || raycastHit.transform.gameObject.GetComponent<CharacterController>() != null)
+            //{
+            //    grappleVector = raycastHit.transform.position - player.position;
+            //}
+            //else
+            //{
+            //    grappleVector = grapplePoint - player.position;
+            //}
+
+            grappleVector = grapplePoint - player.position;
 
             controller.Move(grappleVector * grappleSpeed * Time.deltaTime);
         }
@@ -94,7 +106,11 @@ public class ChainGrapple : NetworkBehaviour
         {
             useAbilities.SetOnCooldownAbility1();
 
-            grapplePoint = hit.point;
+            pointOffset = hit.transform.gameObject.transform.position - hit.point;
+
+            //pointOffset = Vector3.
+
+            //grapplePoint = hit.point;
 
             raycastHit = hit;
 
@@ -170,7 +186,7 @@ public class ChainGrapple : NetworkBehaviour
             return;
         }
 
-        grapplePoint = target.transform.position;
+        //grapplePoint = target.transform.position;
 
         Vector3 grappleVector = player.position - grapplePoint;
 

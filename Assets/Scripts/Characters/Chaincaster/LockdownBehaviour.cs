@@ -30,6 +30,11 @@ public class LockdownBehaviour : NetworkBehaviour
     [Client]
     void Update()
     {
+        if (GameObject.Find("GamestateManager").GetComponent<GamestateManager>().matchIsPaused)
+        {
+            return;
+        }
+
         if (!hasAuthority)
         {
             return;
@@ -93,6 +98,11 @@ public class LockdownBehaviour : NetworkBehaviour
     [ClientRpc]
     void RpcDrawChain(GameObject _target, GameObject _object, Vector2 vector, float time)
     {
+        if (GameObject.Find("GamestateManager").GetComponent<GamestateManager>().matchIsPaused)
+        {
+            return;
+        }
+
         chain = _object.GetComponent<LineRenderer>();
         chain.positionCount = 2;
 
