@@ -32,7 +32,10 @@ public class PlayerMovement : NetworkBehaviour
     Vector3 move;
     public Vector3 velocity;
     public bool isGrounded;
-    
+
+    public float JumpPower { get { return jumpPower; } set { jumpPower = value; } }
+    public float Speed { get { return speed; } set { speed = value; } }
+
     public override void OnStartAuthority()
     {
         base.OnStartAuthority();

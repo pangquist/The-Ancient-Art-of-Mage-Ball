@@ -2684,15 +2684,15 @@ MonoBehaviour:
   tooltipBackground: {fileID: 69312783}
   headers:
   - Chain Grapple
-  - Lockdown
+  - Chain Lockdown
   - Restrict Magic
-  - '-'
+  - Jailer
   contents:
-  - Summons a magic chain that pulls the ball towards you or lets you grapple across
-    the map
+  - Summons a magic chain to drag the ball or propel himself forwards
   - Summons several chains to hold the ball in place for a short duration
   - Locks the magic of the target, putting all their abilities on cooldown.
-  - 
+  - Gains temporary bonuses to speed and jumping power each time a target is locked
+    with his other abilites.
   tooltips:
   - {fileID: 1757956810}
   - {fileID: 223509488}
@@ -15110,7 +15110,7 @@ PrefabInstance:
     - target: {fileID: 7027079361099392649, guid: f9f2dd1600203254eabef20669d45d98,
         type: 3}
       propertyPath: spawnPrefabs.Array.size
-      value: 19
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7027079361099392649, guid: f9f2dd1600203254eabef20669d45d98,
         type: 3}
@@ -15193,6 +15193,12 @@ PrefabInstance:
       propertyPath: spawnPrefabs.Array.data[18]
       value: 
       objectReference: {fileID: 9212652852658391536, guid: b7c1cb04b8ffb9b46aada444c93cc38b,
+        type: 3}
+    - target: {fileID: 7027079361099392649, guid: f9f2dd1600203254eabef20669d45d98,
+        type: 3}
+      propertyPath: spawnPrefabs.Array.data[19]
+      value: 
+      objectReference: {fileID: 6590868245128863341, guid: cee81df5ec5f6f6408a6eda912c4741f,
         type: 3}
     - target: {fileID: 7027079361099392651, guid: f9f2dd1600203254eabef20669d45d98,
         type: 3}

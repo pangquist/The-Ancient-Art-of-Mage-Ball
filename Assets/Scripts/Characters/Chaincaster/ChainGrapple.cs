@@ -17,6 +17,7 @@ public class ChainGrapple : NetworkBehaviour
     [SerializeField] Transform castPoint, camera, player;
     [SerializeField] private float maxRange = 25f;
     [SerializeField] float grappleSpeed;
+    [SerializeField] float dragSpeed;
     [SerializeField] float duration;
     [SerializeField] float currentDuration;
 
@@ -44,7 +45,7 @@ public class ChainGrapple : NetworkBehaviour
             return;
         }
 
-        if (Input.GetMouseButton(0) == false && currentDuration <= 0)
+        if (Input.GetMouseButton(0) == false && currentDuration <= duration / 2)
         {
             StopGrapple();
         }
@@ -64,7 +65,16 @@ public class ChainGrapple : NetworkBehaviour
         }
         else
         {
-            Vector3 grappleVector = grapplePoint - player.position;
+            Vector3 grappleVector;
+
+            if (raycastHit.transform.gameObject.GetComponent<Rigidbody>() != null || raycastHit.transform.gameObject.GetComponent<CharacterController>() != null)
+            {
+                grappleVector = raycastHit.transform.position - player.position;
+            }
+            else
+            {
+                grappleVector = grapplePoint - player.position;
+            }
 
             controller.Move(grappleVector * grappleSpeed * Time.deltaTime);
         }
@@ -172,6 +182,6 @@ public class ChainGrapple : NetworkBehaviour
     {
         Rigidbody ball = target.GetComponent<Rigidbody>();
 
-        ball.AddForce(vector * grappleSpeed * 10 * time);
+        ball.AddForce(vector * dragSpeed * time);
     }
 }
