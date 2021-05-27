@@ -9,11 +9,15 @@ public class ChainGrapple : NetworkBehaviour
     private Material material;
     private Vector2 offsetSpeed = new Vector2(15, 0);
     private RaycastHit raycastHit;
-    private Vector3 grapplePoint, pointOffset;
+    [SerializeField] GameObject grapplePrefab;
+
+    [SerializeField] GameObject grappleObject;
+
+    [SerializeField] Vector3 grapplePoint;
+    [SerializeField] Vector3 pointOffset;
 
     [SerializeField] UseAbilities useAbilities;
     [SerializeField] CharacterController controller;
-    [SerializeField] LayerMask grappleable;
     [SerializeField] Transform castPoint, camera, player;
     [SerializeField] private float maxRange = 25f;
     [SerializeField] float grappleSpeed;
@@ -62,7 +66,7 @@ public class ChainGrapple : NetworkBehaviour
 
         currentDuration -= Time.deltaTime;
 
-        grapplePoint = raycastHit.transform.position + pointOffset;
+        grapplePoint = grappleObject.transform.position;
 
         if (raycastHit.transform.gameObject.tag == "Enemy")
         {
@@ -106,11 +110,11 @@ public class ChainGrapple : NetworkBehaviour
         {
             useAbilities.SetOnCooldownAbility1();
 
-            pointOffset = hit.transform.gameObject.transform.position - hit.point;
+            grappleObject = Instantiate(grapplePrefab, hit.point, transform.rotation) as GameObject;
 
-            //pointOffset = Vector3.
+            grappleObject.transform.parent = hit.transform;
 
-            //grapplePoint = hit.point;
+            grapplePoint = grappleObject.transform.position;
 
             raycastHit = hit;
 
@@ -161,6 +165,7 @@ public class ChainGrapple : NetworkBehaviour
     [Client]
     void StopGrapple()
     {
+        Destroy(grappleObject);
         currentDuration = duration;
         CmdStopGrapple(gameObject);
     }

@@ -741,11 +741,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  grapplePrefab: {fileID: 2115999373118364624, guid: 7ec48c5c7efec31469e8a39e497a8396,
+    type: 3}
+  grappleObject: {fileID: 0}
+  grapplePoint: {x: 0, y: 0, z: 0}
+  pointOffset: {x: 0, y: 0, z: 0}
   useAbilities: {fileID: 1255805223110542875}
   controller: {fileID: 1398020548929700585}
-  grappleable:
-    serializedVersion: 2
-    m_Bits: 64
   castPoint: {fileID: 1299691982749212937}
   camera: {fileID: 5561234001153099423}
   player: {fileID: 1398020548929700589}
@@ -754,6 +756,7 @@ MonoBehaviour:
   dragSpeed: 80
   duration: 0.75
   currentDuration: 0
+  playerInfo: {fileID: 0}
 --- !u!114 &-6952741555833348994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -802,6 +805,7 @@ MonoBehaviour:
   maxRange: 35
   area: 2.5
   jailerPassive: {fileID: 0}
+  playerInfo: {fileID: 0}
 --- !u!136 &1398020548929700590
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4608,12 +4612,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80d201be22802bc45913ff732915d5af, type: 3}
---- !u!224 &4386475343395933432 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 1935993479335649121, guid: 80d201be22802bc45913ff732915d5af,
-    type: 3}
-  m_PrefabInstance: {fileID: 2738720575812391833}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4692742653844152247 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7430406461004287022, guid: 80d201be22802bc45913ff732915d5af,
@@ -4626,6 +4624,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &4386475343395933432 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1935993479335649121, guid: 80d201be22802bc45913ff732915d5af,
+    type: 3}
+  m_PrefabInstance: {fileID: 2738720575812391833}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5883825956806244698
 PrefabInstance:
   m_ObjectHideFlags: 0
