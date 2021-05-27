@@ -36,6 +36,7 @@ public class MyNetworkPlayer : NetworkBehaviour
     [SerializeField] Image ability3Border;
     [SerializeField] Image border;
     [SerializeField] Image TimerBorder;
+    Vector3 borderSize;
 
     [Header("Name Canvas")]
     [SerializeField] GameObject nameCanvas;
@@ -122,7 +123,7 @@ public class MyNetworkPlayer : NetworkBehaviour
     public override void OnStartAuthority()
     {
         base.OnStartAuthority();
-
+        borderSize = new Vector3(TimerBorder.transform.localScale.x * 0.5f, TimerBorder.transform.localScale.y, TimerBorder.transform.localScale.z);
         trialSoundHasPlayed = false;
         settingsCanvas.SetActive(true);
         gameObject.GetComponent<AudioListener>().enabled = true;
@@ -266,8 +267,8 @@ public class MyNetworkPlayer : NetworkBehaviour
         countdownCanvas.GetComponent<Animator>().Play("Pulse");
 
         if (gamestateManager.PauseTimer <= 0)
-        {   
-            TimerBorder.transform.localScale = new Vector3(TimerBorder.transform.localScale.x * 0.5f, TimerBorder.transform.localScale.y, TimerBorder.transform.localScale.z);
+        {
+            TimerBorder.transform.localScale = borderSize;
             countdownCanvas.SetActive(false);
             if (!trialSoundHasPlayed && playStartSound)
             {
