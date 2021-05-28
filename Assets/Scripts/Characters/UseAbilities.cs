@@ -182,6 +182,6 @@ public class UseAbilities : NetworkBehaviour
 
     public void SetCooldownToPercentage(int cooldownIndex, float percentage)
     {
-        currentCooldowns[cooldownIndex] -= cooldowns[cooldownIndex] * 0.75f;
+        currentCooldowns[cooldownIndex] = cooldowns[cooldownIndex] * (percentage/100);
     }
 }

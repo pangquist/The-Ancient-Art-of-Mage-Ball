@@ -34,12 +34,13 @@ public class GravitySwap : NetworkBehaviour
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         Physics.Raycast(ray, out hit, range, hitableLayer);
 
-        useAbilities.SetOnCooldown(1);
-        if (hit.collider == null)
+        if (hit.collider == null || hit.collider.gameObject.tag != "Enemy")
         {
+            useAbilities.SetCooldownToPercentage(1, 50);
             return;
         }
 
+        useAbilities.SetOnCooldown(1);
         Debug.Log($"Hit object name: {hit.collider.gameObject}");
         ball = hit.collider.gameObject;
         CmdDoSpell(ball);

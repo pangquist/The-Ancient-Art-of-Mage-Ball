@@ -32,29 +32,41 @@ public class ForceWall : NetworkBehaviour
 
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         Physics.Raycast(ray, out hit, range, hitableLayer);
-
+        
         if (hit.collider == null)
         {
+            Vector3 point = ray.origin + (ray.direction * range);
+            CmdDoSpell(point, false);
+            useAbilities.ReduceAllCooldowns(1, 2);
+            useAbilities.SetOnCooldown(2);
             return;
         }
 
-        CmdDoSpell(hit.point);
+        CmdDoSpell(hit.point, true);
         useAbilities.SetOnCooldown(2);
     }
 
     [Command]
-    void CmdDoSpell(Vector3 hitLocation)
+    void CmdDoSpell(Vector3 hitLocation, bool hitGround)
     {
-        RpcDoSpell(hitLocation);
+        RpcDoSpell(hitLocation, hitGround);
     }
 
     [ClientRpc]
-    void RpcDoSpell(Vector3 hitLocation)
+    void RpcDoSpell(Vector3 hitLocation, bool hitGround)
     {
         soundEffect.Play();
         if (NetworkServer.active)
         {
-            GameObject instantiatedForceWall = Instantiate(forceWall, hitLocation + new Vector3(0, 2, 0), gameObject.GetComponent<Transform>().transform.rotation) as GameObject;
+            GameObject instantiatedForceWall;
+            if (hitGround)
+            {
+                instantiatedForceWall = Instantiate(forceWall, hitLocation + new Vector3(0, 2, 0), gameObject.GetComponent<Transform>().transform.rotation) as GameObject;
+            }
+            else
+            {
+                instantiatedForceWall = Instantiate(forceWall, hitLocation, gameObject.GetComponent<Transform>().transform.rotation) as GameObject;
+            }
             NetworkServer.Spawn(instantiatedForceWall);
         }
     }
