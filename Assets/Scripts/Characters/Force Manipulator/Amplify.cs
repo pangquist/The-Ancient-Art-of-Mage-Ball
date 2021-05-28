@@ -38,7 +38,7 @@ public class Amplify : NetworkBehaviour
     void CmdSpawnBeam()
     {
         RpcActivateBeam();
-        useAbilities.SetOnCooldownAbility1();
+        useAbilities.SetOnCooldown(0);
     }
 
     [ClientRpc]

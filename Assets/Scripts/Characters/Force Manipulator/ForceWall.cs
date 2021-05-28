@@ -39,7 +39,7 @@ public class ForceWall : NetworkBehaviour
         }
 
         CmdDoSpell(hit.point);
-        useAbilities.SetOnCooldownAbility3();
+        useAbilities.SetOnCooldown(2);
     }
 
     [Command]

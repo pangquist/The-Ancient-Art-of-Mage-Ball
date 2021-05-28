@@ -50,7 +50,7 @@ public class EarthLevitate : NetworkBehaviour
         groundPositionUnderPlayer = new Vector3(gameObject.transform.position.x, groundTransform[0].transform.position.y, gameObject.transform.position.z);
         CmdSpawnPillarBridge(gameObject, groundPositionUnderPlayer);
         hasSpawnedPillar = true;
-        useAbilities.SetOnCooldownAbility3();
+        useAbilities.SetOnCooldown(2);
     }
 
     [Client]

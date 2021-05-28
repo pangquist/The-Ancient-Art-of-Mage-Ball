@@ -1569,9 +1569,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.001
-  controller: {fileID: 0}
+  controller: {fileID: 3758272146365123705}
   gamestateManager: {fileID: 0}
   useAbilities: {fileID: 8625832493932510498}
+  movement: {fileID: 3758272146365123704}
   teamName: 
   displayName: Missing Name
   playerColor: {r: 1, g: 1, b: 1, a: 1}

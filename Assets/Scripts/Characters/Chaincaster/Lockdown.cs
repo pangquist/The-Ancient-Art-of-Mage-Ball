@@ -46,7 +46,7 @@ public class Lockdown : NetworkBehaviour
                 {
                     jailerPassive.TriggerBuff();
 
-                    useAbilities.SetOnCooldownAbility2();
+                    useAbilities.SetOnCooldown(1);
 
                     CmdCastSpell(hitObject.gameObject);
                 }

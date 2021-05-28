@@ -348,6 +348,7 @@ MonoBehaviour:
   controller: {fileID: 0}
   gamestateManager: {fileID: 0}
   useAbilities: {fileID: 7626238677252518089}
+  movement: {fileID: 1398020548929700584}
   teamName: 
   displayName: Missing Name
   playerColor: {r: 1, g: 1, b: 1, a: 1}

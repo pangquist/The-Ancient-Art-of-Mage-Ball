@@ -92,7 +92,7 @@ public class ChainGrapple : NetworkBehaviour
         RaycastHit hit;
         if(Physics.Raycast(camera.position, camera.forward, out hit, maxRange))
         {
-            useAbilities.SetOnCooldownAbility1();
+            useAbilities.SetOnCooldown(0);
 
             grapplePoint = hit.point;
 

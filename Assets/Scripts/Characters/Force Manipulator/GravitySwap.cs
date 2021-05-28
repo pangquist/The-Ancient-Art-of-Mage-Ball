@@ -34,7 +34,7 @@ public class GravitySwap : NetworkBehaviour
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         Physics.Raycast(ray, out hit, range, hitableLayer);
 
-        useAbilities.SetOnCooldownAbility2();
+        useAbilities.SetOnCooldown(1);
         if (hit.collider == null)
         {
             return;

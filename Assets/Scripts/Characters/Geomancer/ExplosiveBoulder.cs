@@ -44,7 +44,7 @@ public class ExplosiveBoulder : NetworkBehaviour
         //if (NetworkServer.active)
         //{
         CmdBoulderThrow(directionOfBoulder, boulderStartPoint.position, forceDirection, throwForceForward); //calls command to spawn and add force to the instantiated object
-        useAbilities.SetOnCooldownAbility1();
+        useAbilities.SetOnCooldown(0);
     }
 
     #endregion

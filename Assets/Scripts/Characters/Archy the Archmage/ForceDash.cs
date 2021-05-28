@@ -32,7 +32,7 @@ public class ForceDash : NetworkBehaviour
     
     IEnumerator Dash()
     {
-        useAbilities.SetOnCooldownAbility3();
+        useAbilities.SetOnCooldown(2);
         useAbilities.ReduceAllCooldowns(1, 2);
         float startTime = Time.time;
         bool isCloseToBall = false;

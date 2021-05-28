@@ -17,7 +17,7 @@ public class ForceJump : NetworkBehaviour
     {
         playerMovement.velocity.y += forceJumpHeight;
 
-        useAbilities.SetOnCooldownAbility2();
+        useAbilities.SetOnCooldown(1);
         useAbilities.ReduceAllCooldowns(1, 1);
     }
 }
