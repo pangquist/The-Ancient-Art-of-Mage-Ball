@@ -80,7 +80,6 @@ public class ForceDash : NetworkBehaviour
 
     bool BallIsNear()
     {
-        Debug.Log("CHECKING FOR BALL");
         Collider[] checkForBall = Physics.OverlapSphere(transform.position, 1f);
         foreach (Collider pushedObject in checkForBall)
         {
