@@ -16,7 +16,6 @@ public class PillarMovement : NetworkBehaviour
     bool goingUp = true;
     GameObject pillarSmokeEffect;
     Vector3 effectPosition;
-    
 
     void Start()
     {
@@ -31,7 +30,6 @@ public class PillarMovement : NetworkBehaviour
             }
         }
         pillarPosition = playerObject.transform.Find("PillarSpawnPoint");
-        
     }
 
     private void CalculatePillarHeight()

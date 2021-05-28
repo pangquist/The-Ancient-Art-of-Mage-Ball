@@ -35,21 +35,24 @@ public class ForceDash : NetworkBehaviour
         useAbilities.SetOnCooldownAbility3();
         useAbilities.ReduceAllCooldowns(1, 2);
         float startTime = Time.time;
+        bool isCloseToBall = false;
 
-        while(Time.time <startTime + dashDuration)
+        while(Time.time <startTime + dashDuration && isCloseToBall == false)
         {
             if (playerMovement.isGrounded)
             {
                 controller.Move(transform.forward * dashSpeed * Time.deltaTime);
+                isCloseToBall = BallIsNear();
             }
             else
             {
                 controller.Move(playerCamera.transform.forward * dashSpeed * 2 * Time.deltaTime); //aerial dash
+                isCloseToBall = BallIsNear();
             }
             yield return null;
         }
 
-        Vector3 hitLocation = transform.position + transform.forward * 3;
+        Vector3 hitLocation = transform.position + transform.forward;
 
         CmdSpawnHitEffect(hitLocation);
         Collider[] colliders = Physics.OverlapSphere(hitLocation, pushRadius);
@@ -73,5 +76,20 @@ public class ForceDash : NetworkBehaviour
     void CmdDoChargePush(GameObject pushedObject, Vector3 _hitLocation)
     {
         pushedObject.GetComponent<Rigidbody>().AddExplosionForce(pushAmount, _hitLocation, pushRadius);
+    }
+
+    bool BallIsNear()
+    {
+        Debug.Log("CHECKING FOR BALL");
+        Collider[] checkForBall = Physics.OverlapSphere(transform.position, 1f);
+        foreach (Collider pushedObject in checkForBall)
+        {
+            if (pushedObject.CompareTag("Enemy"))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
