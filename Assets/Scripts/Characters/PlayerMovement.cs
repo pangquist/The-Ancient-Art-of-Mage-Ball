@@ -25,14 +25,20 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] float gravity = -9.81f;
     [SerializeField] float speed = 8;
 
+    [SerializeField] bool canStrafe;
+
     [SerializeField] bool matchIsPaused = true;
     float directionX;
     float directionZ;
     float groundDistance = 0.2f;
+   
     Vector3 move;
     public Vector3 velocity;
     public bool isGrounded;
-    
+
+    public float JumpPower { get { return jumpPower; } set { jumpPower = value; } }
+    public float Speed { get { return speed; } set { speed = value; } }
+
     public override void OnStartAuthority()
     {
         base.OnStartAuthority();
@@ -88,13 +94,23 @@ public class PlayerMovement : NetworkBehaviour
         directionX = Input.GetAxis("Horizontal");
         directionZ = Input.GetAxis("Vertical");
 
+        if(directionX != 0 && directionZ != 0)
+        {
+            move = (transform.right * directionX + transform.forward * directionZ)/ Mathf.Sqrt(2f); // to make strafing work.
+        }
+        else
+        {
+            move = transform.right * directionX + transform.forward * directionZ;
+        }
+
         if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2;
         }
 
 
-        move = transform.right * directionX + transform.forward * directionZ;
+        //move = transform.right * directionX + transform.forward * directionZ;
+        //if(Input.GetKey(KeyCode.W)&& Input.GetKey(KeyCode.A)
 
         if (InGameMenu.gameIsPaused)
         {
@@ -103,23 +119,27 @@ public class PlayerMovement : NetworkBehaviour
 
         if (move != Vector3.zero)
         {
-            if (directionX < 0)
+            if (directionX < 0 && canStrafe)
             {
                 animator.SetBool("isStrafingLeft", true);
                 animator.SetBool("isWalking", false);
                 animator.SetBool("isStrafingRight", false);
             }
-            else if (directionX > 0)
+            else if (directionX > 0 && canStrafe)
             {
                 animator.SetBool("isStrafingRight", true);
                 animator.SetBool("isWalking", false);
                 animator.SetBool("isStrafingLeft", false);
             }
-            else if (directionX == 0)
+            else if (directionX == 0 && canStrafe)
             {
                 animator.SetBool("isWalking", true);
                 animator.SetBool("isStrafingRight", false);
                 animator.SetBool("isStrafingLeft", false);
+            }
+            else
+            {
+                animator.SetBool("isWalking", true);
             }
 
         }

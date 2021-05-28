@@ -31,6 +31,12 @@ public class MyNetworkPlayer : NetworkBehaviour
     [SerializeField] TMP_Text blueScoreText;
     [SerializeField] TMP_Text timeText;
     [SerializeField] Image teamIcon;
+    [SerializeField] Image ability1Border;
+    [SerializeField] Image ability2Border;
+    [SerializeField] Image ability3Border;
+    [SerializeField] Image border;
+    [SerializeField] Image TimerBorder;
+    Vector3 borderSize;
 
     [Header("Name Canvas")]
     [SerializeField] GameObject nameCanvas;
@@ -117,7 +123,7 @@ public class MyNetworkPlayer : NetworkBehaviour
     public override void OnStartAuthority()
     {
         base.OnStartAuthority();
-
+        borderSize = new Vector3(TimerBorder.transform.localScale.x * 0.5f, TimerBorder.transform.localScale.y, TimerBorder.transform.localScale.z);
         trialSoundHasPlayed = false;
         settingsCanvas.SetActive(true);
         gameObject.GetComponent<AudioListener>().enabled = true;
@@ -200,6 +206,10 @@ public class MyNetworkPlayer : NetworkBehaviour
     {
         displayNameText.color = playerColor;
         teamIcon.color = playerColor;
+        ability1Border.color = playerColor;
+        ability2Border.color = playerColor;
+        ability3Border.color = playerColor;
+        border.color = playerColor;
 
         if (hasAuthority)
         {
@@ -258,6 +268,7 @@ public class MyNetworkPlayer : NetworkBehaviour
 
         if (gamestateManager.PauseTimer <= 0)
         {
+            TimerBorder.transform.localScale = borderSize;
             countdownCanvas.SetActive(false);
             if (!trialSoundHasPlayed && playStartSound)
             {
