@@ -54,7 +54,7 @@ public class MyNetworkPlayer : NetworkBehaviour
     [SerializeField] AudioSource trialStartSound;
     bool trialSoundHasPlayed;
     [SerializeField] bool playStartSound;
-
+    
     int chosenCharacter;
     public TMP_Text BlueScore { get { return blueScoreText; } set { blueScoreText = value; } }
     public TMP_Text RedScore { get { return redScoreText; } set { redScoreText = value; } }
@@ -230,14 +230,22 @@ public class MyNetworkPlayer : NetworkBehaviour
     }
     
     [Client]
-    public void AssignNameInGame(int playerIndex)
+    public void AssignNameInGame(CSteamID _steamID)
     {
-        List<MyNetworkPlayer> players = ((MyNetworkManager)NetworkManager.singleton).Players;
         List<string[]> characterInfoList = ((MyNetworkManager)NetworkManager.singleton).CharacterInfoList;
 
-        displayName = characterInfoList[playerIndex].GetValue(1).ToString();
-        teamName = characterInfoList[playerIndex].GetValue(2).ToString();
-        chosenCharacter = Convert.ToInt32(characterInfoList[playerIndex].GetValue(3));
+        foreach (string[] info in characterInfoList)
+        {
+            Debug.Log($"Comparing user steamID: {_steamID} to ID in the list: {info.GetValue(0)}");
+            if (info.GetValue(0).ToString() == _steamID.ToString())
+            {
+                displayName = info.GetValue(1).ToString();
+                teamName = info.GetValue(2).ToString();
+                chosenCharacter = Convert.ToInt32(info.GetValue(3));
+
+                Debug.Log($"Name: {displayName}, Team: {teamName}, Chosen Character: {chosenCharacter}");
+            }
+        }
     }
     
     [Client]
