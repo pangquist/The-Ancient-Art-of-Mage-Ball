@@ -27,10 +27,6 @@ public class CooldownUI : NetworkBehaviour
     [SerializeField] Image ability3Icon;
     [SerializeField] TMP_Text ability3Text;
 
-    [Header("Ability 4")]
-    [SerializeField] Image ability4Icon;
-    [SerializeField] TMP_Text ability4Text;
-
     [SerializeField] bool matchIsPaused = true;
 
     private void Start()
