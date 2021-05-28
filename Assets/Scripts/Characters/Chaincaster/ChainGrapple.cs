@@ -109,8 +109,6 @@ public class ChainGrapple : NetworkBehaviour
 
             raycastHit = hit;
 
-            chainSound.mute = false;
-
             CmdStartGrapple(gameObject);
         }
     }
@@ -126,6 +124,7 @@ public class ChainGrapple : NetworkBehaviour
     {
         lr = caster.GetComponent<LineRenderer>();
         lr.positionCount = 2;
+        chainSound.mute = false;
     }
 
     [Client]
@@ -159,7 +158,6 @@ public class ChainGrapple : NetworkBehaviour
     void StopGrapple()
     {
         Destroy(activeGrapple);
-        chainSound.mute = true;
         currentDuration = duration;
         CmdStopGrapple(gameObject);
     }
@@ -175,6 +173,7 @@ public class ChainGrapple : NetworkBehaviour
     {
         lr = caster.GetComponent<LineRenderer>();
         lr.positionCount = 0;
+        chainSound.mute = true;
     }
 
     [Client]
