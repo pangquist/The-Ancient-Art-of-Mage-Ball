@@ -52,20 +52,18 @@ public class NetworkPlayerSpawner : NetworkBehaviour
         }
 
         spawnPositionObject = gamestateManager.GetRespawnPositionObject(playerName);
-        SpawnCharacter(chosenCharacter, spawnPositionObject);
+        SpawnCharacter(chosenCharacter, spawnPositionObject, _steamID);
     }
 
     // Take in the parameter of what character the player has chosen, and spawns a prefab from the array of available characters to play as.
-    void SpawnCharacter(int characterIndex, GameObject _spawnPositionObject)
+    void SpawnCharacter(int characterIndex, GameObject _spawnPositionObject, CSteamID _steamID)
     {
         GameObject[] characters = ((MyNetworkManager)NetworkManager.singleton).Characters;
 
         GameObject instantiatedCharacter = Instantiate(characters[characterIndex + 1], _spawnPositionObject.transform.position, _spawnPositionObject.transform.rotation);
         
         NetworkServer.Spawn(instantiatedCharacter, connectionToClient);
-        ((MyNetworkManager)NetworkManager.singleton).Players.Add(instantiatedCharacter.GetComponent<MyNetworkPlayer>());
-
-        instantiatedCharacter.GetComponent<MyNetworkPlayer>().AssignNameInGame(steamID);
+        instantiatedCharacter.GetComponent<MyNetworkPlayer>().AssignNameInGame(_steamID);
 
         Destroy(gameObject);
     }
