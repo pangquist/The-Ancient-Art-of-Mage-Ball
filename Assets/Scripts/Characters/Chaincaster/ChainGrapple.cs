@@ -12,6 +12,7 @@ public class ChainGrapple : NetworkBehaviour
     private RaycastHit raycastHit;
     private GameObject grappleObject;
     private GameObject activeGrapple;
+    private AudioSource chainSound;
 
     [Header("Dependencies")]
     [SerializeField] MyNetworkPlayer playerInfo;
@@ -43,6 +44,8 @@ public class ChainGrapple : NetworkBehaviour
         currentDuration = duration;
 
         grappleObject = new GameObject("GrappleObject");
+
+        chainSound = gameObject.GetComponent<AudioSource>();
     }
 
     [Client]
@@ -106,6 +109,8 @@ public class ChainGrapple : NetworkBehaviour
 
             raycastHit = hit;
 
+            chainSound.mute = false;
+
             CmdStartGrapple(gameObject);
         }
     }
@@ -154,6 +159,7 @@ public class ChainGrapple : NetworkBehaviour
     void StopGrapple()
     {
         Destroy(activeGrapple);
+        chainSound.mute = true;
         currentDuration = duration;
         CmdStopGrapple(gameObject);
     }
