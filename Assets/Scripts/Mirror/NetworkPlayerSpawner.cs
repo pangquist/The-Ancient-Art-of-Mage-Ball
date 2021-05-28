@@ -64,7 +64,7 @@ public class NetworkPlayerSpawner : NetworkBehaviour
         
         NetworkServer.Spawn(instantiatedCharacter, connectionToClient);
         instantiatedCharacter.GetComponent<MyNetworkPlayer>().AssignNameInGame(_steamID);
-
+        ((MyNetworkManager)NetworkManager.singleton).Players.Add(instantiatedCharacter.GetComponent<MyNetworkPlayer>());
         Destroy(gameObject);
     }
 }
