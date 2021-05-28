@@ -95,7 +95,6 @@ public class EarthLevitate : NetworkBehaviour
         groundPositionUnderPlayer = position;
         
         pillarSpawn = Instantiate(pillarBridgePrefab, groundPositionUnderPlayer - pillarTop.position, Quaternion.identity);
-
         NetworkServer.Spawn(pillarSpawn, connectionToClient);
     }
 
