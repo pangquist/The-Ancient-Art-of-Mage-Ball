@@ -514,9 +514,9 @@ MonoBehaviour:
   mainCamera: {fileID: 1398020549020263658}
   hitableLayers:
   - serializedVersion: 2
-    m_Bits: 128
-  - serializedVersion: 2
     m_Bits: 64
+  - serializedVersion: 2
+    m_Bits: 128
   hitEffect: {fileID: 8027473195609965283, guid: e06bdea1510a3e547a2ed554aac7f5f9,
     type: 3}
   range: 30

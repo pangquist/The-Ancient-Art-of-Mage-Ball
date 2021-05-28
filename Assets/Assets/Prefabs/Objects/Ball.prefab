@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1851805317104961225}
   - component: {fileID: 1851907771105376377}
   - component: {fileID: 4214479593571972912}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Hedra001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: -8833970150620472887}
   - component: {fileID: 6857888942344050580}
   - component: {fileID: -2620973643909619175}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Ball
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -292,7 +292,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4852425603257897338}
   - component: {fileID: 8435051371379571272}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -387,7 +387,7 @@ GameObject:
   - component: {fileID: 8106441478694970951}
   - component: {fileID: 4331632011707861495}
   - component: {fileID: 1593174224037445843}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Sphere001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -536,6 +536,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: trail
+      objectReference: {fileID: 0}
+    - target: {fileID: 7071215757399754216, guid: 81a3252bb33bfe646877702ab802a6c6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7071215757399754216, guid: 81a3252bb33bfe646877702ab802a6c6,
         type: 3}

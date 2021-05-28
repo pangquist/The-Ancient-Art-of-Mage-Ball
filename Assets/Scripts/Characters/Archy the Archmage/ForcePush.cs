@@ -53,13 +53,27 @@ public class ForcePush : NetworkBehaviour
             }
         }
 
-        useAbilities.ReduceAllCooldowns(1, 0);
 
         if (hit.collider == null)
         {
+            Vector3 point = ray.origin + (ray.direction * range);
+            CmdSpawnHitEffect(point);
+
+            Collider[] missedColliders = Physics.OverlapSphere(point, pushRadius);
+            foreach (Collider pushedObject in missedColliders)
+            {
+                if (pushedObject.CompareTag("Enemy"))
+                {
+                    Debug.Log("Client is pushing!");
+                    CmdMoveBall(pushedObject.gameObject, hit.point);
+                }
+            }
+            useAbilities.ReduceAllCooldowns(1, 0);
+            useAbilities.SetOnCooldownAbility1();
             return;
         }
 
+        useAbilities.ReduceAllCooldowns(1, 0);
 
         CmdSpawnHitEffect(hit.point);
         Collider[] colliders = Physics.OverlapSphere(hit.point, pushRadius);
