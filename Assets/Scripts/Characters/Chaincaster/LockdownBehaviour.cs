@@ -32,6 +32,7 @@ public class LockdownBehaviour : NetworkBehaviour
     {
         if (GameObject.Find("GamestateManager").GetComponent<GamestateManager>().matchIsPaused)
         {
+            gameObject.GetComponent<AudioSource>().mute = true;
             return;
         }
 
