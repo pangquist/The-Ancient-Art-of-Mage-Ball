@@ -32,7 +32,7 @@ public class PillarLaunch : NetworkBehaviour
             if (hit.collider != null && hit.collider.gameObject.CompareTag("Ground"))
             {
                 CmdDoPillar(hit.point);
-                useAbilities.SetOnCooldownAbility2();
+                useAbilities.SetOnCooldown(1);
                 break;
             }
         }

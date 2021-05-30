@@ -10,6 +10,7 @@ public class Tooltip : MonoBehaviour
     public static Tooltip instance;
     public static List<GameObject> tooltips;
     public TextMeshProUGUI headerField;
+    public Image abilityImage;
     public TextMeshProUGUI contentField;
     public LayoutElement layoutElement;
     public int characterLimit;
@@ -19,7 +20,7 @@ public class Tooltip : MonoBehaviour
         instance = this;
     }
 
-    public void ShowToolTip(GameObject tooltipGO,Tooltip tooltip, string content, string header = "")
+    public void ShowToolTip(GameObject tooltipGO,Tooltip tooltip, string content, Sprite abilityImage, string header = "")
     {
         tooltipGO.SetActive(true);
         if (string.IsNullOrEmpty(header))
@@ -33,6 +34,7 @@ public class Tooltip : MonoBehaviour
         
         tooltip.contentField.text = content;
         tooltip.headerField.text = header;
+        tooltip.abilityImage.sprite = abilityImage;
     }
 
     public void HideToolTip(GameObject tooltip)

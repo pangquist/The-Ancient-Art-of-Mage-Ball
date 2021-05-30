@@ -69,7 +69,7 @@ public class ForcePush : NetworkBehaviour
                 }
             }
             useAbilities.ReduceAllCooldowns(1, 0);
-            useAbilities.SetOnCooldownAbility1();
+            useAbilities.SetOnCooldown(0);
             return;
         }
 
@@ -86,7 +86,7 @@ public class ForcePush : NetworkBehaviour
             }
         }
 
-        useAbilities.SetOnCooldownAbility1();
+        useAbilities.SetOnCooldown(0);
     }
 
     #endregion

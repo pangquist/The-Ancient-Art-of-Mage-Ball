@@ -39,6 +39,7 @@ public class UseAbilities : NetworkBehaviour
     #endregion
 
     float[] currentCooldowns;
+    float[] cooldowns;
     [SerializeField] bool matchIsPaused = true;
 
     // Getter for the Cooldown UI to retrieve the current cooldowns to correctly display on the UI.
@@ -54,6 +55,23 @@ public class UseAbilities : NetworkBehaviour
         for (int i = 0; i< currentCooldowns.Length; i++)
         {
             currentCooldowns[i] = 0f;
+        }
+
+        cooldowns = new float[3];
+        for (int i = 0; i < cooldowns.Length; i++)
+        {
+            if (i == 0)
+            {
+                cooldowns[i] = cooldownAbility1;
+            }
+            else if (i == 1)
+            {
+                cooldowns[i] = cooldownAbility2;
+            }
+            else if (i == 2)
+            {
+                cooldowns[i] = cooldownAbility3;
+            }
         }
     }
 
@@ -130,19 +148,9 @@ public class UseAbilities : NetworkBehaviour
         anim.Play(ability3Name.name);
     }
 
-    public void SetOnCooldownAbility1()
+    public void SetOnCooldown(int abilityIndex)
     {
-        currentCooldowns[0] = cooldownAbility1;
-    }
-
-    public void SetOnCooldownAbility2()
-    {
-        currentCooldowns[1] = cooldownAbility2;
-    }
-
-    public void SetOnCooldownAbility3()
-    {
-        currentCooldowns[2] = cooldownAbility3;
+        currentCooldowns[abilityIndex] = cooldowns[abilityIndex];
     }
 
     public void ReduceAllCooldowns(float reduceAmount, int attackIndex)
@@ -166,9 +174,14 @@ public class UseAbilities : NetworkBehaviour
 
     public void StartAllCooldowns()
     {
-        //to be balanced
-        currentCooldowns[0] = cooldownAbility1;
-        currentCooldowns[1] = cooldownAbility2;
-        currentCooldowns[2] = cooldownAbility3;
+        for (int i = 0; i < currentCooldowns.Length; i++)
+        {
+            currentCooldowns[i] = cooldowns[i];
+        }
+    }
+
+    public void SetCooldownToPercentage(int cooldownIndex, float percentage)
+    {
+        currentCooldowns[cooldownIndex] = cooldowns[cooldownIndex] * (percentage/100);
     }
 }

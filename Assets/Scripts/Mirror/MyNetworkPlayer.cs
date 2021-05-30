@@ -14,6 +14,7 @@ public class MyNetworkPlayer : NetworkBehaviour
     [SerializeField] CharacterController controller;
     [SerializeField] GamestateManager gamestateManager;
     [SerializeField] UseAbilities useAbilities;
+    [SerializeField] PlayerMovement movement;
 
     [Header("Sync Variables")]
     [SyncVar(hook = nameof(HandlePlayerTeamAssigned))]
@@ -253,6 +254,7 @@ public class MyNetworkPlayer : NetworkBehaviour
     {
         Vector3 respawnPosition = gamestateManager.GetRespawnPositionObject(GetDisplayName()).transform.position;
         Quaternion respawnRotation = gamestateManager.GetRespawnPositionObject(GetDisplayName()).transform.rotation;
+        movement.velocity = Vector3.zero;
         Debug.Log($"RESPAWNING! Respawn position: {respawnPosition}");
         gameObject.transform.position = respawnPosition;
         gameObject.transform.rotation = respawnRotation;

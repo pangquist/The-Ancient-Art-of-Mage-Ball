@@ -443,6 +443,7 @@ MonoBehaviour:
   controller: {fileID: 1398020548929700585}
   gamestateManager: {fileID: 0}
   useAbilities: {fileID: 1255805223110542875}
+  movement: {fileID: 1398020548929700584}
   teamName: 
   displayName: Missing Name
   playerColor: {r: 1, g: 1, b: 1, a: 1}
@@ -595,6 +596,7 @@ MonoBehaviour:
   jumpPower: 6
   gravity: -9.81
   speed: 10
+  canStrafe: 0
   matchIsPaused: 1
   velocity: {x: 0, y: 0, z: 0}
   isGrounded: 0

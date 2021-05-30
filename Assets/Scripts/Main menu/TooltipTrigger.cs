@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -12,6 +13,7 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     [SerializeField] List<string> headers;
     [SerializeField] List<string> contents;
     [SerializeField] List<Tooltip> tooltips;
+    [SerializeField] List<Sprite> abilityImages;
     [SerializeField] List<GameObject> tooltipsGO;
 
     public void Awake()
@@ -27,7 +29,7 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         tooltipBackground.SetActive(true);
         for (int i = 0; i < tooltips.Count; i++)
         {
-            tooltips[i].ShowToolTip(tooltipsGO[i], tooltips[i], contents[i], headers[i]);
+            tooltips[i].ShowToolTip(tooltipsGO[i], tooltips[i], contents[i], abilityImages[i], headers[i]);
         }
     }
  

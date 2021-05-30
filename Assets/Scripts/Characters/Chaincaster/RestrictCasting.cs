@@ -52,7 +52,7 @@ public class RestrictCasting : NetworkBehaviour
 
             if (hitPlayer)
             {
-                useAbilities.SetOnCooldownAbility3();
+                useAbilities.SetOnCooldown(2);
 
                 CmdSpawnHitEffect(hit.point);
             }

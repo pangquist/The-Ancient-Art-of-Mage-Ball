@@ -32,7 +32,7 @@ public class ForceDash : NetworkBehaviour
     
     IEnumerator Dash()
     {
-        useAbilities.SetOnCooldownAbility3();
+        useAbilities.SetOnCooldown(2);
         useAbilities.ReduceAllCooldowns(1, 2);
         float startTime = Time.time;
         bool isCloseToBall = false;
@@ -80,7 +80,6 @@ public class ForceDash : NetworkBehaviour
 
     bool BallIsNear()
     {
-        Debug.Log("CHECKING FOR BALL");
         Collider[] checkForBall = Physics.OverlapSphere(transform.position, 1f);
         foreach (Collider pushedObject in checkForBall)
         {
