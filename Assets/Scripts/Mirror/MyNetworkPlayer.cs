@@ -136,8 +136,8 @@ public class MyNetworkPlayer : NetworkBehaviour
         GamestateManager.HandleTimeChanged += SetTimerText;
         GamestateManager.HandleRedScoreChanged += SetRedScoreText;
         GamestateManager.HandleBlueScoreChanged += SetBlueScoreText;
-        GamestateManager.HandleRedScoreChanged += CmdRespawn;
-        GamestateManager.HandleBlueScoreChanged += CmdRespawn;
+        GamestateManager.HandleRedScoreChanged += Respawn;
+        GamestateManager.HandleBlueScoreChanged += Respawn;
         GamestateManager.HandlePauseTimeChanged += Countdown;
     }
 
@@ -157,8 +157,8 @@ public class MyNetworkPlayer : NetworkBehaviour
         GamestateManager.HandleTimeChanged -= SetTimerText;
         GamestateManager.HandleRedScoreChanged -= SetRedScoreText;
         GamestateManager.HandleBlueScoreChanged -= SetBlueScoreText;
-        GamestateManager.HandleRedScoreChanged -= CmdRespawn;
-        GamestateManager.HandleBlueScoreChanged -= CmdRespawn;
+        GamestateManager.HandleRedScoreChanged -= Respawn;
+        GamestateManager.HandleBlueScoreChanged -= Respawn;
         GamestateManager.HandlePauseTimeChanged -= Countdown;
         ((MyNetworkManager)NetworkManager.singleton).Players.Remove(this);
     }
@@ -250,16 +250,22 @@ public class MyNetworkPlayer : NetworkBehaviour
         }
     }
     
-    [Command]
-    void CmdRespawn()
+    [Client]
+    void Respawn()
     {
         Vector3 respawnPosition = gamestateManager.GetRespawnPositionObject(GetDisplayName()).transform.position;
         Quaternion respawnRotation = gamestateManager.GetRespawnPositionObject(GetDisplayName()).transform.rotation;
         movement.velocity = Vector3.zero;
         Debug.Log($"RESPAWNING! Respawn position: {respawnPosition}");
-        gameObject.transform.position = respawnPosition;
-        gameObject.transform.rotation = respawnRotation;
+        CmdRespawn(respawnPosition, respawnRotation);
         useAbilities.ResetAllCooldowns();
+    }
+
+    [Command]
+    void CmdRespawn(Vector3 _position, Quaternion _rotation)
+    {
+        gameObject.transform.position = _position;
+        gameObject.transform.rotation = _rotation;
     }
 
     void Countdown()
