@@ -23017,6 +23017,12 @@ PrefabInstance:
       propertyPath: gmManager
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5827711242446194892, guid: 96d5d1b862f5aa94faf52afd7df892ce,
+        type: 3}
+      propertyPath: effectObject
+      value: 
+      objectReference: {fileID: 8433062388510036247, guid: 260556c7645352c40903db1a50f21e11,
+        type: 3}
     - target: {fileID: 7373667711518884957, guid: 96d5d1b862f5aa94faf52afd7df892ce,
         type: 3}
       propertyPath: m_RootOrder
@@ -25185,6 +25191,12 @@ PrefabInstance:
       propertyPath: gmManager
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2388776533625320010, guid: b273761e57706424a9e258449d264a02,
+        type: 3}
+      propertyPath: effectObject
+      value: 
+      objectReference: {fileID: 8433062388510036247, guid: 260556c7645352c40903db1a50f21e11,
+        type: 3}
     - target: {fileID: 6061492003645245992, guid: b273761e57706424a9e258449d264a02,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
