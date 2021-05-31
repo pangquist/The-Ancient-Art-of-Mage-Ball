@@ -1384,13 +1384,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5827711242446194894}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0.28, y: -0.17, z: 0}
   m_LocalScale: {x: 0.0064077354, y: 0.006736456, z: 0.0004293992}
   m_Children: []
   m_Father: {fileID: 9085845655578836615}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &5827711242446194892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1405,7 +1405,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  effectObject: {fileID: 8890923103834530407, guid: 784ad36bc36c0544bbaf184f629af1ac,
+  effectObject: {fileID: 8433062388510036247, guid: 4d9aaf682d4503b439975b5f180a3cc3,
     type: 3}
   teamOwnership: Red
   gmManager: {fileID: 0}
