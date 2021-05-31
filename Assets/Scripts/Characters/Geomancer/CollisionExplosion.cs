@@ -22,10 +22,6 @@ public class CollisionExplosion : NetworkBehaviour
 
     float radius = 2;
 
-    //public override void OnStartAuthority()
-    //{
-    //    enabled = true;
-    //}
 
     private void Start()
     {
@@ -84,19 +80,9 @@ public class CollisionExplosion : NetworkBehaviour
     void ServerDoPush(GameObject ball)
     {
         Debug.Log("Server is moving the ball for the clients!");
-        ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        //ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
         ball.GetComponent<Rigidbody>().AddExplosionForce(explosionForceHorizontal, gameObject.transform.position, explosionRadius, explotionForceVertical);
         ball.GetComponent<Rigidbody>().AddExplosionForce(explosionForceHorizontal, gameObject.transform.position, explosionRadius);
-        //RpcDoExplosion(ball);
-        Destroy(gameObject);
-    }
-
-    [ClientRpc]
-    void RpcDoExplosion(GameObject ball)
-    {
-        Debug.Log("Server is moving the ball for the clients!");
-        ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        ball.GetComponent<Rigidbody>().AddExplosionForce(explosionForceHorizontal, gameObject.transform.position, explosionRadius, explotionForceVertical);
         Destroy(gameObject);
     }
 
