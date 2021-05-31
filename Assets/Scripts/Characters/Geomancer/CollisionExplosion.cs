@@ -26,7 +26,7 @@ public class CollisionExplosion : NetworkBehaviour
     private void Start()
     {
         rotateAxis = new Vector3(rotateX, rotateY, rotateZ);// point of boulder-rotation in air.
-        gameState = GameObject.Find("GamestateManager").GetComponent<GamestateManager>();
+        gameState = GameObject.Find("GamestateManager").GetComponent<GamestateManager>(); //allowing to get matchIsPaused for destroying object when goal is made.
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -45,7 +45,7 @@ public class CollisionExplosion : NetworkBehaviour
         try {
             foreach (Collider pushedObject in colliders)
             {
-                if (pushedObject.CompareTag("Enemy") && !hasPushed)
+                if (pushedObject.CompareTag("Enemy") && !hasPushed) // if ball is hit
                 {
                     ServerDoPush(pushedObject.gameObject);
                     ServerSpawnHitEffect(gameObject.transform.position);
@@ -55,8 +55,7 @@ public class CollisionExplosion : NetworkBehaviour
         }
         catch
         {
-        }
-      
+        }     
 
         if (!hasCollided) //The boulder will only be forced to rotate during the initial airtime.
         {
@@ -65,22 +64,17 @@ public class CollisionExplosion : NetworkBehaviour
 
     }
 
-
     [Server]
     void ServerSpawnHitEffect(Vector3 hitLocation)
     {
-        Debug.Log("Inside Hiteffect");
         GameObject magicExplosion = Instantiate(hitEffect, hitLocation, Quaternion.identity) as GameObject;
         NetworkServer.Spawn(magicExplosion);       
-        //RpcSpawnHitEffect(hitLocation);
     }
 
 
     [Server]
     void ServerDoPush(GameObject ball)
     {
-        Debug.Log("Server is moving the ball for the clients!");
-        //ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
         ball.GetComponent<Rigidbody>().AddExplosionForce(explosionForceHorizontal, gameObject.transform.position, explosionRadius, explotionForceVertical);
         ball.GetComponent<Rigidbody>().AddExplosionForce(explosionForceHorizontal, gameObject.transform.position, explosionRadius);
         Destroy(gameObject);
