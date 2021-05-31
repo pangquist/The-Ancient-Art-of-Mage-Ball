@@ -43,9 +43,9 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0.8490566, g: 0.32890847, b: 0.032039847, a: 1}
-  m_Intensity: 47746.48
-  m_Range: 10
+  m_Color: {r: 0.11137152, g: 0, b: 1, a: 1}
+  m_Intensity: 500
+  m_Range: 20
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 094afedfda236ce4a9b23d05100ef1d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTime: 2.5
+  lifeTime: 3.5
 --- !u!1 &8433062387019876041
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,8 +281,8 @@ VisualEffect:
       m_Array:
       - m_Value:
           serializedVersion: 2
-          key0: {r: 22895.338, g: 1200.0729, b: 0, a: 0}
-          key1: {r: 51.366863, g: 5.468619, b: 0, a: 1}
+          key0: {r: 0, g: 201.09673, b: 23646.225, a: 0}
+          key1: {r: 0, g: 0.0011267071, b: 51.36687, a: 1}
           key2: {r: 0.00037222588, g: 0.00037222588, b: 0.00037222588, a: 0.972549}
           key3: {r: 0, g: 0, b: 0, a: 0}
           key4: {r: 0, g: 0, b: 0, a: 0}
@@ -312,8 +312,8 @@ VisualEffect:
         m_Overridden: 1
       - m_Value:
           serializedVersion: 2
-          key0: {r: 22895.338, g: 1200.0729, b: 0, a: 0}
-          key1: {r: 51.366863, g: 5.468619, b: 0, a: 1}
+          key0: {r: 0, g: 550.12067, b: 21339.275, a: 0}
+          key1: {r: 0, g: 2.742986, b: 68.578804, a: 1}
           key2: {r: 0.00037222588, g: 0.00037222588, b: 0.00037222588, a: 0.972549}
           key3: {r: 0, g: 0, b: 0, a: 0}
           key4: {r: 0, g: 0, b: 0, a: 0}
@@ -410,7 +410,7 @@ GameObject:
   - component: {fileID: 3022782695634804683}
   - component: {fileID: 8705962374957982814}
   m_Layer: 0
-  m_Name: Goal effect 1
+  m_Name: Goal Effect Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -460,7 +460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41dae5c8c6284d1499e67f248180f0bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forwardSpeed: 0.2
+  forwardSpeed: 0
   floatCurve:
     serializedVersion: 2
     m_Curve:
@@ -499,7 +499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ace9dfc9afbdfb49acb711a5ba20619, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Splash: {fileID: 3712248344953752656, guid: 8e8e29b81bffcea4f86f4f10a74cd11d, type: 3}
+  Splash: {fileID: 3712248344953752656, guid: 0667d2c0415369f4a98e59023c66e8d4, type: 3}
   HitSource: {fileID: 7046189048280821248}
 --- !u!135 &8805592490722834410
 SphereCollider:
