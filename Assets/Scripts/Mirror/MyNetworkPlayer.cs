@@ -314,6 +314,7 @@ public class MyNetworkPlayer : NetworkBehaviour
             if (!hasPlayedBackgroundMusic)
             {
                 backgroundMusic.Play();
+                hasPlayedBackgroundMusic = true;
             }
             if (!trialSoundHasPlayed && playStartSound)
             {
