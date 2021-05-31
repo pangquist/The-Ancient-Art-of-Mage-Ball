@@ -69,8 +69,15 @@ public class ChainGrapple : NetworkBehaviour
         if (lr.positionCount == 0) return;
 
         currentDuration -= Time.deltaTime;
-
-        grapplePoint = activeGrapple.transform.position;
+        try
+        {
+            grapplePoint = activeGrapple.transform.position;
+        }
+        catch
+        {
+            Debug.Log("Not able to set grapplepoint position");
+        }
+        
 
         if (raycastHit.transform.gameObject.tag == "Enemy")
         {

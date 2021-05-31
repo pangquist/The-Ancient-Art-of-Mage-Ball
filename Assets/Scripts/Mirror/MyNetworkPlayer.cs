@@ -257,12 +257,8 @@ public class MyNetworkPlayer : NetworkBehaviour
     void Respawn()
     {
         respawnPosition = gamestateManager.GetRespawnPositionObject(GetDisplayName()).transform.position;
-        Quaternion respawnRotation = gamestateManager.GetRespawnPositionObject(GetDisplayName()).transform.rotation;
         movement.velocity = Vector3.zero;
-        Debug.Log($"RESPAWNING! Respawn position: {respawnPosition}");
-        gameObject.transform.rotation = respawnRotation;
-        respawn = true;
-        //gameObject.transform.Translate(respawnPosition - gameObject.transform.position * Time.deltaTime, Space.World);     
+        Debug.Log($"RESPAWNING! Respawn position: {respawnPosition}");    
         useAbilities.ResetAllCooldowns();
     }
 
