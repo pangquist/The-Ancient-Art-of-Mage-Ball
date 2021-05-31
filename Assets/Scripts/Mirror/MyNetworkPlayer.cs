@@ -273,7 +273,7 @@ public class MyNetworkPlayer : NetworkBehaviour
         {
             return;
         }
-        if (respawn)
+        if (gamestateManager.matchIsPaused)
         {
             if (!(Vector3.Distance(gameObject.transform.position, respawnPosition) < 1f))
             {
