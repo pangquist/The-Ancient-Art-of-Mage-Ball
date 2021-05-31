@@ -67,6 +67,10 @@ public class RestrictCasting : NetworkBehaviour
 
                 CmdSpawnHitEffect(hit.point);
             }
+            else
+            {
+                useAbilities.SetCooldownToPercentage(2, 50);
+            }
         }
     }
 
