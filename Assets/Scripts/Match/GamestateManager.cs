@@ -100,14 +100,12 @@ public class GamestateManager : NetworkBehaviour
             
         time -= Time.deltaTime;
     }
-
-    [Server]
+    
     void UnpauseMatch()
     {
         matchIsPaused = false;
     }
-
-    [Server]
+    
     void PauseGame()
     {
         matchIsPaused = true;
