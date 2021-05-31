@@ -31,6 +31,8 @@ public class GamestateManager : NetworkBehaviour
     [SerializeField]  public float startPauseTime = 12f;
     [Tooltip("The amount of seconds the game will wait before starting when a goal is made")]
     [SerializeField] float goalPauseTime = 5f;
+    [SyncVar (hook = nameof(HandleMatchPause))]
+    public bool matchIsPaused = true;
 
     [Header("Team Scores")]
     [SyncVar (hook = nameof(HandleRedScore))]
@@ -44,8 +46,6 @@ public class GamestateManager : NetworkBehaviour
     [SerializeField] TMP_Text winningTeamText;
     [SerializeField] AudioSource overtimeSoundSource;
     
-    [SyncVar (hook = nameof(HandleMatchPause))]
-    public bool matchIsPaused = true;
 
     [HideInInspector]
     public bool matchIsOver = false;
@@ -175,7 +175,6 @@ public class GamestateManager : NetworkBehaviour
     
     public void HandleMatchPause(bool oldBool, bool newBool)
     {
-        Debug.Log("PAUSE EVENT IS CALLED");
         if (matchIsPaused)
         {
             HandleMatchPaused?.Invoke();
@@ -220,34 +219,19 @@ public class GamestateManager : NetworkBehaviour
     public GameObject GetRespawnPositionObject(string name)
     {
         List<MyNetworkPlayer> players = ((MyNetworkManager)NetworkManager.singleton).Players;
-
-        //Debug.Log($"NUMBER OF PLAYERS IN LIST: {players.Count}, NAME GIVEN: {name}");
+        
         for (int i = 0; i < redTeam.Count; i++)
         {
-            Debug.Log($"Red team member {i}: {redTeam[i]}");
-        }
-
-        for (int i = 0; i < blueTeam.Count; i++)
-        {
-            Debug.Log($"Blue team member {i}: {blueTeam[i]}");
-        }
-
-        for (int i = 0; i < redTeam.Count; i++)
-        {
-            Debug.Log($"Comparing user name: {name} to Name in the list: {redTeam[i]}");
             if (name == redTeam[i])
             {
-                Debug.Log($"Returning red position: {spawnpointPositions[i].transform.position}");
                 return (spawnpointPositions[i].gameObject);
             }
         }
 
         for (int i = 0; i < blueTeam.Count; i++)
         {
-            Debug.Log($"Comparing user name: {name} to Name in the list: {blueTeam[i]}");
             if (name == blueTeam[i])
             {
-                Debug.Log($"Returning blue position: {spawnpointPositions[i+3].transform.position}");
                 return (spawnpointPositions[i + 3].gameObject);
             }
         }

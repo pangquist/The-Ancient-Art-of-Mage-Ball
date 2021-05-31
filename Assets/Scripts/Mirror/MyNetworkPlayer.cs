@@ -136,8 +136,8 @@ public class MyNetworkPlayer : NetworkBehaviour
         GamestateManager.HandleTimeChanged += SetTimerText;
         GamestateManager.HandleRedScoreChanged += SetRedScoreText;
         GamestateManager.HandleBlueScoreChanged += SetBlueScoreText;
-        GamestateManager.HandleRedScoreChanged += Respawn;
-        GamestateManager.HandleBlueScoreChanged += Respawn;
+        GamestateManager.HandleRedScoreChanged += CmdRespawn;
+        GamestateManager.HandleBlueScoreChanged += CmdRespawn;
         GamestateManager.HandlePauseTimeChanged += Countdown;
     }
 
@@ -157,8 +157,8 @@ public class MyNetworkPlayer : NetworkBehaviour
         GamestateManager.HandleTimeChanged -= SetTimerText;
         GamestateManager.HandleRedScoreChanged -= SetRedScoreText;
         GamestateManager.HandleBlueScoreChanged -= SetBlueScoreText;
-        GamestateManager.HandleRedScoreChanged -= Respawn;
-        GamestateManager.HandleBlueScoreChanged -= Respawn;
+        GamestateManager.HandleRedScoreChanged -= CmdRespawn;
+        GamestateManager.HandleBlueScoreChanged -= CmdRespawn;
         GamestateManager.HandlePauseTimeChanged -= Countdown;
         ((MyNetworkManager)NetworkManager.singleton).Players.Remove(this);
     }
@@ -250,8 +250,8 @@ public class MyNetworkPlayer : NetworkBehaviour
         }
     }
     
-    [Client]
-    void Respawn()
+    [Command]
+    void CmdRespawn()
     {
         Vector3 respawnPosition = gamestateManager.GetRespawnPositionObject(GetDisplayName()).transform.position;
         Quaternion respawnRotation = gamestateManager.GetRespawnPositionObject(GetDisplayName()).transform.rotation;
