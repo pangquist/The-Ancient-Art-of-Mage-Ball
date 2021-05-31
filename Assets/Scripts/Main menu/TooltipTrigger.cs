@@ -27,7 +27,7 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public void OnPointerEnter(PointerEventData eventData)
     {
         tooltipBackground.SetActive(true);
-        for (int i = 0; i < tooltips.Count; i++)
+        for (int i = 0; i < tooltips.Count-1; i++)
         {
             tooltips[i].ShowToolTip(tooltipsGO[i], tooltips[i], contents[i], abilityImages[i], headers[i]);
         }

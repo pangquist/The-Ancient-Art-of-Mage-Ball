@@ -5,7 +5,6 @@ using Mirror;
 
 public class PillarMovement : NetworkBehaviour
 {
-    [SerializeField] GameObject pillarSmoke;
     [SerializeField] Transform pillarTop;
     [SerializeField] float forceUpwards;
     GameObject playerObject;
@@ -68,29 +67,12 @@ public class PillarMovement : NetworkBehaviour
 
         playerObject.GetComponent<PlayerMovement>().velocity.y = 0;
 
-        if (!hasSpawnedEffect)
-        {
-            CmdSpawnPillarSmokeEffect();
-            hasSpawnedEffect = true;
-        }
-        else
-        {
-            CmdMoveSmokeEffect();
-        }
+
 
     }
-    [Command]
-    void CmdSpawnPillarSmokeEffect()
-    {
-        pillarSmokeEffect = Instantiate(pillarSmoke, effectPosition, Quaternion.identity) as GameObject;
-        NetworkServer.Spawn(pillarSmokeEffect, connectionToClient);
-    }
 
-    [Command]
-    void CmdMoveSmokeEffect()
-    {
-        pillarSmokeEffect.transform.position = effectPosition;
-    }
+
+
 
     //[Command]
     //void CmdMovePillar(Vector3 _pillarPosition, Vector3 _pillarTop)
@@ -105,10 +87,4 @@ public class PillarMovement : NetworkBehaviour
     //    pillarSmoke.transform.Translate(effectPosition, Space.World);
     //}
 
-    [Client]
-    void SpawnHitEffect(Vector3 effectPosition)
-    {
-        GameObject pillarSmokeEffect = Instantiate(pillarSmoke, effectPosition, Quaternion.identity) as GameObject;
-        NetworkServer.Spawn(pillarSmokeEffect);
-    }
 }
