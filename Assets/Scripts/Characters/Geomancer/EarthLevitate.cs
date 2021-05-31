@@ -39,7 +39,7 @@ public class EarthLevitate : NetworkBehaviour
     {
         groundTransform = GameObject.FindGameObjectsWithTag("Ground");
         hasSpawnedPillar = false;
-        pillarTop = pillarBridgePrefab.transform.GetChild(0);
+        pillarTop = pillarBridgePrefab.transform.GetChild(0);      
     }
 
     [Client]
@@ -56,6 +56,8 @@ public class EarthLevitate : NetworkBehaviour
     [Client]
     private void Update()
     {
+        
+        
         if (hasSpawnedPillar)
         {
             timer += Time.deltaTime;

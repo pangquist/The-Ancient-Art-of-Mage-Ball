@@ -15,6 +15,7 @@ public class PillarMovement : NetworkBehaviour
     bool goingUp = true;
     GameObject pillarSmokeEffect;
     Vector3 effectPosition;
+    GamestateManager gameState;
 
     void Start()
     {
@@ -29,6 +30,7 @@ public class PillarMovement : NetworkBehaviour
             }
         }
         pillarPosition = playerObject.transform.Find("PillarSpawnPoint");
+        gameState = GameObject.Find("GamestateManager").GetComponent<GamestateManager>();
     }
 
     private void CalculatePillarHeight()
@@ -43,6 +45,10 @@ public class PillarMovement : NetworkBehaviour
         if (!hasAuthority)
         {
             return;
+        }
+        if (gameState.matchIsPaused)
+        {
+            Destroy(gameObject);
         }
 
         effectPosition = new Vector3(gameObject.transform.position.x, 0, gameObject.transform.position.z);
@@ -66,9 +72,6 @@ public class PillarMovement : NetworkBehaviour
         }
 
         playerObject.GetComponent<PlayerMovement>().velocity.y = 0;
-
-
-
     }
 
 

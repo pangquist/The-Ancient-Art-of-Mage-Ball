@@ -15,6 +15,8 @@ public class CollisionExplosion : NetworkBehaviour
 
     bool hasCollided = false, hasPushed = false;
 
+    GamestateManager gameState;
+
     Vector3 rotateAxis;
 
 
@@ -28,6 +30,7 @@ public class CollisionExplosion : NetworkBehaviour
     private void Start()
     {
         rotateAxis = new Vector3(rotateX, rotateY, rotateZ);// point of boulder-rotation in air.
+        gameState = GameObject.Find("GamestateManager").GetComponent<GamestateManager>();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -36,8 +39,11 @@ public class CollisionExplosion : NetworkBehaviour
     }
     [Server]
     private void Update()
-    {
-        
+    {        
+        if (gameState.matchIsPaused)
+        {
+            Destroy(gameObject);
+        }
         
         Collider[] colliders = Physics.OverlapSphere(gameObject.transform.position, radius);
         try {
