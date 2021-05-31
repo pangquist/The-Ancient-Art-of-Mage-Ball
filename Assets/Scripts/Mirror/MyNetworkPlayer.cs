@@ -54,6 +54,7 @@ public class MyNetworkPlayer : NetworkBehaviour
     [Tooltip("The audio play when the match starts (countdown is 0)")]
     [SerializeField] AudioSource trialStartSound;
     bool trialSoundHasPlayed;
+    bool hasPlayedBackgroundMusic;
     [SerializeField] bool playStartSound;
     
     int chosenCharacter;
@@ -276,10 +277,17 @@ public class MyNetworkPlayer : NetworkBehaviour
         CountdownText.text = Convert.ToInt32(gamestateManager.PauseTimer).ToString();
         countdownCanvas.GetComponent<Animator>().Play("Pulse");
 
+        AudioSource backgroundMusic = GameObject.Find("Audio").transform.GetChild(0).GetComponent<AudioSource>();
+
         if (gamestateManager.PauseTimer <= 0)
         {
             TimerBorder.transform.localScale = borderSize;
             countdownCanvas.SetActive(false);
+
+            if (!hasPlayedBackgroundMusic)
+            {
+                backgroundMusic.Play();
+            }
             if (!trialSoundHasPlayed && playStartSound)
             {
                 trialStartSound.Play();

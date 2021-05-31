@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class Jailer : MonoBehaviour
 {
+    private float baseSpeed;
+    private float baseJump;
+    private bool buffActive;
+
+    [Header("Dependencies")]
     [SerializeField] PlayerMovement player;
 
-    [SerializeField] float baseSpeed;
+    [Header("Values")]
     [SerializeField] float maxSpeed;
     [SerializeField] float speedIncrement;
-
-    [SerializeField] float baseJump;
     [SerializeField] float maxJump;
     [SerializeField] float jumpIncrement;
-
     [SerializeField] float buffDuration;
     [SerializeField] float maxDuration;
-
-    bool buffActive;
 
     private void Start()
     {

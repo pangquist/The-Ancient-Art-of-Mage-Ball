@@ -5,14 +5,19 @@ using UnityEngine;
 
 public class RestrictCasting : NetworkBehaviour
 {
+    [Header("Dependencies")]
+    [SerializeField] MyNetworkPlayer playerInfo;
     [SerializeField] UseAbilities useAbilities;
-    [SerializeField] Transform castPoint, camera, player;
-    [SerializeField] GameObject hitEffect;
+    [SerializeField] Jailer jailerPassive;
+    [SerializeField] Camera playerCamera;
+    [SerializeField] Transform castPoint;
 
+    [Header("Values")]
     [SerializeField] float maxRange;
     [SerializeField] float area;
 
-    [SerializeField] Jailer jailerPassive;
+    [Header("Visual Effect")]
+    [SerializeField] GameObject hitEffect;
 
     public override void OnStartAuthority()
     {
@@ -22,6 +27,7 @@ public class RestrictCasting : NetworkBehaviour
     private void Start()
     {
         jailerPassive = gameObject.GetComponent<Jailer>();
+        playerInfo = gameObject.GetComponent<MyNetworkPlayer>();
     }
 
     [Client]
@@ -33,7 +39,7 @@ public class RestrictCasting : NetworkBehaviour
         }
 
         RaycastHit hit;
-        if (Physics.Raycast(camera.position, camera.forward, out hit, maxRange))
+        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, maxRange))
         {
             bool hitPlayer = false;
 
@@ -42,11 +48,16 @@ public class RestrictCasting : NetworkBehaviour
             {
                 if (hitObject.CompareTag("Player"))
                 {
-                    jailerPassive.TriggerBuff();
+                    MyNetworkPlayer targetInfo = hitObject.gameObject.GetComponent<MyNetworkPlayer>();
 
-                    CmdCastRestrict(hitObject.gameObject);
+                    if(targetInfo.TeamName != playerInfo.TeamName)
+                    {
+                        jailerPassive.TriggerBuff();
 
-                    hitPlayer = true;
+                        CmdCastRestrict(hitObject.gameObject);
+
+                        hitPlayer = true;
+                    }
                 }
             }
 
@@ -55,6 +66,10 @@ public class RestrictCasting : NetworkBehaviour
                 useAbilities.SetOnCooldown(2);
 
                 CmdSpawnHitEffect(hit.point);
+            }
+            else
+            {
+                useAbilities.SetCooldownToPercentage(2, 50);
             }
         }
     }
