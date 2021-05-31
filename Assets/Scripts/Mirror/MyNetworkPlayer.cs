@@ -39,6 +39,9 @@ public class MyNetworkPlayer : NetworkBehaviour
     [SerializeField] Image TimerBorder;
     Vector3 borderSize;
 
+    Vector3 respawnPosition;
+    bool respawn;
+
     [Header("Name Canvas")]
     [SerializeField] GameObject nameCanvas;
     [SerializeField] TMP_Text displayNameText = null;
@@ -253,21 +256,38 @@ public class MyNetworkPlayer : NetworkBehaviour
     [Client]
     void Respawn()
     {
-        Vector3 respawnPosition = gamestateManager.GetRespawnPositionObject(GetDisplayName()).transform.position;
+        respawnPosition = gamestateManager.GetRespawnPositionObject(GetDisplayName()).transform.position;
         Quaternion respawnRotation = gamestateManager.GetRespawnPositionObject(GetDisplayName()).transform.rotation;
         movement.velocity = Vector3.zero;
         Debug.Log($"RESPAWNING! Respawn position: {respawnPosition}");
-        gameObject.transform.Translate(respawnPosition - gameObject.transform.position);
         gameObject.transform.rotation = respawnRotation;
+        respawn = true;
+        //gameObject.transform.Translate(respawnPosition - gameObject.transform.position * Time.deltaTime, Space.World);     
         useAbilities.ResetAllCooldowns();
     }
 
-    //[Command]
-    //void CmdRespawn(Vector3 _position, Quaternion _rotation)
-    //{
-    //    gameObject.transform.position = _position;
-    //    gameObject.transform.rotation = _rotation;
-    //}
+    [Client]
+    private void Update()
+    {
+        if (!hasAuthority)
+        {
+            return;
+        }
+        if (respawn)
+        {
+            if (!(Vector3.Distance(gameObject.transform.position, respawnPosition) < 1f))
+            {
+                movement.velocity.y = 0;
+                gameObject.transform.Translate((respawnPosition -gameObject.transform.position) * Time.deltaTime *2, Space.World);
+            }
+            else
+            {
+                respawn = false;
+            }
+        }
+        
+    }
+
 
     void Countdown()
     {
