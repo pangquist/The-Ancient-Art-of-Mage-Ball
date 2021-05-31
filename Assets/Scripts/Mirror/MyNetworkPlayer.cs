@@ -279,11 +279,16 @@ public class MyNetworkPlayer : NetworkBehaviour
 
             if (!(Vector3.Distance(gameObject.transform.position, respawnPosition) < 1f))
             {
+                if (gameObject.layer != 11)
+                {
+                    gameObject.layer = 11;
+                }
                 movement.velocity.y = 0;
                 gameObject.transform.Translate((respawnPosition -gameObject.transform.position) * Time.deltaTime *2, Space.World);
             }
             else
             {
+                gameObject.layer = 9;
                 respawn = false;
             }
         }
