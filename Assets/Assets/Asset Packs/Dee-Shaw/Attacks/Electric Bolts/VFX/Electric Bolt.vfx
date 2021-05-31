@@ -24,7 +24,7 @@ MonoBehaviour:
     x: 717
     y: -431
     width: 2100
-    height: 4232
+    height: 2849
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1545,6 +1545,7 @@ MonoBehaviour:
   blendMode: 0
   useAlphaClipping: 0
   generateMotionVector: 0
+  excludeFromTAA: 0
   m_SubOutputs:
   - {fileID: 8926484042661614919}
   cullMode: 0
@@ -1992,7 +1993,7 @@ MonoBehaviour:
   m_Children:
   - {fileID: 8926484042661615014}
   - {fileID: 8926484042661614725}
-  m_UIPosition: {x: 1196, y: 3409}
+  m_UIPosition: {x: 1135, y: 1970}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -2007,6 +2008,7 @@ MonoBehaviour:
   blendMode: 0
   useAlphaClipping: 0
   generateMotionVector: 0
+  excludeFromTAA: 0
   m_SubOutputs:
   - {fileID: 8926484042661614920}
   cullMode: 0
@@ -6364,6 +6366,7 @@ MonoBehaviour:
   blendMode: 0
   useAlphaClipping: 0
   generateMotionVector: 0
+  excludeFromTAA: 0
   m_SubOutputs:
   - {fileID: 8926484042661614921}
   cullMode: 0
