@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: -8991774330159646320}
   - component: {fileID: 2370730863913473806}
   - component: {fileID: 3063045423973797764}
+  - component: {fileID: 379392664857455038}
   m_Layer: 0
   m_Name: LockdownChain
   m_TagString: Untagged
@@ -436,3 +437,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &379392664857455038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9212652852658391536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f8f24dfc9b9d96448458188d535fd7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
