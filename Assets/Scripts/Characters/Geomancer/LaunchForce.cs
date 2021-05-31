@@ -21,6 +21,8 @@ public class LaunchForce : NetworkBehaviour
 
     Vector3 originposition;
 
+    GamestateManager gameState;
+
     float heightOfPillar;
 
     public override void OnStartAuthority()
@@ -31,6 +33,7 @@ public class LaunchForce : NetworkBehaviour
     private void Start()
     {
         CalculatePillarHeight();
+        gameState = GameObject.Find("GamestateManager").GetComponent<GamestateManager>();
     }
 
     private void CalculatePillarHeight()
@@ -43,16 +46,25 @@ public class LaunchForce : NetworkBehaviour
     [Client]
     private void Update()
     {
+
+        if (gameState.matchIsPaused)
+        {
+            Destroy(gameObject);
+        }
+
         if (!hasPlayedAnime)
         {
             CmdSpawnHitEffect();
             hasPlayedAnime = true;
         }
+
         if (gameObject.transform.position.y < originposition.y + heightOfPillar)
         {
             transform.Translate(Vector3.up * forceUpwards * Time.deltaTime, Space.World);
         }
+
         Collider[] colliders = Physics.OverlapSphere(topPartPillar.transform.position, collideBallRadius);
+
         foreach (Collider pushedObject in colliders)
         {
             if (pushedObject.CompareTag("Enemy"))
@@ -65,6 +77,7 @@ public class LaunchForce : NetworkBehaviour
             }
         }
     }
+
     [Command]
     void CmdPushBall(GameObject ball)
     {
