@@ -257,16 +257,17 @@ public class MyNetworkPlayer : NetworkBehaviour
         Quaternion respawnRotation = gamestateManager.GetRespawnPositionObject(GetDisplayName()).transform.rotation;
         movement.velocity = Vector3.zero;
         Debug.Log($"RESPAWNING! Respawn position: {respawnPosition}");
-        CmdRespawn(respawnPosition, respawnRotation);
+        gameObject.transform.Translate(respawnPosition);
+        gameObject.transform.rotation = respawnRotation;
         useAbilities.ResetAllCooldowns();
     }
 
-    [Command]
-    void CmdRespawn(Vector3 _position, Quaternion _rotation)
-    {
-        gameObject.transform.position = _position;
-        gameObject.transform.rotation = _rotation;
-    }
+    //[Command]
+    //void CmdRespawn(Vector3 _position, Quaternion _rotation)
+    //{
+    //    gameObject.transform.position = _position;
+    //    gameObject.transform.rotation = _rotation;
+    //}
 
     void Countdown()
     {
