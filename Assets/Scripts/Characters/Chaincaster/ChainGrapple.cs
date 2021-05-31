@@ -8,13 +8,20 @@ public class ChainGrapple : NetworkBehaviour
     private LineRenderer lr;
     private Material material;
     private Vector2 offsetSpeed = new Vector2(15, 0);
-    private RaycastHit raycastHit;
     private Vector3 grapplePoint;
+    private RaycastHit raycastHit;
+    private GameObject grappleObject;
+    private GameObject activeGrapple;
+    private AudioSource chainSound;
 
+    [Header("Dependencies")]
+    [SerializeField] MyNetworkPlayer playerInfo;
     [SerializeField] UseAbilities useAbilities;
     [SerializeField] CharacterController controller;
-    [SerializeField] LayerMask grappleable;
-    [SerializeField] Transform castPoint, camera, player;
+    [SerializeField] Camera playerCamera;
+    [SerializeField] Transform castPoint;
+
+    [Header("Values")]
     [SerializeField] private float maxRange = 25f;
     [SerializeField] float grappleSpeed;
     [SerializeField] float dragSpeed;
@@ -35,6 +42,10 @@ public class ChainGrapple : NetworkBehaviour
         material = lr.material;
 
         currentDuration = duration;
+
+        grappleObject = new GameObject("GrappleObject");
+
+        chainSound = gameObject.GetComponent<AudioSource>();
     }
 
     [Client]
@@ -45,6 +56,11 @@ public class ChainGrapple : NetworkBehaviour
             return;
         }
 
+        if (GameObject.Find("GamestateManager").GetComponent<GamestateManager>().matchIsPaused)
+        {
+            StopGrapple();
+        }
+
         if (Input.GetMouseButton(0) == false && currentDuration <= duration / 2)
         {
             StopGrapple();
@@ -53,6 +69,8 @@ public class ChainGrapple : NetworkBehaviour
         if (lr.positionCount == 0) return;
 
         currentDuration -= Time.deltaTime;
+
+        grapplePoint = activeGrapple.transform.position;
 
         if (raycastHit.transform.gameObject.tag == "Enemy")
         {
@@ -65,16 +83,7 @@ public class ChainGrapple : NetworkBehaviour
         }
         else
         {
-            Vector3 grappleVector;
-
-            if (raycastHit.transform.gameObject.GetComponent<Rigidbody>() != null || raycastHit.transform.gameObject.GetComponent<CharacterController>() != null)
-            {
-                grappleVector = raycastHit.transform.position - player.position;
-            }
-            else
-            {
-                grappleVector = grapplePoint - player.position;
-            }
+            Vector3 grappleVector = grapplePoint - gameObject.transform.position;
 
             controller.Move(grappleVector * grappleSpeed * Time.deltaTime);
         }
@@ -90,11 +99,13 @@ public class ChainGrapple : NetworkBehaviour
     void StartGrapple()
     {
         RaycastHit hit;
-        if(Physics.Raycast(camera.position, camera.forward, out hit, maxRange))
+        if(Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, maxRange))
         {
             useAbilities.SetOnCooldown(0);
 
-            grapplePoint = hit.point;
+            activeGrapple = Instantiate(grappleObject, hit.point, transform.rotation) as GameObject;
+
+            activeGrapple.transform.parent = hit.transform;
 
             raycastHit = hit;
 
@@ -113,6 +124,7 @@ public class ChainGrapple : NetworkBehaviour
     {
         lr = caster.GetComponent<LineRenderer>();
         lr.positionCount = 2;
+        chainSound.mute = false;
     }
 
     [Client]
@@ -145,6 +157,7 @@ public class ChainGrapple : NetworkBehaviour
     [Client]
     void StopGrapple()
     {
+        Destroy(activeGrapple);
         currentDuration = duration;
         CmdStopGrapple(gameObject);
     }
@@ -160,6 +173,7 @@ public class ChainGrapple : NetworkBehaviour
     {
         lr = caster.GetComponent<LineRenderer>();
         lr.positionCount = 0;
+        chainSound.mute = true;
     }
 
     [Client]
@@ -170,9 +184,7 @@ public class ChainGrapple : NetworkBehaviour
             return;
         }
 
-        grapplePoint = target.transform.position;
-
-        Vector3 grappleVector = player.position - grapplePoint;
+        Vector3 grappleVector = gameObject.transform.position - grapplePoint;
 
         CmdDragBall(target, grappleVector, Time.deltaTime);
     }

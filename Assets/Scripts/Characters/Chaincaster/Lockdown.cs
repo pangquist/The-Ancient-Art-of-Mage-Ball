@@ -7,14 +7,16 @@ public class Lockdown : NetworkBehaviour
 {
     private GameObject anchor1, anchor2, anchor3;
 
+    [Header("Dependencies")]
     [SerializeField] UseAbilities useAbilities;
+    [SerializeField] Jailer jailerPassive;
     [SerializeField] GameObject chain;
-    [SerializeField] LayerMask grappleable;
-    [SerializeField] Transform castPoint, camera, player;
+    [SerializeField] Camera playerCamera;
+    [SerializeField] Transform castPoint;
+
+    [Header("Values")]
     [SerializeField] float maxRange;
     [SerializeField] float area;
-
-    [SerializeField] Jailer jailerPassive;
 
     public override void OnStartAuthority()
     {
@@ -34,10 +36,8 @@ public class Lockdown : NetworkBehaviour
             return;
         }
 
-        Debug.Log("Casting Lockdown");
-
         RaycastHit hit;
-        if (Physics.Raycast(camera.position, camera.forward, out hit, maxRange))
+        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, maxRange))
         {
             Collider[] colliders = Physics.OverlapSphere(hit.point, area);
             foreach (Collider hitObject in colliders)
@@ -57,14 +57,12 @@ public class Lockdown : NetworkBehaviour
     [Command]
     void CmdCastSpell(GameObject target)
     {
-        Debug.Log("Casting Lockdown 2");
         RpcCastSpell(target);
     }
 
     [ClientRpc]
     void RpcCastSpell(GameObject target)
     {
-        Debug.Log("Casting Lockdown 3");
         if (NetworkServer.active)
         {
             LockdownBehaviour behave = chain.GetComponent<LockdownBehaviour>();
