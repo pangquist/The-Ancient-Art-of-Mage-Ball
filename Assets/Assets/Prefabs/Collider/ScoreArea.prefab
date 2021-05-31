@@ -47,9 +47,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  effectObject: {fileID: 8890923103834530407, guid: 784ad36bc36c0544bbaf184f629af1ac,
+  effectObject: {fileID: 8433062388510036247, guid: 260556c7645352c40903db1a50f21e11,
     type: 3}
-  parentName: {fileID: 0}
+  teamOwnership: 
   gmManager: {fileID: 0}
 --- !u!65 &4908698843352313257
 BoxCollider:
