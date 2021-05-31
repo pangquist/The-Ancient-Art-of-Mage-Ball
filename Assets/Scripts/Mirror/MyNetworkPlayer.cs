@@ -275,6 +275,8 @@ public class MyNetworkPlayer : NetworkBehaviour
         }
         if (gamestateManager.matchIsPaused)
         {
+            respawnPosition = gamestateManager.GetRespawnPositionObject(GetDisplayName()).transform.position;
+
             if (!(Vector3.Distance(gameObject.transform.position, respawnPosition) < 1f))
             {
                 movement.velocity.y = 0;
