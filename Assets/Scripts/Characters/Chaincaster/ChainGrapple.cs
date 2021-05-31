@@ -98,18 +98,31 @@ public class ChainGrapple : NetworkBehaviour
     [Client]
     void StartGrapple()
     {
+        bool hitBall = false;
         RaycastHit hit;
         if(Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, maxRange))
         {
-            useAbilities.SetOnCooldown(0);
-
             activeGrapple = Instantiate(grappleObject, hit.point, transform.rotation) as GameObject;
 
             activeGrapple.transform.parent = hit.transform;
 
             raycastHit = hit;
 
+            if(hit.transform.gameObject.tag == "Enemy")
+            {
+                hitBall = true;
+            }
+
             CmdStartGrapple(gameObject);
+        }
+
+        if (hitBall)
+        {
+            useAbilities.SetOnCooldown(0);
+        }
+        else
+        {
+            useAbilities.SetCooldownToPercentage(0, 50);
         }
     }
 
