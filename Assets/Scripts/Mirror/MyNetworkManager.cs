@@ -182,6 +182,10 @@ public class MyNetworkManager : NetworkManager
             Spawners.Clear();
             selectedScene = "Underwater Ruins";
         }
+        else if (sceneName == "MainMenu")
+        {
+            SteamAPI.Init();
+        }
     }
 
     public override void OnClientSceneChanged(NetworkConnection conn)
@@ -205,10 +209,12 @@ public class MyNetworkManager : NetworkManager
             if (NetworkServer.active && NetworkClient.isConnected)
             {
                 singleton.StopHost();
+                SteamAPI.Init();
             }
             else
             {
                 singleton.StopClient();
+                SteamAPI.Init();
             }
         }
     }

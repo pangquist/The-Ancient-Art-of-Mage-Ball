@@ -41,6 +41,17 @@ public class MainMenu : MonoBehaviour
             return;
         }
 
+        if (NetworkServer.active)
+        {
+            NetworkServer.Shutdown();
+        }
+
+        if (NetworkClient.active)
+        {
+            NetworkClient.Shutdown();
+        }
+        
+
         NetworkManager.singleton.StartHost();
     }
 

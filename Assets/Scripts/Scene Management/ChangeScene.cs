@@ -1,4 +1,5 @@
 using Mirror;
+using Steamworks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,20 +30,7 @@ public class ChangeScene : NetworkBehaviour
 
     public void GoToMainMenu()
     {
-        //if (NetworkServer.active)
-        //{
-        //    NetworkServer.Shutdown();
-        //    NetworkClient.Shutdown();
-        //}
-        //else if (NetworkClient.active)
-        //{
-        //    NetworkClient.Shutdown();
-        //}
-
-        NetworkServer.Shutdown();
-        NetworkClient.Shutdown();
-
-        //Destroy(myNetworkManager.gameObject);
+        myNetworkManager.StopHost();
         SceneManager.LoadScene("MainMenu");
     }
 }

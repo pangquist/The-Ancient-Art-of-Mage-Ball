@@ -390,6 +390,16 @@ namespace Mirror
         /// <summary>Starts a network "host" - a server and client in the same application.</summary>
         public void StartHost()
         {
+            if (NetworkServer.active)
+            {
+                NetworkServer.Shutdown();
+            }
+
+            if (NetworkClient.active)
+            {
+                NetworkClient.Shutdown();
+            }
+
             if (NetworkServer.active || NetworkClient.active)
             {
                 Debug.LogWarning("Server or Client already started.");
