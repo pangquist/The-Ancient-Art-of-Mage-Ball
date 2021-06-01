@@ -20,6 +20,7 @@ public class MyNetworkManager : NetworkManager
 
     [Header("Script Dependencies")]
     [SerializeField] GamestateManager gamestateManager;
+    [SerializeField] SceneSelect sceneSelect;
 
     [Header("References")]
     [SerializeField] GameObject mainMenuPlayer;
@@ -80,6 +81,13 @@ public class MyNetworkManager : NetworkManager
 
         isGameInProgress = true;
         gamestateManager = GameObject.Find("GamestateManager").GetComponent<GamestateManager>();
+
+        if (selectedScene == "Random")
+        {
+            System.Random random = new System.Random();
+            List<string> maps = sceneSelect.Maps();
+            selectedScene = maps[random.Next(0, maps.Count-1)];
+        }
         ServerChangeScene(selectedScene);
     }
     

@@ -61,10 +61,8 @@ public class ChangeMenuBackground : NetworkBehaviour
     
     public void ChangeBackground()
     {
-        Debug.Log("Trying to change background!");
         for (int i = 0; i < backgrounds.Length; i++)
         {
-            Debug.Log($"background name: {backgrounds[i].name} scene name: {networkManager.SelectedScene}");
             if(backgrounds[i].name == networkManager.SelectedScene)
             {
                 gameObject.GetComponent<Image>().sprite = backgrounds[i];
