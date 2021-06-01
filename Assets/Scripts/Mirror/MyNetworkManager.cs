@@ -50,11 +50,11 @@ public class MyNetworkManager : NetworkManager
         base.Start();
         if (useSteam)
         {
-            transport = GameObject.Find("SteamManager").GetComponent<FizzySteamworks>();
+            //transport = GameObject.Find("SteamManager").GetComponent<FizzySteamworks>();
         }
         else
         {
-            transport = gameObject.GetComponent<KcpTransport>();
+            //transport = gameObject.GetComponent<KcpTransport>();
         }
     }
 
