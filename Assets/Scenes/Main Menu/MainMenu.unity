@@ -10132,8 +10132,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3718856610359258601, guid: 946dac0630fca4d45ad1a2d4a2c6e700,
         type: 3}
+      propertyPath: redScore
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3718856610359258601, guid: 946dac0630fca4d45ad1a2d4a2c6e700,
+        type: 3}
       propertyPath: matchStartTime
-      value: 300
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3718856610359258601, guid: 946dac0630fca4d45ad1a2d4a2c6e700,
         type: 3}
