@@ -1,4 +1,5 @@
 using Mirror;
+using Mirror.FizzySteam;
 using Steamworks;
 using System;
 using System.Collections;
@@ -40,6 +41,11 @@ public class MyNetworkManager : NetworkManager
     public List<NetworkPlayerSpawner> Spawners { get; } = new List<NetworkPlayerSpawner>();
     public string SelectedScene { get { return selectedScene; } set { selectedScene = value; } }
 
+    public override void Start()
+    {
+        base.Start();
+        transport = GameObject.Find("SteamManager").GetComponent<FizzySteamworks>();
+    }
 
     public void ClearMenuPlayers()
     {
