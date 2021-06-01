@@ -358,6 +358,11 @@ namespace Mirror
         {
             if (NetworkClient.active)
             {
+                NetworkClient.Shutdown();
+            }
+
+            if (NetworkClient.active)
+            {
                 Debug.LogWarning("Client already started.");
                 return;
             }
