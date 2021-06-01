@@ -100,6 +100,7 @@ public class MyNetworkManager : NetworkManager
     {
         base.OnClientDisconnect(conn);
         SceneManager.LoadScene("MainMenu");
+        Destroy(gameObject);
         ClientOnDisconnected?.Invoke();
     }
 
