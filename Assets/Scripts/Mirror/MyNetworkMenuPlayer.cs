@@ -145,7 +145,10 @@ public class MyNetworkMenuPlayer : NetworkBehaviour
     [Client]
     private void Start()
     {
-        gamestateManager = GameObject.Find("GamestateManager").GetComponent<GamestateManager>();
+        if (SceneManager.GetActiveScene().name != "PostMatch")
+        {
+            gamestateManager = GameObject.Find("GamestateManager").GetComponent<GamestateManager>();
+        }
     }
 
     //Hook method that is called whenever the steam ID of the client is updated. Starts a method that finds the steam name that is connected to that steam id.

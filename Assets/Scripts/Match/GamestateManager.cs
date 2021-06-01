@@ -123,7 +123,11 @@ public class GamestateManager : NetworkBehaviour
         else
         {
             matchIsOver = true;
-            myNetworkManager.EndGame();
+
+            if (NetworkServer.active)
+            {
+                myNetworkManager.EndGame();
+            }
         }
     }
 
