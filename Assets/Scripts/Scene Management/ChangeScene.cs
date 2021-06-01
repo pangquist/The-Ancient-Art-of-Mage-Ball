@@ -26,4 +26,10 @@ public class ChangeScene : NetworkBehaviour
         //}
         //SceneManager.LoadScene(sceneName);
     }
+
+    public void GoToMainMenu()
+    {
+        Destroy(myNetworkManager.gameObject);
+        SceneManager.LoadScene("MainMenu");
+    }
 }
