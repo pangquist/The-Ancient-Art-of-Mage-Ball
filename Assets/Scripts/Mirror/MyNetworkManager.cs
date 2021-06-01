@@ -148,6 +148,7 @@ public class MyNetworkManager : NetworkManager
         {
             MyNetworkMenuPlayer menuPlayer = conn.identity.GetComponent<MyNetworkMenuPlayer>();
             MenuPlayers.Add(menuPlayer);
+            Debug.Log($"Number of players: {numPlayers}");
         
             CSteamID steamId = SteamMatchmaking.GetLobbyMemberByIndex(MainMenu.LobbyId, numPlayers - 1);
             menuPlayer.SetSteamId(steamId.m_SteamID);
