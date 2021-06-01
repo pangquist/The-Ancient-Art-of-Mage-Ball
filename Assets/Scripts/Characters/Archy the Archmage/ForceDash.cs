@@ -32,6 +32,11 @@ public class ForceDash : NetworkBehaviour
     
     IEnumerator Dash()
     {
+        if (!hasAuthority)
+        {
+            yield break;
+        }
+
         useAbilities.SetOnCooldown(2);
         useAbilities.ReduceAllCooldowns(1, 2);
         float startTime = Time.time;
