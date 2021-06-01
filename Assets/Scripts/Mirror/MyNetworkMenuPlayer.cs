@@ -33,7 +33,7 @@ public class MyNetworkMenuPlayer : NetworkBehaviour
     bool isPartyOwner = false;
 
     [SyncVar(hook = nameof(HandleSteamIdUpdated))]
-    ulong steamId;
+    CSteamID steamId;
 
     [SyncVar(hook = nameof(HandlePlayerColorUpdated))]
     [SerializeField] Color playerColor = Color.white;
@@ -53,7 +53,7 @@ public class MyNetworkMenuPlayer : NetworkBehaviour
     public string TeamName { get { return teamName; } }
     public bool IsPartyOwner { get { return isPartyOwner; } }
     public int ChosenCharacter { get { return chosenCharacter; } set { chosenCharacter = value; } }
-    public ulong SteamId { get { return steamId; } }
+    public CSteamID SteamId { get { return steamId; } }
     
     public bool GetIsPartyOwner()
     {
@@ -69,13 +69,13 @@ public class MyNetworkMenuPlayer : NetworkBehaviour
 
     // Gives the player the correct steam ID, which is passed in as a parameter from the NetworkManager.
     [Server]
-    public void SetSteamId(ulong _steamId)
+    public void SetSteamId()
     {
-        steamId = _steamId;
+        steamId = SteamUser.GetSteamID();
 
-        if (steamId == 0) //THIS SHOULD BE REMOVED WHEN TESTING FOR REAL
+        if (steamId == (CSteamID)0) //THIS SHOULD BE REMOVED WHEN TESTING FOR REAL
         {
-            steamId = 1;
+            steamId = (CSteamID)1;
         }
     }
 
@@ -153,17 +153,16 @@ public class MyNetworkMenuPlayer : NetworkBehaviour
 
     //Hook method that is called whenever the steam ID of the client is updated. Starts a method that finds the steam name that is connected to that steam id.
     [Client]
-    void HandleSteamIdUpdated(ulong oldSteamId, ulong newSteamId)
+    void HandleSteamIdUpdated(CSteamID oldSteamId, CSteamID newSteamId)
     {
         if (!isLocalPlayer)
         {
             return;
         }
 
-        if (steamId != 1)
+        if (steamId != (CSteamID)1)
         {
-            var CSteamID = new CSteamID(newSteamId);
-            CmdSetDisplayName(SteamFriends.GetFriendPersonaName(CSteamID));
+            CmdSetDisplayName(SteamFriends.GetFriendPersonaName(steamId));
         }
         else
         {
