@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 7027079361099392649}
   - component: {fileID: 7027079361099392648}
   - component: {fileID: 23307860}
+  - component: {fileID: 3500840628468803089}
+  - component: {fileID: 208399440669270525}
   m_Layer: 0
   m_Name: MenuNetworkManager
   m_TagString: NetworkManager
@@ -54,7 +56,7 @@ MonoBehaviour:
   serverBatchInterval: 0
   offlineScene: 
   onlineScene: 
-  transport: {fileID: 7027079361099392648}
+  transport: {fileID: 3500840628468803089}
   networkAddress: localhost
   maxConnections: 6
   disconnectInactiveConnections: 0
@@ -98,7 +100,7 @@ MonoBehaviour:
   - {fileID: 3758272146365123707, guid: ffbcc04f70fa4fb44a37e1da06fe5194, type: 3}
   - {fileID: 2502805589157441407, guid: 4a71ceea5f8e3db44b0c4b54fd7d8c3d, type: 3}
   - {fileID: 1398020548929700587, guid: ffc49a7d56283624083e984f973003a4, type: 3}
-  useSteam: 0
+  useSteam: 1
   selectedScene: Underwater Ruins
 --- !u!114 &7027079361099392648
 MonoBehaviour:
@@ -132,5 +134,35 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84e244f1e1ae2df44b7b923f8d685691, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3500840628468803089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7027079361099392651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea368fb6f27ec2f40a40e20977992b9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Channels: 0200000001000000
+  Timeout: 25
+  SteamAppID: 480
+  AllowSteamRelay: 1
+  UseNextGenSteamNetworking: 1
+  SteamUserID: 0
+--- !u!114 &208399440669270525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7027079361099392651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef4bffeda13d7a748973ff9204401c07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

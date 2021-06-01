@@ -42,7 +42,7 @@ public class ChangeScene : NetworkBehaviour
         NetworkServer.Shutdown();
         NetworkClient.Shutdown();
 
-        Destroy(myNetworkManager.gameObject);
+        //Destroy(myNetworkManager.gameObject);
         SceneManager.LoadScene("MainMenu");
     }
 }
