@@ -30,7 +30,14 @@ public class ChangeScene : NetworkBehaviour
 
     public void GoToMainMenu()
     {
-        myNetworkManager.StopHost();
+        if (isServer)
+        {
+            myNetworkManager.StopHost();
+        }
+        else if (isClient)
+        {
+            myNetworkManager.StopClient();
+        }
         SceneManager.LoadScene("MainMenu");
     }
 }
