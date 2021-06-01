@@ -1,3 +1,4 @@
+using kcp2k;
 using Mirror;
 using Mirror.FizzySteam;
 using Steamworks;
@@ -31,6 +32,9 @@ public class MyNetworkManager : NetworkManager
     [Header("Characters")]
     [SerializeField] GameObject[] characters;
 
+    [Header("Use Steam")]
+    [SerializeField] bool useSteam;
+
     [SerializeField] string selectedScene = "Underwater Ruins";
     bool isGameInProgress;
 
@@ -44,7 +48,14 @@ public class MyNetworkManager : NetworkManager
     public override void Start()
     {
         base.Start();
-        transport = GameObject.Find("SteamManager").GetComponent<FizzySteamworks>();
+        if (useSteam)
+        {
+            transport = GameObject.Find("SteamManager").GetComponent<FizzySteamworks>();
+        }
+        else
+        {
+            transport = gameObject.GetComponent<KcpTransport>();
+        }
     }
 
     public void ClearMenuPlayers()
