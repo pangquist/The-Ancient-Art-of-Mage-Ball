@@ -32,7 +32,7 @@ public class MyNetworkManager : NetworkManager
     [Header("Characters")]
     [SerializeField] GameObject[] characters;
 
-    [Header("Use Steam")]
+    [Header("Pick what transport you want to use")]
     [SerializeField] bool useSteam;
 
     [SerializeField] string selectedScene = "Underwater Ruins";

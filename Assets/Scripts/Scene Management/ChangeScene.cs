@@ -29,14 +29,18 @@ public class ChangeScene : NetworkBehaviour
 
     public void GoToMainMenu()
     {
-        if (NetworkServer.active)
-        {
-            NetworkServer.Shutdown();
-        }
-        else if (NetworkClient.active)
-        {
-            NetworkClient.Shutdown();
-        }
+        //if (NetworkServer.active)
+        //{
+        //    NetworkServer.Shutdown();
+        //    NetworkClient.Shutdown();
+        //}
+        //else if (NetworkClient.active)
+        //{
+        //    NetworkClient.Shutdown();
+        //}
+
+        NetworkServer.Shutdown();
+        NetworkClient.Shutdown();
 
         Destroy(myNetworkManager.gameObject);
         SceneManager.LoadScene("MainMenu");
