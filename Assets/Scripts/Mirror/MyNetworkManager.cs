@@ -150,8 +150,8 @@ public class MyNetworkManager : NetworkManager
             MenuPlayers.Add(menuPlayer);
             Debug.Log($"Number of players: {numPlayers}");
         
-            //CSteamID steamId = SteamMatchmaking.GetLobbyMemberByIndex(MainMenu.LobbyId, numPlayers - 1);
-            menuPlayer.SetSteamId();
+            CSteamID steamId = SteamMatchmaking.GetLobbyMemberByIndex(MainMenu.LobbyId, numPlayers - 1);
+            menuPlayer.SetSteamId(steamId.m_SteamID);
             
             menuPlayer.SetPartyOwner(MenuPlayers.Count == 1);
         }

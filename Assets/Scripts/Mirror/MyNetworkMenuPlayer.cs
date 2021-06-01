@@ -32,7 +32,7 @@ public class MyNetworkMenuPlayer : NetworkBehaviour
     [SyncVar(hook = nameof(AuthorityHandlePartyOwnerStateUpdated))]
     bool isPartyOwner = false;
 
-    //[SyncVar(hook = nameof(HandleSteamIdUpdated))]
+    [SyncVar(hook = nameof(HandleSteamIdUpdated))]
     ulong steamId;
 
     [SyncVar(hook = nameof(HandlePlayerColorUpdated))]
@@ -68,24 +68,14 @@ public class MyNetworkMenuPlayer : NetworkBehaviour
     #region Server
 
     // Gives the player the correct steam ID, which is passed in as a parameter from the NetworkManager.
-    [Client]
-    public void SetSteamId()
+    [Server]
+    public void SetSteamId(ulong _steamId)
     {
-        steamId = Convert.ToUInt64((SteamUser.GetSteamID().ToString()));
+        steamId = _steamId;
 
         if (steamId == 0) //THIS SHOULD BE REMOVED WHEN TESTING FOR REAL
         {
             steamId = 1;
-        }
-
-        if (steamId != 1)
-        {
-            var CSteamID = new CSteamID(steamId);
-            CmdSetDisplayName(SteamFriends.GetFriendPersonaName(CSteamID));
-        }
-        else
-        {
-            CmdSetDisplayName($"Player 1");
         }
     }
 
@@ -172,7 +162,7 @@ public class MyNetworkMenuPlayer : NetworkBehaviour
 
         if (steamId != 1)
         {
-            var CSteamID = new CSteamID(steamId);
+            var CSteamID = new CSteamID(newSteamId);
             CmdSetDisplayName(SteamFriends.GetFriendPersonaName(CSteamID));
         }
         else
