@@ -317,6 +317,11 @@ namespace Mirror
         {
             if (NetworkClient.active)
             {
+                NetworkClient.Shutdown();
+            }
+            
+            if (NetworkClient.active)
+            {
                 Debug.LogWarning("Client already started.");
                 return;
             }
@@ -356,11 +361,6 @@ namespace Mirror
         /// <summary>Starts the client, connects it to the server via Uri</summary>
         public void StartClient(Uri uri)
         {
-            if (NetworkClient.active)
-            {
-                NetworkClient.Shutdown();
-            }
-
             if (NetworkClient.active)
             {
                 Debug.LogWarning("Client already started.");

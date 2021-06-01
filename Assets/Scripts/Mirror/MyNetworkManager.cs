@@ -182,10 +182,10 @@ public class MyNetworkManager : NetworkManager
             Spawners.Clear();
             selectedScene = "Underwater Ruins";
         }
-        else if (sceneName == "MainMenu")
-        {
-            SteamAPI.Init();
-        }
+        //else if (sceneName == "MainMenu")
+        //{
+        //    SteamAPI.Init();
+        //}
     }
 
     public override void OnClientSceneChanged(NetworkConnection conn)
@@ -204,19 +204,19 @@ public class MyNetworkManager : NetworkManager
             gamestateManager.AssignScoreAtPostScreen();
             Destroy(gamestateManager.gameObject);
         }
-        if(SceneManager.GetActiveScene().name == "MainMenu")
-        {
-            if (NetworkServer.active && NetworkClient.isConnected)
-            {
-                singleton.StopHost();
-                SteamAPI.Init();
-            }
-            else
-            {
-                singleton.StopClient();
-                SteamAPI.Init();
-            }
-        }
+        //if(SceneManager.GetActiveScene().name == "MainMenu")
+        //{
+        //    if (NetworkServer.active && NetworkClient.isConnected)
+        //    {
+        //        singleton.StopHost();
+        //        SteamAPI.Init();
+        //    }
+        //    else
+        //    {
+        //        singleton.StopClient();
+        //        SteamAPI.Init();
+        //    }
+        //}
     }
 
     public override void OnStopClient()
