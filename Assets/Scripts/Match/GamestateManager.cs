@@ -208,7 +208,7 @@ public class GamestateManager : NetworkBehaviour
         {
             return;
         }
-        
+
         ballRb = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Rigidbody>();
 
         for (int i = 0; i < 6; i++)

@@ -7163,6 +7163,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 2190712066405685425, guid: 59983a107d813084a9c494e8de009d7c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4908019296134691780, guid: 59983a107d813084a9c494e8de009d7c,
         type: 3}
       propertyPath: m_Name
@@ -7242,6 +7247,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8442317322453079821, guid: 59983a107d813084a9c494e8de009d7c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59983a107d813084a9c494e8de009d7c, type: 3}
