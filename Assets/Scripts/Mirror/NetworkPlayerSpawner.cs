@@ -45,7 +45,16 @@ public class NetworkPlayerSpawner : NetworkBehaviour
             {
                 playerName = info.GetValue(1).ToString();
                 playerTeam = info.GetValue(2).ToString();
-                chosenCharacter = Convert.ToInt32(info.GetValue(3));
+
+                if (info.GetValue(3).ToString() == "4")
+                {
+                    System.Random random = new System.Random();
+                    chosenCharacter = random.Next(0, 3);
+                }
+                else
+                {
+                    chosenCharacter = Convert.ToInt32(info.GetValue(3));
+                }
 
                 Debug.Log($"Name: {playerName}, Team: { playerTeam}, Chosen Character: {chosenCharacter}");
             }
