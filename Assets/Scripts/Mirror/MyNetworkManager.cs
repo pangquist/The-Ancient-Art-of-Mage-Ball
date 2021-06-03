@@ -180,7 +180,7 @@ public class MyNetworkManager : NetworkManager
 
         gamestateManager.matchIsOver = false;
         gamestateManager.matchIsPaused = true;
-        gamestateManager.FillSpawnpointList();
+        gamestateManager.MatchPreparation();
         base.OnClientSceneChanged(conn);
 
         if (SceneManager.GetActiveScene().name== "PostMatch")

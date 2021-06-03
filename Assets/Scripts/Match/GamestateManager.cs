@@ -12,7 +12,6 @@ public class GamestateManager : NetworkBehaviour
     [SerializeField] MyNetworkManager myNetworkManager;
     [SerializeField] PostMatch postMatch;
 
-
     [Header("Lists")]
     [SerializeField] List<string> redTeam = new List<string>();
     [SerializeField] List<string> blueTeam = new List<string>();
@@ -50,6 +49,7 @@ public class GamestateManager : NetworkBehaviour
     [HideInInspector]
     public bool matchIsOver = false;
     int startScore = 0;
+    [SerializeField] Rigidbody ballRb;
 
     public int BlueScore { get { return blueScore; } set { blueScore = value; } }
     public int RedScore { get { return redScore; } set { redScore = value; } }
@@ -71,6 +71,11 @@ public class GamestateManager : NetworkBehaviour
     {
         myNetworkManager = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<MyNetworkManager>();
         DontDestroyOnLoad(this.gameObject);
+
+        if (SceneManager.GetActiveScene().name != "MainMenu" || SceneManager.GetActiveScene().name != "PostMatch")
+        {
+            ballRb = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Rigidbody>();
+        }
     }
 
     private void Update()
@@ -83,7 +88,7 @@ public class GamestateManager : NetworkBehaviour
         if (matchIsPaused)
         {
             pauseTimer -= Time.deltaTime;
-
+            
             if (pauseTimer <= 0)
             {
                 UnpauseMatch();
@@ -105,12 +110,14 @@ public class GamestateManager : NetworkBehaviour
     void UnpauseMatch()
     {
         matchIsPaused = false;
+        ballRb.isKinematic = false;
     }
 
     [Server]
     void PauseGame()
     {
         matchIsPaused = true;
+        ballRb.isKinematic = true;
     }
 
     void EndGame()
@@ -195,12 +202,14 @@ public class GamestateManager : NetworkBehaviour
         }
     }
     
-    public void FillSpawnpointList()
+    public void MatchPreparation()
     {
         if (SceneManager.GetActiveScene().name == "PostMatch" || SceneManager.GetActiveScene().name == "MainMenu")
         {
             return;
         }
+        
+        ballRb = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Rigidbody>();
 
         for (int i = 0; i < 6; i++)
         {
