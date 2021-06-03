@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Lockdown : NetworkBehaviour
+public class Lockdown : Ability
 {
     private GameObject anchor1, anchor2, anchor3;
 
@@ -29,9 +29,15 @@ public class Lockdown : NetworkBehaviour
     }
 
     [Client]
-    void CastLockdown()
+    public override void UseAbility(int abilityIndex)
     {
-        if(!hasAuthority)
+        if (abilityIndex != 2)
+        {
+            return;
+        }
+
+
+        if (!hasAuthority)
         {
             return;
         }

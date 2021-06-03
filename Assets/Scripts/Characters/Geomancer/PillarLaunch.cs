@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PillarLaunch : NetworkBehaviour
+public class PillarLaunch : Ability
 {
     [SerializeField] GameObject pillarPrefab;
     [SerializeField] Camera mainCamera;
@@ -20,8 +20,13 @@ public class PillarLaunch : NetworkBehaviour
     }
 
     [Client]
-    void DoPillarLaunch()
+    public override void UseAbility(int abilityIndex)
     {
+        if (abilityIndex != 2)
+        {
+            return;
+        }
+
         Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit);
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         foreach (LayerMask hitableLayer in hitableLayers)

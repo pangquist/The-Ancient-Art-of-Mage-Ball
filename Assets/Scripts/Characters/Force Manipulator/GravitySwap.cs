@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GravitySwap : NetworkBehaviour
+public class GravitySwap : Ability
 {
     [Header("Script Dependencies")]
     [SerializeField] UseAbilities useAbilities;
@@ -21,9 +21,31 @@ public class GravitySwap : NetworkBehaviour
     RaycastHit hit;
     GameObject ball;
 
-    [Client]
-    public void DoGravityWarpSpell()
+    private void OnEnable()
     {
+        useAbilities = GetComponent<UseAbilities>();
+        mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        hitableLayer = LayerMask.GetMask("Jumpable");
+        soundEffect = GameObject.Find("Audio Sources").transform.Find("Gravity Warp").GetComponent<AudioSource>();
+
+        range = 20;
+        appliedForce = new Vector3(0, 225, 0);
+        duration = 2.5f;
+    }
+
+    public override void OnStartAuthority()
+    {
+        enabled = true;
+    }
+
+    [Client]
+    public override void UseAbility(int abilityIndex)
+    {
+        if (abilityIndex != 2)
+        {
+            return;
+        }
+
         if (!hasAuthority)
         {
             return;

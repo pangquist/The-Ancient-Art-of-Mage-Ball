@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ForceDash : NetworkBehaviour
+public class ForceDash : Ability
 {
     [Header("Script Dependencies")]
     [SerializeField] CharacterController controller;
@@ -23,13 +23,32 @@ public class ForceDash : NetworkBehaviour
     void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
+        controller = GetComponent<CharacterController>();
+        playerCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        useAbilities = GetComponent<UseAbilities>();
+        hitEffect = GameObject.Find("Objects").transform.Find("Hit").gameObject;
+
+        dashSpeed = 25;
+        dashDuration = 0.4f;
+        pushAmount = 650;
+        pushRadius = 8;
     }
 
     public override void OnStartAuthority()
     {
         enabled = true;
     }
-    
+
+    public override void UseAbility(int abilityIndex)
+    {
+        if (abilityIndex != 3)
+        {
+            return;
+        }
+
+        Dash();
+    }
+
     IEnumerator Dash()
     {
         useAbilities.SetOnCooldown(2);
@@ -69,6 +88,7 @@ public class ForceDash : NetworkBehaviour
     void CmdSpawnHitEffect(Vector3 hitLocation)
     {
         GameObject magicExplosion = Instantiate(hitEffect, hitLocation, Quaternion.identity) as GameObject;
+        magicExplosion.SetActive(true);
         NetworkServer.Spawn(magicExplosion);
     }
 

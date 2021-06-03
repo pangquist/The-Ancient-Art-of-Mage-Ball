@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RestrictCasting : NetworkBehaviour
+public class RestrictCasting : Ability
 {
     [Header("Dependencies")]
     [SerializeField] MyNetworkPlayer playerInfo;
@@ -31,8 +31,14 @@ public class RestrictCasting : NetworkBehaviour
     }
 
     [Client]
-    void CastRestrict()
+    public override void UseAbility(int abilityIndex)
     {
+        if (abilityIndex != 3)
+        {
+            return;
+        }
+
+
         if (!hasAuthority)
         {
             return;

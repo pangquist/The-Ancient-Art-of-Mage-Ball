@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExplosiveBoulder : NetworkBehaviour
+public class ExplosiveBoulder : Ability
 {
     [SerializeField] Camera mainCamera;
     [SerializeField] Transform boulderStartPoint;
@@ -24,8 +24,13 @@ public class ExplosiveBoulder : NetworkBehaviour
     }
 
     [Client]
-    void DoBoulderThrow()
+    public override void UseAbility(int abilityIndex)
     {
+        if (abilityIndex != 1)
+        {
+            return;
+        }
+        
         foreach (LayerMask hitableLayer in hitableLayers)
         {
             Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, hitableLayer);

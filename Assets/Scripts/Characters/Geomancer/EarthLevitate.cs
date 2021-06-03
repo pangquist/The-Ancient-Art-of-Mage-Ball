@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EarthLevitate : NetworkBehaviour
+public class EarthLevitate : Ability
 {
     [SerializeField] GameObject pillarBridgePrefab;
     [SerializeField] float abilityDuration;
@@ -43,8 +43,14 @@ public class EarthLevitate : NetworkBehaviour
     }
 
     [Client]
-    void DoPillarBridge()
+    public override void UseAbility(int abilityIndex)
     {
+        if (abilityIndex != 3)
+        {
+            return;
+        }
+
+
         animator.SetBool("isPose", true);
         timer = 0;
         groundPositionUnderPlayer = new Vector3(gameObject.transform.position.x, groundTransform[0].transform.position.y, gameObject.transform.position.z);

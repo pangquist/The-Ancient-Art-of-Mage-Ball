@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChainGrapple : NetworkBehaviour
+public class ChainGrapple : Ability
 {
     private LineRenderer lr;
     private Material material;
@@ -51,6 +51,7 @@ public class ChainGrapple : NetworkBehaviour
     [Client]
     private void Update()
     {
+       
         if (!hasAuthority)
         {
             return;
@@ -103,8 +104,13 @@ public class ChainGrapple : NetworkBehaviour
     }
 
     [Client]
-    void StartGrapple()
+    public override void UseAbility(int abilityIndex)
     {
+        if (abilityIndex != 1)
+        {
+            return;
+        }
+
         bool hitBall = false;
         RaycastHit hit;
         if(Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, maxRange))

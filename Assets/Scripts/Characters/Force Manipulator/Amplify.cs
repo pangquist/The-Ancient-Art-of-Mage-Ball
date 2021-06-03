@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Amplify : NetworkBehaviour
+public class Amplify : Ability
 {
     [Header("Script Dependencies")]
     [SerializeField] UseAbilities useAbilities;
@@ -22,17 +22,32 @@ public class Amplify : NetworkBehaviour
     RaycastHit hit;
     GameObject ball;
 
-    //[Client]
-    //public void DoAmplifySpell()
-    //{
-    //    if (!hasAuthority)
-    //    {
-    //        return;
-    //    }
+    private void OnEnable()
+    {
+        useAbilities = GetComponent<UseAbilities>();
+        mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        amplifyBeam = GameObject.Find("Main Camera").transform.Find("AmplifyBeam").gameObject;
+        soundEffect = GameObject.Find("Audio Sources").transform.Find("Amplify").GetComponent<AudioSource>();
 
-    //    CmdSpawnBeam();
+        duration = 4.5f;
+        force = 17;
+    }
 
-    //}
+    public override void OnStartAuthority()
+    {
+        enabled = true;
+    }
+
+    [Client]
+    public override void UseAbility(int abilityIndex)
+    {
+        if (abilityIndex != 1)
+        {
+            return;
+        }
+
+        CmdSpawnBeam();
+    }
 
     [Command]
     void CmdSpawnBeam()

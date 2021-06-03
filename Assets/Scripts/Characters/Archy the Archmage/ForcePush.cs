@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ForcePush : NetworkBehaviour
+public class ForcePush : Ability
 {
     [Header("Script Dependencies")]
     [SerializeField] UseAbilities useAbilities;
@@ -25,7 +25,20 @@ public class ForcePush : NetworkBehaviour
 
     private void Start()
     {
-        
+    }
+
+    private void OnEnable()
+    {
+        useAbilities = GetComponent<UseAbilities>();
+        hitableLayers = new LayerMask[2];
+        hitableLayers[0] = LayerMask.GetMask("Jumpable");
+        hitableLayers[1] = LayerMask.GetMask("Hitable");
+        hitEffect = GameObject.Find("Objects").transform.Find("Hit").gameObject;
+
+        range = 20;
+        pushAmount = 700;
+        pushRadius = 8;
+        mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
     }
 
     public override void OnStartAuthority()
@@ -34,8 +47,13 @@ public class ForcePush : NetworkBehaviour
     }
 
     [Client]
-    void DoPush()
+    public override void UseAbility(int abilityIndex)
     {
+        if (abilityIndex != 1)
+        {
+            return;
+        }
+
         if (!hasAuthority)
         {
             return;
@@ -102,23 +120,9 @@ public class ForcePush : NetworkBehaviour
     void CmdSpawnHitEffect(Vector3 hitLocation)
     {
         GameObject magicExplosion = Instantiate(hitEffect, hitLocation, Quaternion.identity) as GameObject;
+        magicExplosion.SetActive(true);
         NetworkServer.Spawn(magicExplosion);
         Debug.Log($"Instantiating the hit effect: {magicExplosion}");
     }
-
-    //[ClientRpc]
-    //void RpcMoveBall(Vector3 location)
-    //{
-    //    Collider[] colliders = Physics.OverlapSphere(location, pushRadius);
-    //    foreach (Collider pushedObject in colliders)
-    //    {
-    //        if (pushedObject.CompareTag("Enemy"))
-    //        {
-    //            Debug.Log($"Player: {gameObject.GetComponent<MyNetworkPlayer>().GetDisplayName()}, Ball: {pushedObject.gameObject.name}, Location: {location}, Velocity: {pushedObject.gameObject.GetComponent<Rigidbody>().velocity}, Push Amount: {pushAmount}");
-    //            pushedObject.GetComponent<Rigidbody>().AddForce(new Vector3(0,200,0));
-    //        }
-    //    }
-
-    //}
     #endregion
 }

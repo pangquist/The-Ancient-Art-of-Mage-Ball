@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ForceWall : NetworkBehaviour
+public class ForceWall : Ability
 {
     [Header("Script Dependencies")]
     [SerializeField] UseAbilities useAbilities;
@@ -19,10 +19,32 @@ public class ForceWall : NetworkBehaviour
     [SerializeField] float duration;
     
     RaycastHit hit;
-    
-    [Client]
-    public void DoForceWallSpell()
+
+    private void OnEnable()
     {
+        useAbilities = GetComponent<UseAbilities>();
+        mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        hitableLayer = LayerMask.GetMask("Jumpable");
+        forceWall = GameObject.Find("Objects").transform.Find("Force Wall").gameObject;
+        soundEffect = GameObject.Find("Audio Sources").transform.Find("Force Wall").GetComponent<AudioSource>();
+
+        range = 20;
+        duration = 4f;
+    }
+
+    public override void OnStartAuthority()
+    {
+        enabled = true;
+    }
+
+    [Client]
+    public override void UseAbility(int abilityIndex)
+    {
+        if (abilityIndex != 3)
+        {
+            return;
+        }
+
         if (!hasAuthority)
         {
             return;
@@ -67,6 +89,7 @@ public class ForceWall : NetworkBehaviour
             {
                 instantiatedForceWall = Instantiate(forceWall, hitLocation, gameObject.GetComponent<Transform>().transform.rotation) as GameObject;
             }
+            instantiatedForceWall.SetActive(true);
             NetworkServer.Spawn(instantiatedForceWall);
         }
     }
