@@ -59,7 +59,6 @@ public class InGameMenu : MonoBehaviour
 
     public void QuitGame()
     {
-        Debug.Log("Quitted Game");
         Application.Quit();
     }
 }
