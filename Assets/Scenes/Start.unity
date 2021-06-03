@@ -306,11 +306,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3500840628468803089, guid: f9f2dd1600203254eabef20669d45d98,
-        type: 3}
-      propertyPath: UseNextGenSteamNetworking
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7027079361099392651, guid: f9f2dd1600203254eabef20669d45d98,
         type: 3}
       propertyPath: m_Name

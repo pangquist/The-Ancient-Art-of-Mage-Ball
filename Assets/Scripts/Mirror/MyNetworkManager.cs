@@ -81,6 +81,11 @@ public class MyNetworkManager : NetworkManager
 
         isGameInProgress = true;
         gamestateManager = GameObject.Find("GamestateManager").GetComponent<GamestateManager>();
+        sceneSelect = GameObject.Find("MainMenuDisplay").transform.Find
+            ("Canvas").transform.Find
+            ("LobbyParent").transform.Find
+            ("LobbyUI").transform.Find
+            ("MapSelectionScreen").GetComponent<SceneSelect>();
 
         if (selectedScene == "Random")
         {
