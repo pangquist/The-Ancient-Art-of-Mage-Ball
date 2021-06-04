@@ -25,6 +25,7 @@ public class MainMenu : MonoBehaviour
         if (!useSteam)
             return;
 
+        myNetworkManager = GameObject.Find("MenuNetworkManager").GetComponent<MyNetworkManager>();
         lobbyCreated = Callback<LobbyCreated_t>.Create(OnLobbyCreated);
         gameLobbyJoinRequested = Callback<GameLobbyJoinRequested_t>.Create(OnGameLobbyJoinRequested);
         lobbyEntered = Callback<LobbyEnter_t>.Create(OnLobbyEntered);
