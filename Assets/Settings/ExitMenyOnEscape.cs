@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class ExitMenyOnEscape : MonoBehaviour
 {
-    [SerializeField] GameObject landingPage;
+    [SerializeField] GameObject activePage;
 
     void Update()
     {
         if (Input.GetKey(KeyCode.Escape))
         {
             gameObject.SetActive(false);
-            landingPage.SetActive(true);
+            activePage.SetActive(true);
             
         }
     }

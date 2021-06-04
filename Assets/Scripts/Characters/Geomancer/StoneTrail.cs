@@ -5,15 +5,14 @@ using UnityEngine;
 
 public class StoneTrail : NetworkBehaviour
 {   
+    [Header("Dependency")]
     [SerializeField] GameObject stonePrefab;
-
     [SerializeField] Transform stoneSpawnPosition; //slightly ahead of the playercharacters feet.
-
-    [SerializeField] float timeBetweenStones = 1f;
-
-    [SerializeField] float scaleMin, scaleMax;
-
     [SerializeField] GameObject hitEffect;
+
+    [Header("Values")]
+    [SerializeField] float timeBetweenStones = 1f;
+    [SerializeField] float scaleMin, scaleMax;
 
     [Header("2 is default, minimum is the collider x  or z value of player")]
     [SerializeField] float dropPositionMarginalToPlayer = 2;
@@ -42,11 +41,11 @@ public class StoneTrail : NetworkBehaviour
     {        
         timer += Time.deltaTime;
 
-        //Debug.Log(timer + "for" + gameObject.transform.position);
         if (timer % 0.4 > 0 && timer % 0.4 < 0.1) // 0.1 sec window to set a new dropPosition. every 0.7 sec
         {
             dropPosition = stoneSpawnPosition.transform.position;
         }
+        
         if (timer > timeBetweenStones)
         {
             if (playerMovement.isGrounded && playerMovement.velocity != Vector3.zero)
@@ -72,9 +71,9 @@ public class StoneTrail : NetworkBehaviour
 
             CmdSpawnHitEffect();
 
-            NetworkServer.Spawn(projectileInstance, connectionToClient);
-            
+            NetworkServer.Spawn(projectileInstance, connectionToClient);            
     }
+
     [Command]
     void CmdSpawnHitEffect()
     {
