@@ -695,7 +695,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c787c021d250b234e94b17cf666e0d81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   useAbility: {fileID: 7626238677252518089}
+  passiveIcon: {fileID: 21300000, guid: 2762221fccdcdbb4e9ba7ca5a284a0a0, type: 3}
 --- !u!1 &1398020549020263655
 GameObject:
   m_ObjectHideFlags: 0
@@ -3807,6 +3810,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Abilities
       objectReference: {fileID: 0}
+    - target: {fileID: 3023062009644946767, guid: 17a19f53f8cd3f941b790329e3507401,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4335594901277930524, guid: 17a19f53f8cd3f941b790329e3507401,
         type: 3}
       propertyPath: m_Sprite
@@ -3823,6 +3831,12 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4693437615915103956, guid: 17a19f53f8cd3f941b790329e3507401,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2762221fccdcdbb4e9ba7ca5a284a0a0,
+        type: 3}
     - target: {fileID: 4995051615207920620, guid: 17a19f53f8cd3f941b790329e3507401,
         type: 3}
       propertyPath: m_Type

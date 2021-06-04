@@ -34,6 +34,7 @@ public class RandomizeAbilities : MonoBehaviour
     [SerializeField] Image abilityIcon1;
     [SerializeField] Image abilityIcon2;
     [SerializeField] Image abilityIcon3;
+    [SerializeField] Image passiveIcon;
     
     System.Random random = new System.Random();
 
@@ -79,6 +80,7 @@ public class RandomizeAbilities : MonoBehaviour
         abilityIcon1.sprite = randomizedAbility1.ReturnIcon();
         abilityIcon2.sprite = randomizedAbility2.ReturnIcon();
         abilityIcon3.sprite = randomizedAbility3.ReturnIcon();
+        passiveIcon.sprite = randomizedPassive.ReturnIcon();
     }
 
     [Client]

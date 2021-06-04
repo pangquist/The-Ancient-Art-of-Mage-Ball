@@ -11,6 +11,9 @@ public class Jailer : Passive
     [Header("Dependencies")]
     [SerializeField] PlayerMovement player;
 
+    [Header("Settings")]
+    [SerializeField] Sprite passiveIcon;
+
     [Header("Values")]
     [SerializeField] float maxSpeed;
     [SerializeField] float speedIncrement;
@@ -62,5 +65,10 @@ public class Jailer : Passive
         buffDuration = maxDuration;
         player.Speed = baseSpeed;
         player.JumpPower = baseJump;
+    }
+
+    public override Sprite ReturnIcon()
+    {
+        return passiveIcon;
     }
 }

@@ -7,6 +7,9 @@ public class SpellSlinging : Passive
     [Header("Script Dependencies")]
     [SerializeField] UseAbilities useAbility;
 
+    [Header("Settings")]
+    [SerializeField] Sprite passiveIcon;
+
     private void Start()
     {
         
@@ -14,7 +17,15 @@ public class SpellSlinging : Passive
 
     public void SpellSling(float cooldownReduction, int abilityIndex)
     {
-        useAbility.ReduceAllCooldowns(cooldownReduction, abilityIndex);
+        if (enabled == true)
+        {
+            useAbility.ReduceAllCooldowns(cooldownReduction, abilityIndex);
+        }
+    }
+
+    public override Sprite ReturnIcon()
+    {
+        return passiveIcon;
     }
 
 }

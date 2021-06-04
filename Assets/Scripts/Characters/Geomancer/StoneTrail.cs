@@ -15,6 +15,8 @@ public class StoneTrail : Passive
 
     [SerializeField] GameObject hitEffect;
 
+    [SerializeField] Sprite passiveIcon;
+
     [Header("2 is default, minimum is the collider x  or z value of player")]
     [SerializeField] float dropPositionMarginalToPlayer = 2;
 
@@ -83,4 +85,8 @@ public class StoneTrail : Passive
         NetworkServer.Spawn(smokeEffect);
     }
 
+    public override Sprite ReturnIcon()
+    {
+        return passiveIcon;
+    }
 }

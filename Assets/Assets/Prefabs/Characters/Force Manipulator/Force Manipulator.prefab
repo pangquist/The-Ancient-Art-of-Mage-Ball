@@ -1805,7 +1805,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a496d99b42cb9834ea3498000fc68d78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   movement: {fileID: 3758272146365123704}
+  passiveIcon: {fileID: 21300000, guid: 23f10fdf94230b94695ed716bde0161f, type: 3}
 --- !u!1 &3906260169555093223
 GameObject:
   m_ObjectHideFlags: 0

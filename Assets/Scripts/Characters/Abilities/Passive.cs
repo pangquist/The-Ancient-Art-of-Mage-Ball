@@ -5,5 +5,5 @@ using UnityEngine;
 
 public abstract class Passive : NetworkBehaviour
 {
-    
+    public abstract Sprite ReturnIcon();
 }
