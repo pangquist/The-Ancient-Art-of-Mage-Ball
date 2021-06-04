@@ -697,6 +697,7 @@ MonoBehaviour:
   animator: {fileID: 282141968}
   cooldown: 10
   abilityIcon: {fileID: 21300000, guid: 40317c412268fa4498cf26ce6ffda087, type: 3}
+  groundTransform: []
   offSetPillarSpawnMultiplier: 2
 --- !u!114 &1126745944140206780
 MonoBehaviour:

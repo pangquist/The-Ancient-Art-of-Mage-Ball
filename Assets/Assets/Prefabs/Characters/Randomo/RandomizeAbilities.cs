@@ -41,6 +41,10 @@ public class RandomizeAbilities : MonoBehaviour
         
         foreach (Ability ability in allAbilities)
         {
+            if (ability.GetType() == ability1Type || ability.GetType() == ability2Type || ability.GetType() == ability3Type)
+            {
+                continue;
+            }
             ability.enabled = false;
         }
 
