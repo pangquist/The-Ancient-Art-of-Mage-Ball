@@ -8,6 +8,7 @@ public class ForceJump : Ability
     [Header("Script Dependencies")]
     [SerializeField] UseAbilities useAbilities;
     [SerializeField] PlayerMovement playerMovement;
+    [SerializeField] SpellSlinging spellSlinging;
 
     [Header("settings")]
     [SerializeField] Sprite abilityIcon;
@@ -32,7 +33,11 @@ public class ForceJump : Ability
         playerMovement.velocity.y += forceJumpHeight;
 
         useAbilities.SetOnCooldown(1, cooldown);
-        useAbilities.ReduceAllCooldowns(1, 1);
+
+        if (spellSlinging.enabled == true)
+        {
+            spellSlinging.SpellSling(1, 1);
+        }
     }
 
     public override Sprite ReturnIcon()

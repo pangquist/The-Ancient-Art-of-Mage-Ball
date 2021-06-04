@@ -13,17 +13,22 @@ public class RandomizeAbilities : MonoBehaviour
     [Header("Available Abilities")]
     [SerializeField] Ability[] allAbilities;
 
+    [Header("Available Passive")]
+    [SerializeField] Passive[] allPassives;
+
     [Header("Lists")]
-    [SerializeField] List<string> firstAbilities;
-    [SerializeField] List<string> secondAbilities;
-    [SerializeField] List<string> thirdAbilities;
-    [SerializeField] List<string> fourthAbilities;
+    [SerializeField] List<Ability> firstAbilities;
+    [SerializeField] List<Ability> secondAbilities;
+    [SerializeField] List<Ability> thirdAbilities;
+    [SerializeField] List<Passive> passives;
 
     [Header("Abilities")]
-    [SerializeField] Ability ability1;
-    [SerializeField] Ability ability2;
-    [SerializeField] Ability ability3;
-    [SerializeField] string ability4;
+    [SerializeField] Ability randomizedAbility1;
+    [SerializeField] Ability randomizedAbility2;
+    [SerializeField] Ability randomizedAbility3;
+
+    [Header("Passive")]
+    [SerializeField] Passive randomizedPassive;
 
     [Header("Ability Icons")]
     [SerializeField] Image abilityIcon1;
@@ -35,49 +40,66 @@ public class RandomizeAbilities : MonoBehaviour
     void Start()
     {
         allAbilities = GetComponents<Ability>();
-        
-        Type ability1Type = Type.GetType(firstAbilities[random.Next(0, firstAbilities.Count)]);
-        Type ability2Type = Type.GetType(secondAbilities[random.Next(0, secondAbilities.Count)]);
-        Type ability3Type = Type.GetType(thirdAbilities[random.Next(0, thirdAbilities.Count)]);
-        
+        allPassives = GetComponents<Passive>();
+
+        randomizedAbility1 = firstAbilities[random.Next(0, firstAbilities.Count)];
+        randomizedAbility2 = secondAbilities[random.Next(0, secondAbilities.Count)];
+        randomizedAbility3 = thirdAbilities[random.Next(0, thirdAbilities.Count)];
+
         foreach (Ability ability in allAbilities)
         {
-            if (ability.GetType() == ability1Type || ability.GetType() == ability2Type || ability.GetType() == ability3Type)
+            if (ability == randomizedAbility1)
             {
-                continue;
+                ability.enabled = true;
             }
-            ability.enabled = false;
+            else if(ability == randomizedAbility2)
+            {
+                ability.enabled = true;
+            }
+            else if(ability == randomizedAbility3)
+            {
+                ability.enabled = true;
+            }
+            else
+            {
+                ability.enabled = false;
+            }
         }
 
-        ability1 = (Ability)gameObject.GetComponent(ability1Type);
-        ability2 = (Ability)gameObject.GetComponent(ability2Type);
-        ability3 = (Ability)gameObject.GetComponent(ability3Type);
-        ability4 = fourthAbilities[random.Next(0, fourthAbilities.Count)];
+        randomizedPassive = allPassives[random.Next(0, passives.Count)];
 
-        abilityIcon1.sprite = ability1.ReturnIcon();
-        abilityIcon2.sprite = ability2.ReturnIcon();
-        abilityIcon3.sprite = ability3.ReturnIcon();
+        foreach (Passive passive in allPassives)
+        {
+            if(passive != randomizedPassive)
+            {
+                passive.enabled = false;
+            }
+        }
+        
+        abilityIcon1.sprite = randomizedAbility1.ReturnIcon();
+        abilityIcon2.sprite = randomizedAbility2.ReturnIcon();
+        abilityIcon3.sprite = randomizedAbility3.ReturnIcon();
     }
 
     [Client]
     public void UseAbility1()
     {
         Debug.Log("Using Ability 1");
-        ability1.UseAbility(1);
+        randomizedAbility1.UseAbility(1);
     }
 
     [Client]
     public void UseAbility2()
     {
         Debug.Log("Using Ability 2");
-        ability2.UseAbility(2);
+        randomizedAbility2.UseAbility(2);
     }
 
     [Client]
     public void UseAbility3()
     {
         Debug.Log("Using Ability 3");
-        ability3.UseAbility(3);
+        randomizedAbility3.UseAbility(3);
     }
 
 }

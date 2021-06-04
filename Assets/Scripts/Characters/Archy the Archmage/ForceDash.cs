@@ -10,6 +10,7 @@ public class ForceDash : Ability
     [SerializeField] Camera playerCamera;
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] UseAbilities useAbilities;
+    [SerializeField] SpellSlinging spellSlinging;
 
     [Header("settings")]
     [SerializeField] Sprite abilityIcon;
@@ -42,7 +43,11 @@ public class ForceDash : Ability
     IEnumerator Dash()
     {
         useAbilities.SetOnCooldown(2, cooldown);
-        useAbilities.ReduceAllCooldowns(1, 2);
+
+        if (spellSlinging.enabled == true)
+        {
+            spellSlinging.SpellSling(1, 2);
+        }
         float startTime = Time.time;
         bool isCloseToBall = false;
 

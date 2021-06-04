@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Jailer : MonoBehaviour
+public class Jailer : Passive
 {
     private float baseSpeed;
     private float baseJump;

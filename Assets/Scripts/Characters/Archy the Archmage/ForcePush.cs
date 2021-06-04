@@ -7,6 +7,7 @@ public class ForcePush : Ability
 {
     [Header("Script Dependencies")]
     [SerializeField] UseAbilities useAbilities;
+    [SerializeField] SpellSlinging spellSlinging;
 
     [Header("Settings")]
     [SerializeField] Camera mainCamera;
@@ -74,7 +75,12 @@ public class ForcePush : Ability
                     CmdMoveBall(pushedObject.gameObject, hit.point);
                 }
             }
-            useAbilities.ReduceAllCooldowns(1, 0);
+
+            if (spellSlinging.enabled == true)
+            {
+                spellSlinging.SpellSling(1, 0);
+            }
+
             useAbilities.SetOnCooldown(0, cooldown);
             return;
         }
