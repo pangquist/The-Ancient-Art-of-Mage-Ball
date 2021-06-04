@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RestrictCasting : NetworkBehaviour
+public class RestrictCasting : Ability
 {
     [Header("Dependencies")]
     [SerializeField] MyNetworkPlayer playerInfo;
@@ -12,7 +12,11 @@ public class RestrictCasting : NetworkBehaviour
     [SerializeField] Camera playerCamera;
     [SerializeField] Transform castPoint;
 
+    [Header("Settings")]
+    [SerializeField] Sprite abilityIcon;
+
     [Header("Values")]
+    [SerializeField] float cooldown;
     [SerializeField] float maxRange;
     [SerializeField] float area;
 
@@ -31,8 +35,14 @@ public class RestrictCasting : NetworkBehaviour
     }
 
     [Client]
-    void CastRestrict()
+    public override void UseAbility(int abilityIndex)
     {
+        if (abilityIndex != 3)
+        {
+            return;
+        }
+
+
         if (!hasAuthority)
         {
             return;
@@ -63,13 +73,13 @@ public class RestrictCasting : NetworkBehaviour
 
             if (hitPlayer)
             {
-                useAbilities.SetOnCooldown(2);
+                useAbilities.SetOnCooldown(2, cooldown);
 
                 CmdSpawnHitEffect(hit.point);
             }
             else
             {
-                useAbilities.SetCooldownToPercentage(2, 50);
+                useAbilities.SetCooldownToPercentage(2, cooldown, 50);
             }
         }
     }
@@ -93,5 +103,10 @@ public class RestrictCasting : NetworkBehaviour
         UseAbilities targetAbilities = target.GetComponent<UseAbilities>();
 
         targetAbilities.StartAllCooldowns();
+    }
+
+    public override Sprite ReturnIcon()
+    {
+        return abilityIcon;
     }
 }

@@ -20,6 +20,9 @@ public class AmplifyBeamBehaviour : MonoBehaviour
     private void Start()
     {
         gameObject.GetComponent<MeshRenderer>().enabled = false;
+        amplify = gameObject.transform.parent.gameObject.GetComponentInParent<Amplify>();
+        mainCamera = gameObject.GetComponentInParent<Camera>();
+        force = 20;
     }
 
     private void Update()

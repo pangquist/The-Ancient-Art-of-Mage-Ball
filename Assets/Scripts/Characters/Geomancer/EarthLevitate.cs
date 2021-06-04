@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EarthLevitate : NetworkBehaviour
+public class EarthLevitate : Ability
 {
     [SerializeField] GameObject pillarBridgePrefab;
     [SerializeField] float abilityDuration;
@@ -12,9 +12,11 @@ public class EarthLevitate : NetworkBehaviour
     [SerializeField] float ballForce = 100f;
     [SerializeField] UseAbilities useAbilities;
     [SerializeField] Animator animator;
+    [SerializeField] float cooldown;
+    [SerializeField] Sprite abilityIcon;
 
     GameObject pillarSpawn;
-    GameObject[] groundTransform;
+    [SerializeField] GameObject[] groundTransform; //Deserialize this later
     GameObject pillarSmoke;
     Transform pillarTop;
 
@@ -43,14 +45,20 @@ public class EarthLevitate : NetworkBehaviour
     }
 
     [Client]
-    void DoPillarBridge()
+    public override void UseAbility(int abilityIndex)
     {
+        if (abilityIndex != 3)
+        {
+            return;
+        }
+
+
         animator.SetBool("isPose", true);
         timer = 0;
         groundPositionUnderPlayer = new Vector3(gameObject.transform.position.x, groundTransform[0].transform.position.y, gameObject.transform.position.z);
         CmdSpawnPillarBridge(gameObject, groundPositionUnderPlayer);
         hasSpawnedPillar = true;
-        useAbilities.SetOnCooldown(2);
+        useAbilities.SetOnCooldown(2, cooldown);
     }
 
     [Client]
@@ -113,5 +121,8 @@ public class EarthLevitate : NetworkBehaviour
         ball.GetComponent<Rigidbody>().AddForce(new Vector3(0, 1, 0) * ballForce, ForceMode.Force);
     }
 
-
+    public override Sprite ReturnIcon()
+    {
+        return abilityIcon;
+    }
 }

@@ -3,13 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PillarLaunch : NetworkBehaviour
+public class PillarLaunch : Ability
 {
     [SerializeField] GameObject pillarPrefab;
     [SerializeField] Camera mainCamera;
     [SerializeField] float range;
     [SerializeField] LayerMask[] hitableLayers;
     [SerializeField] UseAbilities useAbilities;
+    [SerializeField] float cooldown;
+    [SerializeField] Sprite abilityIcon;
 
     Transform pillarTop;
     RaycastHit hit;
@@ -20,8 +22,13 @@ public class PillarLaunch : NetworkBehaviour
     }
 
     [Client]
-    void DoPillarLaunch()
+    public override void UseAbility(int abilityIndex)
     {
+        if (abilityIndex != 2)
+        {
+            return;
+        }
+
         Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit);
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         foreach (LayerMask hitableLayer in hitableLayers)
@@ -32,7 +39,7 @@ public class PillarLaunch : NetworkBehaviour
             if (hit.collider != null && hit.collider.gameObject.CompareTag("Ground"))
             {
                 CmdDoPillar(hit.point);
-                useAbilities.SetOnCooldown(1);
+                useAbilities.SetOnCooldown(1, cooldown);
                 break;
             }
         }
@@ -51,5 +58,10 @@ public class PillarLaunch : NetworkBehaviour
         pillarTop = pillarPrefab.transform.GetChild(0);
         GameObject projectileInstance = Instantiate(pillarPrefab, hitLocation - pillarTop.position, Quaternion.identity);
         NetworkServer.Spawn(projectileInstance, connectionToClient);
+    }
+
+    public override Sprite ReturnIcon()
+    {
+        return abilityIcon;
     }
 }

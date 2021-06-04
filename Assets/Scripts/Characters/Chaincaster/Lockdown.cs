@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Lockdown : NetworkBehaviour
+public class Lockdown : Ability
 {
     private GameObject anchor1, anchor2, anchor3;
 
@@ -14,7 +14,11 @@ public class Lockdown : NetworkBehaviour
     [SerializeField] Camera playerCamera;
     [SerializeField] Transform castPoint;
 
+    [Header("Settings")]
+    [SerializeField] Sprite abilityIcon;
+
     [Header("Values")]
+    [SerializeField] float cooldown;
     [SerializeField] float maxRange;
     [SerializeField] float area;
 
@@ -29,9 +33,15 @@ public class Lockdown : NetworkBehaviour
     }
 
     [Client]
-    void CastLockdown()
+    public override void UseAbility(int abilityIndex)
     {
-        if(!hasAuthority)
+        if (abilityIndex != 2)
+        {
+            return;
+        }
+
+
+        if (!hasAuthority)
         {
             return;
         }
@@ -46,7 +56,7 @@ public class Lockdown : NetworkBehaviour
                 {
                     jailerPassive.TriggerBuff();
 
-                    useAbilities.SetOnCooldown(1);
+                    useAbilities.SetOnCooldown(1, cooldown);
 
                     CmdCastSpell(hitObject.gameObject);
                 }
@@ -75,5 +85,10 @@ public class Lockdown : NetworkBehaviour
             NetworkServer.Spawn(anchor2, connectionToClient);
             NetworkServer.Spawn(anchor3, connectionToClient);
         }
+    }
+
+    public override Sprite ReturnIcon()
+    {
+        return abilityIcon;
     }
 }

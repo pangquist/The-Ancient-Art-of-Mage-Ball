@@ -3,17 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ForcePush : NetworkBehaviour
+public class ForcePush : Ability
 {
     [Header("Script Dependencies")]
     [SerializeField] UseAbilities useAbilities;
+    [SerializeField] SpellSlinging spellSlinging;
 
     [Header("Settings")]
     [SerializeField] Camera mainCamera;
     [SerializeField] LayerMask[] hitableLayers;
     [SerializeField] GameObject hitEffect;
-    
+    [SerializeField] Sprite abilityIcon;
+
     [Header("Values")]
+    [SerializeField] float cooldown;
     [SerializeField] float range;
     [SerializeField] float pushAmount;
     [SerializeField] float pushRadius;
@@ -25,17 +28,21 @@ public class ForcePush : NetworkBehaviour
 
     private void Start()
     {
-        
     }
-
+    
     public override void OnStartAuthority()
     {
         enabled = true;
     }
 
     [Client]
-    void DoPush()
+    public override void UseAbility(int abilityIndex)
     {
+        if (abilityIndex != 1)
+        {
+            return;
+        }
+
         if (!hasAuthority)
         {
             return;
@@ -68,8 +75,13 @@ public class ForcePush : NetworkBehaviour
                     CmdMoveBall(pushedObject.gameObject, hit.point);
                 }
             }
-            useAbilities.ReduceAllCooldowns(1, 0);
-            useAbilities.SetOnCooldown(0);
+
+            if (spellSlinging.enabled == true)
+            {
+                spellSlinging.SpellSling(1, 0);
+            }
+
+            useAbilities.SetOnCooldown(0, cooldown);
             return;
         }
 
@@ -86,7 +98,7 @@ public class ForcePush : NetworkBehaviour
             }
         }
 
-        useAbilities.SetOnCooldown(0);
+        useAbilities.SetOnCooldown(0, cooldown);
     }
 
     #endregion
@@ -106,19 +118,9 @@ public class ForcePush : NetworkBehaviour
         Debug.Log($"Instantiating the hit effect: {magicExplosion}");
     }
 
-    //[ClientRpc]
-    //void RpcMoveBall(Vector3 location)
-    //{
-    //    Collider[] colliders = Physics.OverlapSphere(location, pushRadius);
-    //    foreach (Collider pushedObject in colliders)
-    //    {
-    //        if (pushedObject.CompareTag("Enemy"))
-    //        {
-    //            Debug.Log($"Player: {gameObject.GetComponent<MyNetworkPlayer>().GetDisplayName()}, Ball: {pushedObject.gameObject.name}, Location: {location}, Velocity: {pushedObject.gameObject.GetComponent<Rigidbody>().velocity}, Push Amount: {pushAmount}");
-    //            pushedObject.GetComponent<Rigidbody>().AddForce(new Vector3(0,200,0));
-    //        }
-    //    }
-
-    //}
+    public override Sprite ReturnIcon()
+    {
+        return abilityIcon;
+    }
     #endregion
 }

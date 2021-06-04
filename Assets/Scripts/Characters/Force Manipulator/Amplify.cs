@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Amplify : NetworkBehaviour
+public class Amplify : Ability
 {
     [Header("Script Dependencies")]
     [SerializeField] UseAbilities useAbilities;
@@ -12,8 +12,10 @@ public class Amplify : NetworkBehaviour
     [SerializeField] Camera mainCamera;
     [SerializeField] GameObject amplifyBeam;
     [SerializeField] AudioSource soundEffect;
+    [SerializeField] Sprite abilityIcon;
 
     [Header("Values")]
+    [SerializeField] float cooldown;
     [SerializeField] float duration;
     [SerializeField] float force;
 
@@ -21,24 +23,28 @@ public class Amplify : NetworkBehaviour
 
     RaycastHit hit;
     GameObject ball;
+    
+    public override void OnStartAuthority()
+    {
+        enabled = true;
+    }
 
-    //[Client]
-    //public void DoAmplifySpell()
-    //{
-    //    if (!hasAuthority)
-    //    {
-    //        return;
-    //    }
+    [Client]
+    public override void UseAbility(int abilityIndex)
+    {
+        if (abilityIndex != 1)
+        {
+            return;
+        }
 
-    //    CmdSpawnBeam();
-
-    //}
+        CmdSpawnBeam();
+    }
 
     [Command]
     void CmdSpawnBeam()
     {
         RpcActivateBeam();
-        useAbilities.SetOnCooldown(0);
+        useAbilities.SetOnCooldown(0, cooldown);
     }
 
     [ClientRpc]
@@ -71,5 +77,10 @@ public class Amplify : NetworkBehaviour
     void RpcMoveBall(GameObject ball, Vector3 _force)
     {
         ball.GetComponent<Rigidbody>().AddForce(_force);
+    }
+
+    public override Sprite ReturnIcon()
+    {
+        return abilityIcon;
     }
 }

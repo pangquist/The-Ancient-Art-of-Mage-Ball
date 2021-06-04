@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ForceWall : NetworkBehaviour
+public class ForceWall : Ability
 {
     [Header("Script Dependencies")]
     [SerializeField] UseAbilities useAbilities;
@@ -13,16 +13,28 @@ public class ForceWall : NetworkBehaviour
     [SerializeField] LayerMask hitableLayer;
     [SerializeField] GameObject forceWall;
     [SerializeField] AudioSource soundEffect;
+    [SerializeField] Sprite abilityIcon;
 
     [Header("Values")]
+    [SerializeField] float cooldown;
     [SerializeField] float range;
     [SerializeField] float duration;
     
     RaycastHit hit;
-    
-    [Client]
-    public void DoForceWallSpell()
+
+    public override void OnStartAuthority()
     {
+        enabled = true;
+    }
+
+    [Client]
+    public override void UseAbility(int abilityIndex)
+    {
+        if (abilityIndex != 3)
+        {
+            return;
+        }
+
         if (!hasAuthority)
         {
             return;
@@ -38,12 +50,12 @@ public class ForceWall : NetworkBehaviour
             Vector3 point = ray.origin + (ray.direction * range);
             CmdDoSpell(point, false);
             useAbilities.ReduceAllCooldowns(1, 2);
-            useAbilities.SetOnCooldown(2);
+            useAbilities.SetOnCooldown(2, cooldown);
             return;
         }
 
         CmdDoSpell(hit.point, true);
-        useAbilities.SetOnCooldown(2);
+        useAbilities.SetOnCooldown(2, cooldown);
     }
 
     [Command]
@@ -69,5 +81,10 @@ public class ForceWall : NetworkBehaviour
             }
             NetworkServer.Spawn(instantiatedForceWall);
         }
+    }
+
+    public override Sprite ReturnIcon()
+    {
+        return abilityIcon;
     }
 }

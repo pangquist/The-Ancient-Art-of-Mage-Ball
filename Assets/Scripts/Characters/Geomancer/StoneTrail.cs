@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StoneTrail : NetworkBehaviour
+public class StoneTrail : Passive
 {   
     [Header("Dependency")]
     [SerializeField] GameObject stonePrefab;
@@ -14,6 +14,8 @@ public class StoneTrail : NetworkBehaviour
     [SerializeField] float timeBetweenStones = 1f;
     [SerializeField] float scaleMin, scaleMax;
 
+    [SerializeField] Sprite passiveIcon;
+    
     [Header("2 is default, minimum is the collider x  or z value of player")]
     [SerializeField] float dropPositionMarginalToPlayer = 2;
 
@@ -82,4 +84,8 @@ public class StoneTrail : NetworkBehaviour
         NetworkServer.Spawn(smokeEffect);
     }
 
+    public override Sprite ReturnIcon()
+    {
+        return passiveIcon;
+    }
 }

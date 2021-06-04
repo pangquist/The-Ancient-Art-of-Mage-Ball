@@ -3,7 +3,11 @@ guid: ad21e2b4093f75e48a204a7dda25e0ee
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - useAbilities: {instanceID: 0}
+  - mainCamera: {instanceID: 0}
+  - hitEffect: {fileID: 8027473195609965283, guid: e06bdea1510a3e547a2ed554aac7f5f9,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

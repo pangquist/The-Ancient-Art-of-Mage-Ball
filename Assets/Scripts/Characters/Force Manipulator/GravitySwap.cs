@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GravitySwap : NetworkBehaviour
+public class GravitySwap : Ability
 {
     [Header("Script Dependencies")]
     [SerializeField] UseAbilities useAbilities;
@@ -12,8 +12,10 @@ public class GravitySwap : NetworkBehaviour
     [SerializeField] Camera mainCamera;
     [SerializeField] LayerMask hitableLayer;
     [SerializeField] AudioSource soundEffect;
+    [SerializeField] Sprite abilityIcon;
 
     [Header("Values")]
+    [SerializeField] float cooldown;
     [SerializeField] float range;
     [SerializeField] Vector3 appliedForce;
     [SerializeField] float duration;
@@ -21,9 +23,19 @@ public class GravitySwap : NetworkBehaviour
     RaycastHit hit;
     GameObject ball;
 
-    [Client]
-    public void DoGravityWarpSpell()
+    public override void OnStartAuthority()
     {
+        enabled = true;
+    }
+
+    [Client]
+    public override void UseAbility(int abilityIndex)
+    {
+        if (abilityIndex != 2)
+        {
+            return;
+        }
+
         if (!hasAuthority)
         {
             return;
@@ -36,11 +48,11 @@ public class GravitySwap : NetworkBehaviour
 
         if (hit.collider == null || hit.collider.gameObject.tag != "Enemy")
         {
-            useAbilities.SetCooldownToPercentage(1, 50);
+            useAbilities.SetCooldownToPercentage(1, cooldown, 50);
             return;
         }
 
-        useAbilities.SetOnCooldown(1);
+        useAbilities.SetOnCooldown(1, cooldown);
         Debug.Log($"Hit object name: {hit.collider.gameObject}");
         ball = hit.collider.gameObject;
         CmdDoSpell(ball);
@@ -66,5 +78,10 @@ public class GravitySwap : NetworkBehaviour
     void RpcPlaySoundEffect()
     {
         soundEffect.Play();
+    }
+
+    public override Sprite ReturnIcon()
+    {
+        return abilityIcon;
     }
 }

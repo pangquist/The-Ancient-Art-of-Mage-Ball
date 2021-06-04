@@ -148,9 +148,9 @@ public class UseAbilities : NetworkBehaviour
         anim.Play(ability3Name.name);
     }
 
-    public void SetOnCooldown(int abilityIndex)
+    public void SetOnCooldown(int abilityIndex, float cooldownAmount)
     {
-        currentCooldowns[abilityIndex] = cooldowns[abilityIndex];
+        currentCooldowns[abilityIndex] = cooldownAmount;
     }
 
     public void ReduceAllCooldowns(float reduceAmount, int attackIndex)
@@ -180,8 +180,8 @@ public class UseAbilities : NetworkBehaviour
         }
     }
 
-    public void SetCooldownToPercentage(int cooldownIndex, float percentage)
+    public void SetCooldownToPercentage(int cooldownIndex, float cooldownAmount, float percentage)
     {
-        currentCooldowns[cooldownIndex] = cooldowns[cooldownIndex] * (percentage/100);
+        currentCooldowns[cooldownIndex] = cooldownAmount * (percentage/100);
     }
 }

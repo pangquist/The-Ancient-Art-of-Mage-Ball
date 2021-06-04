@@ -485,6 +485,8 @@ MonoBehaviour:
   controller: {fileID: 1398020548929700585}
   playerCamera: {fileID: 5826631109005300286}
   castPoint: {fileID: 1299691982749212937}
+  abilityIcon: {fileID: 21300000, guid: 40670ab4a97acdf4f82bc61fc9f70a4f, type: 3}
+  cooldown: 1.5
   maxRange: 35
   grappleSpeed: 7
   dragSpeed: 80
@@ -509,6 +511,8 @@ MonoBehaviour:
   chain: {fileID: 9212652852658391536, guid: b7c1cb04b8ffb9b46aada444c93cc38b, type: 3}
   playerCamera: {fileID: 5826631109005300286}
   castPoint: {fileID: 1299691982749212937}
+  abilityIcon: {fileID: 21300000, guid: 1296f907550acf64eb7514b6065d53a7, type: 3}
+  cooldown: 5
   maxRange: 35
   area: 4
 --- !u!114 &8333611319720115501
@@ -530,6 +534,8 @@ MonoBehaviour:
   jailerPassive: {fileID: 1250621574692289349}
   playerCamera: {fileID: 5826631109005300286}
   castPoint: {fileID: 1299691982749212937}
+  abilityIcon: {fileID: 21300000, guid: e7dcf8b9c3a6be14eb4c66a528d86a30, type: 3}
+  cooldown: 10
   maxRange: 35
   area: 2.5
   hitEffect: {fileID: 6590868245128863341, guid: cee81df5ec5f6f6408a6eda912c4741f,
@@ -882,7 +888,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a8e5494064d37b48bc962bc22af22cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   player: {fileID: 1398020548929700584}
+  passiveIcon: {fileID: 21300000, guid: 8ccff011cf0d2d045a3f8f2e44d019fc, type: 3}
   maxSpeed: 16
   speedIncrement: 1
   maxJump: 12
@@ -5192,6 +5201,12 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4693437615915103956, guid: 17a19f53f8cd3f941b790329e3507401,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8ccff011cf0d2d045a3f8f2e44d019fc,
+        type: 3}
     - target: {fileID: 4995051615207920620, guid: 17a19f53f8cd3f941b790329e3507401,
         type: 3}
       propertyPath: m_Type

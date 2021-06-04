@@ -1425,6 +1425,8 @@ MonoBehaviour:
   - serializedVersion: 2
     m_Bits: 1088
   useAbilities: {fileID: 2106470732702085849}
+  cooldown: 5
+  abilityIcon: {fileID: 21300000, guid: 40317c412268fa4498cf26ce6ffda087, type: 3}
 --- !u!95 &1106491956633752253
 Animator:
   serializedVersion: 3
@@ -1555,6 +1557,9 @@ MonoBehaviour:
   ballForce: 200
   useAbilities: {fileID: 2106470732702085849}
   animator: {fileID: 1106491956633752253}
+  cooldown: 10
+  abilityIcon: {fileID: 21300000, guid: f83869dc843759d42be6a0c4a7ae1b6d, type: 3}
+  groundTransform: []
   offSetPillarSpawnMultiplier: 2
 --- !u!114 &4562241116313397843
 MonoBehaviour:
@@ -1578,6 +1583,7 @@ MonoBehaviour:
   scaleMax: 1
   hitEffect: {fileID: 1295856588731438336, guid: ebc43cfaa13d3a3429ca01e6b97e5e4a,
     type: 3}
+  passiveIcon: {fileID: 21300000, guid: 7a79a4bd2ee01c046b144b1a4fe83d10, type: 3}
   dropPositionMarginalToPlayer: 3
 --- !u!114 &8310891137082437123
 MonoBehaviour:
@@ -1602,6 +1608,8 @@ MonoBehaviour:
     type: 3}
   hitableObject: {fileID: 0}
   useAbilities: {fileID: 2106470732702085849}
+  cooldown: 1.5
+  abilityIcon: {fileID: 21300000, guid: ed22f4526ed183246bf21ee30c8b2a4e, type: 3}
   throwForceForward: 1500
   throwForceUpward: 200
 --- !u!1 &2504937733938519409
@@ -3673,6 +3681,12 @@ PrefabInstance:
       propertyPath: ability4Icon
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4693437615915103956, guid: 17a19f53f8cd3f941b790329e3507401,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7a79a4bd2ee01c046b144b1a4fe83d10,
+        type: 3}
     - target: {fileID: 6303391952782078731, guid: 17a19f53f8cd3f941b790329e3507401,
         type: 3}
       propertyPath: m_AssetId

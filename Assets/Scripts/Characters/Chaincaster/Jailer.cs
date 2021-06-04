@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Jailer : MonoBehaviour
+public class Jailer : Passive
 {
     private float baseSpeed;
     private float baseJump;
@@ -10,6 +10,9 @@ public class Jailer : MonoBehaviour
 
     [Header("Dependencies")]
     [SerializeField] PlayerMovement player;
+
+    [Header("Settings")]
+    [SerializeField] Sprite passiveIcon;
 
     [Header("Values")]
     [SerializeField] float maxSpeed;
@@ -62,5 +65,10 @@ public class Jailer : MonoBehaviour
         buffDuration = maxDuration;
         player.Speed = baseSpeed;
         player.JumpPower = baseJump;
+    }
+
+    public override Sprite ReturnIcon()
+    {
+        return passiveIcon;
     }
 }

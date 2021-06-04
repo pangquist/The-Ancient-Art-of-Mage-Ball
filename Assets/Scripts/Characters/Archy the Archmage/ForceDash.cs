@@ -3,15 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ForceDash : NetworkBehaviour
+public class ForceDash : Ability
 {
     [Header("Script Dependencies")]
     [SerializeField] CharacterController controller;
     [SerializeField] Camera playerCamera;
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] UseAbilities useAbilities;
+    [SerializeField] SpellSlinging spellSlinging;
+
+    [Header("settings")]
+    [SerializeField] Sprite abilityIcon;
 
     [Header("Values")]
+    [SerializeField] float cooldown;
     [SerializeField] float dashSpeed;
     [SerializeField] float dashDuration;
     [SerializeField] float pushAmount;
@@ -20,24 +25,35 @@ public class ForceDash : NetworkBehaviour
     [Header("Visual Effect")]
     [SerializeField] GameObject hitEffect;
 
-    void Start()
-    {
-        playerMovement = GetComponent<PlayerMovement>();
-    }
-
     public override void OnStartAuthority()
     {
         enabled = true;
     }
-    
+
+    public override void UseAbility(int abilityIndex)
+    {
+        if (abilityIndex != 3)
+        {
+            return;
+        }
+
+        StartCoroutine(Dash());
+    }
+
     IEnumerator Dash()
     {
-        useAbilities.SetOnCooldown(2);
-        useAbilities.ReduceAllCooldowns(1, 2);
+        useAbilities.SetOnCooldown(2, cooldown);
+
+        if (spellSlinging.enabled == true)
+        {
+            spellSlinging.SpellSling(1, 2);
+        }
         float startTime = Time.time;
         bool isCloseToBall = false;
 
-        while(Time.time <startTime + dashDuration && isCloseToBall == false)
+        Debug.Log($"Dash duration: {dashDuration}");
+
+        while(Time.time < startTime + dashDuration && isCloseToBall == false)
         {
             if (playerMovement.isGrounded)
             {
@@ -90,5 +106,10 @@ public class ForceDash : NetworkBehaviour
         }
 
         return false;
+    }
+
+    public override Sprite ReturnIcon()
+    {
+        return abilityIcon;
     }
 }

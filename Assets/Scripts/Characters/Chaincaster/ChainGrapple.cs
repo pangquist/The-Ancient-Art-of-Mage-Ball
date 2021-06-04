@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChainGrapple : NetworkBehaviour
+public class ChainGrapple : Ability
 {
     private LineRenderer lr;
     private Material material;
@@ -21,7 +21,11 @@ public class ChainGrapple : NetworkBehaviour
     [SerializeField] Camera playerCamera;
     [SerializeField] Transform castPoint;
 
+    [Header("Settings")]
+    [SerializeField] Sprite abilityIcon;
+
     [Header("Values")]
+    [SerializeField] float cooldown;
     [SerializeField] private float maxRange = 25f;
     [SerializeField] float grappleSpeed;
     [SerializeField] float dragSpeed;
@@ -51,6 +55,7 @@ public class ChainGrapple : NetworkBehaviour
     [Client]
     private void Update()
     {
+       
         if (!hasAuthority)
         {
             return;
@@ -103,8 +108,13 @@ public class ChainGrapple : NetworkBehaviour
     }
 
     [Client]
-    void StartGrapple()
+    public override void UseAbility(int abilityIndex)
     {
+        if (abilityIndex != 1)
+        {
+            return;
+        }
+
         bool hitBall = false;
         RaycastHit hit;
         if(Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, maxRange))
@@ -125,11 +135,11 @@ public class ChainGrapple : NetworkBehaviour
 
         if (hitBall)
         {
-            useAbilities.SetOnCooldown(0);
+            useAbilities.SetOnCooldown(0, cooldown);
         }
         else
         {
-            useAbilities.SetCooldownToPercentage(0, 50);
+            useAbilities.SetCooldownToPercentage(0, cooldown, 50);
         }
     }
 
@@ -215,5 +225,10 @@ public class ChainGrapple : NetworkBehaviour
         Rigidbody ball = target.GetComponent<Rigidbody>();
 
         ball.AddForce(vector * dragSpeed * time);
+    }
+
+    public override Sprite ReturnIcon()
+    {
+        return abilityIcon;
     }
 }
