@@ -21,7 +21,11 @@ public class ChainGrapple : Ability
     [SerializeField] Camera playerCamera;
     [SerializeField] Transform castPoint;
 
+    [Header("Settings")]
+    [SerializeField] Sprite abilityIcon;
+
     [Header("Values")]
+    [SerializeField] float cooldown;
     [SerializeField] private float maxRange = 25f;
     [SerializeField] float grappleSpeed;
     [SerializeField] float dragSpeed;
@@ -131,11 +135,11 @@ public class ChainGrapple : Ability
 
         if (hitBall)
         {
-            useAbilities.SetOnCooldown(0);
+            useAbilities.SetOnCooldown(0, cooldown);
         }
         else
         {
-            useAbilities.SetCooldownToPercentage(0, 50);
+            useAbilities.SetCooldownToPercentage(0, cooldown, 50);
         }
     }
 
@@ -221,5 +225,10 @@ public class ChainGrapple : Ability
         Rigidbody ball = target.GetComponent<Rigidbody>();
 
         ball.AddForce(vector * dragSpeed * time);
+    }
+
+    public override Sprite ReturnIcon()
+    {
+        return abilityIcon;
     }
 }

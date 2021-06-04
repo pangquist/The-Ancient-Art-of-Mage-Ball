@@ -12,8 +12,10 @@ public class Amplify : Ability
     [SerializeField] Camera mainCamera;
     [SerializeField] GameObject amplifyBeam;
     [SerializeField] AudioSource soundEffect;
+    [SerializeField] Sprite abilityIcon;
 
     [Header("Values")]
+    [SerializeField] float cooldown;
     [SerializeField] float duration;
     [SerializeField] float force;
 
@@ -21,18 +23,7 @@ public class Amplify : Ability
 
     RaycastHit hit;
     GameObject ball;
-
-    private void OnEnable()
-    {
-        useAbilities = GetComponent<UseAbilities>();
-        mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
-        amplifyBeam = GameObject.Find("Main Camera").transform.Find("AmplifyBeam").gameObject;
-        soundEffect = GameObject.Find("Audio Sources").transform.Find("Amplify").GetComponent<AudioSource>();
-
-        duration = 4.5f;
-        force = 17;
-    }
-
+    
     public override void OnStartAuthority()
     {
         enabled = true;
@@ -53,7 +44,7 @@ public class Amplify : Ability
     void CmdSpawnBeam()
     {
         RpcActivateBeam();
-        useAbilities.SetOnCooldown(0);
+        useAbilities.SetOnCooldown(0, cooldown);
     }
 
     [ClientRpc]
@@ -86,5 +77,10 @@ public class Amplify : Ability
     void RpcMoveBall(GameObject ball, Vector3 _force)
     {
         ball.GetComponent<Rigidbody>().AddForce(_force);
+    }
+
+    public override Sprite ReturnIcon()
+    {
+        return abilityIcon;
     }
 }

@@ -12,9 +12,11 @@ public class EarthLevitate : Ability
     [SerializeField] float ballForce = 100f;
     [SerializeField] UseAbilities useAbilities;
     [SerializeField] Animator animator;
+    [SerializeField] float cooldown;
+    [SerializeField] Sprite abilityIcon;
 
     GameObject pillarSpawn;
-    GameObject[] groundTransform;
+    [SerializeField] GameObject[] groundTransform; //Deserialize this later
     GameObject pillarSmoke;
     Transform pillarTop;
 
@@ -56,7 +58,7 @@ public class EarthLevitate : Ability
         groundPositionUnderPlayer = new Vector3(gameObject.transform.position.x, groundTransform[0].transform.position.y, gameObject.transform.position.z);
         CmdSpawnPillarBridge(gameObject, groundPositionUnderPlayer);
         hasSpawnedPillar = true;
-        useAbilities.SetOnCooldown(2);
+        useAbilities.SetOnCooldown(2, cooldown);
     }
 
     [Client]
@@ -119,5 +121,8 @@ public class EarthLevitate : Ability
         ball.GetComponent<Rigidbody>().AddForce(new Vector3(0, 1, 0) * ballForce, ForceMode.Force);
     }
 
-
+    public override Sprite ReturnIcon()
+    {
+        return abilityIcon;
+    }
 }

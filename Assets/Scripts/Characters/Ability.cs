@@ -18,4 +18,6 @@ public abstract class Ability : NetworkBehaviour
     }
 
     public abstract void UseAbility(int abilityIndex);
+
+    public abstract Sprite ReturnIcon();
 }

@@ -9,16 +9,12 @@ public class ForceJump : Ability
     [SerializeField] UseAbilities useAbilities;
     [SerializeField] PlayerMovement playerMovement;
 
+    [Header("settings")]
+    [SerializeField] Sprite abilityIcon;
+
     [Header("Values")]
+    [SerializeField] float cooldown;
     [SerializeField] float forceJumpHeight;
-
-    private void OnEnable()
-    {
-        useAbilities = GetComponent<UseAbilities>();
-        playerMovement = GetComponent<PlayerMovement>();
-
-        forceJumpHeight = 15;
-    }
 
     public override void OnStartAuthority()
     {
@@ -35,7 +31,12 @@ public class ForceJump : Ability
 
         playerMovement.velocity.y += forceJumpHeight;
 
-        useAbilities.SetOnCooldown(1);
+        useAbilities.SetOnCooldown(1, cooldown);
         useAbilities.ReduceAllCooldowns(1, 1);
+    }
+
+    public override Sprite ReturnIcon()
+    {
+        return abilityIcon;
     }
 }

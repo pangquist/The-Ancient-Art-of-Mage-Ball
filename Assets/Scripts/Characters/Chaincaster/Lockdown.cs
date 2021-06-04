@@ -14,7 +14,11 @@ public class Lockdown : Ability
     [SerializeField] Camera playerCamera;
     [SerializeField] Transform castPoint;
 
+    [Header("Settings")]
+    [SerializeField] Sprite abilityIcon;
+
     [Header("Values")]
+    [SerializeField] float cooldown;
     [SerializeField] float maxRange;
     [SerializeField] float area;
 
@@ -52,7 +56,7 @@ public class Lockdown : Ability
                 {
                     jailerPassive.TriggerBuff();
 
-                    useAbilities.SetOnCooldown(1);
+                    useAbilities.SetOnCooldown(1, cooldown);
 
                     CmdCastSpell(hitObject.gameObject);
                 }
@@ -81,5 +85,10 @@ public class Lockdown : Ability
             NetworkServer.Spawn(anchor2, connectionToClient);
             NetworkServer.Spawn(anchor3, connectionToClient);
         }
+    }
+
+    public override Sprite ReturnIcon()
+    {
+        return abilityIcon;
     }
 }

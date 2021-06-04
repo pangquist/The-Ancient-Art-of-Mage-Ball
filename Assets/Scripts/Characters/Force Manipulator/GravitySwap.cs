@@ -12,26 +12,16 @@ public class GravitySwap : Ability
     [SerializeField] Camera mainCamera;
     [SerializeField] LayerMask hitableLayer;
     [SerializeField] AudioSource soundEffect;
+    [SerializeField] Sprite abilityIcon;
 
     [Header("Values")]
+    [SerializeField] float cooldown;
     [SerializeField] float range;
     [SerializeField] Vector3 appliedForce;
     [SerializeField] float duration;
     
     RaycastHit hit;
     GameObject ball;
-
-    private void OnEnable()
-    {
-        useAbilities = GetComponent<UseAbilities>();
-        mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
-        hitableLayer = LayerMask.GetMask("Jumpable");
-        soundEffect = GameObject.Find("Audio Sources").transform.Find("Gravity Warp").GetComponent<AudioSource>();
-
-        range = 20;
-        appliedForce = new Vector3(0, 225, 0);
-        duration = 2.5f;
-    }
 
     public override void OnStartAuthority()
     {
@@ -58,11 +48,11 @@ public class GravitySwap : Ability
 
         if (hit.collider == null || hit.collider.gameObject.tag != "Enemy")
         {
-            useAbilities.SetCooldownToPercentage(1, 50);
+            useAbilities.SetCooldownToPercentage(1, cooldown, 50);
             return;
         }
 
-        useAbilities.SetOnCooldown(1);
+        useAbilities.SetOnCooldown(1, cooldown);
         Debug.Log($"Hit object name: {hit.collider.gameObject}");
         ball = hit.collider.gameObject;
         CmdDoSpell(ball);
@@ -88,5 +78,10 @@ public class GravitySwap : Ability
     void RpcPlaySoundEffect()
     {
         soundEffect.Play();
+    }
+
+    public override Sprite ReturnIcon()
+    {
+        return abilityIcon;
     }
 }

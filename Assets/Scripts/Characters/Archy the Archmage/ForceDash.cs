@@ -11,7 +11,11 @@ public class ForceDash : Ability
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] UseAbilities useAbilities;
 
+    [Header("settings")]
+    [SerializeField] Sprite abilityIcon;
+
     [Header("Values")]
+    [SerializeField] float cooldown;
     [SerializeField] float dashSpeed;
     [SerializeField] float dashDuration;
     [SerializeField] float pushAmount;
@@ -19,20 +23,6 @@ public class ForceDash : Ability
 
     [Header("Visual Effect")]
     [SerializeField] GameObject hitEffect;
-
-    void Start()
-    {
-        playerMovement = GetComponent<PlayerMovement>();
-        controller = GetComponent<CharacterController>();
-        playerCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
-        useAbilities = GetComponent<UseAbilities>();
-        hitEffect = GameObject.Find("Objects").transform.Find("Hit").gameObject;
-
-        dashSpeed = 25;
-        dashDuration = 0.4f;
-        pushAmount = 650;
-        pushRadius = 8;
-    }
 
     public override void OnStartAuthority()
     {
@@ -46,17 +36,19 @@ public class ForceDash : Ability
             return;
         }
 
-        Dash();
+        StartCoroutine(Dash());
     }
 
     IEnumerator Dash()
     {
-        useAbilities.SetOnCooldown(2);
+        useAbilities.SetOnCooldown(2, cooldown);
         useAbilities.ReduceAllCooldowns(1, 2);
         float startTime = Time.time;
         bool isCloseToBall = false;
 
-        while(Time.time <startTime + dashDuration && isCloseToBall == false)
+        Debug.Log($"Dash duration: {dashDuration}");
+
+        while(Time.time < startTime + dashDuration && isCloseToBall == false)
         {
             if (playerMovement.isGrounded)
             {
@@ -88,7 +80,6 @@ public class ForceDash : Ability
     void CmdSpawnHitEffect(Vector3 hitLocation)
     {
         GameObject magicExplosion = Instantiate(hitEffect, hitLocation, Quaternion.identity) as GameObject;
-        magicExplosion.SetActive(true);
         NetworkServer.Spawn(magicExplosion);
     }
 
@@ -110,5 +101,10 @@ public class ForceDash : Ability
         }
 
         return false;
+    }
+
+    public override Sprite ReturnIcon()
+    {
+        return abilityIcon;
     }
 }

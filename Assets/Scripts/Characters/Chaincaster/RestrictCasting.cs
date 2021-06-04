@@ -12,7 +12,11 @@ public class RestrictCasting : Ability
     [SerializeField] Camera playerCamera;
     [SerializeField] Transform castPoint;
 
+    [Header("Settings")]
+    [SerializeField] Sprite abilityIcon;
+
     [Header("Values")]
+    [SerializeField] float cooldown;
     [SerializeField] float maxRange;
     [SerializeField] float area;
 
@@ -69,13 +73,13 @@ public class RestrictCasting : Ability
 
             if (hitPlayer)
             {
-                useAbilities.SetOnCooldown(2);
+                useAbilities.SetOnCooldown(2, cooldown);
 
                 CmdSpawnHitEffect(hit.point);
             }
             else
             {
-                useAbilities.SetCooldownToPercentage(2, 50);
+                useAbilities.SetCooldownToPercentage(2, cooldown, 50);
             }
         }
     }
@@ -99,5 +103,10 @@ public class RestrictCasting : Ability
         UseAbilities targetAbilities = target.GetComponent<UseAbilities>();
 
         targetAbilities.StartAllCooldowns();
+    }
+
+    public override Sprite ReturnIcon()
+    {
+        return abilityIcon;
     }
 }

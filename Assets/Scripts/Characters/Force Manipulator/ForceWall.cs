@@ -13,24 +13,14 @@ public class ForceWall : Ability
     [SerializeField] LayerMask hitableLayer;
     [SerializeField] GameObject forceWall;
     [SerializeField] AudioSource soundEffect;
+    [SerializeField] Sprite abilityIcon;
 
     [Header("Values")]
+    [SerializeField] float cooldown;
     [SerializeField] float range;
     [SerializeField] float duration;
     
     RaycastHit hit;
-
-    private void OnEnable()
-    {
-        useAbilities = GetComponent<UseAbilities>();
-        mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
-        hitableLayer = LayerMask.GetMask("Jumpable");
-        forceWall = GameObject.Find("Objects").transform.Find("Force Wall").gameObject;
-        soundEffect = GameObject.Find("Audio Sources").transform.Find("Force Wall").GetComponent<AudioSource>();
-
-        range = 20;
-        duration = 4f;
-    }
 
     public override void OnStartAuthority()
     {
@@ -60,12 +50,12 @@ public class ForceWall : Ability
             Vector3 point = ray.origin + (ray.direction * range);
             CmdDoSpell(point, false);
             useAbilities.ReduceAllCooldowns(1, 2);
-            useAbilities.SetOnCooldown(2);
+            useAbilities.SetOnCooldown(2, cooldown);
             return;
         }
 
         CmdDoSpell(hit.point, true);
-        useAbilities.SetOnCooldown(2);
+        useAbilities.SetOnCooldown(2, cooldown);
     }
 
     [Command]
@@ -89,8 +79,12 @@ public class ForceWall : Ability
             {
                 instantiatedForceWall = Instantiate(forceWall, hitLocation, gameObject.GetComponent<Transform>().transform.rotation) as GameObject;
             }
-            instantiatedForceWall.SetActive(true);
             NetworkServer.Spawn(instantiatedForceWall);
         }
+    }
+
+    public override Sprite ReturnIcon()
+    {
+        return abilityIcon;
     }
 }

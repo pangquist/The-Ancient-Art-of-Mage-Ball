@@ -2,11 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RandomizeAbilities : MonoBehaviour
 {
     [Header("Script Dependencies")]
     [SerializeField] UseAbilities useAbilities;
+
+    [Header("Available Abilities")]
+    [SerializeField] Ability[] allAbilities;
 
     [Header("Lists")]
     [SerializeField] List<string> firstAbilities;
@@ -20,19 +24,34 @@ public class RandomizeAbilities : MonoBehaviour
     [SerializeField] Ability ability3;
     [SerializeField] string ability4;
 
+    [Header("Ability Icons")]
+    [SerializeField] Image abilityIcon1;
+    [SerializeField] Image abilityIcon2;
+    [SerializeField] Image abilityIcon3;
+    
     System.Random random = new System.Random();
 
     void Start()
     {
+        allAbilities = GetComponents<Ability>();
+        
         Type ability1Type = Type.GetType(firstAbilities[random.Next(0, firstAbilities.Count)]);
         Type ability2Type = Type.GetType(secondAbilities[random.Next(0, secondAbilities.Count)]);
         Type ability3Type = Type.GetType(thirdAbilities[random.Next(0, thirdAbilities.Count)]);
-
+        
+        foreach (Ability ability in allAbilities)
+        {
+            ability.enabled = false;
+        }
 
         ability1 = (Ability)gameObject.GetComponent(ability1Type);
         ability2 = (Ability)gameObject.GetComponent(ability2Type);
         ability3 = (Ability)gameObject.GetComponent(ability3Type);
         ability4 = fourthAbilities[random.Next(0, fourthAbilities.Count)];
+
+        abilityIcon1.sprite = ability1.ReturnIcon();
+        abilityIcon2.sprite = ability2.ReturnIcon();
+        abilityIcon3.sprite = ability3.ReturnIcon();
     }
 
     public void UseAbility1()

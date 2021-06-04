@@ -12,8 +12,10 @@ public class ForcePush : Ability
     [SerializeField] Camera mainCamera;
     [SerializeField] LayerMask[] hitableLayers;
     [SerializeField] GameObject hitEffect;
-    
+    [SerializeField] Sprite abilityIcon;
+
     [Header("Values")]
+    [SerializeField] float cooldown;
     [SerializeField] float range;
     [SerializeField] float pushAmount;
     [SerializeField] float pushRadius;
@@ -26,21 +28,7 @@ public class ForcePush : Ability
     private void Start()
     {
     }
-
-    private void OnEnable()
-    {
-        useAbilities = GetComponent<UseAbilities>();
-        hitableLayers = new LayerMask[2];
-        hitableLayers[0] = LayerMask.GetMask("Jumpable");
-        hitableLayers[1] = LayerMask.GetMask("Hitable");
-        hitEffect = GameObject.Find("Objects").transform.Find("Hit").gameObject;
-
-        range = 20;
-        pushAmount = 700;
-        pushRadius = 8;
-        mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
-    }
-
+    
     public override void OnStartAuthority()
     {
         enabled = true;
@@ -87,7 +75,7 @@ public class ForcePush : Ability
                 }
             }
             useAbilities.ReduceAllCooldowns(1, 0);
-            useAbilities.SetOnCooldown(0);
+            useAbilities.SetOnCooldown(0, cooldown);
             return;
         }
 
@@ -104,7 +92,7 @@ public class ForcePush : Ability
             }
         }
 
-        useAbilities.SetOnCooldown(0);
+        useAbilities.SetOnCooldown(0, cooldown);
     }
 
     #endregion
@@ -120,9 +108,13 @@ public class ForcePush : Ability
     void CmdSpawnHitEffect(Vector3 hitLocation)
     {
         GameObject magicExplosion = Instantiate(hitEffect, hitLocation, Quaternion.identity) as GameObject;
-        magicExplosion.SetActive(true);
         NetworkServer.Spawn(magicExplosion);
         Debug.Log($"Instantiating the hit effect: {magicExplosion}");
+    }
+
+    public override Sprite ReturnIcon()
+    {
+        return abilityIcon;
     }
     #endregion
 }

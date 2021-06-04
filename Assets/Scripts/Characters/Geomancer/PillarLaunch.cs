@@ -10,6 +10,8 @@ public class PillarLaunch : Ability
     [SerializeField] float range;
     [SerializeField] LayerMask[] hitableLayers;
     [SerializeField] UseAbilities useAbilities;
+    [SerializeField] float cooldown;
+    [SerializeField] Sprite abilityIcon;
 
     Transform pillarTop;
     RaycastHit hit;
@@ -37,7 +39,7 @@ public class PillarLaunch : Ability
             if (hit.collider != null && hit.collider.gameObject.CompareTag("Ground"))
             {
                 CmdDoPillar(hit.point);
-                useAbilities.SetOnCooldown(1);
+                useAbilities.SetOnCooldown(1, cooldown);
                 break;
             }
         }
@@ -56,5 +58,10 @@ public class PillarLaunch : Ability
         pillarTop = pillarPrefab.transform.GetChild(0);
         GameObject projectileInstance = Instantiate(pillarPrefab, hitLocation - pillarTop.position, Quaternion.identity);
         NetworkServer.Spawn(projectileInstance, connectionToClient);
+    }
+
+    public override Sprite ReturnIcon()
+    {
+        return abilityIcon;
     }
 }

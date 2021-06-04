@@ -46,10 +46,10 @@ public class NetworkPlayerSpawner : NetworkBehaviour
                 playerName = info.GetValue(1).ToString();
                 playerTeam = info.GetValue(2).ToString();
 
-                if (info.GetValue(3).ToString() == "4")
+                if (info.GetValue(3).ToString() == "5")
                 {
                     System.Random random = new System.Random();
-                    chosenCharacter = random.Next(0, 3);
+                    chosenCharacter = random.Next(0, 4);
                 }
                 else
                 {

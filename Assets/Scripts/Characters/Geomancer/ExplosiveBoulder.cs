@@ -11,6 +11,8 @@ public class ExplosiveBoulder : Ability
     [SerializeField] GameObject boulderPrefab;
     [SerializeField] GameObject hitableObject;
     [SerializeField] UseAbilities useAbilities;
+    [SerializeField] float cooldown;
+    [SerializeField] Sprite abilityIcon;
 
     RaycastHit hit;
 
@@ -18,7 +20,7 @@ public class ExplosiveBoulder : Ability
     public float throwForceUpward;  
 
     #region Client
-    public override void OnStartClient()
+    public override void OnStartAuthority()
     {
         enabled = true;
     }
@@ -46,10 +48,9 @@ public class ExplosiveBoulder : Ability
         }
         Vector3 forceDirection = mainCamera.transform.forward;
 
-        //if (NetworkServer.active)
-        //{
+       
         CmdBoulderThrow(directionOfBoulder, boulderStartPoint.position, forceDirection, throwForceForward); //calls command to spawn and add force to the instantiated object
-        useAbilities.SetOnCooldown(0);
+        useAbilities.SetOnCooldown(0, cooldown);
     }
 
     #endregion
@@ -58,45 +59,16 @@ public class ExplosiveBoulder : Ability
     [Command]
     void CmdBoulderThrow(Vector3 directionOfBoulder, Vector3 startPos, Vector3 direction, float throwForceForward)
     {
-        //if (NetworkServer.active)
-        //{
-        //    projectileInstance = Instantiate(boulderPrefab, startPos, Quaternion.identity);
-
-        //    NetworkServer.Spawn(projectileInstance, connectionToClient);
-        //projectileInstance.GetComponent<Rigidbody>().AddForce(directionOfBoulder.normalized * throwForceForward, ForceMode.Force);
-        //projectileInstance.GetComponent<Rigidbody>().AddForce(direction * throwForceUpward, ForceMode.Force);
         GameObject projectileInstance = Instantiate(boulderPrefab, startPos, Quaternion.identity);
-
         NetworkServer.Spawn(projectileInstance);
         projectileInstance.GetComponent<Rigidbody>().AddForce(directionOfBoulder.normalized * throwForceForward, ForceMode.Force);
         projectileInstance.GetComponent<Rigidbody>().AddForce(Vector3.up * throwForceUpward, ForceMode.Force);
-
-        //ClientRpcBoulderThrow(directionOfBoulder, startPos, direction);
+        
     }
 
-    //[Server]
-    //void ServerBoulderThrow(Vector3 directionOfBoulder, Vector3 direction)
-    //{
-    //    ClientRpcBoulderThrow(directionOfBoulder, direction);
-    //}
-
-    //[ClientRpc]
-    //void ClientRpcBoulderThrow(Vector3 directionOfBoulder, Vector3 boulderStartPos, Vector3 direction)
-    //{
-    //    GameObject projectileInstance = Instantiate(boulderPrefab, boulderStartPos, Quaternion.identity);
-
-    //    NetworkServer.Spawn(projectileInstance);
-    //    projectileInstance.GetComponent<Rigidbody>().AddForce(directionOfBoulder.normalized * throwForceForward, ForceMode.Force);
-    //    projectileInstance.GetComponent<Rigidbody>().AddForce(direction * throwForceUpward, ForceMode.Force);
-    //}
-    //void BoulderSpawn(Vector3 directionOfBoulder, Vector3 boulderStartPos, Vector3 direction)
-    //{
-    //    GameObject projectileInstance = Instantiate(boulderPrefab, boulderStartPos, Quaternion.identity);
-
-    //    NetworkServer.Spawn(projectileInstance);
-    //    projectileInstance.GetComponent<Rigidbody>().AddForce(directionOfBoulder.normalized * throwForceForward, ForceMode.Force);
-    //    projectileInstance.GetComponent<Rigidbody>().AddForce(direction * throwForceUpward, ForceMode.Force);
-    //}
-
+    public override Sprite ReturnIcon()
+    {
+        return abilityIcon;
+    }
     #endregion
 }
