@@ -72,10 +72,10 @@ public class GamestateManager : NetworkBehaviour
         myNetworkManager = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<MyNetworkManager>();
         DontDestroyOnLoad(this.gameObject);
 
-        if (SceneManager.GetActiveScene().name != "MainMenu" || SceneManager.GetActiveScene().name != "PostMatch")
-        {
-            ballRb = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Rigidbody>();
-        }
+        //if (SceneManager.GetActiveScene().name != "MainMenu" || SceneManager.GetActiveScene().name != "PostMatch")
+        //{
+        //    ballRb = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Rigidbody>();
+        //}
     }
 
     private void Update()
@@ -110,14 +110,14 @@ public class GamestateManager : NetworkBehaviour
     void UnpauseMatch()
     {
         matchIsPaused = false;
-        ballRb.isKinematic = false;
+        //ballRb.isKinematic = false;
     }
 
     [Server]
     void PauseGame()
     {
         matchIsPaused = true;
-        ballRb.isKinematic = true;
+        //ballRb.isKinematic = true;
     }
 
     void EndGame()
@@ -209,7 +209,7 @@ public class GamestateManager : NetworkBehaviour
             return;
         }
 
-        ballRb = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Rigidbody>();
+        //ballRb = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Rigidbody>();
 
         for (int i = 0; i < 6; i++)
         {
