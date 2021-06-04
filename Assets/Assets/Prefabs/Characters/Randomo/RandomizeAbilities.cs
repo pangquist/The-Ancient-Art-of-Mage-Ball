@@ -1,3 +1,4 @@
+using Mirror;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -58,18 +59,21 @@ public class RandomizeAbilities : MonoBehaviour
         abilityIcon3.sprite = ability3.ReturnIcon();
     }
 
+    [Client]
     public void UseAbility1()
     {
         Debug.Log("Using Ability 1");
         ability1.UseAbility(1);
     }
 
+    [Client]
     public void UseAbility2()
     {
         Debug.Log("Using Ability 2");
         ability2.UseAbility(2);
     }
 
+    [Client]
     public void UseAbility3()
     {
         Debug.Log("Using Ability 3");
