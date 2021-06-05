@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class AmplifyBeamBehaviour : MonoBehaviour
 {
+    // This script mainly handles the collision interaction between Force Manipulators beam and the ball.
+    // Author: Valter Lindecrantz.
+
     [Header("Script Dependencies")]
     [SerializeField] Amplify amplify;
 

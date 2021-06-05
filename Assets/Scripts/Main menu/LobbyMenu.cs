@@ -8,6 +8,10 @@ using UnityEngine.UI;
 
 public class LobbyMenu : MonoBehaviour
 {
+    // Script that handles functions relating to connecting to a lobby, leaving a lobby, starting a game, changing teams and more.
+    // Every time information regarding the lobby participants is changed, the lobby is updated accordingly. This is handled through multiple Event actions.
+    // Author: Valter Lindecrantz, Pär Ängqvist.
+
     [Header("Script Dependencies")]
     [SerializeField] GamestateManager gamestateManager;
 

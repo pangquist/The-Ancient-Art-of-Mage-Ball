@@ -5,6 +5,12 @@ using UnityEngine;
 
 public class ForceDash : Ability
 {
+    // This script handels the functioning of Archy the Archmages second ability, Force Jump.
+    // It inherits from the ability class.
+    // It is responsible for starting a coroutine which repeatedly moves the character forward fast, creating the illusion of it charging forward.
+    // Either when the dash has reached its maximum length, or the character is close to the ball, it spawns an Magic Explosion for all clients. 
+    // Author: Valter Lindecrantz.
+
     [Header("Script Dependencies")]
     [SerializeField] CharacterController controller;
     [SerializeField] Camera playerCamera;

@@ -7,6 +7,10 @@ using UnityEngine.UI;
 
 public class ChangeMenuBackground : NetworkBehaviour
 {
+    // This script in responsible for changing the background of the map picture in the main menu.
+    // This happens when the host of the lobby chooses a map, calling the picture to be changed on all clients though the use of an event action.
+    // Author: Valter Lindecrantz
+
     [Header("Sync Variables")]
     [SyncVar(hook= nameof(HandleMapChange))]
     [SerializeField] string chosenMapName;

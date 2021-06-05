@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class MouseLook : NetworkBehaviour
 {
+    // This script makes the camera follow the mouse on the X and Y axis.
+    // As an additional feature, the script makes the camera clamp, meaning that you can't rotate the camera more than a certain amount.
+    // Author: Valter Lindecrantz
+
     public static float mouseSensitivity = 100f;
     [SerializeField] Camera playerCamera;
 

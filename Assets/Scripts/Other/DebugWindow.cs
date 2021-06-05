@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class DebugWindow : MonoBehaviour
 {
-     //#if !UNITY_EDITOR
+    // Imported script that allows the user to see the debug window even if they play the game from a build, allowing for better troubleshooting.
+
     static string myLog = "";
     private string output;
     private string stack;

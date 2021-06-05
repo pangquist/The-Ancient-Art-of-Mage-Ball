@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class ForcePush : Ability
 {
+    // This script handels the functioning of Archy the Archmages first ability, Force Push.
+    // It inherits from the ability class.
+    // It is responsible for spawning the explosion at a given position, and applying force to the ball for all clients.
+    // Author: Valter Lindecrantz.
+
     [Header("Script Dependencies")]
     [SerializeField] UseAbilities useAbilities;
     [SerializeField] SpellSlinging spellSlinging;

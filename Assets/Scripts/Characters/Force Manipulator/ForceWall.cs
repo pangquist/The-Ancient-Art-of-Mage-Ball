@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class ForceWall : Ability
 {
+    // This script handels the functioning of Force Manipulators third ability, Force Wall.
+    // It inherits from the ability class.
+    // It is responsible for spawning in the object "Force Wall" for every client att the specified position.
+
     [Header("Script Dependencies")]
     [SerializeField] UseAbilities useAbilities;
 

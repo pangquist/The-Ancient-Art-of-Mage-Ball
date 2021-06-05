@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class Amplify : Ability
 {
+    // This script handels the functioning of Force Manipulators first ability, Amplifying Beam.
+    // It inherits from the ability class.
+    // It is responsible for spawning the beam for all clients, and telling the ball to move when the beam is in contact with the ball.
+    // Author: Valter Lindecrantz.
+
     [Header("Script Dependencies")]
     [SerializeField] UseAbilities useAbilities;
 
@@ -29,6 +34,8 @@ public class Amplify : Ability
         enabled = true;
     }
 
+    // Overriden method from Ability that is called from an animation from the character.
+    // It calls a command on the server to activate the ability.
     [Client]
     public override void UseAbility(int abilityIndex)
     {
@@ -40,6 +47,7 @@ public class Amplify : Ability
         CmdSpawnBeam();
     }
 
+    // A method that tells the server to activate the beam for all clients and set the ability on cooldown thorugh the useAbility script.
     [Command]
     void CmdSpawnBeam()
     {
@@ -47,6 +55,7 @@ public class Amplify : Ability
         useAbilities.SetOnCooldown(0, cooldown);
     }
 
+    // This method activates the beam for all clients and tells the beam how long it will be active for aswell as how powerful it will be.
     [ClientRpc]
     void RpcActivateBeam()
     {
@@ -56,6 +65,7 @@ public class Amplify : Ability
         amplifyBeam.GetComponent<AmplifyBeamBehaviour>().SetForce(force);
     }
 
+    // Method that is called from the beam object that sends a command to the server telling the server to apply force to the ball.
     [Client]
     public void MoveBall(GameObject ball, Vector3 _force)
     {

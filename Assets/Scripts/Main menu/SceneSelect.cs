@@ -6,6 +6,11 @@ using UnityEngine;
 
 public class SceneSelect : MonoBehaviour
 {
+    // Handles the map selection process in the lobby menu.
+    // When a player clicks a map-button the "selected map"-variable on the Network Manager is changed accordingly.
+    // When a map is changed. The script invokes an event action that changes the background of the selected map picture in the lobby.
+    // Author: Valter Lindecrantz
+
     MyNetworkManager networkManager;
     [SerializeField] ChangeMenuBackground changeBackground;
     [SerializeField] List<string> maps = new List<string>();

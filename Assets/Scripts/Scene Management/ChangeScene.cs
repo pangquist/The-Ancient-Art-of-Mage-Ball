@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class ChangeScene : NetworkBehaviour
 {
+    // This script calls the "ServerChangeScene" method on the referenced Network Manager.
+    // Author: Valter Lindecrantz
+
     [SerializeField] MyNetworkManager myNetworkManager;
 
     private void Start()
@@ -16,14 +19,5 @@ public class ChangeScene : NetworkBehaviour
     public void ChangeTheScene(string sceneName)
     {
         myNetworkManager.ServerChangeScene(sceneName);
-        //if (NetworkServer.active && NetworkClient.isConnected)
-        //{
-        //    NetworkManager.singleton.StopHost();
-        //}
-        //else
-        //{
-        //    NetworkManager.singleton.StopClient();
-        //}
-        //SceneManager.LoadScene(sceneName);
     }
 }

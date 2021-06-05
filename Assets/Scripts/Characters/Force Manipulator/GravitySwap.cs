@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class GravitySwap : Ability
 {
+    // This script handels the functioning of Force Manipulators second ability, Gravity Swap.
+    // It inherits from the ability class.
+    // It is responsible for turning the gravity off for the ball when the ability is casted through an animation.
+    // Author: Valter Lindecrantz.
+
     [Header("Script Dependencies")]
     [SerializeField] UseAbilities useAbilities;
 

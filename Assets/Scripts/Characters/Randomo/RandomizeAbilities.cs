@@ -7,6 +7,11 @@ using UnityEngine.UI;
 
 public class RandomizeAbilities : MonoBehaviour
 {
+    // This script handels the general function of Amalgos concept, randomizing each of his abilities at the start of the match.
+    // It retrieves every script which inherits from "Ability", and randomizes from that pool 3 abilities.
+    // On top of abilities, it also randomizes a passive from all available ones.
+    // Author: Valter Lindecrantz.
+
     [Header("Script Dependencies")]
     [SerializeField] UseAbilities useAbilities;
 
