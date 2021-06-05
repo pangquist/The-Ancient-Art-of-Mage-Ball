@@ -92,8 +92,7 @@ public class Settings : MonoBehaviour
 
     public void SetResolutionsValues()
     {
-        int currentRefreshRate = Screen.currentResolution.refreshRate;      
-        //äcklig lösning + 46 725 22 21 27 om ni har problem med detta
+        int currentRefreshRate = Screen.currentResolution.refreshRate;   
         resolutions = Screen.resolutions.Where(resolution => resolution.refreshRate >= currentRefreshRate || resolution.refreshRate >= currentRefreshRate -1).ToArray();
         resDropDown.ClearOptions();
         List<string> options = new List<string>();
