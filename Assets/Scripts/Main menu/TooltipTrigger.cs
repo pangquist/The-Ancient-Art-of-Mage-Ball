@@ -7,6 +7,9 @@ using UnityEngine.UI;
 
 public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    //This script makes it so the tooltips get set to active when you hover over a character 
+    //Author Emil Påsse
+
     [Header("References")]
     [SerializeField] GameObject tooltipBackground;
 

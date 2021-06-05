@@ -8,6 +8,10 @@ using System;
 
 public class Settings : MonoBehaviour
 {
+    //This script gets all the settings recommended by the computer and puts it in lists where you are free of choise to choose from it.
+    //It also saves your settings in your Unity Player preferences so that it will be remember next time you open up the program.
+    //Author Emil Påsse
+
     [Header("References")]
     public AudioMixer audioMixer;
     [SerializeField] Dropdown resDropDown;

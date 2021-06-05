@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class InGameMenu : MonoBehaviour
 {
+    //This script pauses the game and makes the game meny canvas go active and alose the mouse if the escape key is pressed
+    //Author Emil Påsse
+
     [Header("Script Dependencies")]
     [SerializeField] CharacterController controller;
 
