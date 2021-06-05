@@ -37,6 +37,20 @@ public class Tooltip : MonoBehaviour
         tooltip.abilityImage.sprite = abilityImage;
     }
 
+    public void ShowCharacterName(GameObject tooltipGO, Tooltip tooltip, string header = "")
+    {
+        tooltipGO.SetActive(true);
+        if (string.IsNullOrEmpty(header))
+        {
+            headerField.gameObject.SetActive(false);
+        }
+        else
+        {
+            headerField.gameObject.SetActive(true);
+        }
+        tooltip.headerField.text = header;
+    }
+
     public void HideToolTip(GameObject tooltip)
     {
         tooltip.SetActive(false);
@@ -44,21 +58,22 @@ public class Tooltip : MonoBehaviour
     
     private void Update()
     {
+        layoutElement.enabled = true;
 
-        if (Application.isEditor)
-        {
-            int headerLength = headerField.text.Length;
-            int contentLength = contentField.text.Length;
+        //if (Application.isEditor)
+        //{
+        //    int headerLength = headerField.text.Length;
+        //    int contentLength = contentField.text.Length;
 
-            if (headerLength > characterLimit || contentLength > characterLimit)
-            {
-                layoutElement.enabled = true;
-            }
-            else
-            {
-                layoutElement.enabled = false;
-            }
-        }
+        //    if (headerLength > characterLimit || contentLength > characterLimit)
+        //    {
+                
+        //    }
+        //    else
+        //    {
+        //        layoutElement.enabled = false;
+        //    }
+        //}
 
     }
 }
