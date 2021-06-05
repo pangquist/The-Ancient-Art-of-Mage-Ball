@@ -11707,6 +11707,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2479228818889375703, guid: c30128766e115ec4d87da8de88c473b4,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 45.783306
+      objectReference: {fileID: 0}
+    - target: {fileID: 2479228818889375703, guid: c30128766e115ec4d87da8de88c473b4,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 313.61694
+      objectReference: {fileID: 0}
+    - target: {fileID: 2479228818889375703, guid: c30128766e115ec4d87da8de88c473b4,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 6600.303
+      objectReference: {fileID: 0}
+    - target: {fileID: 2479228818889375703, guid: c30128766e115ec4d87da8de88c473b4,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 22.392578
+      objectReference: {fileID: 0}
+    - target: {fileID: 2479228818889375703, guid: c30128766e115ec4d87da8de88c473b4,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 47.564877
+      objectReference: {fileID: 0}
+    - target: {fileID: 2479228818889375703, guid: c30128766e115ec4d87da8de88c473b4,
+        type: 3}
+      propertyPath: m_Center.z
+      value: -471.3839
+      objectReference: {fileID: 0}
     - target: {fileID: 6957538741668174600, guid: c30128766e115ec4d87da8de88c473b4,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -29710,6 +29740,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 46233549573991224, guid: 96d5d1b862f5aa94faf52afd7df892ce,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 23.556713
+      objectReference: {fileID: 0}
+    - target: {fileID: 46233549573991224, guid: 96d5d1b862f5aa94faf52afd7df892ce,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 325.2089
+      objectReference: {fileID: 0}
+    - target: {fileID: 46233549573991224, guid: 96d5d1b862f5aa94faf52afd7df892ce,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 6970.067
+      objectReference: {fileID: 0}
+    - target: {fileID: 46233549573991224, guid: 96d5d1b862f5aa94faf52afd7df892ce,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 11.278402
+      objectReference: {fileID: 0}
+    - target: {fileID: 46233549573991224, guid: 96d5d1b862f5aa94faf52afd7df892ce,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 53.36201
+      objectReference: {fileID: 0}
+    - target: {fileID: 46233549573991224, guid: 96d5d1b862f5aa94faf52afd7df892ce,
+        type: 3}
+      propertyPath: m_Center.z
+      value: -489.14236
+      objectReference: {fileID: 0}
     - target: {fileID: 1099593434439728361, guid: 96d5d1b862f5aa94faf52afd7df892ce,
         type: 3}
       propertyPath: m_InitialEventNameOverriden
