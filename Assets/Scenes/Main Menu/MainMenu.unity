@@ -4313,7 +4313,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 654036297ce232e44a5f3d20d6b80b9e, type: 3}
   - {fileID: 21300000, guid: 47d2bb5a9ca6fee4a992c365d5efa0f8, type: 3}
   - {fileID: 21300000, guid: 9ae51b9ab9b379048aeba9b757373d2a, type: 3}
-  - {fileID: 21300000, guid: e27be3938de5039409a3de2dc7d09f40, type: 3}
+  - {fileID: 21300000, guid: 4ecda8787628b6041841def6947ce7cb, type: 3}
   - {fileID: 21300000, guid: d8ffff67e58ccb9429376e83d3145e82, type: 3}
 --- !u!114 &662605750
 MonoBehaviour:
@@ -12044,6 +12044,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: db29bfa4118488c4b9e73bc5327edec3, type: 3}
   - {fileID: 21300000, guid: 097bca6a0bf6ad64494271b444164483, type: 3}
   - {fileID: 21300000, guid: da4f68ba2e1be5b4aac33de13d63ef56, type: 3}
+  - {fileID: 21300000, guid: 4405cf266f5565a4ca9164f096478116, type: 3}
   - {fileID: 21300000, guid: d8ffff67e58ccb9429376e83d3145e82, type: 3}
   redTeamImage:
   - {fileID: 1259647667}
@@ -13836,7 +13837,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e27be3938de5039409a3de2dc7d09f40, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4ecda8787628b6041841def6947ce7cb, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
