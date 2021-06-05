@@ -5,6 +5,8 @@ using Mirror;
 
 public class PillarMovement : NetworkBehaviour
 {
+    //Made by Kasper Veileborg
+    //This script enables movement for a pillar. It checks the caster (player) position and combine it with the ground y position to move a pillar in x, y and with an upwardspower in y.
     [Header("Dependency")]
     [SerializeField] Transform pillarTop;
 

@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class PillarLaunch : Ability
 {
+    //Made by Kasper Veileborg
+    //This script enables movement for a pillar. It checks the raycast point and spawns a pillar at the point. It has a force in y movement and stops after a while.
+    //It affects the ball and can cause the ball to move if hit.
     [SerializeField] GameObject pillarPrefab;
     [SerializeField] Camera mainCamera;
     [SerializeField] float range;

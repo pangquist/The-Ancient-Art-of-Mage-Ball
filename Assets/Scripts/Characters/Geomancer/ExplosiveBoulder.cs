@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class ExplosiveBoulder : Ability
 {
+    //Made by Kasper
+    //The scripts spawns a boulder and adds a force in the direction of the players aim. The boulder has a trail attached to it and a 
     [Header("Dependency")]
     [SerializeField] Camera mainCamera;
     [SerializeField] Transform boulderStartPoint;
