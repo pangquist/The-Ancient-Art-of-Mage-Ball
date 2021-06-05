@@ -11,6 +11,8 @@ public class PillarMovement : NetworkBehaviour
     [Header("Values")]
     [SerializeField] float forceUpwards;
 
+    GameObject [] ground;
+
     GameObject playerObject;
     GamestateManager gameState;
     GameObject pillarSmokeEffect;
@@ -27,6 +29,7 @@ public class PillarMovement : NetworkBehaviour
   
     void Start()
     {
+        ground = GameObject.FindGameObjectsWithTag("Ground");
         CalculatePillarHeight();
         //Gets the players in the game
         List<MyNetworkPlayer> players = ((MyNetworkManager)NetworkManager.singleton).Players;        
@@ -50,6 +53,8 @@ public class PillarMovement : NetworkBehaviour
     [Client]
     private void Update()
     {
+        Debug.Log(ground[0].transform.position.y);
+
         if (!hasAuthority)
         {
             return;
@@ -60,15 +65,13 @@ public class PillarMovement : NetworkBehaviour
             Destroy(gameObject);
         }
 
-        effectPosition = new Vector3(gameObject.transform.position.x, 0, gameObject.transform.position.z);
-
         Vector3 pillarPos = pillarPosition.transform.position - pillarTop.transform.position;
 
         //pillar X/Z Movement
         gameObject.transform.Translate(pillarPos.x, 0, pillarPos.z);
 
         //stops movement when the whole pillar is above ground
-        if (gameObject.transform.position.y >= 0)
+        if (gameObject.transform.position.y >= ground[0].transform.position.y)
         {
             goingUp = false;
         }
@@ -77,6 +80,10 @@ public class PillarMovement : NetworkBehaviour
         if (goingUp)
         {           
             gameObject.transform.Translate(Vector3.up * forceUpwards * Time.deltaTime, Space.World);          
+        }
+        else
+        {
+
         }
 
         playerObject.GetComponent<PlayerMovement>().velocity.y = 0;

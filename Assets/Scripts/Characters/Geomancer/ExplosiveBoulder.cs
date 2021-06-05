@@ -5,14 +5,18 @@ using UnityEngine;
 
 public class ExplosiveBoulder : Ability
 {
+    [Header("Dependency")]
     [SerializeField] Camera mainCamera;
     [SerializeField] Transform boulderStartPoint;
     [SerializeField] LayerMask [] hitableLayers;    
     [SerializeField] GameObject boulderPrefab;
     [SerializeField] GameObject hitableObject;
     [SerializeField] UseAbilities useAbilities;
-    [SerializeField] float cooldown;
     [SerializeField] Sprite abilityIcon;
+
+    [Header("Values")]
+    [SerializeField] float cooldown;
+
 
     RaycastHit hit;
 
@@ -32,11 +36,12 @@ public class ExplosiveBoulder : Ability
         {
             return;
         }
-        
+        //Filter out layers that are not solid.
         foreach (LayerMask hitableLayer in hitableLayers)
         {
             Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, hitableLayer);
         }
+        //direction of the throw
         Vector3 directionOfBoulder;
         if(hit.collider != null)
         {

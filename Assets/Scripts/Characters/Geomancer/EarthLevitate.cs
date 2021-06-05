@@ -5,18 +5,26 @@ using UnityEngine;
 
 public class EarthLevitate : Ability
 {
+    [Header("Dependency")]
+    [SerializeField] UseAbilities useAbilities;
+    [SerializeField] Animator animator;
+    [SerializeField] Sprite abilityIcon;
     [SerializeField] GameObject pillarBridgePrefab;
+    [SerializeField] GameObject[] groundTransform; //Deserialize this later
+
+    [Header("Values")]
     [SerializeField] float abilityDuration;
     [SerializeField] float pillarSpawnInterval;
     [SerializeField] float forceUpwards;
     [SerializeField] float ballForce = 100f;
-    [SerializeField] UseAbilities useAbilities;
-    [SerializeField] Animator animator;
     [SerializeField] float cooldown;
-    [SerializeField] Sprite abilityIcon;
+
+    [Header("Offset")]
+    [Tooltip("Multiply with player direction")]
+    [SerializeField] float offSetPillarSpawnMultiplier = 2;
 
     GameObject pillarSpawn;
-    [SerializeField] GameObject[] groundTransform; //Deserialize this later
+
     GameObject pillarSmoke;
     Transform pillarTop;
 
@@ -27,16 +35,11 @@ public class EarthLevitate : Ability
     bool hasSpawnedPillar = false;
     bool hasCollided;
 
-
-    [Header("Offset")]
-    [Tooltip("Multiply with player direction")]
-    [SerializeField] float offSetPillarSpawnMultiplier = 2;
-
-
     public override void OnStartAuthority()
     {
         enabled = true;
     }
+
     private void Start()
     {
         groundTransform = GameObject.FindGameObjectsWithTag("Ground");
@@ -46,26 +49,22 @@ public class EarthLevitate : Ability
 
     [Client]
     public override void UseAbility(int abilityIndex)
-    {
+    {        
         if (abilityIndex != 3)
         {
             return;
-        }
-
-
-        animator.SetBool("isPose", true);
+        }        
+        animator.SetBool("isPose", true); //trigger an animation while being levitated
         timer = 0;
-        groundPositionUnderPlayer = new Vector3(gameObject.transform.position.x, groundTransform[0].transform.position.y, gameObject.transform.position.z);
+        groundPositionUnderPlayer = new Vector3(gameObject.transform.position.x, groundTransform[0].transform.position.y, gameObject.transform.position.z);//startposition will be at ground y
         CmdSpawnPillarBridge(gameObject, groundPositionUnderPlayer);
-        hasSpawnedPillar = true;
+        hasSpawnedPillar = true;//triggers the update cycle
         useAbilities.SetOnCooldown(2, cooldown);
     }
 
     [Client]
     private void Update()
-    {
-        
-        
+    {               
         if (hasSpawnedPillar)
         {
             timer += Time.deltaTime;
@@ -75,9 +74,7 @@ public class EarthLevitate : Ability
                 CmdDestroyPillar();
                 animator.SetBool("isPose", false);
                 hasSpawnedPillar = false;
-            }            
-
-            
+            }                        
 
             Collider[] colliders = Physics.OverlapSphere(pillarTop.transform.position, 5f);
 
@@ -86,7 +83,6 @@ public class EarthLevitate : Ability
             {
                 if (pushedObject.CompareTag("Enemy"))
                 {
-
                     if (!hasCollided)
                     {
                         CmdPushBall(pushedObject.gameObject);
@@ -100,6 +96,10 @@ public class EarthLevitate : Ability
     [Command]
     void CmdSpawnPillarBridge(GameObject player, Vector3 position)//Spawns pillar at groundlevel under player
     {
+        if (!hasAuthority)
+        {
+            return;
+        }
         pillarTop = pillarBridgePrefab.transform.GetChild(0);
         playerFuturePosition = player.transform.forward;
         groundPositionUnderPlayer = position;

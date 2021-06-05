@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class CollisionExplosion : NetworkBehaviour
 {
-    [SerializeField] float rotateX, rotateY, rotateZ;
-
-    [SerializeField] float explosionForceHorizontal, explotionForceVertical;
-
-    [SerializeField] float explosionRadius;
-
+    [Header("Dependency")]
     [SerializeField] GameObject hitEffect;
+
+    [Header("Values")]
+    [SerializeField] float rotateX, rotateY, rotateZ;
+    [SerializeField] float explosionForceHorizontal, explotionForceVertical;
+    [SerializeField] float explosionRadius;
 
     bool hasCollided = false, hasPushed = false;
 
@@ -19,20 +19,19 @@ public class CollisionExplosion : NetworkBehaviour
 
     Vector3 rotateAxis;
 
-
     float radius = 2;
-
 
     private void Start()
     {
         rotateAxis = new Vector3(rotateX, rotateY, rotateZ);// point of boulder-rotation in air.
         gameState = GameObject.Find("GamestateManager").GetComponent<GamestateManager>(); //allowing to get matchIsPaused for destroying object when goal is made.
     }
-
+    //This toggles off the initial rotate through the bool
     private void OnCollisionEnter(Collision collision)
     {
         hasCollided = true;
     }
+
     [Server]
     private void Update()
     {        
@@ -56,7 +55,7 @@ public class CollisionExplosion : NetworkBehaviour
         catch
         {
         }     
-
+        //rotate as long as the object has not collided yet
         if (!hasCollided) //The boulder will only be forced to rotate during the initial airtime.
         {
             transform.Rotate(rotateAxis, 3f);
