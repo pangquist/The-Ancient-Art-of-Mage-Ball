@@ -7,6 +7,9 @@ using UnityEngine.UI;
 [ExecuteInEditMode()]
 public class Tooltip : MonoBehaviour
 {
+    //This script sets the tooltips active and changes the content depending on what character you are hovering over at the moment
+    //Author Emil Påsse
+
     public static Tooltip instance;
     public static List<GameObject> tooltips;
     public TextMeshProUGUI headerField;
@@ -59,21 +62,5 @@ public class Tooltip : MonoBehaviour
     private void Update()
     {
         layoutElement.enabled = true;
-
-        //if (Application.isEditor)
-        //{
-        //    int headerLength = headerField.text.Length;
-        //    int contentLength = contentField.text.Length;
-
-        //    if (headerLength > characterLimit || contentLength > characterLimit)
-        //    {
-                
-        //    }
-        //    else
-        //    {
-        //        layoutElement.enabled = false;
-        //    }
-        //}
-
     }
 }
