@@ -35,7 +35,8 @@ public class MyNetworkPlayer : NetworkBehaviour
     [SerializeField] Image ability1Border;
     [SerializeField] Image ability2Border;
     [SerializeField] Image ability3Border;
-    [SerializeField] Image border;
+    [SerializeField] Image passiveBorder;
+    [SerializeField] Image abilityUIBorder;
     [SerializeField] Image TimerBorder;
     Vector3 borderSize;
 
@@ -214,7 +215,8 @@ public class MyNetworkPlayer : NetworkBehaviour
         ability1Border.color = playerColor;
         ability2Border.color = playerColor;
         ability3Border.color = playerColor;
-        border.color = playerColor;
+        abilityUIBorder.color = playerColor;
+        passiveBorder.color = playerColor;
 
         if (hasAuthority)
         {
