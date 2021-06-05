@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class CollisionExplosion : NetworkBehaviour
 {
+    //Made by Kasper
+    //This script is used on an object that has collisiondetection and upon collision with an enemy-tagged object, it explodes and add force to that object.
     [Header("Dependency")]
     [SerializeField] GameObject hitEffect;
 

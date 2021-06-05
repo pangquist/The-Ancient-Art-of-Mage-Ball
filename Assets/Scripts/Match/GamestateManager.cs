@@ -8,6 +8,12 @@ using UnityEngine.SceneManagement;
 
 public class GamestateManager : NetworkBehaviour
 {
+    // This script handels everything related to the state of the match.
+    // It allocates spawn points, scores, time, calling respawns and more for every client.
+    // Through the use of multiple event actions, each client is recieving every different piece of information everytime a syncvar hook is called.
+    // Another function this script has, is that it carries information regarding the players and the game from one scene to another, allowing for easy transport of said information.
+    // Author: Valter Lindecrantz & Pär Ängqvist.
+
     [Header("Script Dependencies")]
     [SerializeField] MyNetworkManager myNetworkManager;
     [SerializeField] PostMatch postMatch;

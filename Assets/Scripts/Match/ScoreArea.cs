@@ -7,6 +7,10 @@ using UnityEngine;
 
 public class ScoreArea : NetworkBehaviour
 {
+    // This script handles the changing of score whenever a ball enters one of the goals.
+    // Through the changing of either redscore or bluescore on the referenced game manager, this scripts function leads to a multitude of different methods and calls.
+    // Author: Kasper Veileborg
+
     public GameObject effectObject;
     [SerializeField] string teamOwnership;
     [SerializeField] GamestateManager gmManager;

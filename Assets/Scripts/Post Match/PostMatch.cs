@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 public class PostMatch : MonoBehaviour
 {
+    // This script handles all functions that relates to the post game screen.
+    // It assignes the players name to either the winning or the losing side, based on whether they were victorious or not.
+    // Author: Kasper Veileborg & Valter Lindecrantz
+
     GamestateManager gamestateManager;
 
     [Header("Team texts")]

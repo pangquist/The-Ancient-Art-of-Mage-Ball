@@ -922,7 +922,7 @@ MonoBehaviour:
   tooltipBackground: {fileID: 69312783}
   characterNameGO: {fileID: 839817597}
   characterName: {fileID: 839817599}
-  characterNameString: ???
+  characterNameString: Random Character
   headers:
   - ???
   - ???
@@ -1000,7 +1000,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 4
+          m_IntArgument: 5
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -13884,7 +13884,7 @@ GameObject:
   - component: {fileID: 1940289595}
   - component: {fileID: 1940289594}
   m_Layer: 0
-  m_Name: Randomo
+  m_Name: Amalgo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13936,7 +13936,7 @@ MonoBehaviour:
   tooltipBackground: {fileID: 69312783}
   characterNameGO: {fileID: 839817597}
   characterName: {fileID: 839817599}
-  characterNameString: Randomo
+  characterNameString: Amalgo
   headers:
   - Random ability 1
   - Random ability 2
@@ -14040,7 +14040,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Randomo
+          m_StringArgument: Amalgo
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1940289597

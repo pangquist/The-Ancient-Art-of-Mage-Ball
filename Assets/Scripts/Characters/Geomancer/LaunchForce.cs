@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class LaunchForce : NetworkBehaviour
 {
+    //Made by Kasper Veileborg
+    //Translates the object in Y position and adds a force to the ball if it is collided with.
     [SerializeField] float forceUpwards;
 
     [SerializeField] GameObject hitEffect;
@@ -89,6 +91,7 @@ public class LaunchForce : NetworkBehaviour
     [Command]
     void CmdSpawnHitEffect()
     {
+        //4 different animations, 1 in every corner of the base of the pillar.
         Vector3 left = new Vector3(-2, 0, 0);
         Vector3 right = new Vector3(2, 0, 0);
         Vector3 above = new Vector3(0, 0, -2);

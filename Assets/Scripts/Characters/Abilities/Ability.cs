@@ -5,17 +5,9 @@ using UnityEngine;
 
 public abstract class Ability : NetworkBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    // This is a base class for all of our ability scripts. The scripts inherits the two main functions of every ability, a method that activates the ability
+    // and a method that retrieves the abilities icon. The icon is used in our UI system.
+    // Author: Valter Lindecrantz
 
     public abstract void UseAbility(int abilityIndex);
 

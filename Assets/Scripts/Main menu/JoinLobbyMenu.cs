@@ -7,6 +7,10 @@ using UnityEngine.UI;
 
 public class JoinLobbyMenu : MonoBehaviour
 {
+    // Networking script that tells the network manager to begin to connect the client when entering a lobby.
+    // The lobby is specified by getting the adress of the lobby which you are trying ot join.
+    // Author: Valter Lindecrantz.
+
     [Header("References")]
     [SerializeField] GameObject landingPagePanel;
     [SerializeField] TMP_InputField addressInput;

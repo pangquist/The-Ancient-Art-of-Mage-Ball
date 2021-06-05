@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class DestroyOnPause : MonoBehaviour
 {
+    // This script, when applied to a gameObject, will destroy the object when the gamestateManager is "paused" (a bool on the gamestate manager) decides this.
+    // Author: Valter Lindecrantz.
+
     void Start()
     {
         GamestateManager gamestateManager = GameObject.Find("GamestateManager").GetComponent<GamestateManager>();

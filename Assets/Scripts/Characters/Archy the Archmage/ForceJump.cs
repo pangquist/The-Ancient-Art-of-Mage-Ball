@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class ForceJump : Ability
 {
+    // This script handels the functioning of Archy the Archmages second ability, Force Jump.
+    // It inherits from the ability class.
+    // It is responsible for applying force upwards to the character, making it jump higher than an average jump.
+    // Author: Valter Lindecrantz.
+
     [Header("Script Dependencies")]
     [SerializeField] UseAbilities useAbilities;
     [SerializeField] PlayerMovement playerMovement;

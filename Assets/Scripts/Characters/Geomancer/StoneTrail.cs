@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class StoneTrail : Passive
 {   
+    //Made by Kasper Veileborg
+    //This script is used on a character for spawning atrail of stones. After a given time, a stone of random size will spawn at the feet of the character.
     [Header("Dependency")]
     [SerializeField] GameObject stonePrefab;
     [SerializeField] Transform stoneSpawnPosition; //slightly ahead of the playercharacters feet.

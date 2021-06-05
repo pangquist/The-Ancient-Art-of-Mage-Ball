@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class EarthLevitate : Ability
 {
+    //Made by Kasper Veileborg
+    //This script spawns a pillar underneath the player. It sets a duration for the pillar to last and changes the animation to a pose.
     [Header("Dependency")]
     [SerializeField] UseAbilities useAbilities;
     [SerializeField] Animator animator;

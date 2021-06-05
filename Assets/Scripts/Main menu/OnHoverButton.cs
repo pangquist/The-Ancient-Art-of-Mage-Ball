@@ -5,6 +5,9 @@ using UnityEngine.EventSystems;
 
 public class OnHoverButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    // Simple script that enlarges buttons that have the scripts on them.
+    // Author: Valter Lindecrantz
+
     Vector3 scale;
     Vector3 enlargedScale;
 

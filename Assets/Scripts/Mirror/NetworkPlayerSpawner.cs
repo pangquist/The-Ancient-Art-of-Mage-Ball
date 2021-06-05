@@ -8,6 +8,8 @@ using UnityEngine;
 public class NetworkPlayerSpawner : NetworkBehaviour
 {
     // This script assign the correct character to each player when they enter the game.
+    // Through the referencing of the network manager, the player spawner can retrieve information regarding the player through finding the local steam ID.
+    // The spawner spawns in the correct character based on the information retrieved.
     // Author: Valter Lindecrantz.
 
     [Header("Script Dependencies")]

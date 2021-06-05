@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 public class CharacterSelect : MonoBehaviour
 {
+    // This script changes the character index of what character the player has currently selected.
+    // When a character is picked, the picture in the main menu which displays the selected character is updated to correspond to the selection.
+    // Author: Valter Lindecrantz.
+
     [Header("Script Dependencies")]
     [SerializeField] MyNetworkManager myNetworkManager;
     [SerializeField] MyNetworkMenuPlayer myNetworkMenuPlayer;
@@ -35,6 +39,5 @@ public class CharacterSelect : MonoBehaviour
         }
         selectSound.Play();
         characterImage.sprite = characterImages[characterIndex];
-        //Get the players current position, the image and give the image the sprite of the character
     }
 }
