@@ -18,8 +18,9 @@ När ni har byggt filen så ska ni öppna steam och lägga till builden som ett 
 * Hitta builden i era lokala filer och lägg till spelet
 
 Ni ska nu kunna starta spelet genom steam och sedan använda steam UI för att bjuda in varandra till en lobby (Steam UI kommer upp genom 
-att klicka Shift + Tab). Alla måste ha igång spelet när ni accepterar inbjudan för att hamna i lobbyn. I nuläget så ser inte de andra 
-utöver hosten lobbyn men ni kommer att komma in i spelet ändå när hosten väl startar matchen (hoppas vi).
+att klicka Shift + Tab). Alla måste ha igång spelet när ni accepterar inbjudan för att hamna i lobbyn.
+
+väljer ni istället att starta spelet från Unity editorn så ska ni ha uppe scenen "Start" när ni klickar på Play-knappen.
 
 I spelet så finns funktionaliteten att ni kan:
 Skjuta - vänsterklick
