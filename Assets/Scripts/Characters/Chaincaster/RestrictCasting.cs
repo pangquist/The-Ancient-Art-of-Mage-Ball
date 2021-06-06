@@ -5,6 +5,12 @@ using UnityEngine;
 
 public class RestrictCasting : Ability
 {
+    // This script handles the functions of Chaincaster's third ability, Restrict Magic
+    // It inherits from the ability class.
+    // It checks if any player's are within the area of the ability and then set all their abilities on their full respective cooldowns
+    // Players on the same team as the casting player won't be affected
+    // Author: Pär Ängquist
+
     [Header("Dependencies")]
     [SerializeField] MyNetworkPlayer playerInfo;
     [SerializeField] UseAbilities useAbilities;

@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Jailer : Passive
 {
+    // This script handles the functions of Chaincaster's passive ability, Jailer
+    // It inherits from the passive class.
+    // It will increase the speed and jump height of the Chaincaster for a duration
+    // Each trigger will reset the duration and increase the values up to a maximum
+    // Author: Pär Ängquist
+
     private float baseSpeed;
     private float baseJump;
     private bool buffActive;

@@ -5,6 +5,12 @@ using UnityEngine;
 
 public class ChainGrapple : Ability
 {
+    // This script handles the functions of Chaincaster's first ability, Chain Grapple
+    // It inherits from the ability class.
+    // When used on the ball, it will drag the ball towards the player. When used on terrain it draws the player towards the target
+    // An animated chain is drawn while the ability is active
+    // Author: Pär Ängquist
+
     private LineRenderer lr;
     private Material material;
     private Vector2 offsetSpeed = new Vector2(15, 0);

@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class Lockdown : Ability
 {
+    // This script handles the functions of Chaincaster's second ability, Lockdown
+    // It inherits from the ability class.
+    // It checks if the target is the ball and then spawns three chains that hold it
+    // Author: Pär Ängquist
+
     private GameObject anchor1, anchor2, anchor3;
 
     [Header("Dependencies")]

@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class LockdownBehaviour : NetworkBehaviour
 {
+    // This script controls the chains spawned by Chaincaster's second ability, Lockdown
+    // The chains will pull on the target and remain active for a certain duration
+    // An animated chain is drawn while the ability is active
+    // Author: Pär Ängquist
+
     private LineRenderer chain;
     private Material material;
     private Vector2 offsetSpeed = new Vector2(15, 0);
